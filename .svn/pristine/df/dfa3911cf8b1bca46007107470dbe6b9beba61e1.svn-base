@@ -1,0 +1,144 @@
+#region Using
+
+using System.Collections.Generic;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SmartAdmin.Seed.Controllers.Settings;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models;
+using SmartAdmin.Seed.Models.Entities;
+using System.Linq;
+using Newtonsoft.Json;
+
+#endregion
+
+namespace SmartAdmin.Seed.Controllers
+{
+    //[Authorize]
+    [AllowAnonymous]
+    public class HomeController : Controller
+    {
+        public IActionResult Index() => View();
+
+
+
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllCountries> countries;
+        #endregion
+        public HomeController(ApplicationDbContext context)
+        {
+
+            _context = context;
+            countries = (from c in _context.lkpAllCountries select c).ToList();
+        }
+
+
+
+        public IActionResult Error() => View(new ErrorViewModel
+        {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
+
+
+        [HttpPost]
+        public JsonStringResult GetDefinedCountries()
+        {
+
+
+
+            var result = (from c in _context.lkpCountry
+                          join allcountries in countries on c.CountryName equals allcountries.CountryName
+                          select new { name = c.CountryName, id = allcountries.MapId }
+                        ).ToList();
+
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+
+        }
+
+        [HttpPost]
+        public JsonStringResult GetDataCenterTreeForCountry(int countryid)
+        {
+            List<DataCentersTree> lstTree = new List<DataCentersTree>();
+            var country = (from c in _context.lkpCountry
+                           join allcountries in countries on c.CountryName equals allcountries.CountryName
+                           where allcountries.MapId == countryid
+                           select new DataCentersTree
+                           {
+                               id = c.CountryId,
+                               name = c.CountryName,
+                               parentid = null
+                           }).FirstOrDefault();
+
+            lstTree.Add(country);
+
+            //          if (country != null)
+            //          {
+            //              var state =
+            //((from word in _context.lkpState
+            //  where word.CountryId == country.id
+            //  select new DataCentersTree
+            //  {
+            //      id = word.StateId,
+            //      name = word.StateName,
+            //      parentid = country.id
+            //  })
+            // ).ToList();
+
+            //              if (state != null)
+            //              {
+            //                  foreach (var a in state)
+            //                  {
+            //                      lstTree.Add(a);
+
+            //                  }
+            //              }
+            //          }
+
+
+            //          if (lstTree[0]!=null)
+            //          {
+            //              foreach (DataCentersTree g in lstTree)
+            //                  if (g.parentid.HasValue)
+            //                      lstTree.Single(group => group.id == g.parentid.Value).children.Add(g);
+
+
+
+            //              var rootgroups = lstTree.Where(g => g.parentid == null);
+
+            //              var json = JsonConvert.SerializeObject(rootgroups);
+            //              return new JsonStringResult(json);
+            //          }
+            //          else
+            //          {
+            //              var json = JsonConvert.SerializeObject(lstTree);
+            //              return new JsonStringResult(json);
+            //          }
+
+
+            var json = JsonConvert.SerializeObject(lstTree);
+                         return new JsonStringResult(json);
+
+        }
+    }
+
+    public class DataCentersTree
+    {
+
+        public int id { get; set; }
+        public string name { get; set; }
+        public int? parentid { get; set; }
+        public List<DataCentersTree> children { get; set; }
+
+        public DataCentersTree()
+        {
+            this.children = new List<DataCentersTree>();
+        }
+    }
+}

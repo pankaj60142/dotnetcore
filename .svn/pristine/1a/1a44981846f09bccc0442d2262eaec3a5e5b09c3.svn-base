@@ -1,0 +1,208 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class DatacenterController : Controller
+    {
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        private List<lkpDataCenter> datacenter;
+        #endregion
+
+        public DatacenterController(ApplicationDbContext context)
+        {
+            _context = context;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities = (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+            datacenter = (from c in _context.lkpDataCenter select c).ToList();
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
+
+
+        public JsonStringResult GetCountryName()
+        {
+            var resultCountries = (from c in countries
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(int CountryId)
+        {
+            var result = (from s in _context.lkpState
+                          where s.CountryId == CountryId
+                          select s
+                          ).ToList();
+            
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+
+        [HttpPost]
+        public JsonStringResult GetCityName(int StateId)
+             
+            {
+                var result = (from s in _context.lkpCity
+                              where s.StateId == StateId
+                              select s
+                              ).ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+
+
+
+
+        [HttpPost]
+        public ActionResult SaveDataCenter([FromBody]lkpdatacenterForController datacenter)
+        {
+            try
+            {
+
+
+                if (datacenter.CityId == 0 || datacenter.CityId == -999)
+                {
+                    string messageCity = "City information not found";
+                    return new JsonStringResult(messageCity);
+                }
+
+
+
+                var found = (from c in _context.lkpDataCenter where c.CityId == datacenter.CityId && c.DataCenterName == datacenter.DataCenterName select c).FirstOrDefault();
+
+                if (found == null)
+                {
+                    lkpDataCenter DataCenterValue = new lkpDataCenter();
+
+                    DataCenterValue.CityId = datacenter.CityId;
+                    DataCenterValue.DataCenterName = datacenter.DataCenterName;
+                    DataCenterValue.CreatedAt = DateTime.Now;
+                    DataCenterValue.ModifiedAt = DateTime.Now;
+                    DataCenterValue.Active = true;
+
+                    _context.lkpDataCenter.Add(DataCenterValue);
+                    _context.SaveChanges();
+                }
+                //Country found, Update it
+                else
+                {
+                    found.DataCenterName = datacenter.DataCenterName;
+
+                    found.ModifiedAt = DateTime.Now;
+                    _context.SaveChanges();
+
+                }
+
+                string message = "SUCCESS";
+                return new JsonStringResult(message);
+
+            }
+
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+
+
+        }
+
+        [HttpPost]
+        public JsonStringResult GetInsertedDataCenter()
+        {
+
+            var result = (from datacenter in _context.lkpDataCenter
+                          join cities in _context.lkpCity on datacenter.CityId equals cities.CityId
+                          select new
+                          {
+
+                             
+                              CityName = cities.CityName,
+                             DataCenterName=datacenter.DataCenterName,
+                             DataCenterId=datacenter.DataCenterId
+
+                          }
+                          ).ToList();
+
+
+
+
+
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Deletedatacenter([FromBody]lkpDataCenter datacenter)
+        {
+            string message = "SUCCESS";
+
+            try
+            {
+                var selecteddatacenter = (from c in _context.lkpDataCenter
+                                    where c.DataCenterId == datacenter.DataCenterId
+                                    select c).FirstOrDefault();
+
+                if (selecteddatacenter == null)
+                {
+
+                    message = "Fail";
+                }
+
+                _context.lkpDataCenter.Remove(selecteddatacenter);
+                _context.SaveChanges();
+
+                return new JsonStringResult(message);
+            }
+            catch (System.Exception)
+            {
+
+                return new JsonStringResult("Fail");
+            }
+
+        }
+
+
+        private int ParseInt(string value)
+        {
+            int number = 0;
+            if (int.TryParse(value, out number))
+                return number;
+            else
+                return 0;
+        }
+
+    }
+}
+

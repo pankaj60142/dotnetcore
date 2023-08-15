@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/style.min.css">
+    <style>
+
+        .flex-container {
+            padding: 1em;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+            grid-gap: 2em;
+        }
+
+        .name {
+            width: 10em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1em;
+        }
+
+        .folder {
+            height: 105px;
+            width: 100%;
+            position: relative;
+            background-color: white;
+            border: 1px solid lightgray;
+            border-radius: 0 6px 6px 6px;
+            box-shadow: 0px 0px 0px lightgrey;
+            padding: 0.25em 0.5em;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+            .folder:before {
+                content: "";
+                width: 50%;
+                height: 12px;
+                border-radius: 0 20px 0 0;
+                /*background-color: #ffbc6d;*/
+                background-color: transparent;
+                border-top: 1px solid lightgray;
+                border-left: 1px solid lightgray;
+                border-right: 1px solid lightgray;
+                position: absolute;
+                top: -13px;
+                left: -1px;
+            }
+
+
+        .file {
+            height: 140px;
+            width: 78%;
+            position: relative;
+            background-color: white;
+            /* border: 1px solid lightgray; */
+            border-radius: 0 6px 6px 6px;
+            /* box-shadow: 0px 4px 4px 0px lightgrey; */
+            /* padding: 0.25em 0.5em; */
+            display: flex;
+            /* justify-content: space-around; */
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .rightCircle {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #7036e9;
+            right: -6px;
+            top: -7px;
+        }
+
+
+        .options {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            border-top: 1px solid lightgray;
+            color: darkgray;
+            font-size: 13px;
+        }
+
+        .optionsfile {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            color: #c7c2c2;
+            margin-bottom: 5px;
+        }
+
+        .folder::after {
+            content: '';
+            position: absolute;
+            left: 0.8em;
+            width: 4em;
+            height: 5px;
+            top: -0.8em;
+            background: transparent;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .folder:hover {
+            /*box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);*/
+            transform: translateY(-5px);
+        }
+
+        .folder:hover {
+            /*box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);*/
+            -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+        }
+
+        .noselect {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently   supported by Chrome, Edge, Opera and Firefox */
+                   overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;      
+                                                                                                                        
+        }
+        .noselectFolder {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                                                                                                          supported by Chrome, Edge, Opera and Firefox */
+                 overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;           
+        }
+
+        .fa-share-alt:hover {
+            color: green;
+        }
+
+        img:hover {
+            /*box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);*/
+            transform: translateY(-5px);
+        }
+
+        img:hover {
+            /*box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);*/
+            -webkit-transform: scale(1.25, 1.25);
+            transform: scale(1.25, 1.25);
+        }
+
+
+        .caption {
+            display: block;
+            width: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .captionFile {
+            display: block;
+            width: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+
+        .wrappermenu {
+            visibility: hidden;
+            position: absolute;
+            width: 300px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+        }
+
+            .wrappermenu .menu {
+                padding: 10px 12px;
+            }
+
+        .contentmenu .item {
+            list-style: none;
+            font-size: 22px;
+            height: 50px;
+            display: flex;
+            width: 100%;
+            cursor: pointer;
+            align-items: center;
+            border-radius: 5px;
+            margin-bottom: 2px;
+            padding: 0 5px 0 10px;
+        }
+
+            .contentmenu .item:hover {
+                background: #f2f2f2;
+            }
+
+            .contentmenu .item span {
+                margin-left: 8px;
+                font-size: 19px;
+            }
+
+        .contentmenu .setting {
+            display: flex;
+            margin-top: -5px;
+            padding: 5px 12px;
+            border-top: 1px solid #ccc;
+        }
+
+        .contentmenu .share {
+            position: relative;
+            justify-content: space-between;
+        }
+
+        .share .share-menu {
+            position: absolute;
+            background: #fff;
+            width: 200px;
+            right: -200px;
+            top: -35px;
+            padding: 13px;
+            opacity: 0;
+            pointer-events: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.08);
+            transition: 0.2s ease;
+        }
+
+        .share:hover .share-menu {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .fa-2x {
+            font-size: 1.5em !important;
+        }
+
+        .jstree-node {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .jstree-leaf {
+            font-weight: normal;
+        }
+
+            .jstree-leaf a.jstree-hovered {
+                font-weight: normal;
+            }
+
+            .jstree-leaf a.jstree-clicked {
+                font-weight: normal;
+            }
+
+        .fa-trash-o {
+            color: red;
+            font-weight: bold;
+        }
+
+
+
+        .docBtn:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            color: lightgray;
+        }
+
+
+
+        .docBtn:hover,
+        .docBtn:hover:after {
+            background-position: 0;
+            font-size: 1.2em;
+            border-radius: 100px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .search {
+            position: relative;
+            box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+        }
+
+            .search input {
+                height: 60px;
+                text-indent: 25px;
+                border: 2px solid #d6d4d4;
+            }
+
+
+                .search input:focus {
+                    box-shadow: none;
+                    border: 2px solid blue;
+                }
+
+            .search .fa-search {
+                position: absolute;
+                top: 20px;
+                left: 16px;
+            }
+
+            .search button {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                height: 50px;
+                width: 110px;
+                background: blue;
+            }
+
+        .buttonCreateDiagram {
+            border-radius: 4px;
+            background-color: transparent;
+            border: none;
+            color: rgb(214 137 45);
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+            .buttonCreateDiagram span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .buttonCreateDiagram span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .buttonCreateDiagram:hover span {
+                padding-right: 25px;
+            }
+
+                .buttonCreateDiagram:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+
+        .buttonCreateFolder {
+            border-radius: 4px;
+            background-color: transparent;
+            border: none;
+            color: rgb(103 172 68);
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+            .buttonCreateFolder span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .buttonCreateFolder span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .buttonCreateFolder:hover span {
+                padding-right: 25px;
+            }
+
+                .buttonCreateFolder:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+    </style>
+</head>
+<body>
+    @*<div class="row"><button style="margin-right:2px;" class="pull-left btn btn-danger" onclick="UpLevel();">Back <i class="fa fa-arrow-up" aria-hidden="true"></i></button></div>*@
+    <div class="row">
+        <div class="col col-lg-2" style="background-color:#F8F8F8;overflow:auto;">
+            <div id="FrameworkTree" class="scrollOverHover" style="height:85vh;color:black;"></div>
+        </div>
+        <div class="col col-lg-10" style="background-color:white;">
+
+            @* <span id="balloon1" class="opener mbBalloonOpener" data-addoverlay="false" data-balloon="Right click to see additional document options" data-bgcolor="#67ac44" data-justonce="false" style="position: absolute; left:-100px;"></span>
+
+            <div id="balloon2" class="opener mbBalloonOpener" data-forceposition="up" data-addoverlay="true" data-balloon="Right click to create/edit new diagram" data-bgcolor="#67ac44" onmouseover="$(this).showBalloon(event,{balloon:$('#forBalloon3')})" onmouseout="$(this).hideBalloon()" style="position:relative; margin: auto ; clear: both;top:20px;"></div>*@
+
+
+
+            <div class="row">
+
+                <div class="col-xs-3 col-md-3 pull-right" style="margin-top:10px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" id="txtSearchFolderList" onkeypress="return SearchOnEnter(event)" />
+
+
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="SearchFolderList();">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-4 col-md-4" style="margin-top:10px;">
+
+                    <button type="button" class="buttonCreateDiagram" id="btnCreateDiagramTop" onclick="NavigateDesignerAddnew();"> <span>Create Diagram</span></button>
+                    <button type="button" class="buttonCreateFolder" id="btnCreateFolderTop" onclick="CreateFolderTop();"> <span>Create Folder</span></button>
+
+
+                </div>
+
+
+            </div>
+            <hr />
+            <img id="imgExplorerLoading" src="~/img/ajax-loader.gif" style="display:none;" />
+            <div id="mainFolderList" class="flex-container context-menu-one" style="height:85vh;margin-top:30px;">
+
+
+
+                @* <div><img id="img1" src="~/img/Transparency Folders.png" style="height:70px;" ondblclick="ShowChildren(this)" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Folders.png" style="height:70px;" /><span class="caption">Text below the image</span></div>
+                <div><img src="~/img/Transparency Files.png" style="height:70px;" /><span class="caption">Text below the image</span></div>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="wrappermenu">
+        <div class="contentmenu">
+            <ul class="menu">
+                <li class="item">
+                    <i class="uil uil-eye"></i>
+                    <span onclick="NavigateDesignerAddnew()">Create New Diagram</span>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="modal" id="foldercreatemodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Folder Name
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCity" class="smart-form" onSubmit="return false;">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+                                <input type="text" autofocus class="form-control" id="txtFolderName" onkeypress="SaveFolderOnEnter(event)" />
+
+
+
+                            </fieldset>
+
+
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="CreateNewFolder();">
+                                    Create New
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelNewFolder();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="foldersharemodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i id="sharingFolderTitle" class="fa fa-edit" style="font-weight:bold;"></i>
+
+                    </span>
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCity" class="smart-form" onSubmit="return false;">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+
+
+
+
+                                <section>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-envelope"></i>
+                                        <input type="email" id="txtEmailShareFolder" name="txtEmailShareFolder" placeholder="Email address">
+                                        <b class="tooltip tooltip-bottom-right">Needed to share  with your account</b>
+                                    </label>
+
+                                    <p id="txtEmailShareFolderError" style="color:red"></p>
+
+
+
+                                </section>
+
+                            </fieldset>
+
+                            @* <hr/>*@
+
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="ShareFolderViaEmail();">
+                                    Share
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelShareFolder();">
+                                    Cancel
+                                </button>
+                                <p id="sharingFolderInfoMessage" style="color:green"></p>
+
+                            </footer>
+                        </form>
+
+                        <img id="imgShareLoading" src="~/img/ajax-loader.gif" style="display:none;" />
+
+                        <table id="tblSharedWith" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Shared With</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div class="modal" id="copyfilemodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i id="moveFileTitle" class="fa fa-copy" style="font-weight:bold;">&nbsp;&nbsp;&nbsp;Copy File</i>
+
+                    </span>
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCopyFile" class="smart-form" onSubmit="return false;">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+
+
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label class="input">
+                                                <b> Parent Folder </b>
+
+                                                <input type="text" disabled id="txtCopyFileFolderName" name="txtCopyFileFolderName" placeholder="Parent Folder">
+                                                <b class="tooltip tooltip-bottom-right">Parent Folder</b>
+                                            </label>
+
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <label class="input">
+
+                                                <b>Diagram Name</b>
+                                                <input type="text" disabled id="txtCopyFileName" name="txtMoveFileName" placeholder="Diagram Name">
+                                                <b class="tooltip tooltip-bottom-right">Diagram Name</b>
+                                            </label>
+
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+
+
+                            </fieldset>
+
+                            @* <hr/>*@
+
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="CopyFileToNewFolder();">
+                                    Copy
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelCopyFileToNewFolder();">
+                                    Cancel
+                                </button>
+                                <p id="copyFileInfoMessage" style="color:green"></p>
+
+                            </footer>
+                        </form>
+
+                        <img id="imgCopyLoading" src="~/img/ajax-loader.gif" style="display:none;" />
+
+                        <table id="tblCopyFile" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Folder Name</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="movefilemodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i id="moveFileTitle" class="fa fa-truck" style="font-weight:bold;">&nbsp;&nbsp;&nbsp;Move File</i>
+
+                    </span>
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmMoveFile" class="smart-form" onSubmit="return false;">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+
+
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label class="input">
+                                                <b> Parent Folder </b>
+
+                                                <input type="text" disabled id="txtMoveFileFolderName" name="txtMoveFileFolderName" placeholder="Parent Folder">
+                                                <b class="tooltip tooltip-bottom-right">Parent Folder</b>
+                                            </label>
+
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <label class="input">
+
+                                                <b>Diagram Name</b>
+                                                <input type="text" disabled id="txtMoveFileName" name="txtMoveFileName" placeholder="Diagram Name">
+                                                <b class="tooltip tooltip-bottom-right">Diagram Name</b>
+                                            </label>
+
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+
+
+                            </fieldset>
+
+                            @* <hr/>*@
+
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="MoveFileToNewFolder();">
+                                    Move
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelMoveFileToNewFolder();">
+                                    Cancel
+                                </button>
+                                <p id="movingFileInfoMessage" style="color:green"></p>
+
+                            </footer>
+                        </form>
+
+                        <img id="imgMoveLoading" src="~/img/ajax-loader.gif" style="display:none;" />
+
+                        <table id="tblMoveFile" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Folder Name</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="renamefilemodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i id="renameFileTitle" class="fa fa-edit" style="font-weight:bold;">&nbsp;&nbsp;&nbsp;Rename File</i>
+
+                    </span>
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmRenameFile" class="smart-form" onSubmit="return false;">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+
+
+                                <section>
+                                    <div class="row">
+
+
+                                        <div class="col-md-12">
+                                            <label class="input">
+                                                <b> Name</b>
+                                                <input type="text" id="txtRenameFileName" name="txtRenameFileName" placeholder="Name">
+                                                <b class="tooltip tooltip-bottom-right">Name</b>
+                                            </label>
+
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+
+
+                            </fieldset>
+
+                            @* <hr/>*@
+
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="RenameFileFolder();">
+                                    Rename
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelRenameFileFolder();">
+                                    Cancel
+                                </button>
+                                <p id="renamingFileInfoMessage" style="color:green"></p>
+
+                            </footer>
+                        </form>
+
+                        <img id="imgRenameLoading" src="~/img/ajax-loader.gif" style="display:none;" />
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+
+        pageSetUp();
+
+        const contextMenu = document.querySelector(".wrappermenu")
+
+        var CurrentFolderId = 0;
+        var CurrentFolderText = "";
+
+        var AllFolders = [];
+        var AllApplications = [];
+
+        var currentLevel;
+        var currentParentId = 0;
+        var currentApplicationParentId = 0;
+
+        var selectedNodeForShareFolder = 0;
+
+        var selectFolderForShareId = 0;
+        var selectFolderForShareText = "";
+
+        var isFileSharing = false;
+        var isFile = 1;
+        var AllUserFolders = [];
+        var AllSearchFolders = [];
+
+        const validateEmail = (email) => {
+            return email.match(
+                /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+        };
+
+
+        //     document.getElementById("mainFolderList").addEventListener("contextmenu", e => {
+        //    e.preventDefault();
+        //    let x = e.offsetX, y = e.offsetY,
+        //    winWidth = window.innerWidth,
+        //    winHeight = window.innerHeight,
+        //    cmWidth = contextMenu.offsetWidth,
+        //    cmHeight = contextMenu.offsetHeight;
+
+
+
+        //    x = x > winWidth - cmWidth ? winWidth - cmWidth - 5 : x;
+        //    y = y > winHeight - cmHeight ? winHeight - cmHeight - 5 : y;
+
+        //    contextMenu.style.left = `${x}px`;
+        //    contextMenu.style.top = `${y}px`;
+        //    contextMenu.style.visibility = "visible";
+        //});
+
+        $(function () {
+
+            //setTimeout(function () {
+            //    var balloon2 = $("#balloon2").showBalloon();
+            //}, 5000);
+
+            //var balloon = $("#balloon1").showBalloon();
+
+
+            //jQuery.balloon.init();
+
+
+
+        });
+
+        $(document).keypress(function (e) {
+
+            if ($("#foldersharemodal").hasClass('in') && (e.keycode == 13 || e.which == 13)) {
+                ShareFolderViaEmail();
+            }
+        });
+
+        function FillDesignerTree() {
+
+
+
+
+            var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerTree',
+                type: 'POST',
+                datatype: 'json',
+                data: { "compid": compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill folders', 'error');
+                },
+                success: function (result) {
+                    AllUserFolders = result;
+
+
+                    $('#FrameworkTree').jstree({
+                        'core': {
+                            "check_callback": true,
+                            'data': result,
+                            'themes': {
+                                "variant": "large",
+                                'dots': false,
+                                'responsive': true
+                            }
+                        },
+                        "types": {
+                            "#": {
+                                "icon": "fa fa-folder-o fa-2x"
+                            },
+                            "share": {
+                                "icon": "fa fa-share-alt"
+                            },
+                            "template": {
+                                "icon": "fa fa-plus"
+                            },
+                            "default": {
+                                "icon": "fa fa-folder-o"
+                            },
+
+                        },
+
+
+
+
+
+
+                        "plugins": ["types", "themes", "search", "contextmenu", "wholerow"],
+
+
+                        "contextmenu": {
+                            "items": function ($node) {
+
+                                var tree = $("#FrameworkTree").jstree(true);
+                                return {
+                                    "Create New": {
+                                        "separator_before": false,
+                                        "separator_after": false,
+                                        "label": "Create New",
+                                        "action": function (obj) {
+
+                                            CreateNew($node);
+
+
+                                        }
+                                    },
+                                    "Share": {
+                                        "separator_before": false,
+                                        "separator_after": false,
+                                        "label": "Share",
+                                        "action": function (obj) {
+
+                                            ShareFolder($node);
+
+
+                                        }
+                                    },
+
+                                    "Rename": {
+                                        "separator_before": false,
+                                        "separator_after": false,
+                                        "label": "Rename",
+                                        "action": function (obj) {
+                                            isFile = 0;
+                                            document.getElementById("txtRenameFileName").value = $node.text;
+                                            RenameFile($node.id);
+
+
+                                        }
+                                    },
+                                    "Remove": {
+                                        "separator_before": false,
+                                        "separator_after": false,
+                                        "label": "Delete",
+                                        "action": function (obj) {
+
+
+                                            swal({
+                                                title: "Are you sure?",
+                                                text: "All associated diagrams as well as Nested folders will be deleted too,You will not be able to rollback this action!",
+                                                type: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonClass: "btn-danger",
+                                                confirmButtonText: "Yes, delete it!",
+                                                cancelButtonText: "No, cancel please!",
+                                                closeOnConfirm: false,
+                                                closeOnCancel: true
+                                            },
+                                                function (isConfirm) {
+
+                                                    if (isConfirm) {
+
+                                                        DeleteFolder($node.original.id, $node);
+
+                                                    } else {
+
+                                                    }
+                                                });
+
+
+
+
+
+
+
+                                        }
+                                    },
+
+
+                                };
+                            }
+                        },
+
+
+
+
+
+                        "search": {
+                            'case_sensitive': false,
+                            "show_only_matches": true
+                        }
+                    }).on('search.jstree', function (e, data) {
+
+                    })
+                        .on('loaded.jstree', function (e, data) {
+
+                            // invoked after jstree has loaded
+                            $(this).jstree("open_all");
+
+                            $('#FrameworkTree').jstree('select_node', 'ul > li:first');
+
+                            //if(gid!=null)
+                            //{
+                            //    setTimeout(function(){ SelectNode(this,pid,gid) }, 3000);
+
+
+                            //}
+                            //else
+                            //{
+                            // setTimeout(function(){ SelectNode(this,0,0) }, 1000);  //By default Select Root
+                            //}
+                        })
+
+                        .on(
+                            "select_node.jstree", function (e, data) {
+
+
+                                var node = $(e.target).closest("li");
+                                fillExplorerBySelectedNode(data.node.id, data.node.text);
+
+                                //document.getElementById("tempSelectedFolderId").innerHTML=data.node.id.toString();
+                                // document.getElementById("mxGraph").contentWindow.postMessage(['cleardiagram'], '*');
+
+                                // document.getElementById("selectedFolderCaption").innerHTML=" ( " + data.node.text.toString() + " ) ";
+                                //FillApplicationTreeBasedUponSelectedFolder(data.node.id);
+
+
+                                //var item = node[0].id;
+
+
+                            }
+                        )
+
+
+
+
+
+
+                }
+
+            });
+
+
+
+
+        }
+
+
+        function CreateNew(nodeval) {
+            selectedNodeForCreatFolder = nodeval;
+            document.getElementById("txtFolderName").value = '';
+            buttonclicknewfolderTop = 0;
+            $('#foldercreatemodal').modal('show');
+
+
+            //document.getElementById("txtFileNameHidden").value = nodeval.text;
+            //allCheckedIds = [];
+            //FillAlreadySharedUsers();
+            // FillAllUsers();
+
+        }
+
+        $('#foldercreatemodal').on('shown.bs.modal', function () {
+            $('#txtFolderName').focus();
+        });
+
+        function CancelNewFolder() {
+            $('#foldercreatemodal').modal('hide');
+        }
+
+        function CancelShareFolder() {
+            $('#foldersharemodal').modal('hide');
+        }
+
+
+        function SaveFolderOnEnter(e) {
+            if (e.keyCode === 13) {
+                e.preventDefault(); // Ensure it is only this code that runs
+
+                CreateNewFolder();
+            }
+        }
+        var buttonclicknewfolderTop = 0;
+        function CreateFolderTop() {
+
+            document.getElementById("txtFolderName").value = '';
+            buttonclicknewfolderTop = 1;
+            $('#foldercreatemodal').modal('show');
+        }
+        function CreateNewFolder() {
+
+            if (document.getElementById("txtFolderName").value == "") {
+                swal('Alert!', 'Folder name must be entered', 'error');
+
+                return;
+            }
+            var compid = localStorage.getItem("companyid");
+            var selectedLevel = 1;
+
+            var parid = 0;
+
+            if (buttonclicknewfolderTop == 1) {
+                parid = CurrentFolderId;
+                selectedLevel = currentLevel;
+
+            }
+            else {
+                parid = selectedNodeForCreatFolder.id;
+                selectedLevel = selectedNodeForCreatFolder.parents.length;
+                buttonclicknewfolderTop = 0;
+            }
+
+
+
+
+
+
+            $.ajax({
+                url: rootUrl + '/Graph/CreateDesignerFolder',
+                type: 'POST',
+                datatype: 'json',
+                data: { compid: compid, parent: parid, foldername: document.getElementById("txtFolderName").value, selectedNodeLevel: selectedLevel },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    swal('Alert!', 'Unable to create folder', 'error');
+                },
+                success: function (result) {
+                    var node = { id: result.Message, text: document.getElementById("txtFolderName").value };
+
+                    if (buttonclicknewfolderTop == 1) {
+                        debugger;
+                        document.getElementById("mainFolderList").innerHTML = "";
+                        var selNode = $('#FrameworkTree').jstree(true).get_node(parid, true);
+                        $('#FrameworkTree').jstree().create_node(selNode, node, 'last');
+
+                        var v = currentLevel;
+                        var obj = {};
+                        obj["id"] = result.Message;
+                        obj["folderLevel"] = selNode.parents.length + 1;
+                        obj["parent"] = parid.toString();
+                        obj["text"] = document.getElementById("txtFolderName").value;
+                        obj["type"] = parid.toString();
+                        AllUserFolders.push(obj);
+
+
+                    }
+
+                    else {
+                        $('#FrameworkTree').jstree().create_node(selectedNodeForCreatFolder, node, 'last');
+                        var obj = {};
+                        obj["id"] = result.Message;
+                        obj["folderLevel"] = selectedLevel + 1;
+                        obj["parent"] = parid.toString();
+                        obj["text"] = document.getElementById("txtFolderName").value;
+                        obj["type"] = parid.toString();
+                        AllUserFolders.push(obj);
+                    }
+
+
+
+                    $('#foldercreatemodal').modal('hide');
+
+                }
+
+            });
+
+
+
+
+
+        }
+        function ShareFolder(nodeval) {
+            selectedNodeForShareFolder = nodeval;
+            selectFolderForShareId = nodeval.id;
+            selectFolderForShareText = nodeval.text;
+            document.getElementById("txtEmailShareFolderError").value = "";
+
+            document.getElementById("sharingFolderTitle").innerHTML = "Share " + nodeval.text;
+            $('#foldersharemodal').modal('show');
+        }
+
+        $('#foldersharemodal').on('shown.bs.modal', function () {
+            $('#txtEmailShareFolder').focus();
+        });
+
+        function OpenShareFolderDatabaseViaEmail(id, text) {
+            isFileSharing = false;
+            selectFolderForShareId = id;
+            selectFolderForShareText = text;
+            document.getElementById("txtEmailShareFolderError").value = "";
+
+            document.getElementById("sharingFolderTitle").innerHTML = "Share " + text;
+            $('#foldersharemodal').modal('show');
+
+            document.getElementById("imgShareLoading").style.display = "block";
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+            $.ajax({
+                url: rootUrl + '/Graph/GetFolderSharingDetail',
+                type: 'POST',
+                datatype: 'json',
+                data: { CompanyId: compid, FolderId: id, FolderName: text },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill states', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblSharedWith').DataTable().destroy();
+                    $('#tblSharedWith').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'FileName', 'width': '20%' },
+                            { data: 'SharedWithUserEmail', 'width': '20%' },
+
+                            {
+
+                                "data": "SharedApplicationId",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-warning" style="background: darkred;color: white;" onclick="DeleteSharing(\'' + data + '\');">Delete</button>';
+                                }
+                            },
+
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                    document.getElementById("imgShareLoading").style.display = "none";
+                }
+
+            });
+
+
+
+        }
+
+        function ShareFolderViaEmail() {
+
+
+            const email = $('#txtEmailShareFolder').val();
+
+
+            if (validateEmail(email)) {
+                document.getElementById("txtEmailShareFolderError").innerHTML = "";
+                var emailToShare = document.getElementById("txtEmailShareFolder").value;
+
+                var compid = localStorage.getItem("companyid");
+                $.ajax({
+                    url: rootUrl + '/Graph/ShareFolderViaEmail',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: { compid: compid, folderid: selectFolderForShareId, email: emailToShare, foldername: selectFolderForShareText, isfilesharing: isFileSharing },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        swal('Alert!', 'Unable to share folder', 'error');
+                    },
+                    success: function (result) {
+
+                        if (result.Message.indexOf("Shared Successfully") == -1) {
+                            document.getElementById("sharingFolderInfoMessage").style.color = "red";
+                        }
+                        else {
+                            document.getElementById("sharingFolderInfoMessage").style.color = "green";
+                            $('#foldersharemodal').modal('hide');
+
+                        }
+
+
+                        document.getElementById("sharingFolderInfoMessage").innerHTML = result.Message;
+
+
+                        //$('#foldersharemodal').modal('hide');
+
+                    }
+
+                });
+
+
+
+            }
+
+            else {
+                document.getElementById("txtEmailShareFolderError").innerHTML = "Please enter valid email address";
+            }
+
+
+        }
+
+        function OpenShareFileDatabaseViaEmail(id, text) {
+            isFileSharing = true;
+            selectFolderForShareId = id;
+            selectFolderForShareText = text;
+
+            document.getElementById("sharingFolderTitle").innerHTML = "Share " + text;
+            $('#foldersharemodal').modal('show');
+
+            document.getElementById("imgShareLoading").style.display = "block";
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+            $.ajax({
+                url: rootUrl + '/Graph/GetSharingDetail',
+                type: 'POST',
+                datatype: 'json',
+                data: { CompanyId: compid, FileId: id, FileName: text },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill states', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblSharedWith').DataTable().destroy();
+                    $('#tblSharedWith').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'FileName', 'width': '20%' },
+                            { data: 'SharedWithUserEmail', 'width': '20%' },
+
+                            {
+
+                                "data": "SharedApplicationWithUserId",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-warning" style="background: darkred;color: white;" onclick="DeleteSharing(\'' + data + '\');">Delete</button>';
+                                }
+                            },
+
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+
+                    document.getElementById("imgShareLoading").style.display = "none";
+                }
+
+            });
+
+
+
+
+
+        }
+
+
+        function DeleteSharing(SharedApplicationId) {
+
+            swal({
+                title: "Are you sure to delete sharing?",
+                text: "You will not be able to rollback this action!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-warning",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: true
+            },
+                function (isConfirm) {
+
+
+
+                    if (isConfirm) {
+
+                        document.getElementById("imgShareLoading").style.display = "block";
+                        RemoveFileSharing(SharedApplicationId);
+                        swal.close();
+
+                    } else {
+
+                    }
+                });
+        }
+
+
+
+        function RemoveFileSharing(SharedApplicationId) {
+            var compid = localStorage.getItem("companyid");
+
+            $.ajax({
+                url: rootUrl + '/Graph/RemoveFileSharing',
+                type: 'POST',
+                data: { "SharedApplicationId": SharedApplicationId, "compid": compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    dropstarted = false;
+                },
+
+                success: function (result) {
+
+                    if (result.Message == "Success") {
+                        swal('Alert!', "Sharing removed successfully", 'success');
+                    }
+                    else {
+
+                        swal('Alert!', result.Message, 'error');
+
+
+                    }
+
+
+                }
+
+
+            });
+        }
+
+        var CurrentFileIdToBeMoved = 0;
+
+        function CancelMoveFileToNewFolder()
+        {
+          $('#movefilemodal').modal('hide');
+        }
+        function MoveFileToNewFolder() {
+
+            if ($('#tblMoveFile').DataTable().rows('.selected').length > 0) {
+                document.getElementById("imgMoveLoading").style.display = "block";
+                var rows_selected = $('#tblMoveFile').DataTable().rows('.selected').data();
+                var fid = rows_selected[0].id;
+
+                var compid = localStorage.getItem("companyid");
+                $.ajax({
+                    url: rootUrl + '/Graph/MoveFileToNewFolder',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: { "compid": compid, 'FolderId': fid, 'FileId': CurrentFileIdToBeMoved },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        Swal('Alert!', 'Unable to fill folders', 'error');
+                    },
+                    success: function (result) {
+
+                        document.getElementById("imgMoveLoading").style.display = "none";
+
+                        if (result.Message == "success") {
+                            document.getElementById("mainFolderList").innerHTML = "";
+                            var found = AllUserFolders.filter(function (item) { return item.parent === CurrentFolderId.toString() });
+
+                            for (var key in found) {
+                                var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + found[key].text + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+                            }
+
+                            Swal('Alert!', 'File moved successfully', 'error');
+
+                            FillApplicationsBySelectedNode(CurrentFolderId, CurrentFolderText);
+                            $('#movefilemodal').modal('hide');
+                        }
+                        else {
+                            Swal('Alert!', 'Unable to move file', 'error');
+                        }
+
+
+
+                    }
+
+                });
+
+
+            }
+            else {
+                Swal('Alert!', 'Please select some folder', 'error');
+            }
+
+        }
+
+           function MoveFile(FileId) {
+
+            CurrentFileIdToBeMoved = FileId;
+            document.getElementById("txtMoveFileFolderName").value = CurrentFolderText;
+            var compid = localStorage.getItem("companyid");
+            $('#movefilemodal').modal('show');
+            document.getElementById("imgMoveLoading").style.display = "block";
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerTreeForMoveFile',
+                type: 'POST',
+                datatype: 'json',
+                data: { "compid": compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill folders', 'error');
+                },
+                success: function (result) {
+
+                    $('#tblMoveFile').DataTable().destroy();
+                    var table = $('#tblMoveFile').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+
+
+                        columns: [
+                            { data: null, 'width': '20%', defaultContent: '' },
+                            { data: 'text', 'width': '40%' },
+
+
+                        ],
+
+
+
+                        "iDisplayLength": 10,
+                        columnDefs: [{
+                            orderable: false,
+                            className: 'select-checkbox',
+                            targets: 0,
+
+                        }],
+                        select: {
+                            style: 'os',
+                            selector: 'td:first-child'
+                        },
+
+
+                    });
+
+
+
+                    document.getElementById("imgMoveLoading").style.display = "none";
+
+
+
+
+
+                }
+
+            });
+
+
+        }
+           var CurrentFileIdToBeCopied = 0;
+        function CopyFile(FileId) {
+
+            CurrentFileIdToBeCopied = FileId;
+            document.getElementById("txtCopyFileFolderName").value = CurrentFolderText;
+            var compid = localStorage.getItem("companyid");
+            $('#copyfilemodal').modal('show');
+            document.getElementById("imgCopyLoading").style.display = "block";
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerTreeForCopyFile',
+                type: 'POST',
+                datatype: 'json',
+                data: { "compid": compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill folders', 'error');
+                },
+                success: function (result) {
+
+                    $('#tblCopyFile').DataTable().destroy();
+                    var table = $('#tblCopyFile').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+
+
+                        columns: [
+                            { data: null, 'width': '20%', defaultContent: '' },
+                            { data: 'text', 'width': '40%' },
+
+
+                        ],
+
+
+
+                        "iDisplayLength": 10,
+                        columnDefs: [{
+                            orderable: false,
+                            className: 'select-checkbox',
+                            targets: 0,
+
+                        }],
+                        select: {
+                            style: 'os',
+                            selector: 'td:first-child'
+                        },
+
+
+                    });
+
+
+
+                    document.getElementById("imgCopyLoading").style.display = "none";
+
+
+
+
+
+                }
+
+            });
+
+
+        }
+
+        function CancelCopyFileToNewFolder() {
+          $('#copyfilemodal').modal('hide');
+        }
+
+            function CopyFileToNewFolder() {
+
+            if ($('#tblCopyFile').DataTable().rows('.selected').length > 0) {
+                document.getElementById("imgCopyLoading").style.display = "block";
+                var rows_selected = $('#tblCopyFile').DataTable().rows('.selected').data();
+                var fid = rows_selected[0].id;
+
+                var compid = localStorage.getItem("companyid");
+                $.ajax({
+                    url: rootUrl + '/Graph/CopyFileToNewFolder',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: { "compid": compid, 'FolderId': fid, 'FileId': CurrentFileIdToBeCopied },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        Swal('Alert!', 'Unable to fill folders', 'error');
+                    },
+                    success: function (result) {
+
+                        document.getElementById("imgCopyLoading").style.display = "none";
+                        debugger;
+                        if (result.Message == "success") {
+                            document.getElementById("mainFolderList").innerHTML = "";
+                            var found = AllUserFolders.filter(function (item) { return item.parent === CurrentFolderId.toString() });
+
+                            for (var key in found) {
+                                var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + found[key].text + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+                            }
+
+                            swal('Alert!', 'File copied successfully', 'success');
+
+                            FillApplicationsBySelectedNode(CurrentFolderId, CurrentFolderText);
+                            $('#copyfilemodal').modal('hide');
+                        }
+                        else {
+                            swal('Alert!', 'Unable to copy file', 'success');
+                        }
+
+
+
+                    }
+
+                });
+
+
+            }
+            else {
+                Swal('Alert!', 'Please select some folder', 'error');
+            }
+
+        }
+
+        var CurrentFileIdToBeRenamed = 0;
+        function CancelRenameFileFolder() {
+               $('#renamefilemodal').modal('hide');
+        }
+
+        function RenameFile(FileId) {
+
+            CurrentFileIdToBeRenamed = FileId;
+
+            var compid = localStorage.getItem("companyid");
+            $('#renamefilemodal').modal('show');
+
+
+
+
+
+        }
+
+        function RenameFileFolder() {
+            var compid = localStorage.getItem("companyid");
+            var RenamedName = document.getElementById("txtRenameFileName").value;
+
+
+            if (RenamedName == '') {
+                swal('Alert!', "Name can not be empty !", 'error');
+
+                return;
+            }
+
+            document.getElementById("imgRenameLoading").style.display = "block";
+
+            $.ajax({
+                url: rootUrl + '/Graph/RenameFileFolder',
+                type: 'POST',
+                data: { "FileFolderId": CurrentFileIdToBeRenamed, "compid": compid, "isFile": isFile, "RenamedName": RenamedName },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    dropstarted = false;
+                    document.getElementById("imgRenameLoading").style.display = "none";
+                },
+
+                success: function (result) {
+
+                    if (result.Message == "Unable to rename !") {
+                        swal('Alert!', "Unable to rename !", 'error');
+                    }
+                    else {
+                        document.getElementById("imgRenameLoading").style.display = "none";
+                        $('#renamefilemodal').modal('hide');
+
+
+
+                        document.getElementById("mainFolderList").innerHTML = "";
+                        var found = AllUserFolders.filter(function (item) { return item.parent === CurrentFolderId.toString() });
+                        if (isFile == 0) {
+                            var objIndex = AllUserFolders.findIndex((obj => obj.id == CurrentFileIdToBeRenamed.toString()));
+
+                            AllUserFolders[objIndex].text = document.getElementById("txtRenameFileName").value;
+
+                            var node = $('#FrameworkTree').jstree(true).get_node(CurrentFileIdToBeRenamed, true);
+                            $("#FrameworkTree").jstree('set_text', node, document.getElementById("txtRenameFileName").value);
+
+                            for (var key in found) {
+
+                                if (found[key].id == CurrentFileIdToBeRenamed) {
+                                    var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                                    document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + document.getElementById("txtRenameFileName").value + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + document.getElementById("txtRenameFileName").value + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+
+                                }
+                                else {
+                                    var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                                    document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + found[key].text + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+                                }
+                            }
+
+                        }
+                        else {
+                            for (var key in found) {
+
+
+                                var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + found[key].text + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+
+                            }
+
+
+                        }
+
+
+
+                        FillApplicationsBySelectedNode(CurrentFolderId, CurrentFolderText);
+
+
+                        document.getElementById("imgExplorerLoading").style.display = "none";
+
+                    }
+
+
+                }
+
+
+            });
+        }
+
+        function DeleteFile(FileId) {
+            var compid = localStorage.getItem("companyid");
+
+            $.ajax({
+                url: rootUrl + '/Graph/DeleteFile',
+                type: 'POST',
+                data: { "DiagramId": FileId, "compid": compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    dropstarted = false;
+                },
+
+                success: function (result) {
+
+                    if (result.Message == "Unable to delete file !") {
+                        swal('Alert!', "Unable to delete file !", 'error');
+                    }
+                    else {
+
+
+                        document.getElementById("mainFolderList").innerHTML = "";
+                        var found = AllUserFolders.filter(function (item) { return item.parent === CurrentFolderId.toString() });
+
+                        for (var key in found) {
+                            var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                            document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + found[key].text + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+                        }
+
+
+
+                        FillApplicationsBySelectedNode(CurrentFolderId, CurrentFolderText);
+
+
+                        document.getElementById("imgExplorerLoading").style.display = "none";
+
+                    }
+
+
+                }
+
+
+            });
+        }
+
+        function DeleteFolder(FileId, node) {
+
+            var compid = localStorage.getItem("companyid");
+            dropstarted = true;
+            $.ajax({
+                url: rootUrl + '/Graph/DeleteFolder',
+                type: 'POST',
+                data: { "DiagramId": FileId, "compid": compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    dropstarted = false;
+                },
+
+                success: function (result) {
+
+                    if (result.Message == "Unable to delete folder !") {
+                        swal('Alert!', "Unable to delete folder, Please make sure it is not a Root folder !", 'error');
+                    }
+                    else {
+                        var tree = $("#FrameworkTree").jstree(true);
+                        tree.delete_node(node);
+                        debugger;
+
+                        var index = AllUserFolders.findIndex(function (o) {
+                            return o.id === FileId;
+                        })
+                        if (index !== -1) AllUserFolders.splice(index, 1);
+
+
+                        swal('Alert!', result.Message, 'success');
+                    }
+
+
+                }
+
+
+            });
+
+        }
+
+        //document.getElementById("mainFolderList").addEventListener("click", () => contextMenu.style.visibility = "hidden");
+
+        function fillExplorer() {
+
+            currentLevel = 1;
+            var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerTree',
+                type: 'POST',
+                datatype: 'json',
+                data: { "compid": compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill folders', 'error');
+                },
+                success: function (result) {
+
+                    AllFolders = result;
+
+                    var found = AllFolders.filter(function (item) { return item.folderLevel === 1 });
+
+                    for (var key in found) {
+
+                        document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + ' <div ><img class="childFolderList" id="' + found[key].id + '" src="/img/Transparency Folders.png" style="height:70px;" ondblclick="ShowChildren(this,' + found[key].folderLevel + ',' + found[key].parent + ')" /><span class="caption">' + found[key].text + '</span></div>';
+                    }
+
+
+                }
+
+            });
+
+
+
+
+
+
+
+        }
+
+        function FillApplicationsBySelectedNode(selectedFolderId, parentText) {
+
+            document.getElementById("imgExplorerLoading").style.display = "block";
+
+            var compid = localStorage.getItem("companyid");
+
+            var issharedwithmeselected = false;
+
+            if (selectedFolderId == "-999") {
+                issharedwithmeselected = true;
+            }
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerApplicationTree',
+                type: 'POST',
+                datatype: 'json',
+                data: { "compid": compid, "selectedFolder": selectedFolderId, "isSharedWithmeSelected": issharedwithmeselected },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    document.getElementById("imgExplorerLoading").style.display = "none";
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill folders', 'error');
+                },
+                success: function (result) {
+
+                    document.getElementById("imgExplorerLoading").style.display = "none";
+                    var foundApplications = result.filter(function (item) { return item.parent === selectedFolderId.toString() });
+
+
+                    for (var key in foundApplications) {
+
+                        document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + foundApplications[key].id + '" class="file" style="margin-top: -24px;" ondblclick="NavigateDesigner( \'' + parentText + '\',' + foundApplications[key].id + ',' + selectedFolderId + ')" ><div class="optionsfile"><button class="docBtn" onclick="OpenShareFileDatabaseViaEmail(' + foundApplications[key].id + ',  \'' + foundApplications[key].text + '\')"  style="width:100%;border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-fw"></i>Share</button>    </div><img src="/img/flocharticon.png" style="height: 6vh;margin-top: 0px;margin-bottom: 5px;"> <p class="noselect" title=' + foundApplications[key].text + ' style="text-align: -webkit-center;font-weight:bold;font-size:11px;">' + foundApplications[key].text + '</p> </div>';
+                    }
+
+
+
+                  
+
+
+                }
+
+            });
+
+
+
+
+        }
+
+        function FillApplicationsByearch() {
+
+            document.getElementById("imgExplorerLoading").style.display = "block";
+
+            var compid = localStorage.getItem("companyid");
+
+            var textToSearch = document.getElementById("txtSearchFolderList").value;
+            //document.getElementById("mainFolderList").innerHTML = "";
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerApplicationTreeBySearch',
+                type: 'POST',
+                datatype: 'json',
+                data: { "compid": compid, "filenameContains": textToSearch },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    document.getElementById("imgExplorerLoading").style.display = "none";
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill folders', 'error');
+                },
+                success: function (result) {
+
+                    document.getElementById("imgExplorerLoading").style.display = "none";
+                    var foundApplications = result;//.filter(function (item) { return item.parent === selectedFolderId.toString() });
+
+
+                    for (var key in foundApplications) {
+
+                        document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + foundApplications[key].id + '" class="file" style="margin-top: -24px;" ondblclick="NavigateDesigner( \'' + foundApplications[key].parentText + '\',' + foundApplications[key].id + ',' + foundApplications[key].parent + ')" ><div class="optionsfile"><button class="docBtn" onclick="OpenShareFileDatabaseViaEmail(' + foundApplications[key].id + ',  \'' + foundApplications[key].text + '\')"  style="width:100%;border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-fw"></i>Share</button>    </div><img src="/img/flocharticon.png" style="height: 6vh;margin-top: 0px;margin-bottom: 5px;"> <p class="noselect"  title='+foundApplications[key].text+' style=" word-break: break-all;text-align: -webkit-center;font-weight:bold;font-size:11px;">' + foundApplications[key].text + '</p> </div>';
+                    }
+
+                    //    var found = AllApplications.filter(function (item) { return item.folderLevel === 0 });
+
+                    //for (var key in found)
+                    //{
+
+                    //  document.getElementById("mainFolderList").innerHTML= document.getElementById("mainFolderList").innerHTML + ' <div><img  src="/img/Transparency Files.png" style="height:70px;" ondblclick="NavigateDesigner('+found[key].id+','+found[key].parent+')" /><span style="margin-top:10px;" class="caption">' + found[key].text+ '</span></div>';
+                    //}
+
+
+                }
+
+            });
+
+
+
+
+        }
+
+
+
+        function fillExplorerBySelectedNode(selectedFolderId, parentText) {
+
+
+            var compid = localStorage.getItem("companyid");
+
+            document.getElementById("mainFolderList").innerHTML = "";
+            var found = AllUserFolders.filter(function (item) { return item.parent === selectedFolderId.toString() });
+
+            for (var key in found) {
+                var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + found[key].text + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+            }
+
+            CurrentFolderId = selectedFolderId;
+            CurrentFolderText = parentText;
+
+            FillApplicationsBySelectedNode(selectedFolderId, parentText);
+
+
+        }
+        function ShowChildrenSelectedNode(obj, folderLevel, parentId, parentText) {
+
+            currentApplicationParentId = obj.id.toString();
+            //currentParentId=parentId;
+            currentParentId = obj.id.toString();
+
+            CurrentFolderId = obj.id;
+            CurrentFolderText = parentText;
+
+            currentLevel = folderLevel;
+            var found = AllUserFolders.filter(function (item) { return item.parent === obj.id.toString() });
+
+            document.getElementById("mainFolderList").innerHTML = "";
+
+            for (var key in found) {
+
+                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselectFolder" style=" word-break: break-word; white-space: normal;">' + found[key].text + '</p> <div class="options"><button onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')" class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt"></i></button>    </div> </div>';
+            }
+
+            if (found.length == 0) {
+                currentParentId = -1;
+
+            }
+
+
+            FillApplicationsBySelectedNode(obj.id, parentText);
+
+
+        }
+
+        //   $.contextMenu({
+        //     selector: '.childFolderList',
+        //     items: {
+        //         "edit": {
+        //         name: "Edit",
+        //         icon: "edit",
+        //         // superseeds "global" callback
+        //         callback: function(itemKey, opt, e) {
+        //             var m = "edit was clicked" + opt.$trigger.attr("id");
+        //             window.console && console.log(m) || alert(m);
+        //         }
+        //     },
+        //         "share": {name: "Share", icon: "paste"}
+        //     }
+        // });
+
+        $.contextMenu({
+            selector: '.context-menu-one',
+            items: {
+                "add": {
+                    name: "Create New Diagram",
+                    icon: "fa-file",
+                    // superseeds "global" callback
+                    callback: function (itemKey, opt, e) {
+                        NavigateDesignerAddnew();
+                    }
+                }
+            }
+        });
+
+
+        $.contextMenu({
+            selector: '.childFolderList',
+            items: {
+                "renam":
+                {
+                    name: "Rename Folder",
+                    icon: "fa-edit",
+                    callback: function (itemKey, opt, e) {
+                        try {
+                            var id = this.attr('id');
+                            var el = document.getElementById(id);
+                            var folderText = el.childNodes[2].innerText;
+
+                            if (folderText != null) {
+                                folderText = folderText.replace(/(\r\n|\n|\r)/gm, "");
+                                folderText = folderText.replace("Share", "");
+
+                                document.getElementById("txtRenameFileName").value = folderText;
+                            }
+                            else {
+                                document.getElementById("txtRenameFileName").value = "";
+
+                            }
+
+
+                            isFile = 0;
+                            RenameFile(id);
+                        }
+                        catch (err) {
+
+                        }
+
+
+
+
+
+                    }
+                }
+            }
+        });
+
+
+        $.contextMenu({
+            selector: '.file',
+            items: {
+                  "cop":
+                {
+                    name: "Copy",
+                    icon: "fa-copy",
+                    callback: function (itemKey, opt, e) {
+
+
+                        var id = this.attr('id');
+                        var el = document.getElementById(id);
+                        var fileText = el.innerText;
+
+                        if (fileText != null) {
+                            fileText = fileText.replace(/(\r\n|\n|\r)/gm, "");
+                            fileText = fileText.replace("Share", "");
+
+                            document.getElementById("txtCopyFileName").value = fileText;
+                        }
+                        else {
+                            document.getElementById("txtCopyFileName").value = "";
+
+                        }
+
+
+
+                        CopyFile(id);
+
+
+
+                    }
+                },
+                "mov":
+                {
+                    name: "Move",
+                    icon: "fa-truck",
+                    callback: function (itemKey, opt, e) {
+
+
+                        var id = this.attr('id');
+                        var el = document.getElementById(id);
+                        var fileText = el.innerText;
+
+                        if (fileText != null) {
+                            fileText = fileText.replace(/(\r\n|\n|\r)/gm, "");
+                            fileText = fileText.replace("Share", "");
+
+                            document.getElementById("txtMoveFileName").value = fileText;
+                        }
+                        else {
+                            document.getElementById("txtMoveFileName").value = "";
+
+                        }
+
+
+
+                        MoveFile(id);
+
+
+
+                    }
+                },
+                "ren":
+                {
+                    name: "Rename",
+                    icon: "fa-edit",
+                    callback: function (itemKey, opt, e) {
+
+
+                        var id = this.attr('id');
+                        var el = document.getElementById(id);
+                        var fileText = el.innerText;
+
+                        if (fileText != null) {
+                            fileText = fileText.replace(/(\r\n|\n|\r)/gm, "");
+                            fileText = fileText.replace("Share", "");
+
+                            document.getElementById("txtRenameFileName").value = fileText;
+                        }
+                        else {
+                            document.getElementById("txtRenameFileName").value = "";
+
+                        }
+
+                        isFile = 1;
+
+                        RenameFile(id);
+
+
+
+                    }
+                },
+                "del": {
+                    name: "Delete",
+                    icon: "fa-trash-o",
+                    // superseeds "global" callback
+                    callback: function (itemKey, opt, e) {
+
+                        var id = this.attr('id');
+                        swal({
+                            title: "Are you sure?",
+                            text: "You will not be able to rollback this action!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonClass: "btn-warning",
+                            confirmButtonText: "Yes, delete it!",
+                            cancelButtonText: "No, cancel please!",
+                            closeOnConfirm: false,
+                            closeOnCancel: true
+                        },
+                            function (isConfirm) {
+
+
+
+                                if (isConfirm) {
+
+                                    document.getElementById("imgExplorerLoading").style.display = "block";
+                                    DeleteFile(id);
+                                    swal.close();
+
+                                } else {
+
+                                }
+                            });
+
+
+
+                    }
+                }
+            }
+
+
+        });
+
+        function fillExplorerApplications() {
+            var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerApplicationTree',
+                type: 'POST',
+                datatype: 'json',
+                data: { "compid": compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill folders', 'error');
+                },
+                success: function (result) {
+
+                    AllApplications = result;
+
+                    //    var found = AllApplications.filter(function (item) { return item.folderLevel === 0 });
+
+                    //for (var key in found)
+                    //{
+
+                    //  document.getElementById("mainFolderList").innerHTML= document.getElementById("mainFolderList").innerHTML + ' <div><img  src="/img/Transparency Files.png" style="height:70px;" ondblclick="NavigateDesigner('+found[key].id+','+found[key].parent+')" /><span style="margin-top:10px;" class="caption">' + found[key].text+ '</span></div>';
+                    //}
+
+
+                }
+
+            });
+        }
+
+
+
+        function ShowChildren(obj, folderLevel, parentId) {
+
+            currentApplicationParentId = obj.id.toString();
+            //currentParentId=parentId;
+            currentParentId = obj.id.toString();
+
+            CurrentFolderId = obj.id;
+
+            currentLevel = folderLevel;
+            var found = AllFolders.filter(function (item) { return item.parent === obj.id.toString() });
+
+            document.getElementById("mainFolderList").innerHTML = "";
+
+            for (var key in found) {
+
+                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + ' <div><img class="childFolderList" id="' + found[key].id + '" src="/img/Transparency Folders.png" style="height:70px;" ondblclick="ShowChildren(this,' + found[key].folderLevel + ',' + found[key].parent + ')" /><span class="caption">' + found[key].text + '</span></div>';
+            }
+
+            if (found.length == 0) {
+                currentParentId = -1;
+
+            }
+
+            var foundApplications = AllApplications.filter(function (item) { return item.parent === obj.id.toString() });
+
+
+            for (var key in foundApplications) {
+
+                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + ' <div><img  src="/img/Transparency Files.png" style="height:70px;" ondblclick="NavigateDesigner(' + foundApplications[key].id + ',' + foundApplications[key].parent + ')" /><span style="margin-top:10px;" class="caption">' + foundApplications[key].text + '</span></div>';
+            }
+
+
+        }
+
+
+        function NavigateDesigner(id, pid) {
+
+            debugger;
+            window.location.href = rootUrl + '/Graph/Designer?gid=\'' + id + '\'&pid=' + pid;
+        }
+
+        function NavigateDesignerAddnew() {
+            var pid = CurrentFolderId;
+
+            window.location.href = rootUrl + '/Graph/Designer?gid=-1&pid=' + pid + '&pfolder=\'' + CurrentFolderText + '\'';
+        }
+
+        function UpLevel() {
+
+            if (currentLevel == 0) return;
+
+
+            var found = [];
+            var foundApplications = [];
+            //var found = AllFolders.filter(function (item) { return item.folderLevel === currentLevel  && (item.parent===currentParentId.toString() || item.parent===currentApplicationParentId.toString()) });
+            if (currentParentId == -1) {
+                found = AllFolders.filter(function (item) { return item.id === currentApplicationParentId.toString() });
+
+                currentParentId = found[0].parent;
+
+                found = AllFolders.filter(function (item) { return item.parent === currentParentId.toString() });
+
+                foundApplications = AllApplications.filter(function (item) { return item.parent === currentParentId.toString() });
+
+                currentParentId = found[0].parent;
+
+
+
+            }
+            else {
+                var currpid = AllFolders.filter(function (item) { return item.id === currentParentId.toString() });
+                if (currpid.length > 0) {
+                    found = AllFolders.filter(function (item) { return item.parent === currpid[0].parent.toString() });
+
+                    foundApplications = AllApplications.filter(function (item) { return item.parent === currpid[0].parent.toString() });
+
+                    currentParentId = currpid[0].parent;
+                }
+            }
+
+
+            if (currentLevel == 1) {
+                found = AllFolders.filter(function (item) { return item.folderLevel === currentLevel });
+            }
+
+            document.getElementById("mainFolderList").innerHTML = "";
+
+            for (var key in found) {
+
+                currentLevel = found[key].folderLevel;
+                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + ' <div><img class="childFolderList" id="' + found[key].id + '" src="/img/Transparency Folders.png" style="height:70px;" ondblclick="ShowChildren(this,' + currentLevel + ',' + currentParentId + ')" /><span class="caption">' + found[key].text + '</span></div>';
+            }
+
+
+
+
+            currentLevel = currentLevel - 1;
+
+
+
+
+
+            for (var key in foundApplications) {
+
+                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + ' <div><img  src="/img/Transparency Files.png" style="height:70px;" ondblclick="NavigateDesigner(' + foundApplications[key].id + ',' + foundApplications[key].parent + ')" /><span style="margin-top:10px;" class="caption">' + foundApplications[key].text + '</span></div>';
+            }
+        }
+
+        FillDesignerTree();
+
+        function SearchOnEnter(event) {
+
+            if (event.keyCode === 13) {
+
+                SearchFolderList();
+            }
+        }
+
+        function SearchFolderList() {
+
+            var compid = localStorage.getItem("companyid");
+
+            document.getElementById("mainFolderList").innerHTML = "";
+
+            var textToSearch = document.getElementById("txtSearchFolderList").value;
+            debugger;
+            var found = AllUserFolders.filter(function (item) { return item.text.toLowerCase().includes(textToSearch.toString().toLowerCase()) });
+
+            for (var key in found) {
+                var htm = '<div class="options"><button class=" pull-right" style="border-color: transparent;background: transparent;height: 100%;"><i class="fa fa-share-alt fa-2x"></i></button>    </div>'
+
+                document.getElementById("mainFolderList").innerHTML = document.getElementById("mainFolderList").innerHTML + '<div id="' + found[key].id + '" class="folder childFolderList" ondblclick="ShowChildrenSelectedNode(this,' + found[key].folderLevel + ',' + found[key].parent + ',  \'' + found[key].text + '\')" > <p class="noselect" style=" word-break: break-all; white-space: normal;">' + found[key].text + '</p> <div class="options"><button class="docBtn" onclick="OpenShareFolderDatabaseViaEmail(' + found[key].id + ',  \'' + found[key].text + '\')"  style="border-color: transparent;background: transparent;width: 100%;"><i class="fa fa-share-alt  fa-fw"></i>Share</button>    </div> </div>';
+            }
+
+
+
+            FillApplicationsByearch();
+
+        }
+
+
+
+                                                                                     //fillExplorer();
+                                                                                                                                     //fillExplorerApplications();
+    </script>
+
+
+    }
+

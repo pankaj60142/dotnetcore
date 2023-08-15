@@ -1,0 +1,1156 @@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section id="widget-grid" class="">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Company Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+
+
+
+
+
+                        <form action="" id="company-user" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+
+
+
+
+
+                                <div class="row">
+
+
+
+                                    <section class="col col-6" id="country">
+                                        <label class="label">Country Name</label>
+
+                                        <div class="input" id="countryid">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="countryname" placeholder='Select countries' class='flexdatalist' data-min-length='1' multiple='multiple' list='countries' name='countryname'>
+
+
+
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6" id="state">
+                                        <label class="label">State Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="statename" placeholder='Select States' class='flexdatalist' data-min-length='1' multiple='multiple' list='states' name='states1'>
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="cities">
+                                        <label class="label">City Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="datacenter">
+                                        <label class="label">Datacenters</label>
+                                        <div class="input">
+
+                                            <input type='text' id="datacentername" placeholder='Select Datacenters' class='flexdatalist' data-min-length='1' multiple='multiple' list='datacenters' name='datacenters1'>
+
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="department">
+                                        <label class="label">Departments</label>
+                                        <div class="input">
+
+                                            <input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+
+
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="application" style="display:none">
+                                        <label class="label">Applications </label>
+                                        <div class="input">
+
+                                            <input type='text' id="applicationname" placeholder='Select Applications' class='flexdatalist' data-min-length='1' multiple='multiple' list='applications' name='datacenters1'>
+
+
+
+
+                                        </div>
+                                    </section>
+
+
+                                </div>
+
+
+
+                            </fieldset>
+
+                            @*<footer>
+                                    <button type="button" class="btn btn-primary" onclick="SaveUser();">
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-danger" onclick="ClearCity();">
+                                        Cancel
+                                    </button>
+                                </footer>*@
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+
+
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-pencil-square"></i>
+                    </span>
+                    <h2>Application  </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body custom-scroll" id="Tree">
+
+                        <ul id="myTab3" class="nav nav-tabs tabs-left bordered">
+                            <li class="active">
+                                <a href="#l1" data-toggle="tab">Applications </a>
+                            </li>
+                            <li class="pull-left">
+                                <a href="#l2" data-toggle="tab">Application ADGroup</a>
+                            </li>
+                            <li class="pull-left">
+                                <a href="#l3" data-toggle="tab">Application Contact</a>
+                            </li>
+                            <li class="pull-left">
+                                <a href="#l4" data-toggle="tab">Application Database</a>
+                            </li>
+                            <li class="pull-left">
+                                <a href="#l5" data-toggle="tab">Application Document</a>
+                            </li>
+
+                        </ul>
+
+                        <div id="myTabContent3" class="tab-content padding-10">
+                            <div class="tab-pane fade in active" id="l1">
+                                <form id="frm-application">
+
+                                    <fieldset>
+                                        <input name="authenticity_token" type="hidden">
+                                        <div class="col-lg-6">
+                                            <label>Application Server</label>
+
+                                            <select class="form-control" id="Application_Server"></select>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label>Application Database</label>
+                                            <select class="form-control" id="Application_Database"></select>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input class="form-control" id="Name" name="Name" placeholder="Name" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Version</label>
+                                                <input class="form-control" id="Version" name="Version" placeholder="Version" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Short Description</label>
+                                                <textarea class="form-control" id="ShortDescription" name="ShortDescription" placeholder="Short Description" rows="3"></textarea>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Long Description</label>
+                                                <textarea class="form-control" id="LongDescription" name="LongDescription" placeholder="Long Description" rows="3"></textarea>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Installation Path</label>
+                                                <input class="form-control" id="InstallationPath" name="InstallationPath" placeholder="InstallationPath" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Installed Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="InstalledDate" id="InstalledDate" placeholder="Select a date" class="form-control datepicker" data-dateformat="dd/mm/yy">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Support Phone</label>
+                                                <input class="form-control" name="SupportPhone" id="SupportPhone" placeholder="Support Phone" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Support Email</label>
+                                                <input class="form-control" name="SupportEmail" id="SupportEmail" placeholder="Support Email" type="email">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Support Account No</label>
+                                                <input class="form-control" name="SupportAccountNo" id="SupportAccountNo" placeholder="Support Account No" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Support Expiration Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="SupportExpirationDate" id="SupportExpirationDate" placeholder="Support Expiration Date" class="form-control datepicker" data-dateformat="dd/mm/yy">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Support URL</label>
+                                                <input class="form-control" name="SupportURL" id="SupportURL" placeholder="Support URL" type="text">
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Number Of Licenses</label>
+                                                <input class="form-control" name="NumberOfLicenses" id="NumberOfLicenses" placeholder="Number Of Licenses" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Comment</label>
+                                                <input class="form-control" id="Comment" name="Comment" placeholder="Comment" type-="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Installer Name ID</label>
+                                                <input class="form-control" name="InstallerNameID" id="InstallerNameID" placeholder="Installer Name ID" type="text">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Username</label>
+                                                <input class="form-control" name="Username" id="Username" placeholder="Username" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input class="form-control" name="Password" id="Password" placeholder="Password" type="password">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Developer Type ID</label>
+                                                <input class="form-control" name="DeveloperTypeID" id="DeveloperTypeID" placeholder="Developer Type ID" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Developer ID</label>
+                                                <input class="form-control" name="DeveloperID" id="DeveloperID" placeholder="Developer ID" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Citrix Application Name</label>
+                                                <input class="form-control" name="CitrixApplicationName" id="CitrixApplicationName" placeholder="Citrix Application Name" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Application URL</label>
+                                                <input class="form-control" name="ApplicationURL" id="ApplicationURL" placeholder="Application URL" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Application Type ID</label>
+                                                <input class="form-control" name="ApplicationTypeID" id="ApplicationTypeID" placeholder="Application Type ID" type="text">
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Is Visible Inside GGP</label>
+                                                <input class="form-control" name="IsVisibleInsideGGP" id="IsVisibleInsideGGP" placeholder="Citrix Application Name" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Certificate Expiration</label>
+                                                <input class="form-control" name="CertificateExpiration" id="CertificateExpiration" placeholder="Certificate Expiration" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>SMTP</label>
+                                                <input class="form-control" name="SMTP" id="SMTP" placeholder="SMTP" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Is Visible Non Employee</label>
+                                                <div class="onoffswitch-container">
+                                                    @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                    <span class="onoffswitch">
+                                                        <input type="checkbox" class="onoffswitch-checkbox" id="autoopen">
+                                                        <label class="onoffswitch-label" for="autoopen">
+                                                            <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                            <span class="onoffswitch-switch"></span>
+                                                        </label>
+                                                    </span>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Firewall Exception</label>
+                                                <input class="form-control" name="FirewallException" id="FirewallException" placeholder="Firewall Exception" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>V Process Dependent</label>
+                                                <input class="form-control" name="V Process Dependent" id="VProcessDependent" placeholder="V Process Dependent" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>LDAP</label>
+                                                <input class="form-control" name="LDAP" id="LDAP" placeholder="LDAP" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+
+                                        </div>
+
+
+                                    </fieldset>
+
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="l2">
+                                <form action="" id="company-user" >
+                                    <fieldset>
+                                       
+                                            <div class="row">
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Group Name</label>
+                                                        <input class="form-control" name="GroupName" id="GroupName" placeholder="Group Name" type="text">
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Group Path</label>
+                                                        <input class="form-control" name="GroupPath" id="GroupPath" placeholder="Group Path" type="text">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        
+                                    </fieldset>
+                                </form>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="l3">
+                                <form action="" id="application-contact">
+                                    <fieldset>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input class="form-control" id="FirstName" name="FirstName" placeholder="First Name" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input class="form-control" id="LastName" name="LastName" placeholder="Last Name" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Middle Initial</label>
+                                                <input class="form-control" id="MiddleInitial" name="MiddleInitial" placeholder="Middle Initial" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input class="form-control" id="Email" name="Email" placeholder="Email" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Phone</label>
+                                                <input class="form-control" id="Phone" name="Phone" placeholder="Phone" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <input class="form-control" id="Title" name="Title" placeholder="Title" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Login Name</label>
+                                                <input class="form-control" id="LoginName" name="LoginName" placeholder="Login Name" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>SID</label>
+                                                <input class="form-control" id="SID" name="SID" placeholder="SID" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Employee No</label>
+                                                <input class="form-control" id="EmployeeNo" name="EmployeeNo" placeholder="EmployeeNo" type="text">
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Contact Type ID</label>
+                                                <input class="form-control" id="ContactTypeID" name="ContactTypeID" placeholder="Contact Type ID" type="text">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IsValid</label>
+                                                <div class="onoffswitch-container">
+                                                    @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                    <span class="onoffswitch">
+                                                        <input type="checkbox" class="onoffswitch-checkbox" id="ContactIsValid">
+                                                        <label class="onoffswitch-label" for="ContactIsValid">
+                                                            <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                            <span class="onoffswitch-switch"></span>
+                                                        </label>
+                                                    </span>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary btn-lg" onclick="addContactData()">Add</button>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+
+                                            <table id="tblapplicationcontact" class="table table-striped table-bordered table-hover" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Middle Initial</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Title</th>
+                                                        <th>Login Name</th>
+                                                        <th>SID</th>
+                                                        <th>Employee No</th>
+                                                        @*<th>IsValid</th>*@
+                                                        @*<th>Contact Type ID</th>*@
+                                                        <th>Actions</th>
+
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane fade" id="l4">
+                                <form action="" id="application-database">
+                                    <fieldset>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+
+                                                <section class=" col-lg-12 col-md-12">
+                                                    <label class="label">Database Name</label>
+                                                    <div class="select form-group">
+
+                                                        <select name="databaseName" class="form-control" id="databasename" onchange="HideShow(this)">
+                                                            <option value="0" selected="" disabled="">Select Database</option>
+                                                            <option value="5">Database 1</option>
+                                                            <option value="1">Database 2</option>
+                                                            <option value="2">Database 3</option>
+                                                            <option value="3">Database 4</option>
+                                                            <option value="4">Database 5</option>
+
+                                                        </select> <i></i>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="l5">
+                                <form action="" id="company-user" class="smart-form">
+                                    <fieldset>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+
+                                                <section class="col col-lg-12 col-md-12">
+                                                    <label class="label">Docuemnt</label>
+                                                    <div class="select">
+                                                        <select name="databaseId" id="databaseId" onchange="HideShow(this)">
+                                                            <option value="0" selected="" disabled="">Select ID</option>
+                                                            <option value="5">1</option>
+                                                            <option value="1">2</option>
+                                                            <option value="2">3</option>
+                                                            <option value="3">4</option>
+                                                            <option value="4">5</option>
+
+                                                        </select> <i></i>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="SaveDataapplication()">Save</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <!-- end widget content -->
+
+    </div>
+    <!-- end widget div -->
+
+
+</section>
+
+
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+
+
+
+        pageSetUp();
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+        };
+
+
+        $(document).ready(function () {
+            $("#InstalledDate").datepicker('setDate', 'today');
+            $("#SupportExpirationDate").datepicker('setDate', 'today');
+
+            Application_Database();
+        });
+        var arr = new Array();
+        function addContactData() {
+            var FirstName = $('#FirstName').val();
+            var LastName = $('#LastName').val();
+            var MiddleInitial = $('#MiddleInitial').val();
+            var Email = $('#Email').val();
+            var Phone = $('#Phone').val();
+            var Title = $('#Title').val();
+            var SID = $('#SID').val();
+            var EmployeeNo = $('#EmployeeNo').val();
+            var ContactIsValid = $('#ContactIsValid').val();
+            var ContactTypeID = $('#ContactTypeID').val();
+            var LoginName = $('#LoginName').val();
+            
+            var obj = {
+
+                FirstName: FirstName,
+                LastName: LastName,
+                MiddleInitial: MiddleInitial,
+                Email: Email,
+                Phone: Phone,
+                Title: Title,
+                SID: SID,
+                EmployeeNo: EmployeeNo,
+                LoginName:LoginName,
+                //ContactIsValid: ContactIsValid,
+                ContactTypeID: ContactTypeID
+            };
+
+           
+            arr.push(obj);
+           
+            $('#tblapplicationcontact').DataTable().destroy();
+            $('#tblapplicationcontact').DataTable({
+                data: JSON.parse(JSON.stringify(arr)),
+                columns: [
+                    { data: "FirstName" },
+                    { data: "LastName" },
+                    { data: "MiddleInitial" },
+                    { data: "Email" },
+                    { data: "Phone" },
+                    { data: "Title" },
+                    { data: "LoginName" },
+                    { data: "SID" },
+                    { data: "EmployeeNo" },
+                    {
+                        data: null,
+                        className: "center",
+                        defaultContent: '<button id="btnEdit" type="button" value="Edit">Edit</button><button id="btndelete" type="button" value="Delete">Delete</button>'
+                    }
+                  //{ title: "ContactIsValid" },
+                    //{
+                    //    data: 'Email',
+                    //    'render': function (data, type, row) {
+
+                    //        return '<input id="btnEdit" type="button" value="Edit"/>';
+                    //    }
+                    
+                ]
+            });
+        }
+            
+           
+        
+        
+
+        function Application_Database() {
+            
+               
+                    var options = {};
+            options.url = "/Framework_Application/Application_Database";
+                    options.type = "GET";
+                    var obj = {
+                        
+                    };
+
+                    options.data = JSON.stringify(obj);
+                    options.contentType = "application/json";
+                    options.dataType = "json";
+
+                    options.beforeSend = function (xhr) {
+                        xhr.setRequestHeader("MY-XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    };
+            options.complete = function (msg) {
+               // console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].DatabaseID);
+                        $('#Application_Database').append(option);
+}
+               
+                    };
+                    $.ajax(options);
+
+                
+             }
+
+        function SaveDataapplication() {
+            if ($("#frm-application").valid()) {
+                var Name = $('#Name').val();
+                
+                var Ver = $('#Version').val();
+                var ShortDescription = $('#ShortDescription').val();
+                var LongDescription = $('#LongDescription').val();
+                var InstallationPath = $('#InstallationPath').val();
+                var InstalledDate = $('#InstalledDate').val();
+                var SupportPhone = $('#SupportPhone').val();
+                var SupportEmail = $('#SupportEmail').val();
+                var SupportAccountNo = $('#SupportAccountNo').val();
+                var SupportExpirationDate = $('#SupportExpirationDate').val();
+                var SupportURL = $('#SupportURL').val();
+                var NumberOfLicenses = $('#NumberOfLicenses').val();
+                var Comment = $('#Comment').val();
+                var InstallerNameID = $('#InstallerNameID').val();
+                var Usrname = $('#Username').val();
+                var Pass = $('#Password').val();
+
+                var DeveloperTypeID = $('#DeveloperTypeID').val();
+                var DeveloperID = $('#DeveloperID').val();
+                var CitrixApplicationName = $('#CitrixApplicationName').val();
+                var ApplicationURL = $('#ApplicationURL').val();
+                var ApplicationTypeID = $('#ApplicationTypeID').val();
+                var IsVisibleInsideGGP = $('#IsVisibleInsideGGP').val();
+                var CertificateExpiration = $('#CertificateExpiration').val();
+                var SMTP = $('#SMTP').val();
+                var FirewallException = $('#FirewallException').val();
+                var VProcessDependent = $('#VProcessDependent').val();
+                var LDAP = $('#LDAP').val();
+                var options = {};
+                options.url = "/Framework_Application/SaveData";
+                options.type = "POST";
+                var obj = {
+
+                    Name: Name,
+                    Ver: Ver,
+                    ShortDescription: ShortDescription,
+                    LongDescription: LongDescription,
+                    InstallationPath: InstallationPath,
+                    InstalledDate: InstalledDate,
+                    SupportPhone: SupportPhone,
+                    SupportEmail: SupportEmail,
+                    SupportAccountNo: SupportAccountNo,
+                    SupportExpirationDate: SupportExpirationDate,
+                    SupportURL: SupportURL,
+                    NumberOfLicenses: NumberOfLicenses,
+                    Comment: Comment,
+                    InstallerNameID: InstallerNameID,
+                    Usrname: Usrname,
+                    Pass: Pass,
+                    DeveloperTypeID: DeveloperTypeID,
+                    DeveloperID: DeveloperID,
+                    CitrixApplicationName: CitrixApplicationName,
+                    ApplicationURL: ApplicationURL,
+                    ApplicationTypeID: ApplicationTypeID,
+                    IsVisibleInsideGGP: IsVisibleInsideGGP,
+                    CertificateExpiration: CertificateExpiration,
+                    SMTP: SMTP,
+                    ////IsVisibleNonEmployee: autoopen,
+                    FirewallException: FirewallException,
+                    VProcessDependent: VProcessDependent,
+                    LDAP: LDAP
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Framework application saved successfully!", "success");
+
+
+
+                    }
+                    else
+                        swal("Error", "Please fill in the required fields!", "error");
+                };
+                $.ajax(options);
+
+            }
+            
+
+            }
+            
+          
+
+        function FillCities(stateid) {
+
+            $.ajax({
+                url: '/Framework_Application/GetCityName',
+                type: 'POST',
+                datatype: 'json',
+                data: { StateId: stateid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCity) {
+
+                    var flexdatalistCity = $("#cityname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CityName',
+                        visibleProperties: ["CityName", "Latitude", "Longitude", "CityId"],
+                        searchIn: 'CityName',
+                        data: resultCity
+                    });
+
+                    flexdatalistCity.on('select:flexdatalist', function (event, data) {
+                        selectedcityid = data.CityId;
+                        FillDataCenter(selectedcityid);
+
+                    });
+
+                }
+
+
+            });
+        }
+        function FillDataCenter(cityid) {
+
+            $.ajax({
+                url: '/Framework_Application/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CityId: cityid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDataCenter) {
+
+
+                    var flexdatalistDatacenter = $("#datacentername").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DataCenterName',
+                        visibleProperties: ["DataCenterName", "DataCenterId"],
+
+                        searchIn: 'DataCenterName',
+                        data: resultDataCenter
+                    });
+
+                    flexdatalistDatacenter.on('select:flexdatalist', function (event, data) {
+
+                        selecteddatacenterid = data.DataCenterId;
+                        FillDeparment(selecteddatacenterid);
+                    });
+
+                }
+
+            });
+        }
+
+
+        function FillDeparment(dataCenterId) {
+
+            $.ajax({
+                url: '/Framework_Application/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { DataCenterId: dataCenterId },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+
+                },
+
+                success: function (resultDepartment) {
+
+
+                    var flexdatalistDatacenter = $("#departmentname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DepartmentName',
+                        visibleProperties: ["DepartmentName", "DepartmentId"],
+
+                        searchIn: 'DepartmentName',
+                        data: resultDepartment
+                    });
+
+                    flexdatalistDatacenter.on('select:flexdatalist', function (event, data) {
+
+                        selecteddepartmentid = data.DepartmentId;
+
+                    });
+
+                }
+
+            });
+        }
+
+
+        function FillStates(countryid) {
+
+            $.ajax({
+                url: '/Framework_Application/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CountryId: countryid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+
+
+                    var flexdatalistState = $("#statename").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'StateName',
+                        visibleProperties: ["StateName", "Latitude", "Longitude", "StateId"],
+                        searchIn: 'StateName',
+                        data: resultState
+                    });
+
+                    flexdatalistState.on('select:flexdatalist', function (event, data) {
+                        selectedstateid = data.StateId;
+
+                        FillCities(data.StateId);
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+                }
+
+
+            });
+        }
+        
+        var rootDir = "@Url.Content("~/")";
+        
+        var selectedcountryid = -999;
+        var selectedstateid = -999;
+        var selectedcityid = -999;
+        var selecteddatacenterid = -999;
+        var selecteddepartmentid = -999;
+
+        $.ajax({
+            url: '/Framework_Application/GetCountryName',
+            type: 'POST',
+            datatype: 'json',
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+
+            },
+
+            success: function (resultCountry) {
+
+
+                var flexDataListCountry = $("#countryname").flexdatalist({
+                    minLength: 1,
+                    valueProperty: 'CountryId',
+                    visibleProperties: ["CountryName", "Latitude", "Longitude", "CountryId"],
+                    searchIn: 'CountryName',
+                    data: resultCountry
+                });
+
+                flexDataListCountry.on('select:flexdatalist', function (event, data) {
+                    selectedcountryid = data.CountryId;
+                    FillStates(selectedcountryid);
+                    //$('#city').val(data.city);
+                    //$('#state').val(data.state);
+                });
+
+
+            }
+
+
+        });
+
+
+        function Clearframeworkapplication() {
+            selectedName = "";
+            
+        }
+
+       
+     
+
+      
+        function ClearDepartment(DepartmentId) {
+
+        }
+
+
+
+
+
+    </script>
+
+}
+
+

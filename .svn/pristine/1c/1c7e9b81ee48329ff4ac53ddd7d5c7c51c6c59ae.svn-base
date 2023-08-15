@@ -1,0 +1,158 @@
+<style>
+    .graticule {
+        fill: none;
+        stroke: #777;
+        stroke-opacity: .5;
+        stroke-width: .5px;
+    }
+
+    .land {
+        fill: #222;
+    }
+
+    .boundary {
+        fill: none;
+        stroke: #fff;
+        stroke-width: .5px;
+    }
+
+    circle {
+        fill: yellow;
+    }
+
+    .geopath {
+        fill: green;
+    }
+
+    #map {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+</style>
+
+<div class="row" onload="makeSomeMaps()">
+    <div id="map"></div>
+
+ </div>
+
+
+
+    @section Scripts {
+
+        <script type="text/javascript">
+
+            pageSetUp();
+
+            //var width = 1200,
+            //    height = 720;
+            //var projection = d3.geo.mercator()
+            //    .scale(8000)
+            //    .precision(.1)
+            //    .center([13.320255, 52.52831499])
+            //    .translate([width / 2, height / 2])
+            //var path = d3.geo.path()
+            //    .projection(projection);
+            //var graticule = d3.geo.graticule();
+            //var svg = d3.select("body").append("svg")
+            //    .attr("width", width)
+            //    .attr("height", height);
+            //svg.append("path")
+            //    .datum(graticule)
+            //    .attr("class", "graticule")
+            //    .attr("d", path);
+            //d3.json("world-50m.json", function (error, world) {
+            //    svg.insert("path", ".graticule")
+            //        .datum(topojson.feature(world, world.objects.land))
+            //        .attr("class", "land")
+            //        .attr("d", path);
+            //    svg.insert("path", ".graticule")
+            //        .datum(topojson.mesh(world, world.objects.countries, function (a, b) { return a !== b; }))
+            //        .attr("class", "boundary")
+            //        .attr("d", path);
+            //});
+            //d3.json("stops_berlin.geojson.json", function (error, data) {
+            //    // using d3.geo.path() which does all the work for you
+            //    svg.append("path")
+            //        .datum(data)
+            //        .classed("geopath", true)
+            //        .attr("d", path)
+            //    // or insert your own custom dots by hand
+            //    svg.append("g")
+            //        .selectAll("g")
+            //        .data(data.features)
+            //        .enter()
+            //        .append("g")
+            //        .attr("transform", function (d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+            //        .append("circle")
+            //        .attr("r", 1)
+            //});
+            //d3.select(self.frameElement).style("height", height + "px");
+            function makeSomeMaps() {
+                map = d3.carto.map();
+
+                d3.select("#map").call(map);
+
+                tileLayer = d3.carto.layer();
+                tileLayer
+                    .type("tile")
+                    .path("elijahmeeks.map-azn21pbi")
+                    .label("Base")
+
+                csvLayer = d3.carto.layer.csv();
+                csvLayer
+                    .path("http://bl.ocks.org/emeeks/raw/540b1b884b80b14a44c6/all_sites.csv")
+                    .label("CSV Points")
+                    .cssClass("pinkcircle")
+                    .renderMode("svg")
+                    .x("xcoord")
+                    .y("ycoord")
+                    .cluster(true)
+                    .on("recluster", positionCluster);
+
+                map.addCartoLayer(tileLayer).addCartoLayer(csvLayer);
+                map.centerOn([-115, 40], "latlong").setScale(2);
+
+                function positionCluster() {
+                    var d3MapProjection = map.projection();
+                    csvLayer.clusterLayer().g().selectAll("g.pointG")
+                        .each(function (d) {
+                            if (!d.leaf) {
+                                var newPosition = findMax(d, d);
+                                var newProjectedPos = d3MapProjection([csvLayer.x()(newPosition.point), csvLayer.y()(newPosition.point)]);
+                                d3.select(this).attr("transform", "translate(" + newProjectedPos + ")");
+                            }
+
+                        })
+
+                    function findMax(current, max) {
+                        if (current.leaf) {
+                            if (!max.leaf) {
+                                max = current;
+                            }
+                            else if (parseInt(current.point.pop) >= parseInt(max.point.pop)) {
+                                max = current;
+                            }
+                        }
+                        else {
+                            for (var y in current.children) {
+                                var thisMax = findMax(current.children[y], max);
+                                if (!max.leaf) {
+                                    max = thisMax;
+                                }
+                                else if (parseInt(thisMax.point.pop) >= parseInt(max.point.pop)) {
+                                    max = thisMax;
+                                }
+                            }
+                        }
+                        return max;
+                    }
+
+                }
+
+            }
+        </script>
+
+
+    }
+

@@ -1,0 +1,1176 @@
+@*@{
+    Layout = null;
+    }*@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grapheditor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="~/css/style.min.css">
+    <style type="text/css">
+        .nooverflow#mxGraph {
+            height: 100vh !important;
+        }
+
+        .geFooterContainer {
+            height: 0px !important;
+        }
+    </style>
+
+    <script type="text/javascript">
+        // Parses URL parameters. Supported parameters are:
+        // - lang=xy: Specifies the language of the user interface.
+        // - touch=1: Enables a touch-style user interface.
+        //storage=local // Enables HTML5 local storage.
+        //chrome=0 // Chromeless mode.
+
+        var urlParams = (function (url) {
+            var result = new Object();
+            var idx = url.lastIndexOf('?');
+
+            if (idx > 0) {
+                var params = url.substring(idx + 1).split('&');
+
+                for (var i = 0; i < params.length; i++) {
+                    idx = params[i].indexOf('=');
+
+                    if (idx > 0) {
+                        result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                    }
+                }
+            }
+
+            return result;
+        })(window.location.href);
+
+        // Default resources are included in grapheditor resources
+        mxLoadResources = false;
+
+    </script>
+
+
+
+</head>
+<body>
+
+    <section id="widget-grid" class="">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon">
+                            <i class="fa fa-cogs"></i>
+                        </span>
+                        <h2>Framework </h2>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding custom-scroll" id="Tree">
+
+                            <div id="FrameworkTree"></div>
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon">
+                            <i class="fa fa-apple"></i>
+                        </span>
+                        <h2>Applications </h2>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding custom-scroll" id="Applications">
+
+                            <div class="row padding-10">
+                                <div class="col-lg-12 margin-top-5">
+
+                                    <input id="search-input" class="form-control search-input" placeholder="Search" />
+
+                                </div>
+
+
+
+                            </div>
+                            <div id="ApplicationTree"></div>
+
+                            <div id="TestIt"></div>
+                            @*<div class="col-lg-12 custom-scroll">
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item"> <i class=" fa fa-file"></i> &nbsp; Application 1</li>
+                                        <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp;  Application 2</li>
+                                        <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp; Application 3</li>
+                                        <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp; Application 4</li>
+                                        <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp;  Application 5</li>
+
+                                    </ul>
+
+
+
+
+                                </div>*@
+
+
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+
+
+
+            </div>
+
+            <div class="col-lg-9">
+
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-3" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon">
+                            <i class="fa fa-area-chart"></i>
+                        </span>
+                        <b id="graphEditor" style="margin-left:10px;"> </b>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" id="widgetBody">
+
+                            <iframe id="mxGraph" style="width:100%; height:84vh" src="~/graph/mxgraph"></iframe>
+
+
+
+
+
+                        </div>
+                        <!-- end widget content -->
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="modal" id="graphusermodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Users
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCity" class="smart-form">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+                                <input type="hidden" id="txtFileNameHidden" />
+
+                                <table id="tblUsers" class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>User Name</th>
+                                            <th>Id</th>
+                                            <th>Role</th>
+
+                                        </tr>
+                                    </thead>
+                                </table>
+
+
+
+
+
+
+                            </fieldset>
+
+
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="ShareWithUsers();">
+                                    Share
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelSharingModal();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+
+        var targetNodeId = '';
+        var dropstarted = false;
+        var updateInProgress = 0;
+        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+        $(".search-input").keyup(function () {
+            var searchString = $(this).val();
+            $('#ApplicationTree').jstree('search', searchString);
+        });
+
+
+
+
+        //    $('#tree1').jstree({
+        //            'core': {
+        //            check_callback: function (op) {
+
+        //                if (op === "move_node" || op === "copy_node") {
+        //                    return false;
+        //    }
+        //    // you may not want to return true here - configure as needed
+        //    return true;
+        //},
+        //'data': [
+        //                {"id": "id-a1b", "parent": "#", "text": "Node A1b", "type": "tree" },
+        //                {"id": "id-a2b", "parent": "#", "text": "Node A2b", "type": "tree" },
+        //                {"id": "id-a3b", "parent": "#", "text": "Node A3b", "type": "tree" }
+        //    ],
+        //            'themes': {
+        //            'dots': false,
+        //        'responsive': true
+        //    }
+        //},
+        //        "types": {
+        //            "tree": {"icon": "glyphicon glyphicon-th-list" }
+        //    },
+
+        //    "plugins": ["dnd", "types", "themes", "search"],
+        //        "search": {
+        //            'case_sensitive': false,
+        //            "show_only_matches": true
+        //    }
+        //    }).on('search.jstree', function (e, data) {
+        //        console.log(data);
+        //        });
+
+
+        $("#FrameworkTree").bind("loaded.jstree", function (event, data) {
+            data.instance.open_all();
+        });
+
+        $("#FrameworkTree").on(
+            "select_node.jstree", function (evt, data) {
+                
+                if (data.node.type != "root") {
+                    FillApplication(data.node.id);
+                }
+            }
+        );
+
+
+
+        $.ajax({
+            url:rootUrl + '/Graph/GetFrameworkData',
+            type: 'POST',
+            datatype: 'json',
+            async: false,
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                Swal('Alert!', 'Unable to fill data', 'error');
+            },
+            success: function (result) {
+                
+                $('#FrameworkTree')
+                    .jstree({
+                        core: {
+
+                            data: result,
+                            check_callback: function (op, node, parent, position, more) {
+
+                                switch (op) {
+
+                                    case 'move_node':
+                                        if (more) {
+
+
+                                            if (more.ref != null) {
+                                                if (more.ref.original.type == "app") {
+
+
+                                                    if (parent.original.id.indexOf('ap') != -1) {
+
+
+                                                        return true;
+                                                    }
+                                                    else
+                                                        return false;
+                                                }
+                                                else {
+                                                    return false;
+
+                                                }
+                                            }
+                                            else {
+
+                                                return true;
+                                            }
+
+
+
+
+
+                                        }
+                                    // return true if we can move, false if not
+
+                                }
+                            }
+                        },
+                        types: {
+                            "root": {
+                                "icon": "glyphicon glyphicon-plus"
+                            },
+                            "child": {
+                                "icon": "glyphicon glyphicon-leaf"
+                            },
+                            "default": {
+                            }
+                        },
+                        plugins: ["dnd", "search", "themes", "types", "contextmenu"],
+
+
+
+                        "contextmenu": {
+                            "items": function ($node) {
+
+                                var tree = $("#FrameworkTree").jstree(true);
+                                return {
+                                    "Move To Applications": {
+                                        "separator_before": false,
+                                        "separator_after": false,
+                                        "label": "Move To Applications",
+                                        "action": function (obj) {
+                                            if ($node.original.type == "tree") {
+                                                SaveDiagram("ap-1", $node.original.text);
+
+                                                tree.delete_node($node);
+                                            }
+
+
+                                        }
+                                    },
+
+                                    "Remove": {
+                                        "separator_before": false,
+                                        "separator_after": false,
+                                        "label": "Remove",
+                                        "action": function (obj) {
+                                            if ($node.original.type == "tree") {
+
+
+                                                swal({
+                                                    title: "Are you sure?",
+                                                    text: "All associated sharing of this diagram  will be deleted too,You will not be able to rollback this action!",
+                                                    type: "warning",
+                                                    showCancelButton: true,
+                                                    confirmButtonClass: "btn-danger",
+                                                    confirmButtonText: "Yes, delete it!",
+                                                    cancelButtonText: "No, cancel please!",
+                                                    closeOnConfirm: false,
+                                                    closeOnCancel: true
+                                                },
+                                                    function (isConfirm) {
+
+                                                        if (isConfirm) {
+
+                                                            DeleteDiagramDetail($node.original.text, $node);
+
+                                                        } else {
+
+                                                        }
+                                                    });
+
+
+
+
+
+                                            }
+
+                                        }
+                                    }
+                                };
+                            }
+                        }
+
+
+
+
+                    })
+
+                    .on('open_node.jstree', function (e, data) {
+                        data.instance.set_icon(data.node, "glyphicon glyphicon-minus");
+                    }).on('close_node.jstree', function (e, data) { data.instance.set_icon(data.node, "glyphicon glyphicon-plus"); });
+
+
+                var a = $(document).on('dnd_stop.vakata', function (e, data) {
+
+                    ref = $('#FrameworkTree').jstree(true);
+                    parent = ref.get_node(data.event.target);
+
+
+
+
+                    SaveDiagram(parent.id, data.data.origin.get_node(data.element).text);
+
+
+
+                }).jstree();
+
+            }
+
+        });
+
+
+        var clientHeight = document.getElementById('wid-id-3').clientHeight;
+
+        //alert(clientHeight/2);
+        //var fullHeight = clientHeight / 2;
+        //document.getElementById("Tree").style.height = fullHeight + "px";
+        //document.getElementById("Applications").style.height = fullHeight + "px";
+        //var clientHeighttree = document.getElementById('Tree').clientHeight;
+        //alert(clientHeighttree);
+
+
+        //$('#applications').jstree();
+
+
+        $(document).ready(function () {
+
+
+
+
+
+            FillApplicationTree();
+
+
+
+            // $("#splitter").splitter();
+            // var gheight = document.getElementsByClassName('.geFooterContainer');
+            // gheight.style.height = "0px !important";
+            // gheight.style.color = "red";
+            document.getElementsByClassName("geFooterContainer").style.height = "0px !important";
+
+
+            var a = $(document).on('dnd_stop.vakata', function (e, data) {
+                alert('move success');
+            }).jstree();
+
+
+        });
+
+
+        function FillApplicationTree() {
+
+             var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url:rootUrl + '/Graph/GetAllowedApplication',
+                type: 'POST',
+                datatype: 'json',
+                data: {"compid":compid},
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill applications', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#ApplicationTree').jstree({
+                        'core': {
+                            "check_callback": true,
+                            'data': result,
+                            'themes': {
+                                'dots': false,
+                                'responsive': true
+                            }
+                        },
+                        "types": {
+                            "tree": { "icon": "glyphicon glyphicon-th-list" }
+                        },
+
+
+
+
+
+
+                        "plugins": ["dnd", "types", "themes", "search", "contextmenu"],
+
+
+                        "contextmenu": {
+                            "items": function ($node) {
+
+                                var tree = $("#FrameworkTree").jstree(true);
+                                return {
+                                    "Share With Users": {
+                                        "separator_before": false,
+                                        "separator_after": false,
+                                        "label": "Share With Users",
+                                        "action": function (obj) {
+
+                                            OpenShareModal($node);
+
+
+                                        }
+                                    },
+
+
+                                };
+                            }
+                        },
+
+
+
+                        "search": {
+                            'case_sensitive': false,
+                            "show_only_matches": true
+                        }
+                    }).on('search.jstree', function (e, data) {
+                        console.log(data);
+                    }).on(
+                        "select_node.jstree", function (e, data) {
+
+
+                            var node = $(e.target).closest("li");
+                            console.log(data.node.id);
+
+                            //var item = node[0].id;
+
+
+                        }
+                    )
+
+
+                        .on('dblclick.jstree', function (e) {
+
+                            var node = $(e.target).closest("li");
+                            var type = node.attr('rel');
+                            debugger;
+                            var item = node[0].id;
+                            var filename = node[0].innerText;
+
+                            FillSelectedDiagramXML(item, filename);
+
+
+
+
+
+
+                        });
+
+
+
+
+                }
+
+            });
+        }
+        var allCheckedIds = [];
+        function OpenShareModal(nodeval) {
+            $('#graphusermodal').modal('show');
+
+            document.getElementById("txtFileNameHidden").value = nodeval.text;
+            allCheckedIds = [];
+            FillAlreadySharedUsers();
+            // FillAllUsers();
+
+        }
+
+        function CancelSharingModal() {
+            $('#graphusermodal').modal('hide');
+        }
+
+        function FillAlreadySharedUsers() {
+            var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url:rootUrl + '/Graph/GetAlreadySharedUsers',
+                type: 'POST',
+                datatype: 'json',
+                data: { compid: compid, FileName: document.getElementById("txtFileNameHidden").value },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    swal('Alert!', 'Unable to fill users', 'error');
+                },
+                success: function (result) {
+                    
+                    FillAllUsers(result);
+
+                }
+
+            });
+        }
+
+        function ReturnMatchedId(sharedIds, CurrentId) {
+
+
+            for (var i = 0; i < sharedIds.length; i++) {
+              
+                if (sharedIds[i].SharedWithId == CurrentId) {
+
+                    return 1;
+                }
+            }
+
+            return 0;
+        }
+
+        function FillAllUsers(sharedIds) {
+
+
+            var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url:rootUrl + '/Graph/GetSharingUsers',
+                type: 'POST',
+                datatype: 'json',
+                data: { compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    swal('Alert!', 'Unable to fill users', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblUsers').DataTable().destroy();
+                    var t = $('#tblUsers').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 5,
+
+
+                        columns: [
+                            {
+                                data: null,
+                                'targets': 0,
+                                'checkboxes': {
+                                    'selectRow': true
+                                }
+                            },
+                            { data: 'UserName' },
+                            { data: 'Id' },
+                            { data: 'Name' }
+
+
+                        ],
+                        select: {
+                            style: 'multi' // 'single', 'multi', 'os', 'multi+shift'
+
+                        },
+
+
+                        responsive: true
+
+
+                    });
+
+                    SelectExisting(sharedIds);
+                }
+
+            });
+        }
+        function SelectExisting(sharedIds) {
+
+
+            var table = $('#tblUsers').DataTable();
+
+            table.column(0).nodes().to$().each(function (index) {
+                var UserId = ($(this).closest('tr').children(1)[2].innerHTML);
+
+                if (ReturnMatchedId(sharedIds, UserId) == 1) {
+                      allCheckedIds.push(UserId);
+                    $(this).find('.dt-checkboxes').prop('checked', 'checked');
+                }
+                else {
+                    //  this.api().cell(td).checkboxes.deselect(true);
+                }
+
+
+
+            });
+
+
+
+
+        }
+        function ShareWithUsers() {
+            var comp_id = localStorage.getItem("companyid");
+            var all_usernames = [];
+            var table = $('#tblUsers').DataTable();
+            var rows = $(table.$('input[type="checkbox"]').map(function () {
+                return $(this).prop("checked") ? $(this).closest('tr') : null;
+            }));
+            for (i = 0; i < rows.length; i++) {
+
+                all_usernames.push(rows[i].children()[2].innerText);
+            }
+            if (all_usernames.length == 0 && allCheckedIds.length==0) {
+                swal('Alert!', 'Please select atleast one user', 'error');
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url:rootUrl + '/Graph/SaveUserSharing',
+                data: { all_usernames: JSON.stringify(all_usernames), FileName: document.getElementById("txtFileNameHidden").value, compid: comp_id ,AlreadyCheckedIds:JSON.stringify(allCheckedIds)},
+                success: function (result) {
+                    if (result.Message == "Diagram shared successfully") {
+                        swal('Alert!', result.Message, 'success');
+                        
+                    }
+
+                    else
+                        swal('Alert!', result.Message, 'error');
+                }
+            });
+
+        }
+
+        function RefreshApplicationTree() {
+            $.ajax({
+                url:rootUrl + '/Graph/GetAllowedApplication',
+                type: 'POST',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    swal('Alert!', 'Unable to fill applications', 'error');
+                },
+                success: function (result) {
+
+                    $('#ApplicationTree').jstree(true).settings.core.data = result;
+                    $('#ApplicationTree').jstree(true).refresh();
+
+
+                }
+
+            });
+        }
+        ////////    $('#ApplicationTree a').live('dblclick',function (e) {
+        ////////    var node = $(e.target).closest("li");
+        ////////    var type = node.attr('rel');
+        ////////    var item = node[0].id;
+
+        ////////   document.getElementById('mxGraph').contentWindow.isEditorCalled(item);
+        ////////});
+
+
+        function DeleteDiagramDetail(FileName, node) {
+
+               var compid = localStorage.getItem("companyid");
+            dropstarted = true;
+            $.ajax({
+                url:rootUrl + '/Graph/DeleteDiagramDetail',
+                type: 'POST',
+                data: { "FileName": FileName ,"compid":compid},
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    dropstarted = false;
+                },
+
+                success: function (result) {
+
+                    if (result.Message == "success") {
+
+                    }
+                    else {
+                        var tree = $("#FrameworkTree").jstree(true);
+                        tree.delete_node(node);
+                        RefreshApplicationTree();
+                        swal('Alert!', result.Message, 'success');
+                    }
+
+
+                }
+
+
+            });
+
+        }
+
+
+        function SaveDiagram(applicationid, FileName) {
+
+              var compid = localStorage.getItem("companyid");
+            dropstarted = true;
+            $.ajax({
+                url:rootUrl + '/Graph/SaveDiagramDetail',
+                type: 'POST',
+                data: { "appId": applicationid, "FileName": FileName, "updateInProgress": updateInProgress, "compid": compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    dropstarted = false;
+                },
+
+                success: function (result) {
+
+                    if (result.Message == "success") {
+                        RefreshApplicationTree();
+                    }
+                    else {
+                        swal('Alert!', result.Message, 'success');
+                    }
+
+
+                }
+
+
+            });
+
+        }
+
+        function FillSelectedDiagramXML(fileid, filename) {
+
+
+            $.ajax({
+                url:rootUrl + '/Graph/GetDiagramXML',
+                type: 'POST',
+                data: { "FileId": fileid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+                    updateInProgress = 1;
+                    var xmlContents = result.FileName;
+                    document.getElementById("mxGraph").contentWindow.postMessage(['pcall', xmlContents, filename], '*');
+
+
+                }
+
+
+            });
+
+        }
+
+        function ReloadApplications() {
+            //  $("#TestIt").load("/Graph/GetPartial");
+
+            RefreshApplicationTree();
+        }
+
+        function FillApplication(DepartmentId) {
+            return;
+            $("#ApplicationTree").jstree("destroy");
+            $.ajax({
+                url:rootUrl + '/Graph/GetApplicationForDepartment',
+                type: 'POST',
+                datatype: 'json',
+                async: false,
+                data: { "DepartmentId": DepartmentId },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill applications', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#ApplicationTree').jstree({
+                        'core': {
+                            check_callback: function (op) {
+
+                                if (op === "move_node" || op === "copy_node") {
+                                    return false;
+                                }
+                                // you may not want to return true here - configure as needed
+                                return true;
+                            },
+                            'data': result,
+                            'themes': {
+                                'dots': false,
+                                'responsive': true
+                            }
+                        },
+                        "types": {
+                            "tree": { "icon": "glyphicon glyphicon-th-list" }
+                        },
+
+                        "plugins": ["dnd", "types", "themes", "search"],
+                        "search": {
+                            'case_sensitive': false,
+                            "show_only_matches": true
+                        }
+                    }).on('search.jstree', function (e, data) {
+                        console.log(data);
+                    });
+
+
+
+
+                }
+
+            });
+        }
+
+        fullscreenBtn =
+            '<a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="Fullscreen" data-placement="bottom"><i class="' +
+            self.fullscreenClass[0] +
+            '"></i></a>';
+
+        $('<i class="fa fa-expand"></i>').click(function () {
+            alert("The paragraph was clicked.");
+        });
+
+        $(window).resize(function () {
+            var bodyheight = $(this).height();
+
+            //if (bodyheight <= 500) {
+            //    document.getElementById("grpEdit").style.height = "500px";
+            //}
+            //else {
+            // document.getElementById("grpEdit").style.height = bodyheight - 112 + "px";
+            //}
+
+        }).resize();
+
+
+
+
+        // Extends EditorUi to update I/O action states based on availability of backend
+        (function () {
+            //$(".search-input").keyup(function () {
+            //    var searchString = $(this).val();
+
+            //});
+            var editorUiInit = EditorUi.prototype.init;
+
+            EditorUi.prototype.init = function () {
+                editorUiInit.apply(this, arguments);
+                this.actions.get('export').setEnabled(false);
+
+                // Updates action states which require a backend
+                if (!Editor.useLocalStorage) {
+                    mxUtils.post(OPEN_URL, '', mxUtils.bind(this, function (req) {
+                        var enabled = req.getStatus() != 404;
+                        this.actions.get('open').setEnabled(enabled || Graph.fileSupport);
+                        this.actions.get('import').setEnabled(enabled || Graph.fileSupport);
+                        this.actions.get('ddd').setEnabled();
+                        this.actions.get('saveAs').setEnabled(enabled);
+                        this.actions.get('export').setEnabled(enabled);
+                    }));
+                }
+            };
+
+            // Adds required resources (disables loading of fallback properties, this can only
+            // be used if we know that all keys are defined in the language specific file)
+            mxResources.loadDefaultBundle = false;
+            var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
+                mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
+
+            // Fixes possible asynchronous requests
+            mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function (xhr) {
+                // Adds bundle text to resources
+                mxResources.parse(xhr[0].getText());
+
+                // Configures the default graph theme
+                var themes = new Object();
+                themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
+
+                // Main
+                new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+            }, function () {
+                document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+            });
+        })();
+
+        pageSetUp();
+
+        // PAGE RELATED SCRIPTS
+        // pagefunction
+
+        var pagefunction = function () {
+
+            loadScript("/js/plugin/bootstraptree/bootstrap-tree.min.js");
+
+
+
+        };
+
+        // end pagefunction
+
+
+
+
+        var pagedestroy = function () {
+
+            /*
+            Example below:
+
+            $("#calednar").fullCalendar( 'destroy' );
+            if (debugState){
+                root.console.log("✔ Calendar destroyed");
+            }
+
+            For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+            */
+
+
+        };
+
+        // end destroy
+
+        // run pagefunction on load
+
+        pagefunction();
+
+
+    </script>
+
+}

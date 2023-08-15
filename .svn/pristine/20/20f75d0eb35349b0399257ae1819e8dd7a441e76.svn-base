@@ -1,0 +1,587 @@
+@*@{
+    Layout = null;
+    }*@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grapheditor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="~/css/style.min.css">
+
+    <script type="text/javascript">
+        // Parses URL parameters. Supported parameters are:
+        // - lang=xy: Specifies the language of the user interface.
+        // - touch=1: Enables a touch-style user interface.
+        //storage=local // Enables HTML5 local storage.
+        //chrome=0 // Chromeless mode.
+
+        var urlParams = (function (url) {
+            var result = new Object();
+            var idx = url.lastIndexOf('?');
+
+            if (idx > 0) {
+                var params = url.substring(idx + 1).split('&');
+
+                for (var i = 0; i < params.length; i++) {
+                    idx = params[i].indexOf('=');
+
+                    if (idx > 0) {
+                        result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                    }
+                }
+            }
+
+            return result;
+        })(window.location.href);
+
+        // Default resources are included in grapheditor resources
+        mxLoadResources = false;
+
+    </script>
+
+   
+
+</head>
+<body>
+
+    <section id="widget-grid" class="">
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon">
+                            <i class="fa fa-cogs"></i>
+                        </span>
+                        <h2>Framework </h2>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+                     
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding custom-scroll" id="Tree">
+
+                            <div id="FrameworkTree"></div>
+
+
+
+
+                            @*<div class="tree smart-form">
+                                    <ul>
+                                        <li>
+                                            <span><i class="fa fa-lg fa-folder-open"></i> Countries</span>
+                                            <ul>
+                                                <li>
+                                                    <span><i class="fa fa-lg fa-plus-circle"></i> Pakistan</span>
+                                                    <ul>
+                                                        <li>
+
+
+                                                            <span><i class="fa fa-lg fa-plus-circle"></i> Punjab</span>
+
+
+                                                            <ul>
+                                                                <li>
+                                                                    <span><i class="fa fa-lg fa-plus-circle"></i> Lahore</span>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <span><i class="fa fa-lg fa-plus-circle"></i>Datacenter 1</span>
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <span><i class="fa fa-lg fa-plus-circle"></i>Department 1</span>
+
+                                                                                </li>
+                                                                                <li>
+                                                                                    <span><i class="fa fa-lg fa-plus-circle"></i>Department 2</span>
+
+                                                                                </li>
+                                                                                <li>
+                                                                                    <span><i class="fa fa-lg fa-plus-circle"></i>Department 3</span>
+
+                                                                                </li>
+                                                                                <li>
+                                                                                    <span><i class="fa fa-lg fa-plus-circle"></i>Department 4</span>
+
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span><i class="fa fa-lg fa-plus-circle"></i>Datacenter 2</span>
+
+                                                                        </li>
+                                                                        <li>
+                                                                            <span><i class="fa fa-lg fa-plus-circle"></i>Datacenter 3</span>
+
+                                                                        </li>
+                                                                        <li>
+                                                                            <span><i class="fa fa-lg fa-plus-circle"></i>Datacenter 4</span>
+
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+
+
+                                                            </ul>
+                                                        </li>
+
+
+                                                    </ul>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </div>*@
+
+
+
+
+
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon">
+                            <i class="fa fa-apple"></i>
+                        </span>
+                        <h2>Applications </h2>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding custom-scroll" id="Applications">
+                            <input id="search-input" class="search-input" />
+                        
+                            <div id="tree1"></div>
+
+                            @*<div class="col-lg-12 custom-scroll">
+
+            <ul class="list-group">
+                <li class="list-group-item"> <i class=" fa fa-file"></i> &nbsp; Application 1</li>
+                <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp;  Application 2</li>
+                <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp; Application 3</li>
+                <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp; Application 4</li>
+                <li class="list-group-item"> <i class="fa fa-file"></i> &nbsp;  Application 5</li>
+
+            </ul>
+
+
+
+
+        </div>*@
+
+
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+
+
+
+            </div>
+
+            <div class="col-lg-9">
+
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-3" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon">
+                            <i class="fa fa-area-chart"></i>
+                        </span>
+                        <h2>Graph Editor </h2>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" id="widgetBody">
+
+                            <iframe style="width:100%; height:84vh" src="~/graph/mxgraph"></iframe>
+
+
+
+
+
+                        </div>
+                        <!-- end widget content -->
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+</body>
+</html>
+
+
+
+
+
+@section Scripts {
+<script type="text/javascript">
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+ *
+ * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+ *
+ * // activate tooltips
+ * $("[rel=tooltip]").tooltip();
+ *
+ * // activate popovers
+ * $("[rel=popover]").popover();
+ *
+ * // activate popovers with hover states
+ * $("[rel=popover-hover]").popover({ trigger: "hover" });
+ *
+ * // activate inline charts
+ * runAllCharts();
+ *
+ * // setup widgets
+ * setup_widgets_desktop();
+ *
+ * // run form elements
+ * runAllForms();
+ *
+ ********************************
+ *
+ * pageSetUp() is needed whenever you load a page.
+ * It initializes and checks for all basic elements of the page
+ * and makes rendering easier.
+ *
+ */
+ 
+    $(".search-input").keyup(function () {
+        var searchString = $(this).val();
+        $('#tree1').jstree('search', searchString);
+    });
+
+     
+    $('#tree1').jstree({
+            'core': {
+            check_callback: function (op) {
+
+                if (op === "move_node" || op === "copy_node") {
+                    return false;
+    }
+    // you may not want to return true here - configure as needed
+    return true;
+},
+'data': [
+                {"id": "id-a1b", "parent": "#", "text": "Node A1b", "type": "tree" },
+                {"id": "id-a2b", "parent": "#", "text": "Node A2b", "type": "tree" },
+                {"id": "id-a3b", "parent": "#", "text": "Node A3b", "type": "tree" }
+    ],
+            'themes': {
+            'dots': false,
+        'responsive': true
+    }
+},
+        "types": {
+            "tree": {"icon": "glyphicon glyphicon-th-list" }
+    },
+
+    "plugins": ["dnd", "types", "themes", "search"],
+        "search": {
+            'case_sensitive': false,
+            "show_only_matches": true
+    }
+    }).on('search.jstree', function (e, data) {
+        console.log(data);
+        });
+
+
+    $("#FrameworkTree").bind("loaded.jstree", function (event, data) {
+            data.instance.open_all();
+        });
+
+
+    $.ajax({
+            url: '/Graph/GetFrameworkData',
+        type: 'POST',
+        datatype: 'json',
+        async: false,
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        Swal('Alert!', 'Unable to fill countries', 'error');
+    },
+        success: function (result) {
+            $('#FrameworkTree')
+                .jstree({
+                    core: {
+                        check_callback: true,
+                        data: result
+                    },
+                    types: {
+                        "root": {
+                            "icon": "glyphicon glyphicon-plus"
+                        },
+                        "child": {
+                            "icon": "glyphicon glyphicon-leaf"
+                        },
+                        "default": {
+                        }
+                    },
+                    plugins: ["dnd", "search", "themes", "types", "contextmenu"],
+
+
+
+                    "contextmenu": {
+                        "items": function ($node) {
+                            var tree = $("#FrameworkTree").jstree(true);
+                            return {
+                                "Move To Applications": {
+                                    "separator_before": false,
+                                    "separator_after": false,
+                                    "label": "Move To Applications",
+                                    "action": function (obj) {
+                                        tree.delete_node($node);
+                                    }
+                                },
+                               
+                                "Remove": {
+                                    "separator_before": false,
+                                    "separator_after": false,
+                                    "label": "Remove",
+                                    "action": function (obj) {
+                                        tree.delete_node($node);
+                                    }
+                                }
+                            };
+                        }
+                    }
+
+
+
+
+                })
+                .on('open_node.jstree', function (e, data) {
+                    data.instance.set_icon(data.node, "glyphicon glyphicon-minus");
+                }).on('close_node.jstree', function (e, data) { data.instance.set_icon(data.node, "glyphicon glyphicon-plus"); });
+
+
+
+
+        }
+
+    });
+
+
+    var clientHeight = document.getElementById('wid-id-3').clientHeight;
+
+    //alert(clientHeight/2);
+    //var fullHeight = clientHeight / 2;
+    //document.getElementById("Tree").style.height = fullHeight + "px";
+    //document.getElementById("Applications").style.height = fullHeight + "px";
+    //var clientHeighttree = document.getElementById('Tree').clientHeight;
+    //alert(clientHeighttree);
+
+
+    //$('#applications').jstree();
+
+
+    $().ready(function () {
+
+
+            $("#splitter").splitter();
+        });
+
+    $(window).resize(function () {
+        var bodyheight = $(this).height();
+
+        //if (bodyheight <= 500) {
+        //    document.getElementById("grpEdit").style.height = "500px";
+        //}
+        //else {
+       // document.getElementById("grpEdit").style.height = bodyheight - 112 + "px";
+        //}
+
+    }).resize();
+
+
+
+
+    // Extends EditorUi to update I/O action states based on availability of backend
+    (function () {
+        //$(".search-input").keyup(function () {
+        //    var searchString = $(this).val();
+
+        //});
+        var editorUiInit = EditorUi.prototype.init;
+
+        EditorUi.prototype.init = function () {
+            editorUiInit.apply(this, arguments);
+        this.actions.get('export').setEnabled(false);
+
+        // Updates action states which require a backend
+            if (!Editor.useLocalStorage) {
+            mxUtils.post(OPEN_URL, '', mxUtils.bind(this, function (req) {
+                var enabled = req.getStatus() != 404;
+                this.actions.get('open').setEnabled(enabled || Graph.fileSupport);
+                this.actions.get('import').setEnabled(enabled || Graph.fileSupport);
+                this.actions.get('ddd').setEnabled();
+                this.actions.get('saveAs').setEnabled(enabled);
+                this.actions.get('export').setEnabled(enabled);
+            }));
+        }
+    };
+
+    // Adds required resources (disables loading of fallback properties, this can only
+    // be used if we know that all keys are defined in the language specific file)
+    mxResources.loadDefaultBundle = false;
+    var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
+        mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
+
+    // Fixes possible asynchronous requests
+        mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function (xhr) {
+            // Adds bundle text to resources
+            mxResources.parse(xhr[0].getText());
+
+        // Configures the default graph theme
+        var themes = new Object();
+        themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
+
+        // Main
+        new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+        }, function () {
+            document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+        });
+    })();
+
+        pageSetUp();
+
+        // PAGE RELATED SCRIPTS
+        // pagefunction
+
+        var pagefunction = function () {
+
+            loadScript("/js/plugin/bootstraptree/bootstrap-tree.min.js");
+
+
+
+        };
+
+        // end pagefunction
+
+
+
+
+        var pagedestroy = function () {
+
+            /*
+            Example below:
+
+            $("#calednar").fullCalendar( 'destroy' );
+            if (debugState){
+                root.console.log("✔ Calendar destroyed");
+            }
+
+            For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+            */
+
+
+        };
+
+        // end destroy
+
+        // run pagefunction on load
+
+        pagefunction();
+
+
+    </script>
+
+}

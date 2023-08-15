@@ -1,0 +1,118 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SmartAdmin.Seed.Models.Entities
+{
+    public class Server
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ServerID { get; set; }
+        public string Name { get; set; }
+        public int LocationID { get; set; }
+        public string IPAddress { get; set; }
+        public int AdminEngineerID { get; set; }
+        public int OS { get; set; }
+        public int ProcessorNumber { get; set; }
+        public string CPUSpeed { get; set; }
+        public string ServerMemory { get; set; }
+        public string Comment { get; set; }
+        public string VHostName { get; set; }
+        public int VirtualHostType { get; set; }
+        public string BackupDescription { get; set; }
+        public int WebServerTypeID { get; set; }
+        public int ServerTypeID { get; set; }
+        public int AntiVirusTypeID { get; set; }
+        public string RebootSchedule { get; set; }
+        public int ControllerNumber { get; set; }
+        public string DiskCapacity { get; set; }
+        public int NetworkTypeID { get; set; }
+        public int ITGroupID { get; set; }
+        public string GroupDescription { get; set; }
+        public string CabinetNo { get; set; }
+        public string ChasisNo { get; set; }
+        public string ModelNo { get; set; }
+        public string BladeNo { get; set; }
+        public string Generation { get; set; }
+        public string SerialNo { get; set; }
+        public string ILODNSName { get; set; }
+        public string ILOIPAddress { get; set; }
+        public string IPAddress2 { get; set; }
+        public string IPAddress3 { get; set; }
+        public string BackUpPath { get; set; }
+        public string ILOLicense { get; set; }
+        public string LastUpdatedBy { get; set; }
+        public DateTime LastUpdated { get; set; }
+        public string NIC1CableNo { get; set; }
+        public string NIC1BunbleNo { get; set; }
+        public string IPAddress4 { get; set; }
+        public int SAN { get; set; }
+        public int SANSwitchName { get; set; }
+        public int SANSwitchPort { get; set; }
+        public int FibreBackup { get; set; }
+        public int FibreSwitchName { get; set; }
+        public int FibreSwitchPort { get; set; }
+        public int ClusterType { get; set; }
+
+        public string ClusterName { get; set; }
+        public string ClusterIP1 { get; set; }
+        public string ClusterIP2 { get; set; }
+        public string ManufacturerNumber { get; set; }
+        public string Manufacturer { get; set; }
+        public DateTime  WarrantyExpiration { get; set; }
+        public string NIC1Bundle { get; set; }
+        public string NIC2Bundle { get; set; }
+        public string NIC3Bundle { get; set; }
+        public string NIC4Bundle { get; set; }
+        public string NIC1Cable { get; set; }
+        public string NIC2Cable { get; set; }
+        public string NIC3Cable { get; set; }
+        public string NIC4Cable { get; set; }
+        public int ClusterSAN { get; set; }
+        public string LUNNumber { get; set; }
+        public Boolean SMTP { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+        public string Network { get; set; }
+        public string iLO_Connection { get; set; }
+        public string ILO_Password { get; set; }
+        public string Backup { get; set; }
+        public bool Virtualize { get; set; }
+        public bool Extend_Warranty { get; set; }
+        public string NIC1Interface { get; set; }
+        public string NIC2Interface { get; set; }
+        public string NIC3Interface { get; set; }
+        public string NIC4Interface { get; set; }
+        public string NIC1Subnet { get; set; }
+        public string NIC2Subnet { get; set; }
+        public string NIC3Subnet { get; set; }
+        public string NIC4Subnet { get; set; }
+        public string NIC1SwitchPortNum { get; set; }
+        public string NIC2SwitchPortNum { get; set; }
+        public string NIC3SwitchPortNum { get; set; }
+        public string NIC4SwitchPortNum { get; set; }
+        public int NIC1VLAN { get; set; }
+        public int NIC2VLAN { get; set; }
+        public int NIC3VLAN { get; set; }
+        public int NIC4VLAN { get; set; }
+        public int NIC1SwitchName { get; set; }
+        public int NIC2SwitchName { get; set; }
+        public int NIC3SwitchName { get; set; }
+        public int NIC4SwitchName { get; set; }
+        public string CPUType { get; set; }
+        public string DNSServer1 { get; set; }
+        public string DNSServer2 { get; set; }
+        public string PhysicalDiskSize { get; set; }
+        public int RaidType { get;  set;}
+        public int PhysicalDisks { get; set; }    
+        public int Ownership { get; set; }    
+        public string ILOPassword { get; set; }
+        public int ServerUseID { get; set; }
+
+
+    }
+}

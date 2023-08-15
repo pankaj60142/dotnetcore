@@ -1,0 +1,207 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class Framework_Databases : Controller
+    {
+        #region Declaration
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        private List<lkpDataCenter> datacenter;
+        private List<lkpDepartment> department;
+        //  private List<Databases> databases;
+       
+        
+      //  private List<Documents> documents;
+        #endregion
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public Framework_Databases(ApplicationDbContext context)
+        {
+            _context = context;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities = (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+            datacenter = (from c in _context.lkpDataCenter select c).ToList();
+            department = (from c in _context.lkpDepartment select c).ToList();
+           // databases = (from c in _context.Databases select c).ToList();
+           
+            //documents = (from c in _context.Documents select c).ToList();
+        }
+
+        public JsonStringResult GetCountryName()
+        {
+            var resultCountries = (from c in countries
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(int CountryId)
+        {
+            var result = (from s in _context.lkpState
+                          where s.CountryId == CountryId
+                          select s
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+
+        [HttpGet]
+        public JsonStringResult frmserver_DBAID()
+        {
+
+            var result = _context.lkpDBA.ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+
+
+
+        [HttpPost]
+        public JsonStringResult GetCityName(int StateId)
+
+        {
+            var result = (from s in _context.lkpCity
+                          where s.StateId == StateId
+                          select s
+                      ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetDataCenterName(int CityId)
+
+        {
+
+            var result = (from s in _context.lkpDataCenter
+                          where s.CityId == CityId
+                          select s
+                          ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+
+        [HttpPost]
+        public JsonStringResult GetDepartmentName(int DataCenterId)
+
+            {
+
+            var result = (from s in _context.lkpDepartment
+                          where s.DataCenterId == DataCenterId
+                          select s
+                          ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult SaveDatabase ([FromBody]MulitpleModels framework_databases)
+        {
+
+           try 
+                {
+
+                //  var SelectedFramework_database = (from c in databases
+                //                                  
+                //select c).FirstOrDefault();
+
+                //if (SelectedFramework_database == null)
+                //{
+                //    string messageDatabase = "Database information not found";
+                //    return new JsonStringResult(messageDatabase);
+
+                //}
+
+
+                var found = (from c in _context.Databases where c.Name == framework_databases.databases.Name select c).FirstOrDefault();
+
+                if (found == null)
+                {
+                    Databases SelectedFramework_database = new Databases();
+                    Document document = new Document();
+
+                    SelectedFramework_database.Name = framework_databases.databases.Name;
+                    SelectedFramework_database.DbaId = framework_databases.databases.DbaId;
+                    SelectedFramework_database.DBTypeID = framework_databases.databases.DBTypeID;
+                    SelectedFramework_database.DBVersion = framework_databases.databases.DBVersion;
+                    SelectedFramework_database.InstalledDate = DateTime.Now;
+                    SelectedFramework_database.InstallerNameID = framework_databases.databases.InstallerNameID;
+                    SelectedFramework_database.Comments = framework_databases.databases.Comments;
+                    SelectedFramework_database.LastUpdated = DateTime.Now;
+
+                    SelectedFramework_database.ServicePack = framework_databases.databases.ServicePack;
+                   // document.DocumentID = framework_databases.document.DocumentID;
+                    document.Name = framework_databases.document.Name;
+                    document.Path = framework_databases.document.Path;
+                    _context.Add(SelectedFramework_database);
+                    _context.Add(document);
+                    _context.SaveChanges();
+                }
+                // found, Update it
+                else
+                {
+                    found.Name = framework_databases.databases.Name;
+                    found.DBTypeID = framework_databases.databases.DBTypeID;
+                    found.DBVersion = framework_databases.databases.DBVersion;
+                    found.InstallerNameID = framework_databases.databases.InstallerNameID;
+                    found.DBVersion = framework_databases.databases.DBVersion;
+
+                    _context.SaveChanges();
+                }
+
+                string message = "SUCCESS";
+                return new JsonStringResult(message);
+
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+
+            }
+           
+        }
+
+
+        private int ParseInt(string value)
+        {
+            int number = 0;
+            if (int.TryParse(value, out number))
+                return number;
+            else
+                return 0;
+        }
+    }
+}

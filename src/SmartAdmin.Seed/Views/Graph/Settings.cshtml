@@ -1,0 +1,207 @@
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark">
+            <i class="fa fa-pencil-square-o fa-fw "></i>
+            Graph
+            <span>
+                >
+                Settings
+            </span>
+        </h1>
+    </div>
+
+</div>
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- NEW WIDGET START -->
+        <article class="col-sm-12">
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-blueLight" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-cloud"></i>
+                    </span>
+                    <h2>Upload Custom Icons! </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
+
+                        <div id="dropzone">
+                            <form action="/Graph/Upload" method="post" enctype="multipart/form-data"
+                                  id="myAwesomeDropzone" class="dropzone needsclick dz-clickable dropzone-previews">
+                            </form>
+
+                        </div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+        </article>
+        <!-- WIDGET END -->
+
+    </div>
+
+    <!-- end row -->
+    <!-- row -->
+
+    <div class="row">
+
+        <style>
+            .s2 {
+                color: #D14;
+            }
+
+            .c1 {
+                color: #998;
+                font-style: italic;
+            }
+
+            .mi {
+                color: #099;
+            }
+        </style>
+
+
+
+    </div>
+
+    <!-- end row -->
+
+</section>
+<!-- end widget grid -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById("header").style.display = "none";
+            document.getElementById("header").style.display = "none";
+        });
+
+        function myParamName() {
+            return "file";
+        }
+
+        Dropzone.options.myAwesomeDropzone = {
+            paramName: myParamName, // The name that will be used to transfer the file
+            maxFilesize: 100,
+           acceptedFiles: "image/jpeg,image/png,image/gif",
+            addRemoveLinks: true,
+            removedfile: function (file) {
+                var fileName = file.name;
+
+                $.ajax({
+                    type: 'POST',
+                    url:rootUrl + '/Graph/RemoveUploadedIcons',
+                    data: { name: fileName },
+                    success: function (data) {
+                        if (data != "success") {
+                            swal("Error", "Unable to delete file!", "error");
+                            return;
+                        }
+                    }
+                });
+
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            uploadMultiple: false,
+            accept: function (file, done) {
+
+                if (file.name === "justinbieber.jpg") {
+                    done("Naha, you don't.");
+                }
+                else { done(); }
+            },
+            init: function () {
+                thisDropzone = this;
+
+                $.ajax({
+                    type: 'post',
+                    url:rootUrl + '/Graph/GetUploadedIcons',
+                    success: function (json) {
+
+                        for (var i = 0; i < json.length; i++) {
+                            var value = json[i];
+                            var mockFile = { name: value.FileName, size: value.FileSize };
+
+                            thisDropzone.emit("addedfile", mockFile);
+                            thisDropzone.options.thumbnail.call(thisDropzone, mockFile,rootUrl + '/graph/stencils/usman/' + value.FileName);
+
+                            // Make sure that there is no progress bar, etc...
+                            thisDropzone.emit("complete", mockFile);
+                        }
+
+
+                    },
+                    error: function (xhr, durum, hata) {
+
+                           swal("Error", hata, "error");
+                       
+                    }
+                });
+
+
+
+
+
+                //this.on("sending", function (file, response, formData) {
+                //    alert('bb');
+                //    formData["__RequestAntiForgeryToken"] = document.getElementsByName("__RequestVerificationToken").value;
+                //});
+                //this.on("sendingmultiple", function (file, response, formData) {
+                //    alert('cc');
+                //    formData["__RequestAntiForgeryToken"] = document.getElementsByName("__RequestVerificationToken").value;
+                //});
+                //this.on("success", function (file, response) {
+                //    alert('dd');
+                //    file.serverID = response.id;
+                //});
+                //this.on("error", function (file, response) {
+                //    var r = response;
+                //    console.log("Drop Err:");
+                //    console.log(r);
+                //});
+            }
+        };
+
+    </script>
+
+
+}

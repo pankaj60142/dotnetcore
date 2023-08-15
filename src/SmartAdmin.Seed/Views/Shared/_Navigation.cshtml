@@ -1,0 +1,159 @@
+@using SmartAdmin.Seed.Configuration
+@using SmartAdmin.Seed.Extensions
+@using System.Linq
+@inject IOptions<SmartSettings> Settings
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel" style="visibility:collapse" >
+    <!-- User info -->
+    <div class="login-info">
+        <span>
+            <!-- User image size is adjusted inside CSS, it should stay as it -->
+            <a href="javascript:void(0);" id="show-shortcut" >
+                <img src="~/img/avatars/sunny.png" alt="me" class="online" />
+
+                @{
+                    var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+                    if(userId!=null)
+                    {
+                        var user = User.Identity;
+
+                        <span>@user.Name.ToLower()</span>
+                    }
+                }
+               
+
+            </a>
+        </span>
+    </div>
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive-->
+    <nav>
+        <!--
+        NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li id="liSetup" is-active-route asp-controller="Home" style="display:none">
+                <a href="#" title="Setup Forms">
+                    <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Setup Forms</span>
+                </a>
+                <ul>
+                    <li is-active-route asp-controller="Country" asp-action="Index">
+                        <a asp-controller="Country" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Country</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="State" asp-action="Index">
+                        <a asp-controller="State" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">State</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="City" asp-action="Index">
+                        <a asp-controller="City" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">City</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="Datacenter" asp-action="Index">
+                        <a asp-controller="Datacenter" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Data Center</span>
+                        </a>
+                    </li>
+
+
+                    <li is-active-route asp-controller="Department" asp-action="Index">
+                        <a asp-controller="Department" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Department</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="Application" asp-action="Index">
+                        <a asp-controller="Application" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Application</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="ImportSettings" asp-action="Index">
+                        <a asp-controller="ImportSettings" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Import Settings</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="Framework_Application" asp-action="Index">
+                        <a asp-controller="Framework_Application" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Framework Application</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="Framework_Databases" asp-action="Index">
+                        <a asp-controller="Framework_Databases" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Framework Database</span>
+                        </a>
+                    </li>
+
+                    <li is-active-route asp-controller="Framework_Server" asp-action="Index">
+                        <a asp-controller="Framework_Server" asp-action="Index" title="Empty">
+                            <span class="menu-item-parent">Framework Server</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+
+            </li>
+
+            <li id="liAdmin" is-active-route asp-controller="Admin" style="display:none">
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Admin Section</span>
+                </a>
+                <ul>
+                    <li is-active-route asp-controller="Confirmation" asp-action="UserSecurity">
+                        <a asp-controller="Confirmation" asp-action="UserSecurity">Users</a>
+                    </li>
+                   @* <li is-active-route asp-controller="Account" asp-action="Register">
+                        <a asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                    <li is-active-route asp-controller="Account" asp-action="ForgotPassword">
+                        <a asp-controller="Account" asp-action="ForgotPassword">Forgot Password</a>
+                    </li>*@
+                </ul>
+            </li>
+
+
+
+
+            
+
+            <li id="liMisc" is-active-route asp-controller="Misc">
+
+                 <a asp-controller="Graph" asp-action="Designer">
+                    <i class="fa fa-lg fa-regular fa-clone"></i> <span class="menu-item-parent">Diagram Design</span>
+                </a>
+                @*
+                 <li is-active-route asp-controller="Graph" asp-action="Index">
+                        <a asp-controller="Graph" asp-action="Designer">Diagram Design</a>
+                    </li>
+
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Design</span>
+                </a>
+                <ul>
+                    <li is-active-route asp-controller="Graph" asp-action="Index">
+                        <a asp-controller="Graph" asp-action="Designer">Diagram Design</a>
+                    </li>
+                    
+                </ul>*@
+            </li>
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+</aside>
+<!-- END NAVIGATION -->

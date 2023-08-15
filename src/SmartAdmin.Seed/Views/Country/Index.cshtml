@@ -1,0 +1,437 @@
+
+@{
+    ViewData["Title"] = "Country";
+}
+<style type="text/css">
+    .modal-header {
+        background-color: #404040 !important;
+        color: white;
+    }
+
+        .modal-header button.close {
+            color: #ffffff !important;
+        }
+
+    .chosen-container{
+        width:100% !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-9">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <h2 class="page-title txt-color-bluedark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Forms
+                <span>
+                    >
+                    Country
+                </span>
+            </h2>
+
+
+        </div>
+    </div>
+
+    <div class="col-3">
+
+            <button type="button" class="btn btn-primary" style="margin:12px 12px 0 0; float:right;" data-toggle="modal" data-target="#openmodal">Add New Country</button>
+    </div>
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+
+
+
+
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid" data-widget-editbuttone">
+                
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Country </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+
+
+                    <div class="widget-body no-padding">
+                        <div class="row" style="margin:10px;">
+
+                        </div>
+                        <div class="row" style="margin:10px;">
+                           
+
+
+                            <table id="tblCountry" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Country Code</th>
+                                        <th>Country Name</th>
+                                        <th>Actions</th>
+
+                                    </tr>
+                                </thead>
+                            </table>
+
+
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+                <!-- end widget -->
+
+            </div>
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="openmodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Country
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCountry" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">Country Name</label>
+                                      
+                                        <label class="input ">
+                                            <select  name="countryname" id="countryname" onchange="Countryattr(this)"></select>
+                                               <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                        </label>
+                                           
+                                       
+
+
+
+                                    </section>
+
+
+                                    <section class="col col-6">
+                                        <label class="label">Country Code</label>
+                                        <label class="input">
+                                            <input type="text" id="countrycode" name="countrycode" style="background-color:lightyellow" readonly placeholder="Country code">
+                                        </label>
+                                    </section>
+
+
+                                </div>
+                                <footer>
+                                    <button type="button" class="btn btn-primary" onclick="SaveCountry();">
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-danger" onclick="clearcountry();">
+                                        Cancel
+                                    </button>
+                                </footer>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            FillcountriesGrid();
+            fillcountries();
+            $('#countryname').chosen();
+            $('#countryname').chosen({ allow_single_deselect: false });
+            
+        });
+        function SaveCountry() {
+
+            var compid = localStorage.getItem("companyid");
+           
+            if ($("#frmCountry").valid()) {
+
+
+                var country = $('#countryname').val();
+
+                if (country == "" || country == null) {
+                    Swal("Alert!", "Please fill the Country fields!", "return");
+                    return false;
+                }
+                var chunks = country.split("_");
+                var selectedcountry = chunks[0];
+                var longitude = chunks[2];
+                var latitude = chunks[3];
+
+
+                var options = {};
+
+                options.url = "/Country/SaveCountry";
+                options.type = "POST";
+
+                var obj = {
+
+                    CountryName: selectedcountry,
+                    CompanyId: parseInt(compid),
+                  Latitude: latitude,
+                   Longitude: longitude
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Country saved successfully!", "success");
+                        $('#countryname').val('');
+                        $('#openmodal').modal('hide');
+                        FillcountriesGrid();
+                        clearcountry();
+                    }
+                    else
+                        swal("Error", "Error while saving country!", "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+        }
+        function Countryattr(all) {
+            var values = all.options[all.selectedIndex].value;
+            var chunks = values.split("_");
+            document.getElementById("countrycode").value = chunks[1];
+
+            
+
+            //document.getElementById("countrycode").value = values;
+        
+
+        }
+        function DeleteCountry(country) {
+
+
+
+
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to rollback this action!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+
+
+
+
+                        DeleteCountryAjax(country);
+
+
+
+                    } else {
+                        swal("Cancelled", "You Cancelled delete operation!", "error");
+                    }
+                });
+
+
+
+
+        }
+
+
+        function DeleteCountryAjax(country) {
+
+            var selectedcountry = country;
+
+
+
+
+
+
+            var options = {};
+            options.url = "/Country/DeleteCountry";
+            options.type = "POST";
+
+            var obj = {
+
+                CountryName: selectedcountry
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+
+                if (msg.responseText == "SUCCESS") {
+                    swal("Deleted!", "Country has been deleted!", "success");
+                    FillcountriesGrid();
+                }
+                else
+                    swal("Error", "Error while deleting country!", "error");
+            };
+
+            $.ajax(options);
+        }
+
+        function fillcountries()
+        {
+            $.ajax({
+                url:rootUrl + '/Country/GetCountries',
+                type: 'POST',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+                    Destroycountryname();
+                    for (var x = 0; x < resultCountry.length; x++) {
+                        
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryName + "_" + resultCountry[x].CountryCode + "_" + resultCountry[x].longitude + "_" + resultCountry[x].latitude).text(resultCountry[x].CountryName));
+                       
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            });
+        }
+        function FillcountriesGrid() {
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+            $.ajax({
+                url:rootUrl + '/Country/FillcountriesGrid',
+                type: 'POST',
+                datatype: 'json',
+                data: { CompanyId: compid},
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill states', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblCountry').DataTable().destroy();
+                     $('#tblCountry').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                         columns: [
+                             { data: 'CountryCode', 'width': '20%' },
+                            { data: 'CountryName', 'width': '20%' },
+                           
+                            {
+
+                                "data": "CountryName",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteCountry(\'' + data + '\');">Delete</button>';
+                                }
+                            },
+                           
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+        function Destroycountryname() {
+            $('#countryname')
+                .empty()
+                .append('<option selected="selected" value="">Select Country</option>');
+        }
+        function clearcountry() {
+          
+            $('#openmodal').modal('hide');
+        }
+    </script>
+}

@@ -1,0 +1,559 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class Framework_Server : Controller
+    {
+        #region Declaration
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        private List<lkpDataCenter> datacenter;
+        private List<lkpDepartment> department;
+        //  private List<Databases> databases;
+
+
+        //  private List<Documents> documents;
+        #endregion
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public Framework_Server(ApplicationDbContext context)
+        {
+            _context = context;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities = (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+            datacenter = (from c in _context.lkpDataCenter select c).ToList();
+            department = (from c in _context.lkpDepartment select c).ToList();
+            
+        }
+
+        public JsonStringResult GetCountryName()
+        {
+            var resultCountries = (from c in countries
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(int CountryId)
+        {
+            var result = (from s in _context.lkpState
+                          where s.CountryId == CountryId
+                          select s
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+
+        [HttpPost]
+        public JsonStringResult GetCityName(int StateId)
+
+        {
+            var result = (from s in _context.lkpCity
+                          where s.StateId == StateId
+                          select s
+                      ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetDataCenterName(int CityId)
+
+        {
+
+            var result = (from s in _context.lkpDataCenter
+                          where s.CityId == CityId
+                          select s
+                          ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        [HttpGet]
+        public JsonStringResult frmserver_DatabaseID()
+        {
+            try
+            {
+                var result = _context.Databases.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+        [HttpGet]
+        public JsonStringResult frmserver_SAN()
+        {
+            try
+            {
+
+                var result = _context.lkpSAN.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+        [HttpGet]
+        public JsonStringResult frmserver_SANSwitchName()
+        {
+            try
+            {
+                var result = _context.lkpSANSwitchName.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+        
+        [HttpGet]
+        public JsonStringResult frmserver_SANSwitchPort()
+        {
+            try
+            {
+                var result = _context.lkpSANSwitchPort.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+        
+        [HttpGet]
+        public JsonStringResult frmserver_lkpFibreBackup()
+        {
+            try
+            {
+
+                var result = _context.lkpFibreBackup.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+        [HttpGet]
+        public JsonStringResult frmserver_lkpFibreSwitchName()
+        {
+            try
+            {
+                var result = _context.lkpFibreSwitchName.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+
+        
+
+        [HttpGet]
+        public JsonStringResult frmserver_lkpFibreSwitchPort()
+        {
+            try
+            {
+                var result = _context.lkpFibreSwitchPort.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+        
+        [HttpGet]
+        public JsonStringResult frmserver_lkpClusterType()
+        {
+            try
+            {
+                var result = _context.lkpClusterType.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch(Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+        [HttpGet]
+        public JsonStringResult frmserver_lkpLocation()
+        {
+            try
+            {
+                var result = _context.lkpLocation.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch(Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+        [HttpGet]
+        public JsonStringResult frmserver_lkpITGroup()
+        {
+            try
+            {
+                var result = _context.lkpITGroup.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+        [HttpGet]
+        public JsonStringResult frmserver_lkpNetworkType()
+        {
+            try
+            {
+                var result = _context.lkpNetworkType.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+        [HttpGet]
+        public JsonStringResult frmserver_lkpServerType()
+        {
+            try
+            {
+                var result = _context.lkpServerType.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch(Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+        [HttpGet]
+        public JsonStringResult frmserver_Document()
+        {
+            try
+            {
+                var result = _context.Document.ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch(Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+        }
+
+        [HttpPost]
+        public JsonStringResult GetDepartmentName(int DataCenterId)
+
+        {
+
+            var result = (from s in _context.lkpDepartment
+                          where s.DataCenterId == DataCenterId
+                          select s
+                          ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        //[HttpPost]
+        //public JsonStringResult demo([FromBody]Server serv)
+        //{
+        //    try
+        //    {
+
+        //        var found = (from c in _context.Server where c.Name == serv.Name select c).FirstOrDefault();
+        //        if (found==null)
+        //        {
+        //            Server selectedserver = new Server();
+        //            selectedserver.ServerID = serv.ServerID;
+        //            selectedserver.Name = serv.Name;
+        //            selectedserver.LocationID = serv.LocationID;
+        //            selectedserver.IPAddress = serv.IPAddress;
+        //            selectedserver.AdminEngineerID = serv.AdminEngineerID;
+        //            selectedserver.OS = serv.OS;
+        //            selectedserver.ProcessorNumber = serv.OS;
+        //            selectedserver.CPUSpeed = serv.CPUSpeed;
+        //            selectedserver.ServerMemory = serv.ServerMemory;
+        //            //selectedserver.Comment = serv.Comment;
+        //            //selectedserver.VHostName = serv.VHostName;
+        //            //selectedserver.VirtualHostType = serv.VirtualHostType;
+        //            //selectedserver.BackupDescription = serv.BackupDescription;
+        //            //selectedserver.WebServerTypeID = serv.WebServerTypeID;
+        //            //selectedserver.ServerTypeID = serv.ServerTypeID;
+        //            //selectedserver.AntiVirusTypeID = serv.AntiVirusTypeID;
+        //            //selectedserver.RebootSchedule = serv.RebootSchedule;
+        //            //selectedserver.ControllerNumber = serv.ControllerNumber;
+        //            //selectedserver.DiskCapacity = serv.DiskCapacity;
+        //            //selectedserver.GroupDescription = serv.GroupDescription;
+        //            //selectedserver.CabinetNo = serv.CabinetNo;
+        //            //selectedserver.ChasisNo = serv.ChasisNo;
+        //            //selectedserver.ModelNo = serv.ModelNo;
+        //            //selectedserver.BladeNo = serv.BladeNo;
+        //            //selectedserver.Generation = serv.Generation;
+        //            //selectedserver.SerialNo = serv.SerialNo;
+        //            //selectedserver.ILODNSName = serv.ILODNSName;
+        //            //selectedserver.ILOIPAddress = serv.ILOIPAddress;
+        //            //selectedserver.IPAddress2 = serv.IPAddress2;
+        //            //selectedserver.IPAddress3 = serv.IPAddress3;
+        //            //selectedserver.BackUpPath = serv.BackUpPath;
+        //            //selectedserver.ILOLicense = serv.ILOLicense;
+        //            //selectedserver.LastUpdatedBy = serv.LastUpdatedBy;
+        //            //selectedserver.LastUpdated = DateTime.Now;
+        //            //selectedserver.NIC1CableNo = serv.NIC1CableNo;
+        //            //selectedserver.NIC1BunbleNo = serv.NIC1BunbleNo;
+        //            //selectedserver.IPAddress4 = serv.IPAddress4;
+        //            //selectedserver.SAN = serv.SAN;
+        //            //selectedserver.SANSwitchName = serv.SANSwitchName;
+        //            //selectedserver.SANSwitchPort = serv.SANSwitchPort;
+        //            //selectedserver.FibreBackup = serv.FibreBackup;
+        //            //selectedserver.FibreSwitchName = serv.FibreSwitchName;
+        //            //selectedserver.FibreSwitchPort = serv.FibreSwitchPort;
+        //            //selectedserver.ClusterType = serv.ClusterType;
+        //            //selectedserver.ClusterName = serv.ClusterName;
+        //            //selectedserver.ClusterIP1 = serv.ClusterIP1;
+        //            //selectedserver.ManufacturerNumber = serv.ManufacturerNumber;
+        //            //selectedserver.Manufacturer = serv.Manufacturer;
+        //            //selectedserver.WarrantyExpiration = serv.WarrantyExpiration;
+        //            //selectedserver.NIC1Bundle = serv.NIC1Bundle;
+        //            //selectedserver.NIC2Bundle = serv.NIC2Bundle;
+        //            //selectedserver.NIC3Bundle = serv.NIC3Bundle;
+        //            //selectedserver.NIC4Bundle = serv.NIC4Bundle;
+        //            //selectedserver.NIC1Cable = serv.NIC1Cable;
+
+
+        //        }
+
+        //        string message = "SUCCESS";
+        //        return new JsonStringResult(message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string message = "Fail.." + ex.Message;
+        //        return new JsonStringResult(message);
+
+        //    }
+        //}
+
+        [HttpPost]
+        public JsonStringResult SaveFramework_Server([FromBody] Server serv)
+        {
+            try
+            {
+                var found = (from c in _context.Server where c.Name == serv.Name select c).FirstOrDefault();
+                if (found==null)
+                {
+                    Server selectedserver = new Server();
+
+                    selectedserver.Name = serv.Name;
+                    selectedserver.LocationID = serv.LocationID;
+                    selectedserver.IPAddress = serv.IPAddress;
+                    selectedserver.AdminEngineerID = serv.AdminEngineerID;
+                    selectedserver.OS = serv.OS;
+                    selectedserver.ProcessorNumber = serv.ProcessorNumber;
+                    selectedserver.CPUSpeed = serv.CPUSpeed;
+                    selectedserver.LastUpdated = DateTime.Now;
+                    selectedserver.ServerMemory = serv.ServerMemory;
+                    selectedserver.WarrantyExpiration = DateTime.Now;
+                    selectedserver.Comment = serv.Comment;
+                    selectedserver.VHostName = serv.VHostName;
+                    selectedserver.VirtualHostType = serv.VirtualHostType;
+                    selectedserver.BackupDescription = serv.BackupDescription;
+                    selectedserver.WebServerTypeID = serv.WebServerTypeID;
+                    selectedserver.ServerTypeID = serv.ServerTypeID;
+                    selectedserver.AntiVirusTypeID = serv.AntiVirusTypeID;
+                    selectedserver.RebootSchedule = serv.RebootSchedule;
+                    selectedserver.ControllerNumber = serv.ControllerNumber;
+                    selectedserver.DiskCapacity = serv.DiskCapacity;
+                    selectedserver.NetworkTypeID = serv.NetworkTypeID;
+                    selectedserver.ITGroupID = serv.ITGroupID;
+                    selectedserver.GroupDescription = serv.GroupDescription;
+                    selectedserver.CabinetNo = serv.CabinetNo;
+                    selectedserver.ChasisNo = serv.ChasisNo;
+                    selectedserver.ModelNo = serv.ModelNo;
+                    selectedserver.BladeNo = serv.BladeNo;
+                    selectedserver.Generation = serv.Generation;
+                    selectedserver.SerialNo = serv.SerialNo;
+                    selectedserver.ILODNSName = serv.ILODNSName;
+                    selectedserver.ILOIPAddress = serv.ILOIPAddress;
+                    selectedserver.IPAddress2 = serv.IPAddress2;
+                    selectedserver.IPAddress3 = serv.IPAddress3;
+                    selectedserver.BackUpPath = serv.BackUpPath;
+                    selectedserver.ILOLicense = serv.ILOLicense;
+                    selectedserver.LastUpdatedBy = serv.LastUpdatedBy;
+                    selectedserver.NIC1CableNo = serv.NIC1CableNo;
+                    selectedserver.NIC1BunbleNo = serv.NIC1BunbleNo;
+                    selectedserver.IPAddress4 = serv.IPAddress4;
+                    selectedserver.SAN = serv.SAN;
+                    selectedserver.SANSwitchName = serv.SANSwitchName;
+                    selectedserver.SANSwitchPort = serv.SANSwitchPort;
+                    selectedserver.FibreBackup = serv.FibreBackup;
+                    selectedserver.FibreSwitchName = serv.FibreSwitchName;
+                    selectedserver.FibreSwitchPort = serv.FibreSwitchPort;
+                    selectedserver.ClusterType = serv.ClusterType;
+                    selectedserver.ClusterName = serv.ClusterName;
+                    selectedserver.ClusterIP1 = serv.ClusterIP1;
+                    selectedserver.ManufacturerNumber = serv.ManufacturerNumber;
+                    selectedserver.Manufacturer = serv.Manufacturer;
+                    selectedserver.NIC1Bundle = serv.NIC1Bundle;
+                    selectedserver.NIC2Bundle = serv.NIC2Bundle;
+                    selectedserver.NIC3Bundle = serv.NIC3Bundle;
+                    selectedserver.NIC4Bundle = serv.NIC4Bundle;
+                    selectedserver.NIC1Cable = serv.NIC1Cable;
+                    selectedserver.NIC2Cable = serv.NIC2Cable;
+                    selectedserver.NIC3Cable = serv.NIC3Cable;
+                    selectedserver.NIC4Cable = serv.NIC4Cable;
+                    selectedserver.ClusterSAN = serv.ClusterSAN;
+                    selectedserver.LUNNumber = serv.LUNNumber;
+                    //selectedserver.SMTP = serv.SMTP;
+                    selectedserver.Description = serv.Description;
+                    selectedserver.Location = serv.Location;
+                    selectedserver.Network = serv.Network;
+                    selectedserver.iLO_Connection = serv.iLO_Connection;
+                    selectedserver.ILO_Password = serv.ILO_Password;
+                    selectedserver.Backup = serv.Backup;
+                    //selectedserver.Virtualize = serv.Virtualize;
+                   // selectedserver.Extend_Warranty = serv.Extend_Warranty;
+                    selectedserver.NIC1Interface = serv.NIC1Interface;
+                    selectedserver.NIC2Interface = serv.NIC2Interface;
+                    selectedserver.NIC3Interface = serv.NIC3Interface;
+                    selectedserver.NIC4Interface = serv.NIC4Interface;
+                    selectedserver.NIC1Subnet = serv.NIC1Subnet;
+                    selectedserver.NIC2Subnet = serv.NIC2Subnet;
+                    selectedserver.NIC3Subnet = serv.NIC3Subnet;
+                    selectedserver.NIC4Subnet = serv.NIC4Subnet;
+                    selectedserver.NIC1SwitchPortNum = serv.NIC1SwitchPortNum;
+                    selectedserver.NIC2SwitchPortNum = serv.NIC2SwitchPortNum;
+                    selectedserver.NIC3SwitchPortNum = serv.NIC3SwitchPortNum;
+                    selectedserver.NIC4SwitchPortNum = serv.NIC4SwitchPortNum;
+                    selectedserver.NIC1VLAN = serv.NIC1VLAN;
+                    selectedserver.NIC2VLAN = serv.NIC2VLAN;
+                    selectedserver.NIC3VLAN = serv.NIC3VLAN;
+                    selectedserver.NIC4VLAN = serv.NIC4VLAN;
+                    selectedserver.NIC1SwitchName = serv.NIC1SwitchName;
+                    selectedserver.NIC2SwitchName = serv.NIC2SwitchName;
+                    selectedserver.NIC3SwitchName = serv.NIC3SwitchName;
+                    selectedserver.NIC4SwitchName = serv.NIC4SwitchName;
+                    selectedserver.CPUType = serv.CPUType;
+                    selectedserver.DNSServer1 = serv.DNSServer1;
+                    selectedserver.DNSServer2 = serv.DNSServer2;
+                    selectedserver.PhysicalDiskSize = serv.PhysicalDiskSize;
+                    selectedserver.RaidType = serv.RaidType;
+                    selectedserver.PhysicalDisks = serv.PhysicalDisks;
+                    selectedserver.Ownership = serv.Ownership;
+                    selectedserver.ILOPassword = serv.ILOPassword;
+                    selectedserver.ServerUseID = serv.ServerUseID;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    _context.Add(selectedserver);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    found.Name = serv.Name;
+
+                }
+                string message = "SUCCESS";
+                return new JsonStringResult(message);
+            }
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+
+            }
+        }
+
+
+        private int ParseInt(string value)
+        {
+            int number = 0;
+            if (int.TryParse(value, out number))
+                return number;
+            else
+                return 0;
+        }
+
+    }
+}

@@ -1,0 +1,121 @@
+
+@{
+    ViewData["Title"] = "CreateDefaultRoles";
+}
+
+<h2>CreateDefaultRoles</h2>
+
+<button type="button" class="btn btn-primary" onclick="SaveRoles();">Create Default Roles</button>
+
+
+
+@section Scripts {
+    <!-- SCRIPTS ON PAGE EVENT -->
+    <script type="text/javascript">
+
+        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+        pageSetUp();
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+        };
+
+        // end pagefunction
+
+
+
+        
+
+
+
+        function SaveRoles() {
+
+                           
+
+                var options = {};
+                options.url = "/Account/SaveRoles";
+                options.type = "POST";
+
+                var obj = {
+                    RoleId: 0
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    //xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    //    $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Roles saved successfully!", "success");
+                        
+                    }
+                    else
+                        //document.getElementById("countryid").addClass("state-error");
+
+                        swal("Error", "Error while saving roles!", "error");
+                };
+
+                $.ajax(options);
+           
+        }
+
+
+      
+
+
+
+
+    </script>
+}

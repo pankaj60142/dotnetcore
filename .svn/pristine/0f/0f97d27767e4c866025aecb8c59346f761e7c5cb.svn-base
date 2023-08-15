@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class CityController : Controller
+    {
+        #region Declaration
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> states;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        #endregion
+        public CityController(ApplicationDbContext context)
+        {
+           _context =context;
+            states  = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(string CountryName)
+        {
+            var result = (from s in states
+                          join allcountries in allcountries on s.CountryCode equals allcountries.CountryCode
+                          where allcountries.CountryName == CountryName
+                          select s
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        public JsonStringResult GetCountryName()
+        {
+           var resultCountries = (from c in countries
+                                  select c).ToList();
+
+
+           var json   = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+        [HttpPost]
+        public JsonStringResult GetCityName(string StateName)
+        {
+            var result = (from s in states
+                          join allcountries in allcountries on s.CountryCode equals allcountries.CountryCode
+                          where allcountries.CountryName == StateName
+                          select s
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+
+    }
+}

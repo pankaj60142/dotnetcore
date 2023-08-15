@@ -1,0 +1,1910 @@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="widget-grid" class="">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Company Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="company-user" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+
+
+
+
+
+                                @*<div class="row">
+
+
+
+            <section class="col col-6" id="country">
+                <label class="label">Country Name</label>
+
+                <div class="input" id="countryid">
+                    <i class="icon-append fa fa-exclamation-circle"></i>
+                    <input type='text' id="countryname" placeholder='Select countries' class='flexdatalist' data-min-length='1' multiple='multiple' list='countries' name='countryname'>
+
+
+
+                </div>
+            </section>
+
+            <section class="col col-6" id="state">
+                <label class="label">State Name</label>
+                <div class="input">
+                    <i class="icon-append fa fa-exclamation-circle"></i>
+                    <input type='text' id="statename" placeholder='Select States' class='flexdatalist' data-min-length='1' multiple='multiple' list='states' name='states1'>
+
+
+                </div>
+            </section>
+        </div>
+
+        <div class="row">
+            <section class="col col-6" id="cities">
+                <label class="label">City Name</label>
+                <div class="input">
+                    <i class="icon-append fa fa-exclamation-circle"></i>
+                    <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                    <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                </div>
+            </section>
+
+
+
+            <section class="col col-6" id="datacenter">
+                <label class="label">Datacenters</label>
+                <div class="input">
+
+                    <input type='text' id="datacentername" placeholder='Select Datacenters' class='flexdatalist' data-min-length='1' multiple='multiple' list='datacenters' name='datacenters1'>
+
+
+                </div>
+            </section>
+        </div>
+
+        <div class="row">
+            <section class="col col-6" id="department">
+                <label class="label">Departments</label>
+                <div class="input">
+
+                    <input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+
+
+                </div>
+            </section>
+
+
+
+            <section class="col col-6" id="application" style="display:none">
+                <label class="label">Applications </label>
+                <div class="input">
+
+                    <input type='text' id="applicationname" placeholder='Select Applications' class='flexdatalist' data-min-length='1' multiple='multiple' list='applications' name='datacenters1'>
+
+
+
+
+                </div>
+            </section>
+
+
+        </div>*@
+                                <div class="row">
+
+
+
+                                    <section class="col col-6" id="country">
+                                        <label class="label">Country Name</label>
+
+                                        <div class="input" id="countryid">
+
+                                            <!-- <input type='text' id="countryname" placeholder='Select countries' class='flexdatalist' data-min-length='1' multiple='multiple' list='countries' name='countryname'>
+                -->
+                                            <select name="countryname" id="countryname" style="width:100%" multiple></select>
+
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6" id="state">
+                                        <label class="label">State Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+
+                                            <select id="statename" name="statename" multiple></select>
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="cities">
+                                        <label class="label">City Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <select name="cityname" id="cityname" multiple></select>
+                                            <!-- <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                -->
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="datacenter">
+                                        <label class="label">Datacenters</label>
+                                        <div class="input">
+                                            <select name="datacentername" id="datacentername" multiple></select>
+
+                                            <!--<input type='text' id="datacentername" placeholder='Select Datacenters' class='flexdatalist' data-min-length='1' multiple='multiple' list='datacenters' name='datacenters1'>
+    -->
+                                           
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="department">
+                                        <label class="label">Departments</label>
+                                        <div class="input">
+                                            <select name="departmentname" id="departmentname" multiple></select>
+
+                                            <!--<input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+                -->
+
+                                        </div>
+                                    </section>
+
+
+
+                                    <!--       <section class="col col-6" id="application" style="display:none">
+               <label class="label">Applications </label>
+               <div class="input">
+
+                   <input type='text' id="applicationname" placeholder='Select Applications' class='flexdatalist' data-min-length='1' multiple='multiple' list='applications' name='datacenters1'>
+
+
+
+
+               </div>
+           </section>
+
+        -->
+                                </div>
+
+
+
+                            </fieldset>
+
+                            @*<footer>
+                                    <button type="button" class="btn btn-primary" onclick="SaveUser();">
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-danger" onclick="ClearCity();">
+                                        Cancel
+                                    </button>
+                                </footer>*@
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+
+
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-server"></i>
+                    </span>
+                    <h2>Server  </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body custom-scroll" id="Tree">
+                        <form id="Frmserver">
+                            <ul id="myTab3" class="nav nav-tabs tabs-left bordered">
+                                <li class="active">
+                                    <a href="#l1" data-toggle="tab">Server </a>
+                                </li>
+
+                                <li class="pull-left">
+                                    <a href="#l4" data-toggle="tab">Server Database</a>
+                                </li>
+                                <li class="pull-left">
+                                    <a href="#l5" data-toggle="tab">Server Document</a>
+                                </li>
+
+                            </ul>
+
+                            <div id="myTabContent3" class="tab-content padding-10">
+
+                                <div class="tab-pane fade in active" id="l1">
+
+
+                                    <fieldset>
+                                        <input name="authenticity_token" type="hidden">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input class="form-control" id="Name" name="Name" placeholder="Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Location </label>
+                                                <select class="form-control" name="LocationID" id="LocationID"></select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IP Address</label>
+                                                <input class="form-control" id="IPAddress" name="IPAddress" placeholder="IP Address" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Admin Engineer </label>
+                                                <input class="form-control" id="AdminEngineerID" name="AdminEngineerID" placeholder="Admin Engineer " type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>OS</label>
+                                                <input class="form-control" id="OS" name="OS" placeholder="OS" type="text">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Processor Number</label>
+                                                    <input class="form-control" name="ProcessorNumber" id="ProcessorNumber" placeholder="Processor Number" type="text">
+                                                </div>
+                                            </div>*@
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>No of procs</label>
+                                                <input class="form-control" name="CPUSpeed" id="CPUSpeed" placeholder="CPU Speed" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Server Memory</label>
+                                                <input class="form-control" name="ServerMemory" id="ServerMemory" placeholder="Server Memory" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Comment</label>
+                                                <input class="form-control" name="Comment" id="Comment" placeholder="Comment" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>V Host Name</label>
+                                                <select data-placeholder="V Host Name" id="VHostName" class="form-control" >
+                                                   
+                                                </select>
+                                                @*<input class="form-control" name="VHostName" id="VHostName" placeholder="VHost Name" type="text">*@
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Virtual Host Type</label>
+                                                <input class="form-control" name="VirtualHostType" id="VirtualHostType" placeholder="Virtual Host Type" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Backup Description</label>
+                                                <input class="form-control" name="BackupDescription" id="BackupDescription" placeholder="Backup Description" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>WebServer Type </label>
+                                                <input class="form-control" id="WebServerTypeID" name="WebServerTypeID" placeholder="WebServer Type " type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Server Type </label>
+                                                <select class="form-control" name="ServerTypeID" id="ServerTypeID"></select>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>AntiVirus Type </label>
+
+                                                <input class="form-control" name="AntiVirusTypeID" id="AntiVirusTypeID" placeholder="AntiVirus Type ID" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Reboot Schedule</label>
+                                                <input class="form-control" name="RebootSchedule" id="RebootSchedule" placeholder="Reboot Schedule" type="text">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Controller Number</label>
+                                                    <input class="form-control" name="ControllerNumber" id="ControllerNumber" placeholder="Controller Number" type="text">
+                                                </div>
+                                            </div>*@
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Disk Capacity</label>
+                                                <input class="form-control" name="DiskCapacity" id="DiskCapacity" placeholder="Disk Capacity" type="text">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Network Type </label>
+                                                    <select class="form-control" name="NetworkTypeID" id="NetworkTypeID"></select>
+
+                                                </div>
+                                            </div>*@
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IT Group</label>
+                                                <select class="form-control" name="ITGroupID" id="ITGroupID"></select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Group Description</label>
+                                                <input class="form-control" name="GroupDescription" id="GroupDescription" placeholder="Group Description" type="text">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Cabinet No</label>
+                                                    <input class="form-control" name="CabinetNo" id="CabinetNo" placeholder="CabinetNo" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Chasis No</label>
+                                                    <input class="form-control" name="CertificateExpiration" id="ChasisNo" placeholder="Chasis No" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Model No</label>
+                                                    <input class="form-control" name="ModelNo" id="ModelNo" placeholder="Model No" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Blade No</label>
+                                                    <input class="form-control" name="BladeNo" id="BladeNo" placeholder="Blade No" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Generation</label>
+                                                    <input class="form-control" name="Generation" id="Generation" placeholder="Generation" type="text">
+                                                </div>
+                                            </div>*@
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Serial No</label>
+                                                <input class="form-control" name="SerialNo" id="SerialNo" placeholder="Serial No" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILODNS Name</label>
+                                                <input class="form-control" name="ILODNSName" id="ILODNSName" placeholder="ILODNS Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILOIP Address</label>
+                                                <input class="form-control" name="ILOIPAddress" id="ILOIPAddress" placeholder="ILOIP Address" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IP Address2</label>
+                                                <input class="form-control" name="IPAddress2" id="IPAddress2" placeholder="IP Address2" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IP Address3</label>
+                                                <input class="form-control" name="IPAddress3" id="IPAddress3" placeholder="IP Address3" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>BackUp Path</label>
+                                                <input class="form-control" name="BackUpPath" id="BackUpPath" placeholder="BackUp Path" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILO License</label>
+                                                <input class="form-control" name="ILOLicense" id="ILOLicense" placeholder="ILO License" type="text">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Cable No</label>
+                                                <input class="form-control" name="NIC1CableNo" id="NIC1CableNo" placeholder="NIC1 Cable No" type="text">
+                                            </div>
+                                        </div>*@
+
+                                      
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Server Use</label>
+                                                <input class="form-control" name="ServerUseID" id="ServerUseID" placeholder="Server UseID" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group" style="visibility:collapse">
+                                                <label>Server ID</label>
+                                                <input class="form-control" name="ServerID" id="ServerID">
+                                            </div>
+                                        </div>
+
+
+                                    </fieldset>
+
+                                </div>
+
+
+                                <div class="tab-pane fade" id="l4">
+
+                                    <fieldset>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+
+                                                <section class="col col-lg-12 col-md-12">
+                                                    <label class="label">Database</label>
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="DatabaseID" id="DatabaseID"></select>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+
+                                <div class="tab-pane fade" id="l5">
+
+                                    <fieldset>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+
+                                                <section class="col col-lg-12 col-md-12">
+                                                    <label class="label">Document</label>
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="DocumentID" id="DocumentID"></select>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+
+
+                                <div class="form-actions">
+
+                                    <button type="button" onclick="SaveFramework_Server();" class="btn btn-primary btn-lg">
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalFrameworkServer" onclick="FillDatabaseTable();">Search</button>
+
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+
+                        <div id="modalFrameworkServer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                            <div role="document" class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <h4 id="_exampleModalLabel" class="modal-title">Server Detail Screen</h4>
+                                        <h4 id="PersonnelName" class="modal-title" style="color: red"></h4>
+                                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-body">
+
+
+                                        <div class="widget-body no-padding">
+
+                                            <table id="tblDataServer" class="table table-striped table-bordered table-hover" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Server ID</th>
+                                                        <th>Name</th>
+                                                        <th>OS</th>
+                                                        <th>IP Address</th>
+                                                        <th>Generation</th>
+
+
+                                                        <th>Edit</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!-- end widget content -->
+
+    </div>
+    <!-- end widget div -->
+
+
+</section>
+
+@section Scripts {
+    <script type="text/javascript">
+
+
+
+
+        pageSetUp();
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+        };
+
+        // end pagefunction
+
+        $(document).ready(function () {
+
+            $('#countryname').chosen();
+            $('#countryname').chosen({ allow_single_deselect: false });
+            $('#statename').chosen();
+            $('#statename').chosen({ allow_single_deselect: false });
+            $('#cityname').chosen();
+            $('#cityname').chosen({ allow_single_deselect: false });
+            $('#datacentername').chosen();
+            $('#datacentername').chosen({ allow_single_deselect: false });
+            $('#departmentname').chosen();
+            $('#departmentname').chosen({ allow_single_deselect: false });
+            fillcountry();
+
+            $("#InstalledDate").datepicker('setDate', 'today');
+            Application_Database();
+            Application_SAN();
+            Application_SANSwitchName();
+            Application_SANSwitchPort();
+            Application_lkpFibreBackup();
+            Application_FiberSwitchName();
+            Application_lkpFibreBackup();
+            Application_FiberSwitchPort();
+            Application_ClusterType();
+            Application_Location();
+            Application_lkpITGroup();
+            Application_NetworkType();
+            Application_ServerType();
+            Application_Document();
+            
+            Application_VHOSTName();
+
+        });
+        function fillcountry() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/Department/GetCountry',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+
+
+                    for (var x = 0; x < resultCountry.length; x++) {
+
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryId).text(resultCountry[x].CountryName));
+
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+                    $("#countryname").chosen().change(function (event) {
+
+                        fillState($(event.target).val(), [], [], [], []);
+
+                    });
+
+
+
+
+
+
+                }
+
+
+            });
+        }
+        function FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCites = selectedcities.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedCites: SelectedCites, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdatacenter) {
+                    Destroydatacenter();
+
+                    for (var x = 0; x < resultdatacenter.length; x++) {
+
+
+                        $('#datacentername').append($('<option></option>').attr('value', resultdatacenter[x].DataCenterId).text(resultdatacenter[x].DataCenterName));
+
+
+                    }
+                    $('#datacentername').trigger("chosen:updated");
+                    $("#datacentername").chosen().change(function (event) {
+
+                        FillDepartment($(event.target).val(), []);
+
+                    });
+                    if (SelectedDepartments.length == 0) {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+                        FillDepartment(selecteddatacenters, SelectedDepartments);
+                    }
+
+
+
+                }
+
+
+            });
+
+        }
+        function FillDepartment(SelectedDataCenter, SelectedDepartments) {
+            SelectedDataCenter = SelectedDataCenter.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedDataCenter: SelectedDataCenter, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdepartment) {
+                    Destroydepartmentname();
+
+                    for (var x = 0; x < resultdepartment.length; x++) {
+
+
+                        $('#departmentname').append($('<option></option>').attr('value', resultdepartment[x].DepartmentId).text(resultdepartment[x].DepartmentName));
+
+
+                    }
+                    $('#departmentname').trigger("chosen:updated");
+
+                    if (SelectedDepartments.length > 0) {
+                        $("#departmentname").val(SelectedDepartments).trigger("chosen:updated");
+                    }
+
+
+                }
+
+
+            });
+
+        }
+        function fillCity(SelectedStates, selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedStates = SelectedStates.join(",");
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetCityName',
+                type: 'POST',
+                data: { SelectedStates: SelectedStates, compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCities) {
+                    DestroyCityName();
+
+
+                    for (var x = 0; x < resultCities.length; x++) {
+
+                        $('#cityname').append($('<option></option>').attr('value', resultCities[x].CityId).text(resultCities[x].CityName));
+
+
+
+                    }
+                    $('#cityname').trigger("chosen:updated");
+
+                    $("#cityname").chosen().change(function (event) {
+
+                        FillDataCenter($(event.target).val(), [], []);
+
+                    });
+                    if (selecteddatacenters.length == 0) {
+                        $("#cityname").val(SelectedCities).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#cityname").val(selectedcities).trigger("chosen:updated");
+                        FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments);
+                    }
+
+
+                }
+
+
+
+            });
+        }
+        function fillState(SelectedCountryIds, selectedstates, selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCountryIds = SelectedCountryIds.join(",");
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+
+                data: { SelectedCountryIds1: SelectedCountryIds, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+                    DestroyStatename();
+
+                    for (var x = 0; x < resultState.length; x++) {
+
+
+                        $('#statename').append($('<option></option>').attr('value', resultState[x].StateId).text(resultState[x].StateName));
+
+
+                    }
+
+                    $('#statename').trigger("chosen:updated");
+                    $("#statename").chosen().change(function (event) {
+
+                        fillCity($(event.target).val(), [], [], []);
+                    });
+
+                    if (selectedcities.length == 0) {
+                        $("#statename").val(selectedstates).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#statename").val(selectedstates).trigger("chosen:updated");
+                        fillCity(selectedstates, selectedcities, selecteddatacenters, SelectedDepartments);
+                    }
+                }
+
+
+            });
+
+        }
+
+
+
+        function FillDatabaseTable() {
+            $.ajax({
+                url: "/Framework_Server/GetServer",
+                type: 'Get',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    swal('Alert!', 'Unable to fill Data', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblDataServer').DataTable().destroy();
+                    $('#tblDataServer').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'ServerID' },
+                            { data: 'Name' },
+                            { data: 'OS' },
+                            { data: 'IPAddress' },
+                            { data: 'Generation' },
+                            //{ data: 'ApplicationDatabaseID' },
+                            //{ data: 'ApplicationDocumentID' },
+
+                            {
+
+                                "data": "ServerID",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-primary" onclick="Editdata(\'' + data + '\');">Edit</button>';
+                                }
+                            },
+                            {
+
+                                "data": "ServerID",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteData(\'' + data + '\');">Delete</button>';
+                                }
+                            }
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+
+        function Editdata(ServerID) {
+          
+
+            $.ajax({
+                url:rootUrl + '/Framework_Server/EditData',
+                type: 'POST',
+                datatype: 'json',
+                data: { ServerID: ServerID },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+
+                },
+
+                success: function (result) {
+                    
+                    $("#ServerID").val(result[0].ServerID);
+
+                    $("#countryname").val(result[0].CountryId);
+                    $("#statename").val(result[0].StateId);
+                    $("#cities").val(result[0].CityId);
+                    $("#datacentername").val(result[0].DataCenterId);
+                    $("#departmentname").val(result[0].DepartmentId);
+                   
+                    $("#Name").val(result[0].Name);
+                    $("#Location").val(result[0].Location);
+                    $("#IPAddress").val(result[0].IPAddress);
+                    $("#AdminEngineerID").val(result[0].AdminEngineerID);
+                    $("#OS").val(result[0].OS);
+                   // $("#ProcessorNumber").val(result[0].ProcessorNumber);
+                    $("#CPUSpeed").val(result[0].CPUSpeed);
+                    $("#ServerMemory").val(result[0].ServerMemory);
+                    $("#Comment").val(result[0].Comment);
+                    $("#VHostName").val(result[0].VHostName);
+                    $("#VirtualHostType").val(result[0].VirtualHostType);
+                    $("#BackupDescription").val(result[0].BackupDescription);
+                    $("#WebServerTypeID").val(result[0].WebServerTypeID);
+                    $('#ServerTypeID').val(result[0].ServerTypeID);
+                    $("#AntiVirusTypeID").val(result[0].AntiVirusTypeID);
+                    $("#RebootSchedule").val(result[0].RebootSchedule);
+                    $("#ControllerNumber").val(result[0].ControllerNumber);
+                    $("#DiskCapacity").val(result[0].DiskCapacity);
+                    $("#ITGroupID").val(result[0].ITGroupID);
+                    $("#GroupDescription").val(result[0].GroupDescription);
+                    $("#CabinetNo").val(result[0].CabinetNo);
+                    $("#ChasisNo").val(result[0].ChasisNo);
+                    $("#ModelNo").val(result[0].ModelNo);
+                    $("#BladeNo").val(result[0].BladeNo);
+                    $("#Generation").val(result[0].Generation);
+                    $("#SerialNo").val(result[0].SerialNo);
+                    $("#ILODNSName").val(result[0].ILODNSName);
+                    $("#ILOIPAddress").val(result[0].ILOIPAddress);
+                    $("#IPAddress2").val(result[0].IPAddress2);
+                    $("#IPAddress3").val(result[0].IPAddress3);
+                    $("#BackUpPath").val(result[0].BackUpPath);
+                    $("#ILOLicense").val(result[0].ILOLicense);
+                    $("#NIC1BunbleNo").val(result[0].NIC1BunbleNo);
+                  
+                   $("#SAN").val(result[0].SAN);
+                    $("#ClusterSAN").val(result[0].ClusterSAN);
+                    $("#ServerUseID").val(result[0].ServerUseID);
+
+
+
+
+
+
+                    $('#modalFrameworkServer').modal('hide');
+                }
+
+            });
+        }
+
+        function Destroycountryname() {
+            $('#countryname')
+                .empty();
+        }
+
+        function Destroydepartmentname() {
+            $('#departmentname')
+                .empty();
+        }
+
+        function DestroyCityName() {
+            $('#cityname')
+                .empty();
+        }
+        function DestroyStatename() {
+            $('#statename')
+                .empty();
+        }
+
+        function Destroydatacenter() {
+            $('#datacentername')
+                .empty();
+        }
+        function Application_Document() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_Document";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    //var option = $('<option></option>').text(msg.responseJSON[i].Name);
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name).val(msg.responseJSON[i].DocumentID);
+
+                    $('#DocumentID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_SAN() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_SAN";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+
+                    $('#SAN').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+      
+        function Application_lkpFibreBackup() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpFibreBackup";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+
+                    $('#FibreBackup').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_FiberSwitchName() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpFibreSwitchName";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+                    $('#FibreSwitchName').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_FiberSwitchPort() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpFibreSwitchPort";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+                    $('#FibreSwitchPort').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_ClusterType() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpClusterType";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+                    $('#ClusterType').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        
+        function Application_lkpITGroup() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpITGroup";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+                    $('#ITGroupID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_NetworkType() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpNetworkType";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+                    $('#NetworkTypeID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_ServerType() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpServerType";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+                    $('#ServerTypeID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+
+
+        
+        function Application_Location() {
+            $('#LocationID').chosen();
+            $('#LocationID').chosen({ allow_single_deselect: true });
+            var target = $('#LocationID');
+            $.ajax({
+                url: "/Framework_Server/frmserver_lkpLocation",
+                type: 'GET',
+                datatype: 'json',
+                data: "{}",
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    alert("unable to fetch Server Type");
+                },
+                success: function (result) {
+                   
+
+
+                    for (var x = 0; x < result.length; x++) {
+                         console.log(result[x]);
+
+
+
+                       // $('#LocationID').append($('<option></option>').attr('value', result[x].LookupId).text(result[x].CodeValue));
+                        $('#LocationID').append($('<option></option>').attr('value', result[x].LookupId).text(result[x].CodeValue));
+
+
+                    }
+
+
+                    $('#LocationID').trigger("chosen:updated");
+
+
+
+                }
+            });
+
+
+
+        }
+        
+        function Application_VHOSTName() {
+           // $(".chzn-select").chosen();
+            $('#VHostName').chosen();
+            $('#VHostName').chosen({ allow_single_deselect: true });
+            var target = $('#VHostName');
+            $.ajax({
+                url: "/Framework_Server/frmserver_lkpVHostName",
+                type: 'GET',
+                datatype: 'json',
+                data: "{}",
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    alert("unable to fetch V host name");
+                },
+                success: function (result) {
+                    
+
+                    for (var x = 0; x < result.length; x++) {
+
+
+
+                        $('#VHostName').append($('<option></option>').attr('value', result[x].LookupId).text(result[x].CodeValue));
+
+
+                    }
+
+
+                    $('#VHostName').trigger("chosen:updated");
+
+
+
+                }
+            });
+        }
+
+       
+
+       
+            
+        function Application_SANSwitchName() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_SANSwitchName";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+
+                    $('#SANSwitchName').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_SANSwitchPort() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_SANSwitchPort";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+
+                    $('#SANSwitchPort').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_Database() {
+
+
+            var options = {};
+            options.url = "/Framework_Server/frmserver_DatabaseID";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name).val(msg.responseJSON[i].DatabaseID);
+                    $('#DatabaseID').append(option);
+
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+        function SaveFramework_Server() {
+
+            if ($("#Frmserver").valid()) {
+                var selectedAntiVirusTypeID = $('#AntiVirusTypeID').val();
+                if (isNaN(selectedAntiVirusTypeID)) {
+                    swal("Error", " WebServerTypeID Type must be a number!", "error");
+                    return false;
+                }
+                selectedAntiVirusTypeID = parseInt(selectedAntiVirusTypeID);
+                var selectedAdminEngineerID = $('#AdminEngineerID').val();
+                selectedAdminEngineerID=parseInt(selectedAdminEngineerID);
+                if (isNaN(selectedAdminEngineerID)) {
+                    swal("Error", "Admin Engineer ID must be a number!", "error");
+                    return false;
+                }
+                var selectedOS = $('#OS').val();
+                if (isNaN(selectedOS)) {
+                    swal("Error", "OS  must be a number!", "error");
+                    return false;
+                }
+                selectedOS = parseInt(selectedOS);
+
+                var selectedVirtualHostType = 0;
+                if (isNaN(selectedVirtualHostType)) {
+                    swal("Error", "Virtual Host Type must be a number!", "error");
+                    return false;
+                }
+                selectedVirtualHostType = parseInt(selectedVirtualHostType);
+                var selectedControllerNumber = 0;
+                if (isNaN(selectedControllerNumber)) {
+                    swal("Error", " ControllerNumber Type must be a number!", "error");
+                    return false;
+                }
+                var selectedWebServerTypeID = $('#WebServerTypeID').val();
+                if (isNaN(selectedWebServerTypeID)) {
+                    swal("Error", " WebServerTypeID Type must be a number!", "error");
+                    return false;
+                }
+                selectedWebServerTypeID = parseInt(selectedWebServerTypeID);
+
+                var selectedSAN = 0;
+
+                var selectedSANSwitchName = 0;
+                if (isNaN(selectedSANSwitchName)) {
+                    swal("Error", " SANSwitchName Type must be a number!", "error");
+                    return false;
+                }
+                var selectedName = $('#Name').val();
+
+
+                var selectedLocationID = $('#LocationID').val();
+                selectedLocationID = parseInt(selectedLocationID);
+                var selectedIPAddress = $('#IPAddress').val();
+                
+                
+                var selectedProcessorNumber = $('#CPUSpeed').val();
+               
+                selectedProcessorNumber = parseInt(selectedProcessorNumber);
+                var selectedServerMemory = $('#ServerMemory').val();
+                var selectedComment = $('#Comment').val();
+                
+                var selectedVHostName = $('#VHostName').val();
+                
+                var selectedBackupDescription = $('#BackupDescription').val();
+                
+                var selectedServerTypeID = $('#ServerTypeID').val();
+                selectedServerTypeID = parseInt(selectedServerTypeID);
+                
+                var selectedRebootSchedule = $('#RebootSchedule').val();
+                
+                var selectedDiskCapacity = $('#DiskCapacity').val();
+                var selectedNetworkTypeID = 0;
+                var selecteITGroupID = $('#ITGroupID').val();
+                selecteITGroupID = parseInt(selecteITGroupID);
+                var selectedGroupDescription = $('#GroupDescription').val();
+               
+                var selectedSerialNo = $('#SerialNo').val();
+                var selectedILODNSName = $('#ILODNSName').val();
+                var selectedILOIPAddress = $('#ILOIPAddress').val();
+                var selectedIPAddress2 = $('#IPAddress2').val();
+                var selectedIPAddress3= $('#IPAddress3').val();
+                var selectedBackUpPath = $('#BackUpPath').val();
+                var selectedILOLicense = $('#ILOLicense').val();
+                var selectedLastUpdatedBy = $('#LastUpdatedBy').val();
+               
+                var selectedNIC1BunbleNo = $('#NIC1BunbleNo').val();
+              
+                
+                var selectedSANSwitchPort =0;
+                var selectedFibreBackup = 0;
+                var selectedFibreSwitchName = 0;
+                var selectedFibreSwitchPort =0;
+                var selectedClusterType =0;
+               
+                var selectedManufacturerNumber = $('#ManufacturerNumber').val();
+                var selectedManufacturer = $('#Manufacturer').val();
+                
+                var selectedClusterSAN = 0;
+               
+                var selectedNIC1VLAN = 0;
+                if (isNaN(selectedNIC1VLAN)) {
+                    swal("Error", " NIC1VLAN Type must be a number!", "error");
+                    return false;
+                }
+                var selectedNIC2VLAN = 0;
+                if (isNaN(selectedNIC2VLAN)) {
+                    swal("Error", " NIC2VLAN Type must be a number!", "error");
+                    return false;
+                }
+                var selectedNIC3VLAN = 0;
+                if (isNaN(selectedNIC3VLAN)) {
+                    swal("Error", " NIC3VLAN Type must be a number!", "error");
+                    return false;
+                }
+                var selectedNIC4VLAN = 0;
+                if (isNaN(selectedNIC4VLAN)) {
+                    swal("Error", " NIC4VLAN Type must be a number!", "error");
+                    return false;
+                }
+                var selectedNIC1SwitchName = 0;
+                if (isNaN(selectedNIC1SwitchName)) {
+                    swal("Error", " NIC1SwitchName Type must be a number!", "error");
+                    return false;
+                }
+                 var selectedNIC2SwitchName = 0;
+                if (isNaN(selectedNIC2SwitchName)) {
+                    swal("Error", " NIC2SwitchName Type must be a number!", "error");
+                    return false;
+                }
+                var selectedNIC3SwitchName =0;
+                if (isNaN(selectedNIC3SwitchName)) {
+                    swal("Error", " NIC3SwitchName Type must be a number!", "error");
+                    return false;
+                }
+                var selectedNIC4SwitchName =0;
+                if (isNaN(selectedNIC4SwitchName)) {
+                    swal("Error", " NIC3SwitchName Type must be a number!", "error");
+                    return false;
+                }
+              
+                var selectedPhysicalDisks = 0;
+                if (isNaN(selectedPhysicalDisks)) {
+                    swal("Error", " PhysicalDisks Type must be a number!", "error");
+                    return false;
+                }
+                var selectedRaidType = 0;
+                if (isNaN(selectedRaidType)) {
+                    swal("Error", " RaidType Type must be a number!", "error");
+                    return false;
+                }
+                var selectedOwnership =0;
+                if (isNaN(selectedOwnership)) {
+                    swal("Error", " Ownership Type must be a number!", "error");
+                    return false;
+                }
+                var selectedILOPassword = 0;
+                if (isNaN(selectedILOPassword)) {
+                    swal("Error", " ILOPassword Type must be a number!", "error");
+                    return false;
+                }
+                var selectedServerUseID = $('#ServerUseID').val();
+                
+                if (isNaN(selectedServerUseID)) {
+                    swal("Error", " ServerUseID Type must be a number!", "error");
+                    return false;
+                }
+                selectedServerUseID = parseInt(selectedServerUseID)
+
+                var selecteddocumentID = $('#DocumentID').val();
+                selecteddocumentID = parseInt(selecteddocumentID)
+
+                var selecteddatabasesID = $('#DatabaseID').val();
+                selecteddatabasesID = parseInt(selecteddatabasesID)
+
+                var selectedCountry = $('#countryname').val(); 
+                
+                selectedCountry = parseInt(selectedCountry)
+
+                
+                
+
+                var selectedState = $('#statename').val();
+                selectedState = parseInt(selectedState)
+
+                var selecteddatacenter = $('#datacentername').val();
+                selecteddatacenter = parseInt(selecteddatacenter)
+
+                var selecteddepartment = $('#departmentname').val();
+                selecteddepartment = parseInt(selecteddepartment)
+                var selectedCity = $('#cityname').val();
+                selectedCity = parseInt(selectedCity);
+
+
+                          var options = {};
+                options.url = "/Framework_Server/SaveFramework_Server";
+                          options.type = "POST";
+
+                var servid = $('#ServerID').val();
+                if (servid == null || servid == '') {
+                    servid = 0;
+                }
+
+                var framework_server = {
+                    "lkpCity": {
+                        "CityId": selectedCity
+                    },
+
+                    "lkpCountry": {
+                        "CountryId": selectedCountry
+                    },
+
+                    "lkpState": {
+                        "StateId": selectedState
+                    },
+
+                    "lkpDepartment": {
+                        "DepartmentId": selecteddepartment
+                    },
+                    "lkpDataCenter": {
+                        "DataCenterId": selecteddatacenter
+                    },
+
+                    "server": {
+                        "Name": selectedName,
+                        "LocationID": selectedLocationID,
+                        "IPAddress": selectedIPAddress,
+                        "AdminEngineerID": selectedAdminEngineerID,
+                        "OS": selectedOS,
+                        "ProcessorNumber": selectedProcessorNumber,
+                    //    "CPUSpeed": selectedCPUSpeed,
+                       "ServerMemory": selectedServerMemory,
+                       "Comment": selectedComment,
+                        "VHostName": selectedVHostName,
+                       "VirtualHostType": selectedVirtualHostType,
+                       "BackupDescription": selectedBackupDescription,
+                        "WebServerTypeID": selectedWebServerTypeID,
+                      "ServerTypeID": selectedServerTypeID,
+                        "AntiVirusTypeID": selectedAntiVirusTypeID,
+                        "RebootSchedule": selectedRebootSchedule,
+                        
+                        "DiskCapacity": selectedDiskCapacity,
+                        
+                        "ITGroupID": selecteITGroupID,
+                        "GroupDescription": selectedGroupDescription,
+                        
+                        "SerialNo": selectedSerialNo,
+                       "ILODNSName": selectedILODNSName,
+                        "ILOIPAddress": selectedILOIPAddress,
+                        "IPAddress2": selectedIPAddress2,
+                       "IPAddress3": selectedIPAddress3,
+                        "BackUpPath": selectedBackUpPath,
+                        "ILOLicense": selectedILOLicense,
+                    //    "LastUpdatedBy": selectedLastUpdatedBy,
+                      
+                    //    "NIC1BunbleNo": selectedNIC1BunbleNo,
+                      
+                    //    "SAN": selectedSAN,
+                    //    "SANSwitchName": selectedSANSwitchName,
+                    //    "SANSwitchPort": selectedSANSwitchPort,
+                    //    "ClusterSAN": selectedClusterSAN,
+                    //    "FibreBackup": selectedFibreBackup,
+                    //    "FibreSwitchName": selectedFibreSwitchName,
+                    //    "FibreSwitchPort": selectedFibreSwitchPort,
+                    //    "ClusterType": selectedClusterType,
+                       
+                    //    "Manufacturer": selectedManufacturer,
+                        
+                    //    "NIC1VLAN": selectedNIC1VLAN,
+                    //    "NIC2VLAN": selectedNIC2VLAN,
+                    //    "NIC2SwitchName": selectedNIC2SwitchName,
+                    //    "NIC3SwitchName": selectedNIC3SwitchName,
+                    //    "NIC4SwitchName": selectedNIC4SwitchName,
+                        
+                       "ServerUseID": selectedServerUseID
+
+                    },
+
+                   "databases": {
+                    "DataBaseID":selecteddatabasesID
+                },
+
+                    "document": {
+                      "DocumentID": selecteddocumentID
+                    }
+
+
+
+
+                };
+
+                options.data = JSON.stringify(framework_server);
+                          options.contentType = "application/json";
+                          options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Framework Server saved successfully!", "success");
+                        $('#Name').val('');
+                        $('#LocationID').val('');
+                        $('#IPAddress').val('');
+                        $('#AdminEngineerID').val('');
+                        $('#OS').val('');
+                        $('#ProcessorNumber').val('');
+                        $('#CPUSpeed').val('');            
+                        $('#ServerMemory').val('');                              
+                        $('#Comment').val('');                 
+                        $('#VHostName').val('');                                       
+                        $('#VirtualHostType').val('');                                       
+                        $('#BackupDescription').val('');                                       
+                        $('#WebServerTypeID').val('');                                                                              
+                        $('#ServerTypeID').val('');                                                                              
+                        $('#AntiVirusTypeID').val('');                                                                              
+                        $('#RebootSchedule').val('');
+                        $('#DiskCapacity').val('');
+                        $('#ITGroupID').val('');
+                        $('#GroupDescription').val('');
+                        $('#SerialNo').val('');
+                        $('#ILODNSName').val('');
+                        $('#ILOIPAddress').val('');
+                        $('#IPAddress2').val('');
+                        $('#IPAddress3').val('');
+                        $('#BackUpPath').val('');
+                        $('#ILOLicense').val('');
+                        $('#LastUpdatedBy').val('');
+                        $('#ServerUseID').val('');
+                        $('#DataBaseID').val('');
+                        $('#DocumentID').val('');
+                        $('#countryname').val('');
+                        $('#statename').val('');
+                        $('#cityname').val('');
+                        $('#datacentername').val('');
+                        $('#departmentname').val('');
+                        
+                        validate();
+                        
+                        
+                    }
+                    else
+                        swal("Error", "Please fill in the required fields!", "error");
+                };
+                $.ajax(options);
+
+            }
+            else {
+                swal("Error", "Error while saving Framework Server!", "error");
+            }
+
+
+        }
+       
+     
+       
+       
+    </script>
+
+}
+

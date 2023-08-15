@@ -1,0 +1,1469 @@
+@*@{
+    Layout = null;
+    }*@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grapheditor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="~/css/style.min.css">
+    <style type="text/css">
+
+
+        .form-inline .donotchange {
+            display: block;
+            margin-bottom: 10px;
+            vertical-align: middle;
+        }
+
+        .nooverflow#mxGraph {
+            height: 100vh !important;
+        }
+
+        .geFooterContainer {
+            height: 0px !important;
+        }
+
+        .jstree-contextmenu {
+            z-index: 999999 !important;
+        }
+
+        .vakata-context {
+            z-index: 999999 !important;
+        }
+
+        .scrollOverHover {
+            overflow: hidden;
+        }
+
+            .scrollOverHover:hover,
+            .scrollOverHover:focus {
+                overflow: auto;
+            }
+
+    </style>
+   
+
+    <script type="text/javascript">
+        // Parses URL parameters. Supported parameters are:
+        // - lang=xy: Specifies the language of the user interface.
+        // - touch=1: Enables a touch-style user interface.
+        //storage=local // Enables HTML5 local storage.
+        //chrome=0 // Chromeless mode.
+
+        var urlParams = (function (url) {
+            var result = new Object();
+            var idx = url.lastIndexOf('?');
+
+            if (idx > 0) {
+                var params = url.substring(idx + 1).split('&');
+
+                for (var i = 0; i < params.length; i++) {
+                    idx = params[i].indexOf('=');
+
+                    if (idx > 0) {
+                        result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                    }
+                }
+            }
+
+            return result;
+        })(window.location.href);
+
+        // Default resources are included in grapheditor resources
+        mxLoadResources = false;
+
+    </script>
+
+
+
+</head>
+<body>
+
+    <section id="widget-grid" class="">
+
+        <div class="row">
+
+
+            <div class="col-lg-12">
+
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-3" data-widget-editbutton="false" data-widget-fullscreenbutton="false">
+
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <b id="graphEditor" style="margin-left:10px;"> </b>
+                        <b id="selectedFolderCaption"></b>
+
+                        <div class="widget-toolbar22" >
+
+                          @*  <div class="form-inline">
+                                <div class="form-group">
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="strikes-range" data-toggle="dropdown" aria-haspopup="true"> Framework <span class="caret"></span> </button>
+                                        <ul class="dropdown-menu dropdown-menu pull-right" aria-labelledby="Framework">
+                                            <li style="width: 120vh;">
+
+                                                <form class="form-horizontal" style="display:block;">
+                                                    <div class="row" style="margin-left:3px;">
+
+                                                        <div class="col col-md-6" style="margin-left:3px;">
+                                                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-1" data-widget-editbutton="false">
+                                                                <!-- widget options:
+                                                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                                                data-widget-colorbutton="false"
+                                                                data-widget-editbutton="false"
+                                                                data-widget-togglebutton="false"
+                                                                data-widget-deletebutton="false"
+                                                                data-widget-fullscreenbutton="false"
+                                                                data-widget-custombutton="false"
+                                                                data-widget-collapsed="true"
+                                                                data-widget-sortable="false"
+
+                                                                -->
+                                                                <header>
+                                                                    <span class="widget-icon">
+                                                                        <i class="fa fa-cogs"></i>
+                                                                    </span>
+                                                                    <h2>Folders </h2>
+
+                                                                </header>
+
+                                                                <!-- widget div-->
+                                                                <div>
+
+                                                                    <!-- widget edit box -->
+                                                                    <div class="jarviswidget-editbox">
+                                                                        <!-- This area used as dropdown edit box -->
+
+                                                                    </div>
+                                                                    <!-- end widget edit box -->
+                                                                    <!-- widget content -->
+                                                                    <div class="widget-body no-padding custom-scroll" id="Tree">
+
+                                                                        <div id="FrameworkTree" class="scrollOverHover" style="height:76vh;color:black;"></div>
+
+
+
+
+
+
+
+
+
+
+                                                                    </div>
+                                                                    <!-- end widget content -->
+
+                                                                </div>
+                                                                <!-- end widget div -->
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col col-md-5">
+                                                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+
+                                                                <!-- widget options:
+                                                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                                                data-widget-colorbutton="false"
+                                                                data-widget-editbutton="false"
+                                                                data-widget-togglebutton="false"
+                                                                data-widget-deletebutton="false"
+                                                                data-widget-fullscreenbutton="false"
+                                                                data-widget-custombutton="false"
+                                                                data-widget-collapsed="true"
+                                                                data-widget-sortable="false"
+
+                                                                -->
+                                                                <header>
+                                                                    <span class="widget-icon">
+                                                                        <i class="fa fa-tasks"></i>
+                                                                    </span>
+                                                                    <h2>Applications </h2>
+
+                                                                </header>
+
+                                                                <!-- widget div-->
+                                                                <div>
+
+                                                                    <!-- widget edit box -->
+                                                                    <div class="jarviswidget-editbox">
+                                                                        <!-- This area used as dropdown edit box -->
+
+                                                                    </div>
+                                                                    <!-- end widget edit box -->
+                                                                    <!-- widget content -->
+                                                                    <div class="widget-body no-padding custom-scroll" id="Applications">
+
+                                                                        <div class="row padding-10">
+                                                                            <div class="col-lg-12 margin-top-5">
+
+                                                                                <input id="search-input" class="form-control search-input" placeholder="Search" />
+
+                                                                            </div>
+
+
+
+                                                                        </div>
+
+                                                                        <div id="ApplicationTree" style="color:black;height:70vh;"></div>
+                                                                        <div id="TestIt"></div>
+                                                                        
+
+
+
+                                                                    </div>
+                                                                    <!-- end widget content -->
+
+                                                                </div>
+                                                                <!-- end widget div -->
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+
+
+
+
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        </div>
+
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" id="widgetBody">
+                              @*<img id="imgExplorerLoading" src="~/img/ajax-loader.gif" style="display:none;" />*@
+                            <iframe id="mxGraph" style="width:100%; height:84vh" src="~/graph/mxgraph" ></iframe>
+
+
+
+
+
+                        </div>
+
+                        <div id="tempSelectedFolderId"></div>
+                        <!-- end widget content -->
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="modal" id="foldercreatemodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Folder Name
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCity" class="smart-form">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+                                <input type="text" class="form-control" id="txtFolderName" />
+
+
+
+                            </fieldset>
+
+
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="CreateNewFolder();">
+                                    Create New
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelNewFolder();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+@section Scripts {
+<script type="text/javascript">
+
+
+                        var targetNodeId = '';
+                        var dropstarted = false;
+                        var updateInProgress = 0;
+                        var AllApplications=[];
+
+                      var counter = 0;
+
+                        var selectedNodeForCreatFolder=null;
+                        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+                     *
+                     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+                     *
+                     * // activate tooltips
+                     * $("[rel=tooltip]").tooltip();
+                     *
+                     * // activate popovers
+                     * $("[rel=popover]").popover();
+                     *
+                     * // activate popovers with hover states
+                     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+                     *
+                     * // activate inline charts
+                     * runAllCharts();
+                     *
+                     * // setup widgets
+                     * setup_widgets_desktop();
+                     *
+                     * // run form elements
+                     * runAllForms();
+                     *
+                     ********************************
+                     *
+                     * pageSetUp() is needed whenever you load a page.
+                     * It initializes and checks for all basic elements of the page
+                     * and makes rendering easier.
+                     *
+                     */
+
+
+
+
+
+
+                        //    $('#tree1').jstree({
+                        //            'core': {
+                        //            check_callback: function (op) {
+
+                        //                if (op === "move_node" || op === "copy_node") {
+                        //                    return false;
+                        //    }
+                        //    // you may not want to return true here - configure as needed
+                        //    return true;
+                        //},
+                        //'data': [
+                        //                {"id": "id-a1b", "parent": "#", "text": "Node A1b", "type": "tree" },
+                        //                {"id": "id-a2b", "parent": "#", "text": "Node A2b", "type": "tree" },
+                        //                {"id": "id-a3b", "parent": "#", "text": "Node A3b", "type": "tree" }
+                        //    ],
+                        //            'themes': {
+                        //            'dots': false,
+                        //        'responsive': true
+                        //    }
+                        //},
+                        //        "types": {
+                        //            "tree": {"icon": "glyphicon glyphicon-th-list" }
+                        //    },
+
+                        //    "plugins": ["dnd", "types", "themes", "search"],
+                        //        "search": {
+                        //            'case_sensitive': false,
+                        //            "show_only_matches": true
+                        //    }
+                        //    }).on('search.jstree', function (e, data) {
+                        //        console.log(data);
+                        //        });
+
+
+
+
+                        var clientHeight = document.getElementById('wid-id-3').clientHeight;
+
+                        //alert(clientHeight/2);
+                        //var fullHeight = clientHeight / 2;
+                        //document.getElementById("Tree").style.height = fullHeight + "px";
+                        //document.getElementById("Applications").style.height = fullHeight + "px";
+                        //var clientHeighttree = document.getElementById('Tree').clientHeight;
+                        //alert(clientHeighttree);
+
+
+                        //$('#applications').jstree();
+
+
+                        $(document).ready(function () {
+
+                         
+
+
+
+                            FillDesignerTree();
+                           // FillApplicationTree('0');
+
+
+
+
+
+
+                            // $("#splitter").splitter();
+                            // var gheight = document.getElementsByClassName('.geFooterContainer');
+                            // gheight.style.height = "0px !important";
+                            // gheight.style.color = "red";
+                            document.getElementsByClassName("geFooterContainer").style.height = "0px !important";
+
+
+                            var a = $(document).on('dnd_stop.vakata', function (e, data) {
+                                alert('move success');
+                            }).jstree();
+
+
+                        });
+
+
+                 
+
+                        function FillDesignerTree()
+                          {
+
+                            const queryString = window.location.search;
+
+            const urlParams = new URLSearchParams(queryString);
+
+            const gid = urlParams.get('gid');
+
+            const pid=urlParams.get('pid');
+
+         
+
+            if(gid=="-1") //new diagram
+            {
+                const pfolder=urlParams.get('pfolder');
+                window.parent.document.getElementById("graphEditor").innerHTML = "(New)";
+                  document.getElementById("tempSelectedFolderId").innerHTML=pid.toString();
+                                             document.getElementById("mxGraph").contentWindow.postMessage(['cleardiagram'], '*');
+
+            document.getElementById("selectedFolderCaption").innerHTML=" ( " + pfolder.toString() +" ) ";
+            }
+            else
+
+            {
+                document.getElementById("selectedFolderCaption").innerHTML=" ( " + gid.toString() + " ) ";
+
+                  setTimeout(function(){ FillDiagramXML(pid) }, 50);
+               
+            }
+
+              return;
+
+                          var compid = localStorage.getItem("companyid");
+                            $.ajax({
+                                url:rootUrl + '/Graph/GetDesignerTree',
+                                type: 'POST',
+                                datatype: 'json',
+                                data: {"compid":compid},
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    Swal('Alert!', 'Unable to fill folders', 'error');
+                                },
+                                success: function (result) {
+
+
+                                    $('#FrameworkTree').jstree({
+                                        'core': {
+                                            "check_callback": true,
+                                            'data': result,
+                                            'themes': {
+                                                'dots': false,
+                                                'responsive': true
+                                            }
+                                        },
+                                        "types": {
+                                            "tree": { "icon": "glyphicon glyphicon-th-list" }
+                                        },
+
+
+
+
+
+
+                                        "plugins": [ "types", "themes", "search", "contextmenu"],
+
+
+                                        "contextmenu": {
+                                            "items": function ($node) {
+
+                                                var tree = $("#FrameworkTree").jstree(true);
+                                                return {
+                                                    "Create New": {
+                                                        "separator_before": false,
+                                                        "separator_after": false,
+                                                        "label": "Create New",
+                                                        "action": function (obj) {
+
+                                                            CreateNew($node);
+
+
+                                                        }
+                                                    },
+
+                                                     "Remove": {
+                                                        "separator_before": false,
+                                                        "separator_after": false,
+                                                        "label": "Delete",
+                                                        "action": function (obj) {
+
+
+                                                             swal({
+                                                        title: "Are you sure?",
+                                                        text: "All associated diagrams as well as Nested folders will be deleted too,You will not be able to rollback this action!",
+                                                        type: "warning",
+                                                        showCancelButton: true,
+                                                        confirmButtonClass: "btn-danger",
+                                                        confirmButtonText: "Yes, delete it!",
+                                                        cancelButtonText: "No, cancel please!",
+                                                        closeOnConfirm: false,
+                                                        closeOnCancel: true
+                                                    },
+                                                        function (isConfirm) {
+
+                                                            if (isConfirm) {
+
+                                                                DeleteFolder($node.original.id, $node);
+
+                                                            } else {
+
+                                                            }
+                                                        });
+
+
+
+
+
+
+
+                                                        }
+                                                    },
+
+
+                                                };
+                                            }
+                                        },
+
+
+
+
+
+                                        "search": {
+                                            'case_sensitive': false,
+                                            "show_only_matches": true
+                                        }
+                                    }).on('search.jstree', function (e, data) {
+
+                                    })
+                                    .on('loaded.jstree', function(e, data) {
+            // invoked after jstree has loaded
+          $(this).jstree("open_all");
+          if(gid!=null)
+          {
+              setTimeout(function(){ SelectNode(this,pid,gid) }, 3000);
+
+
+          }
+          else
+          {
+                setTimeout(function(){ SelectNode(this,0,0) }, 1000);  //By default Select Root
+          }
+        })
+
+                                    .on(
+                                        "select_node.jstree", function (e, data) {
+
+
+                                            var node = $(e.target).closest("li");
+
+
+                                            document.getElementById("tempSelectedFolderId").innerHTML=data.node.id.toString();
+                                             document.getElementById("mxGraph").contentWindow.postMessage(['cleardiagram'], '*');
+
+                                             document.getElementById("selectedFolderCaption").innerHTML=" ( " + data.node.text.toString() + " ) ";
+                                            FillApplicationTreeBasedUponSelectedFolder(data.node.id);
+
+
+                                            //var item = node[0].id;
+
+
+                                        }
+                                    )
+
+
+
+
+
+
+                                }
+
+                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //             var dat=   [
+                //  { "id": "1", "parent": "#", "text": "ROOT" },
+                //  { "id": "2", "parent": "1", "text": "external" },
+                //  { "id": "3", "parent": "1", "text": "teachers" },
+                //  { "id": "4", "parent": "1", "text": "company BV" },
+                //  { "id": "5", "parent": "2", "text": "Buying" },
+                //  { "id": "6", "parent": "2", "text": "finance" },
+                //  { "id": "7", "parent": "3", "text": "buying center" },
+                //  { "id": "8", "parent": "3", "text": "buying generic" },
+                //  { "id": "9", "parent": "3", "text": "buying service center" }
+                //];
+
+                //$('#FrameworkTree').jstree({
+                //    core: {
+                //      data: dat
+                //    }
+                //})
+                        }
+
+                        function SelectNode(tree,pid,gid)
+                        {
+                            if(pid!=0)
+                            {
+                            $("#FrameworkTree").jstree(true).select_node(pid.toString())
+                            FillApplicationTreeBasedUponSelectedFolderEditMode(pid,gid);
+                            }
+                            else
+
+                            {
+                              $("#FrameworkTree").jstree("select_node", "ul > li:first");
+
+                            }
+
+
+                        }
+
+                        function FillApplicationTreeBasedUponSelectedFolder(folderid)
+                        {
+
+
+                              var found =[];
+
+
+                                  found=AllApplications.filter(function (item) { return item.parentid === folderid.toString()  });
+
+
+
+                            if (found.length == 0) {
+                                 $("#ApplicationTree").jstree("destroy");
+                               return;
+                            }
+
+                            $("#ApplicationTree").jstree("destroy");
+
+
+                                    $('#ApplicationTree').jstree({
+                                        'core': {
+                                            "check_callback": true,
+                                            'data': found,
+                                            'themes': {
+                                                'dots': false,
+                                                'responsive': true
+                                            }
+                                        },
+                                        "types": {
+                                            "tree": { "icon": "glyphicon glyphicon-th-list" }
+                                        },
+
+
+
+
+
+
+                                        "plugins": [ "types", "themes", "search"],
+
+
+                                        //"contextmenu": {
+                                        //    "items": function ($node) {
+
+                                        //        var tree = $("#FrameworkTree").jstree(true);
+                                        //        return {
+                                        //            "Share With Users": {
+                                        //                "separator_before": false,
+                                        //                "separator_after": false,
+                                        //                "label": "Share With Users",
+                                        //                "action": function (obj) {
+
+                                        //                    OpenShareModal($node);
+
+
+                                        //                }
+                                        //            },
+
+
+                                        //        };
+                                        //    }
+                                        //},
+
+
+
+                                        "search": {
+                                            'case_sensitive': false,
+                                            "show_only_matches": true
+                                        }
+                                    }).on('search.jstree', function (e, data) {
+                                        console.log(data);
+                                    }).on(
+                                        "select_node.jstree", function (e, data) {
+
+
+                                            var node = $(e.target).closest("li");
+                                            console.log(data.node.id);
+
+                                            //var item = node[0].id;
+
+
+                                        }
+                                    )
+
+
+                                        .on('dblclick.jstree', function (e) {
+
+                                            var node = $(e.target).closest("li");
+                                            var type = node.attr('rel');
+                                            debugger;
+                                            var item = node[0].id;
+                                            var filename = node[0].innerText;
+
+                                            FillSelectedDiagramXML(item, filename);
+
+
+                                        });
+
+                                         $(".search-input").keyup(function () {
+                            var searchString = $(this).val();
+                            $('#ApplicationTree').jstree('search', searchString);
+                        });
+                        }
+
+
+                            function FillApplicationTreeBasedUponSelectedFolderEditMode(folderid,fileid)
+                        {
+
+                              var found = AllApplications.filter(function (item) { return item.parentid === folderid.toString()  });
+
+
+                              console.log(found);
+                            if (found.length == 0) {
+                                 $("#ApplicationTree").jstree("destroy");
+                               return;
+                            }
+
+                            $("#ApplicationTree").jstree("destroy");
+
+
+                                    $('#ApplicationTree').jstree({
+                                        'core': {
+                                            "check_callback": true,
+                                            'data': found,
+                                            'themes': {
+                                                'dots': false,
+                                                'responsive': true
+                                            }
+                                        },
+                                        "types": {
+                                            "tree": { "icon": "glyphicon glyphicon-th-list" }
+                                        },
+
+
+
+
+
+
+                                        "plugins": [ "types", "themes", "search"],
+
+
+                                        "contextmenu": {
+                                            "items": function ($node) {
+
+                                                var tree = $("#FrameworkTree").jstree(true);
+                                                return {
+                                                    "Share With Users": {
+                                                        "separator_before": false,
+                                                        "separator_after": false,
+                                                        "label": "Share With Users",
+                                                        "action": function (obj) {
+
+                                                            OpenShareModal($node);
+
+
+                                                        }
+                                                    },
+
+
+                                                };
+                                            }
+                                        },
+
+
+
+                                        "search": {
+                                            'case_sensitive': false,
+                                            "show_only_matches": true
+                                        }
+                                    }).on('search.jstree', function (e, data) {
+                                        console.log(data);
+                                    }).on('loaded.jstree', function(e, data) {
+            // invoked after jstree has loaded
+
+          if(fileid!=null)
+          {
+          $(this).jstree(true).select_node(fileid.toString());
+
+
+
+
+
+
+                                            FillDiagramXML(fileid);
+
+          }
+        })
+
+
+
+
+                                    .on(
+                                        "select_node.jstree", function (e, data) {
+
+
+                                            var node = $(e.target).closest("li");
+                                            console.log(data.node.id);
+
+                                            //var item = node[0].id;
+
+
+                                        }
+                                    )
+
+
+                                        .on('dblclick.jstree', function (e) {
+
+                                            var node = $(e.target).closest("li");
+                                            var type = node.attr('rel');
+
+                                            var item = node[0].id;
+                                            var filename = node[0].innerText;
+
+                                            FillSelectedDiagramXML(item, filename);
+
+
+                                        });
+                        }
+
+
+                        function FillApplicationTree(selectedfolderid) {
+                              AllApplications=[];
+
+                             var compid = localStorage.getItem("companyid");
+                            $.ajax({
+                                url:rootUrl + '/Graph/GetDesignerApplications',
+                                type: 'POST',
+                                datatype: 'json',
+                                data: {"compid":compid},
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    Swal('Alert!', 'Unable to fill applications', 'error');
+                                },
+                                success: function (result) {
+
+                                    AllApplications=result;
+
+                                    if(selectedfolderid!='0')
+                                    {
+                                         var id = parseInt(selectedfolderid);
+
+                                        FillApplicationTreeBasedUponSelectedFolder(id);
+                                    }
+
+
+                                }
+
+                            });
+                        }
+                        var allCheckedIds = [];
+                        function CreateNew(nodeval) {
+                            selectedNodeForCreatFolder=nodeval;
+                            document.getElementById("txtFolderName").value='';
+
+                            $('#foldercreatemodal').modal('show');
+
+                            //document.getElementById("txtFileNameHidden").value = nodeval.text;
+                            //allCheckedIds = [];
+                            //FillAlreadySharedUsers();
+                            // FillAllUsers();
+
+                        }
+
+                        function CancelNewFolder() {
+                            $('#foldercreatemodal').modal('hide');
+                        }
+                         function CreateNewFolder() {
+                             if(document.getElementById("txtFolderName").value=="")
+                             {
+                                  swal('Alert!', 'Folder name must be entered', 'error');
+
+                                  return;
+                             }
+                              var compid = localStorage.getItem("companyid");
+
+                              var selectedLevel=selectedNodeForCreatFolder.parents.length;
+
+
+                            $.ajax({
+                                url:rootUrl + '/Graph/CreateDesignerFolder',
+                                type: 'POST',
+                                datatype: 'json',
+                                data: { compid: compid,parent:selectedNodeForCreatFolder.id, foldername: document.getElementById("txtFolderName").value,selectedNodeLevel:selectedLevel },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    swal('Alert!', 'Unable to create folder', 'error');
+                                },
+                                success: function (result) {
+
+                                    var node = { id:result.Message,text:document.getElementById("txtFolderName").value};
+
+                                        $('#FrameworkTree').jstree().create_node(selectedNodeForCreatFolder, node, 'last');
+                                        $('#foldercreatemodal').modal('hide');
+
+                                }
+
+                            });
+
+
+
+
+
+                        }
+
+                        function FillAlreadySharedUsers() {
+                            var compid = localStorage.getItem("companyid");
+                            $.ajax({
+                                url:rootUrl + '/Graph/GetAlreadySharedUsers',
+                                type: 'POST',
+                                datatype: 'json',
+                                data: { compid: compid, FileName: document.getElementById("txtFileNameHidden").value },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    swal('Alert!', 'Unable to fill users', 'error');
+                                },
+                                success: function (result) {
+
+                                    FillAllUsers(result);
+
+                                }
+
+                            });
+                        }
+
+                        function ReturnMatchedId(sharedIds, CurrentId) {
+
+
+                            for (var i = 0; i < sharedIds.length; i++) {
+
+                                if (sharedIds[i].SharedWithId == CurrentId) {
+
+                                    return 1;
+                                }
+                            }
+
+                            return 0;
+                        }
+
+                        function FillAllUsers(sharedIds) {
+
+
+                            var compid = localStorage.getItem("companyid");
+                            $.ajax({
+                                url:rootUrl + '/Graph/GetSharingUsers',
+                                type: 'POST',
+                                datatype: 'json',
+                                data: { compid: compid },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    swal('Alert!', 'Unable to fill users', 'error');
+                                },
+                                success: function (result) {
+
+
+                                    $('#tblUsers').DataTable().destroy();
+                                    var t = $('#tblUsers').DataTable({
+                                        data: result,
+                                        paging: true,
+                                        scrollX: false,
+                                        autoWidth: false,
+                                        "iDisplayLength": 5,
+
+
+                                        columns: [
+                                            {
+                                                data: null,
+                                                'targets': 0,
+                                                'checkboxes': {
+                                                    'selectRow': true
+                                                }
+                                            },
+                                            { data: 'UserName' },
+                                            { data: 'Id' },
+                                            { data: 'Name' }
+
+
+                                        ],
+                                        select: {
+                                            style: 'multi' // 'single', 'multi', 'os', 'multi+shift'
+
+                                        },
+
+
+                                        responsive: true
+
+
+                                    });
+
+                                    SelectExisting(sharedIds);
+                                }
+
+                            });
+                        }
+                        function SelectExisting(sharedIds) {
+
+
+                            var table = $('#tblUsers').DataTable();
+
+                            table.column(0).nodes().to$().each(function (index) {
+                                var UserId = ($(this).closest('tr').children(1)[2].innerHTML);
+
+                                if (ReturnMatchedId(sharedIds, UserId) == 1) {
+                                      allCheckedIds.push(UserId);
+                                    $(this).find('.dt-checkboxes').prop('checked', 'checked');
+                                }
+                                else {
+                                    //  this.api().cell(td).checkboxes.deselect(true);
+                                }
+
+
+
+                            });
+
+
+
+
+                        }
+                        function ShareWithUsers() {
+                            var comp_id = localStorage.getItem("companyid");
+                            var all_usernames = [];
+                            var table = $('#tblUsers').DataTable();
+                            var rows = $(table.$('input[type="checkbox"]').map(function () {
+                                return $(this).prop("checked") ? $(this).closest('tr') : null;
+                            }));
+                            for (i = 0; i < rows.length; i++) {
+
+                                all_usernames.push(rows[i].children()[2].innerText);
+                            }
+                            if (all_usernames.length == 0 && allCheckedIds.length==0) {
+                                swal('Alert!', 'Please select atleast one user', 'error');
+                                return;
+                            }
+                            $.ajax({
+                                type: "POST",
+                                url:rootUrl + '/Graph/SaveUserSharing',
+                                data: { all_usernames: JSON.stringify(all_usernames), FileName: document.getElementById("txtFileNameHidden").value, compid: comp_id ,AlreadyCheckedIds:JSON.stringify(allCheckedIds)},
+                                success: function (result) {
+                                    if (result.Message == "Diagram shared successfully") {
+                                        swal('Alert!', result.Message, 'success');
+
+                                    }
+
+                                    else
+                                        swal('Alert!', result.Message, 'error');
+                                }
+                            });
+
+                        }
+
+                        function RefreshApplicationTree() {
+                            $.ajax({
+                                url:rootUrl + '/Graph/GetAllowedApplication',
+                                type: 'POST',
+                                datatype: 'json',
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    swal('Alert!', 'Unable to fill applications', 'error');
+                                },
+                                success: function (result) {
+
+                                    $('#ApplicationTree').jstree(true).settings.core.data = result;
+                                    $('#ApplicationTree').jstree(true).refresh();
+
+
+                                }
+
+                            });
+                        }
+                        ////////    $('#ApplicationTree a').live('dblclick',function (e) {
+                        ////////    var node = $(e.target).closest("li");
+                        ////////    var type = node.attr('rel');
+                        ////////    var item = node[0].id;
+
+                        ////////   document.getElementById('mxGraph').contentWindow.isEditorCalled(item);
+                        ////////});
+
+
+                        function DeleteFolder(FileId, node) {
+
+                               var compid = localStorage.getItem("companyid");
+                            dropstarted = true;
+                            $.ajax({
+                                url:rootUrl + '/Graph/DeleteFolder',
+                                type: 'POST',
+                                data: { "DiagramId": FileId ,"compid":compid},
+                                datatype: 'json',
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    dropstarted = false;
+                                },
+
+                                success: function (result) {
+                                   
+                                    if (result.Message == "Unable to delete folder !") {
+                                        swal('Alert!', "Unable to delete folder, Please make sure it is not a Root folder !", 'error');
+                                    }
+                                    else {
+                                        var tree = $("#FrameworkTree").jstree(true);
+                                        tree.delete_node(node);
+
+                                        swal('Alert!', result.Message, 'success');
+                                    }
+
+
+                                }
+
+
+                            });
+
+                        }
+
+
+                        function SaveDiagram(applicationid, FileName) {
+
+                              var compid = localStorage.getItem("companyid");
+                            dropstarted = true;
+                            $.ajax({
+                                url:rootUrl + '/Graph/SaveDiagramDetail',
+                                type: 'POST',
+                                data: { "appId": applicationid, "FileName": FileName, "updateInProgress": updateInProgress, "compid": compid },
+                                datatype: 'json',
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    dropstarted = false;
+                                },
+
+                                success: function (result) {
+
+                                    if (result.Message == "success") {
+                                        RefreshApplicationTree();
+                                    }
+                                    else {
+                                        swal('Alert!', result.Message, 'success');
+                                    }
+
+
+                                }
+
+
+                            });
+
+                        }
+
+                        function FillSelectedDiagramXML(fileid, filename) {
+
+
+                            $.ajax({
+                                url:rootUrl + '/Graph/GetDesignerDiagramXML',
+                                type: 'POST',
+                                data: { "FileId": fileid },
+                                datatype: 'json',
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+
+                                },
+
+                                success: function (result) {
+                                    updateInProgress = 1;
+                                    var xmlContents = result.XMLData;
+                                    document.getElementById("mxGraph").contentWindow.postMessage(['pcall', xmlContents, filename], '*');
+
+
+                                }
+
+
+                            });
+
+                        }
+
+                          function FillDiagramXML(fileid) {
+                             
+                            document.getElementById("mxGraph").contentWindow.postMessage(['pcall','', fileid], '*');
+
+                          
+
+                        }
+
+                        function ReloadApplications() {
+                            //  $("#TestIt").load("/Graph/GetPartial");
+
+                           FillApplicationTree(document.getElementById("tempSelectedFolderId").innerHTML);
+                        }
+
+                        function FillApplication(DepartmentId) {
+                            return;
+                            $("#ApplicationTree").jstree("destroy");
+                            $.ajax({
+                                url:rootUrl + '/Graph/GetApplicationForDepartment',
+                                type: 'POST',
+                                datatype: 'json',
+                                async: false,
+                                data: { "DepartmentId": DepartmentId },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(errorThrown);
+                                    Swal('Alert!', 'Unable to fill applications', 'error');
+                                },
+                                success: function (result) {
+
+
+                                    $('#ApplicationTree').jstree({
+                                        'core': {
+                                            check_callback: function (op) {
+
+                                                if (op === "move_node" || op === "copy_node") {
+                                                    return false;
+                                                }
+                                                // you may not want to return true here - configure as needed
+                                                return true;
+                                            },
+                                            'data': result,
+                                            'themes': {
+                                                'dots': false,
+                                                'responsive': true
+                                            }
+                                        },
+                                        "types": {
+                                            "tree": { "icon": "glyphicon glyphicon-th-list" }
+                                        },
+
+                                        "plugins": ["dnd", "types", "themes", "search"],
+                                        "search": {
+                                            'case_sensitive': false,
+                                            "show_only_matches": true
+                                        }
+                                    }).on('search.jstree', function (e, data) {
+                                        console.log(data);
+                                    });
+
+
+
+
+                                }
+
+                            });
+                        }
+
+                        fullscreenBtn =
+                            '<a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="Fullscreen" data-placement="bottom"><i class="' +
+                            self.fullscreenClass[0] +
+                            '"></i></a>';
+
+                        $('<i class="fa fa-expand"></i>').click(function () {
+
+                        });
+
+                        $(window).resize(function () {
+                            var bodyheight = $(this).height();
+
+                            //if (bodyheight <= 500) {
+                            //    document.getElementById("grpEdit").style.height = "500px";
+                            //}
+                            //else {
+                            // document.getElementById("grpEdit").style.height = bodyheight - 112 + "px";
+                            //}
+
+                        }).resize();
+
+
+
+
+                        // Extends EditorUi to update I/O action states based on availability of backend
+                        (function () {
+                            //$(".search-input").keyup(function () {
+                            //    var searchString = $(this).val();
+
+                            //});
+                            var editorUiInit = EditorUi.prototype.init;
+
+                            EditorUi.prototype.init = function () {
+                                editorUiInit.apply(this, arguments);
+                                this.actions.get('export').setEnabled(false);
+
+                                // Updates action states which require a backend
+                                if (!Editor.useLocalStorage) {
+                                    mxUtils.post(OPEN_URL, '', mxUtils.bind(this, function (req) {
+                                        var enabled = req.getStatus() != 404;
+                                        this.actions.get('open').setEnabled(enabled || Graph.fileSupport);
+                                        this.actions.get('import').setEnabled(enabled || Graph.fileSupport);
+                                        this.actions.get('ddd').setEnabled();
+                                        this.actions.get('saveAs').setEnabled(enabled);
+                                        this.actions.get('export').setEnabled(enabled);
+                                    }));
+                                }
+                            };
+
+                            // Adds required resources (disables loading of fallback properties, this can only
+                            // be used if we know that all keys are defined in the language specific file)
+                            mxResources.loadDefaultBundle = false;
+                            var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
+                                mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
+
+                            // Fixes possible asynchronous requests
+                            mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function (xhr) {
+                                // Adds bundle text to resources
+                                mxResources.parse(xhr[0].getText());
+
+                                // Configures the default graph theme
+                                var themes = new Object();
+                                themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
+
+                                // Main
+                                new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+                            }, function () {
+                                document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+                            });
+                        })();
+
+                        pageSetUp();
+
+                        // PAGE RELATED SCRIPTS
+                        // pagefunction
+
+                        var pagefunction = function () {
+
+                            loadScript("/js/plugin/bootstraptree/bootstrap-tree.min.js");
+
+
+
+                        };
+
+                        // end pagefunction
+
+
+
+
+                        var pagedestroy = function () {
+
+                            /*
+                            Example below:
+
+                            $("#calednar").fullCalendar( 'destroy' );
+                            if (debugState){
+                                root.console.log("✔ Calendar destroyed");
+                            }
+
+                            For common instances, such as Jarviswidgets, Google maps, and Datatables, are automatically destroyed through the app.js loadURL mechanic
+
+                            */
+
+
+                        };
+
+                        // end destroy
+
+                        // run pagefunction on load
+
+                        pagefunction();
+
+
+</script>
+
+}

@@ -1,0 +1,228 @@
+﻿@*@{
+    Layout = null;
+    }*@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grapheditor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="~/css/grapheditor.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style.min.css">
+    <script type="text/javascript">
+        // Parses URL parameters. Supported parameters are:
+        // - lang=xy: Specifies the language of the user interface.
+        // - touch=1: Enables a touch-style user interface.
+        //storage=local // Enables HTML5 local storage.
+        //chrome=0 // Chromeless mode.
+
+        var urlParams = (function (url) {
+            var result = new Object();
+            var idx = url.lastIndexOf('?');
+
+            if (idx > 0) {
+                var params = url.substring(idx + 1).split('&');
+
+                for (var i = 0; i < params.length; i++) {
+                    idx = params[i].indexOf('=');
+
+                    if (idx > 0) {
+                        result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                    }
+                }
+            }
+
+            return result;
+        })(window.location.href);
+
+        // Default resources are included in grapheditor resources
+        mxLoadResources = false;
+
+    </script>
+    @*<script src="~/js/jquery-1.10.2.min.js"></script>*@
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="~/js/jstree.min.js"></script>
+    <script type="text/javascript" src="~/javascript/Init.js"></script>
+    <script type="text/javascript" src="~/javascript/pako.min.js"></script>
+    <script type="text/javascript" src="~/javascript/base64.js"></script>
+    <script type="text/javascript" src="~/javascript/jscolor.js"></script>
+    <script type="text/javascript" src="~/javascript/sanitizer.min.js"></script>
+    <script type="text/javascript" src="~/javascript/mxClient.js"></script>
+    <script type="text/javascript" src="~/javascript/EditorUi.js"></script>
+    <script type="text/javascript" src="~/javascript/Editor.js"></script>
+    <script type="text/javascript" src="~/javascript/Sidebar.js"></script>
+    <script type="text/javascript" src="~/javascript/Graph.js"></script>
+    <script type="text/javascript" src="~/javascript/Format.js"></script>
+    <script type="text/javascript" src="~/javascript/Shapes.js"></script>
+    <script type="text/javascript" src="~/javascript/Actions.js"></script>
+    <script type="text/javascript" src="~/javascript/Menus.js"></script>
+    <script type="text/javascript" src="~/javascript/Toolbar.js"></script>
+    <script type="text/javascript" src="~/javascript/Dialogs.js"></script>
+    @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>*@
+    <script type="text/javascript" src="~/js/Script1.js"></script>
+</head>
+<body>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="row">
+                <nav>
+                    <ul>
+                        <li style="background-color:#77818B; ">
+                            <a href="ajax/widgets.html"><i class="fa fa-lg fa-fw fa-cogs" style="color:white;"></i> <span class="menu-item-parent" style="color:white;">FrameWork</span></a>
+                        </li>
+                    </ul>
+                </nav>
+                <div id="html" style="margin-top:10px; margin-bottom:100px;">
+                    <ul>
+                        <li data-jstree='{ "opened" : true }'>
+                            Countries
+                            <ul>
+                                <li data-jstree='{ "selected" : true }'>
+                                    Pakistan
+                                    <ul>
+                                        <li>
+                                            Punjab
+                                            <ul>
+                                                <li>
+                                                    Lahore
+                                                    <ul>
+                                                        <li>Datacenter 1
+                                                            <ul>
+                                                                <li>Department 1</li>
+                                                                <li>Department 2</li>
+                                                                <li>Department 3</li>
+                                                                <li>Department 4</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>Datacenter 2</li>
+                                                        <li>Datacenter 3</li>
+                                                        <li>Datacenter 4</li>
+
+                                                    </ul>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                           
+                          
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <nav>
+                    <ul>
+                        <li style="background-color:#77818B;">
+                            <a href="ajax/widgets.html"><i class="fa fa-lg fa-fw fa-apple" style="color:white"></i> <span class="menu-item-parent" style="color:white;">Applications</span></a>
+                        </li>
+                    </ul>
+                </nav>
+                <div  style="margin-top:10px;">
+
+                    <ul>
+                        <li class="parent_li" >
+                          <a href="#"><span title="Collapse this branch"><i class="fa fa-lg fa-plus-circle"></i> Application 1</span></a>  
+                          
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+       
+        <div class="col-lg-10">
+            <div id="grpEdit" style="position:relative;height:auto;width:100%;">
+                @*<div id="grpEdit" style="width:100%;height:100%">*@
+
+
+
+                <div class="geEditor">
+                    <script type="text/javascript">
+                        $('#html').jstree();
+
+                        $('#applications').jstree();
+
+
+                        $().ready(function () {
+                            $("#splitter").splitter();
+                        });
+
+                        $(window).resize(function () {
+                            var bodyheight = $(this).height();
+
+                            if (bodyheight <= 500) {
+                                document.getElementById("grpEdit").style.height = "500px";
+                            }
+                            else {
+                                document.getElementById("grpEdit").style.height = bodyheight * .75 + "px";
+                            }
+
+                        }).resize();
+
+
+                        // Extends EditorUi to update I/O action states based on availability of backend
+                        (function () {
+                            var editorUiInit = EditorUi.prototype.init;
+
+                            EditorUi.prototype.init = function () {
+                                editorUiInit.apply(this, arguments);
+                                this.actions.get('export').setEnabled(false);
+
+                                // Updates action states which require a backend
+                                if (!Editor.useLocalStorage) {
+                                    mxUtils.post(OPEN_URL, '', mxUtils.bind(this, function (req) {
+                                        var enabled = req.getStatus() != 404;
+                                        this.actions.get('open').setEnabled(enabled || Graph.fileSupport);
+                                        this.actions.get('import').setEnabled(enabled || Graph.fileSupport);
+                                        this.actions.get('ddd').setEnabled();
+                                        this.actions.get('saveAs').setEnabled(enabled);
+                                        this.actions.get('export').setEnabled(enabled);
+                                    }));
+                                }
+                            };
+
+                            // Adds required resources (disables loading of fallback properties, this can only
+                            // be used if we know that all keys are defined in the language specific file)
+                            mxResources.loadDefaultBundle = false;
+                            var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
+                                mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
+
+                            // Fixes possible asynchronous requests
+                            mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function (xhr) {
+                                // Adds bundle text to resources
+                                mxResources.parse(xhr[0].getText());
+
+                                // Configures the default graph theme
+                                var themes = new Object();
+                                themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
+
+                                // Main
+                                new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+                            }, function () {
+                                document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+                            });
+                        })();
+                    </script>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,120 @@
+@{
+    ViewData["Index"] = "Index";
+}
+<div class="row">
+
+
+
+    <section class="col col-6" id="country" >
+        <label class="label">Country Name</label>
+
+        <div class="input" id="countryid">
+
+            <!-- <input type='text' id="countryname" placeholder='Select countries' class='flexdatalist' data-min-length='1' multiple='multiple' list='countries' name='countryname'>
+            -->
+            <select name="countryname" id="countryname"  style="width:100%" multiple></select>
+
+        </div>
+    </section>
+
+    <section class="col col-6" id="state" >
+        <label class="label">State Name</label>
+        <div class="input">
+            <i class="icon-append fa fa-exclamation-circle"></i>
+
+            <select id="statename" name="statename" onchange="fillcity()"></select>
+
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#countryname').chosen();
+            
+            $('#statename').chosen();
+            $('#statename').chosen({ allow_single_deselect: false });
+
+            fillcountry();
+        });
+        function fillcountry() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url: '/Department/GetCountry',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+                  
+
+                    for (var x = 0; x < resultCountry.length; x++) {
+
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryId).text(resultCountry[x].CountryName));
+
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+                    $("#countryname").chosen().change(function (event) {
+                      
+                        fillState($(event.target).val());
+                        
+                    });
+                        
+                   
+
+
+
+
+                }
+
+
+            });
+        }
+        function fillState(SelectedCountryIds) {
+  SelectedCountryIds = SelectedCountryIds.join(",") ;
+           
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url: '/Test/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedCountryIds1: SelectedCountryIds, compid: compid},
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+                   
+
+                    for (var x = 0; x < resultState.length; x++) {
+
+
+                        $('#statename').append($('<option></option>').attr('value', resultState[x].StateId).text(resultState[x].StateName));
+
+
+                    }
+                    $('#statename').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            });
+        }
+    </script>
+    }

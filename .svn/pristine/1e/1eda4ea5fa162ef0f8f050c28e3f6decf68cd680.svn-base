@@ -1,0 +1,223 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class DepartmentController : Controller
+    {
+
+       
+
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        private List<lkpDataCenter> datacenter;
+        private List<lkpDepartment> department;
+        #endregion
+
+        public DepartmentController(ApplicationDbContext context)
+        {
+            _context = context;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities = (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+            datacenter = (from c in _context.lkpDataCenter select c).ToList();
+            department = (from c in _context.lkpDepartment select c).ToList();
+        }
+
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonStringResult GetCountryName()
+        {
+            var resultCountries = (from c in countries
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(int CountryId)
+        {
+            var result = (from s in _context.lkpState
+                          where s.CountryId == CountryId
+                          select s
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+
+        [HttpPost]
+        public JsonStringResult GetCityName(int StateId)
+
+        {
+                var result = (from s in _context.lkpCity
+                          where s.StateId == StateId
+                          select s
+                          ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetDataCenterName(int CityId)
+
+        {
+
+            var result = (from s in _context.lkpDataCenter
+                          where s.CityId == CityId
+                          select s
+                          ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public ActionResult SaveDepartment([FromBody]lkpdepartmentForController department)
+        {
+            try
+            {
+
+
+                if (department.DataCenterId == 0 || department.DataCenterId == -999)
+                {
+                    string messageCity = "Department information not found";
+                    return new JsonStringResult(messageCity);
+                }
+
+                var found = (from c in _context.lkpDepartment where c.DataCenterId == department.DataCenterId && c.DepartmentName == department.DepartmentName select c).FirstOrDefault();
+
+                if (found == null)
+                {
+                    lkpDepartment deparment = new lkpDepartment();
+
+                    deparment.DataCenterId = department.DataCenterId;
+                    deparment.DepartmentName = department.DepartmentName;
+                    deparment.CreatedAt = DateTime.Now;
+                    deparment.ModifiedAt = DateTime.Now;
+                    deparment.Active = true;
+
+                    _context.lkpDepartment.Add(deparment);
+                    _context.SaveChanges();
+                }
+                //Country found, Update it
+                else
+                {
+                    found.DepartmentName = department.DepartmentName;
+
+                    found.ModifiedAt = DateTime.Now;
+                    _context.SaveChanges();
+
+                }
+
+                string message = "SUCCESS";
+                return new JsonStringResult(message);
+
+            }
+
+            catch (Exception ex)
+            {
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+
+
+        }
+
+
+        [HttpPost]
+        public JsonStringResult GetInsertedDepartment()
+        {
+
+            var result = (from department in _context.lkpDepartment
+                          join datacenters in _context.lkpDataCenter on department.DataCenterId equals datacenters.DataCenterId
+                          select new
+                          {
+                              
+                              DataCenterName = datacenters.DataCenterName,
+                              DepartmentName = department.DepartmentName,
+                              DepartmentId = department.DepartmentId
+
+                          }
+                          ).ToList();
+
+
+
+
+
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Deletedepartment([FromBody]lkpDepartment department)
+        {
+            string message = "SUCCESS";
+
+            try
+            {
+                var selecteddepartment = (from c in _context.lkpDepartment
+                                          where c.DepartmentId == department.DepartmentId
+                                          select c).FirstOrDefault();
+
+                if (selecteddepartment == null)
+                {
+
+                    message = "Fail";
+                }
+
+                _context.lkpDepartment.Remove(selecteddepartment);
+                _context.SaveChanges();
+
+                return new JsonStringResult(message);
+            }
+            catch (System.Exception)
+            {
+
+                return new JsonStringResult("Fail");
+            }
+
+        }
+
+
+        private int ParseInt(string value)
+        {
+            int number = 0;
+            if (int.TryParse(value, out number))
+                return number;
+            else
+                return 0;
+        }
+
+
+    }
+
+
+}

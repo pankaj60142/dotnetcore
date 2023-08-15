@@ -1,0 +1,863 @@
+
+@{
+    ViewData["Title"] = "Company Users";
+}
+
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+            Forms
+            <span>
+                >
+                Company Users
+            </span>
+        </h1>
+    </div>
+
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Company Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+                  
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form  action="" id="company-user" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                @*<div class="row">
+                                    <section class="col col-6">
+                                        <label class="label">First Name</label>
+
+                                        <label class="input" id="firstname">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="firstname" name="firstname" placeholder="First Name">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the First Name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">Last Name</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Last Name</b>
+                                        </label>
+                                    </section>
+                                </div>*@
+                                <div class="row">
+                                    @*<section class="col col-6">
+            <label class="label">Designation</label>
+            <label class="input">
+                <i class="icon-append fa fa-exclamation-circle"></i>
+                <input type="text" id="designation" name="designation" placeholder="Designation">
+                <b class="tooltip tooltip-bottom-right">Needed to enter the Designation</b>
+            </label>
+        </section>*@
+
+
+
+                                    <section class="col col-6">
+                                        <label class="label">Username</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="username" name="username" placeholder="Username">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Username</b>
+                                        </label>
+                                    </section>
+
+
+                                    <section class="col col-6">
+                                        <label class="label">Email</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="email" id="email" name="email" placeholder="Email">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Email</b>
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="label">Password</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="password" id="password" name="password" placeholder="Password">
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Password</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">Confrim Password</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password">
+                                            <b class="tooltip tooltip-bottom-right">Needed to Confirm Password</b>
+                                        </label>
+                                    </section>
+
+                                </div>
+                                <div class="row">
+                                    <section class="col col-lg-12 col-md-12">
+                                        <label class="label">Role</label>
+                                        <label class="select">
+                                            <select name="roles" id="role" onchange='HideShow(this)'>
+                                                <option value="0" selected="" disabled="">Select Role</option>
+                                                <option value="5">Admin Level</option>
+                                                <option value="1">Country Level</option>
+                                                <option value="2">Datacenter Level</option>
+                                                <option value="3">Department Level</option>
+                                                <option value="4">Application Level</option>
+
+                                            </select> <i></i>
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+
+
+
+                                    <section  class="col col-6" id="country" style="display:none">
+                                        <label class="label">Country Name</label>
+
+                                        <div class="input" id="countryid">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="countryname" placeholder='Select countries' class='flexdatalist' data-min-length='1' multiple='multiple' list='countries' name='countryname'>
+
+
+
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6" id="state" style="display:none">
+                                        <label class="label">State Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="statename" placeholder='Select States' class='flexdatalist' data-min-length='1' multiple='multiple' list='states' name='states1'>
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="cities" style="display:none">
+                                        <label class="label">City Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="datacenter" style="display:none">
+                                        <label class="label">Datacenters</label>
+                                        <div class="input">
+
+                                            <input type='text' id="datacentername" placeholder='Select Datacenters' class='flexdatalist' data-min-length='1' multiple='multiple' list='datacenters' name='datacenters1'>
+
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="department" style="display:none">
+                                        <label class="label">Departments</label>
+                                        <div class="input">
+
+                                            <input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+
+
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="application" style="display:none">
+                                        <label class="label">Applications </label>
+                                        <label class="input">
+
+                                            <input type='text' id="applicationname" placeholder='Select Applications' class='flexdatalist' data-min-length='1' multiple='multiple' list='applications' name='datacenters1'>
+
+
+
+
+                                        </label>
+                                    </section>
+
+
+                                    </div>
+
+
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveUser();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="ClearCity();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+
+
+                    <div class="widget-body no-padding">
+
+                        <br />
+                        <table id="tblRoles" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>First name</th>
+                                    <th>Last Name</th>
+                                    <th>User name</th>
+                                    <th>Roles</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+
+
+
+
+@section Scripts {
+    <!-- SCRIPTS ON PAGE EVENT -->
+    <script type="text/javascript">
+
+        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+        pageSetUp();
+
+
+        runAllForms();
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+            
+
+
+
+        };
+
+        $(document).ready(function () {
+            document.getElementById("country").style.display = "none";
+            document.getElementById("cities").style.display = "none";
+            document.getElementById("state").style.display = "none";
+            document.getElementById("datacenter").style.display = "none";
+            document.getElementById("department").style.display = "none";
+            document.getElementById("application").style.display = "none";
+        });
+
+
+       
+
+
+        // Validation
+        $(function () {
+            // Validation
+            $("#company-user").validate({
+
+                // Rules for form validation
+                rules: {
+
+                    firstname: {
+                        required: true
+                    },
+                    lastname: {
+                        required: true
+                    },
+
+                    username: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    },
+                    confirmpassword: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20,
+                        equalTo: '#password'
+                    },
+                   
+                    tblRoles: {
+                        required: false
+                    }
+                   
+                },
+
+                // Messages for form validation
+                messages: {
+
+                    username: {
+                        required: 'Please enter your username',
+                    },
+                  
+                    email: {
+                        required: 'Please enter your email address',
+                        email: 'Please enter a VALID email address'
+                    },
+                    password: {
+                        required: 'Please enter your password'
+                    },
+                    confirmpassword: {
+                        required: 'Please enter your password one more time',
+                        equalTo: 'Please enter the same password as above'
+                    },
+                    firstname: {
+                        required: 'Please select your first name'
+                    },
+                    lastname: {
+                        required: 'Please select your last name'
+                    },
+                    tblRoles: {
+                        required: 'Please select your gender'
+                    },
+                    terms: {
+                        required: 'You must agree with Terms and Conditions'
+                    }
+                },
+
+                // Ajax form submition
+                submitHandler: function (form) {
+                    $(form).ajaxSubmit({
+                        success: function () {
+                            $("#company-user").addClass('submited');
+                        }
+                    });
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+        });
+
+        // end pagefunction
+
+
+
+        $('#countryname').flexdatalist({
+            minLength: 1
+        });
+
+        $('#statename').flexdatalist({
+            minLength: 1
+        });
+
+
+        $('#departmentname').flexdatalist({
+            minLength: 1
+        });
+
+        $('#datacentername').flexdatalist({
+            minLength: 1
+        });
+
+        $('#applicationname').flexdatalist({
+            minLength: 1
+        });
+
+        var selectedcountryid = 0;
+
+        function HideShow(selectObject) {
+            var value = selectObject.value;
+
+            if (value == "1") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "none";
+                document.getElementById("cities").style.display = "none";
+                document.getElementById("datacenter").style.display = "none";
+                document.getElementById("department").style.display = "none";
+                document.getElementById("application").style.display = "none";
+
+            }
+
+            if (value == "2") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("cities").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "none";
+                document.getElementById("application").style.display = "none";
+            }
+
+            if (value == "3") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("cities").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "block";
+                document.getElementById("application").style.display = "none";
+
+            }
+
+            if (value == "4") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "block";
+                document.getElementById("application").style.display = "none";
+                document.getElementById("cities").style.display = "block";
+
+            }
+
+            if (value == "5") {
+                document.getElementById("country").style.display = "none";
+                document.getElementById("state").style.display = "none";
+                document.getElementById("datacenter").style.display = "none";
+                document.getElementById("department").style.display = "none";
+                document.getElementById("application").style.display = "none";
+                document.getElementById("cities").style.display = "none";
+
+            }
+        }
+
+
+        function FillStates(countryid) {
+
+            $.ajax({
+                url: '/Confirmation/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CountryId: countryid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+
+
+                    var flexdatalistState = $("#statename").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'StateId',
+                        visibleProperties: ["StateName", "Latitude", "Longitude", "StateId"],
+                        searchIn: 'StateName',
+                        data: resultState
+                    });
+
+
+                    
+                    flexdatalistState.on('change:flexdatalist', function (event, set, options) {
+                        FillCities($("#statename").val());
+                    });
+
+
+                    flexdatalistState.on('select:flexdatalist', function (event, data) {
+                       
+
+                      
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillCities(stateid) {
+
+            $.ajax({
+                url: '/Confirmation/GetCityName',
+                type: 'POST',
+                datatype: 'json',
+                data: { StateId: stateid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCity) {
+
+
+                    var flexdatalistCity = $("#cityname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CityId',
+                        visibleProperties: ["CityName", "Latitude", "Longitude", "CityId"],
+                        searchIn: 'CityName',
+                        data: resultCity
+                    });
+
+                    flexdatalistCity.on('change:flexdatalist', function (event, set, options) {
+                        FillDataCenter($("#cityname").val());
+                    });
+
+                    flexdatalistCity.on('select:flexdatalist', function (event, data) {
+                      
+                       // FillDataCenter($("#cityname").val());
+                        
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillDataCenter(cityid) {
+
+            $.ajax({
+                url: '/Confirmation/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CityId: cityid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDataCenter) {
+
+
+                    var flexdatalistDatacenter = $("#datacentername").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DataCenterId',
+                        visibleProperties: ["DataCenterName", "DataCenterId"],
+
+                        searchIn: 'DataCenterName',
+                        data: resultDataCenter
+                    });
+
+                    flexdatalistDatacenter.on('change:flexdatalist', function (event, set, options) {
+                        FillDepartment($("#datacentername").val());
+                    });
+
+                }
+
+            });
+        }
+
+        function FillDepartment(datacenterid) {
+
+            $.ajax({
+                url: '/Confirmation/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { DataCenterId: datacenterid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDepartment) {
+
+
+                    var flexdatalistDatacenter = $("#departmentname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DepartmentId',
+                        visibleProperties: ["DepartmentName", "DepartmentId"],
+
+                        searchIn: 'DepartmentName',
+                        data: resultDepartment
+                    });
+
+
+
+                }
+
+            });
+        }
+
+
+
+        var rootDir = "@Url.Content("~/")";
+
+
+        function FillCountries() {
+            $.ajax({
+                url: '/Department/GetCountryName',
+                type: 'POST',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+
+                    var flexDataListCountry = $("#countryname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CountryId',
+                        visibleProperties: ["CountryName", "Latitude", "Longitude", "CountryId"],
+                        searchIn: 'CountryName',
+                        data: resultCountry
+                    });
+
+
+                    flexDataListCountry.on('change:flexdatalist', function (event, set, options) {
+                        FillStates($("#countryname").val());
+                    });
+
+                    flexDataListCountry.on('select:flexdatalist', function (event, data) {
+                       // console.log($("#countryname").val());
+                      //  selectedcountryid = $("#countryname").val();
+                      //  FillStates(selectedcountryid);
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+
+                }
+
+
+            });
+        }
+
+
+
+        FillCountries();
+
+
+        function SaveUser() {
+
+
+
+            if ($("#company-user").valid()) {
+
+
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                var email = document.getElementById("email").value;
+                var role = document.getElementById("roles").value;
+
+
+               
+
+                var options = {};
+                options.url = "/Confirmation/SaveUser";
+                options.type = "POST";
+
+                var obj = {
+                    UserName: username,
+                    Pass: password,
+                    Email: email,
+                    Role:role
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "User saved successfully!", "success");
+                        $('#username').val('');
+                        $('#password').val('');
+                        $('#email').val('');
+
+                        FillAllUsers();
+                    }
+                    else
+                        //document.getElementById("countryid").addClass("state-error");
+
+                        swal("Error", msg.responseText, "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+        }
+
+
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

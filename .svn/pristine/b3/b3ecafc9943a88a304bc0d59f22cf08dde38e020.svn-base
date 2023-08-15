@@ -1,0 +1,222 @@
+#region Using
+
+using System.Collections.Generic;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SmartAdmin.Seed.Controllers.Settings;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models;
+using SmartAdmin.Seed.Models.Entities;
+using System.Linq;
+using Newtonsoft.Json;
+
+#endregion
+
+namespace SmartAdmin.Seed.Controllers
+{
+    //[Authorize]
+    [AllowAnonymous]
+    public class HomeController : Controller
+    {
+        public IActionResult Index() => View();
+
+
+
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllCountries> countries;
+        #endregion
+        public HomeController(ApplicationDbContext context)
+        {
+
+            _context = context;
+            countries = (from c in _context.lkpAllCountries select c).ToList();
+        }
+
+
+
+        public IActionResult Error() => View(new ErrorViewModel
+        {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+        });
+
+
+        [HttpPost]
+        public JsonStringResult GetDefinedCountries()
+        {
+
+
+
+            var result = (from c in _context.lkpCountry
+                          join allcountries in countries on c.CountryName equals allcountries.CountryName
+                          select new { name = c.CountryName, id = allcountries.MapId }
+                        ).ToList();
+
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+
+        }
+
+        [HttpPost]
+        public JsonStringResult GetDataCenterTreeForCountry(int countryid)
+        {
+            List<DataCentersTree> lstTree = new List<DataCentersTree>();
+            var country = (from c in _context.lkpCountry
+                           join allcountries in countries on c.CountryName equals allcountries.CountryName
+                           where allcountries.MapId == countryid
+                           select new DataCentersTree
+                           {
+                               id = c.CountryId,
+                               name = c.CountryName,
+                               parentid = null
+                           }).FirstOrDefault();
+
+            //fill states of selected country
+
+            if (country != null)
+            {
+                var state =
+  ((from word in _context.lkpState
+    where word.CountryId == country.id
+    select new DataCentersTree
+    {
+        id = word.StateId,
+        name = word.StateName,
+        matchingid="state"+ word.StateId,
+        parentid = null
+    })
+   ).ToList();
+
+                if (state != null)
+                {
+                    foreach (var a in state)
+                    {
+
+                        FillCities(a.id,a.matchingid, lstTree);
+
+                        //add state to list
+                        lstTree.Add(a);
+
+                    }
+
+
+
+
+
+                }
+            }
+
+
+            if (lstTree.Count > 0)
+            {
+                foreach (DataCentersTree g in lstTree)
+                    if (g.parentid!=null)
+                        lstTree.Single(group => group.matchingid == g.parentid).children.Add(g);
+
+
+
+                var rootgroups = lstTree.Where(g => g.parentid == null);
+
+
+                country.children.AddRange(rootgroups);
+                var json = JsonConvert.SerializeObject(country);
+                return new JsonStringResult(json);
+            }
+            else
+            {
+
+                DataCentersTree tree = new DataCentersTree();
+                tree.name = "No data";
+
+                var json = JsonConvert.SerializeObject(tree);
+                return new JsonStringResult(json);
+            }
+
+
+
+
+        }
+
+        private void FillCities(int stateid, string matchingid,List<DataCentersTree> lstTree)
+        {
+            var result =
+((from word in _context.lkpCity
+  where word.StateId == stateid
+  select new DataCentersTree
+  {
+      id = word.CityId,
+      name = word.CityName,
+      matchingid = "city" + word.CityId,
+      parentid = matchingid
+  })
+).ToList();
+
+
+            if (result != null)
+            {
+                foreach (var a in result)
+                {
+
+                    FillDataCenters(a.id,a.matchingid ,lstTree);
+
+                    //add state to list
+                    lstTree.Add(a);
+
+                }
+
+
+
+
+
+            }
+
+
+        }
+
+
+        private void FillDataCenters(int cityid,string matchingid, List<DataCentersTree> lstTree)
+        {
+            var result =
+    ((from word in _context.lkpDataCenter
+      where word.CityId == cityid
+      select new DataCentersTree
+      {
+          id = word.DataCenterId,
+          name = word.DataCenterName,
+          matchingid = "datacenter" + word.DataCenterId,
+          parentid = matchingid
+      })
+    ).ToList();
+            lstTree.AddRange(result);
+        }
+
+
+
+
+
+
+
+    }
+
+    public class DataCentersTree
+    {
+
+        public int id { get; set; }
+        public string matchingid { get; set; }
+        public string name { get; set; }
+        public string parentid { get; set; }
+        public List<DataCentersTree> children { get; set; }
+
+        public DataCentersTree()
+        {
+            this.children = new List<DataCentersTree>();
+        }
+    }
+
+
+}

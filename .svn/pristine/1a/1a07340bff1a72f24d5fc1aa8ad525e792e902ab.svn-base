@@ -1,0 +1,174 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class CountryController : Controller
+    {
+        #region Declaration
+        
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllCountries> countries;
+        #endregion
+        public CountryController(ApplicationDbContext context)
+        {
+            
+            _context = context;
+            countries = (from c in _context.lkpAllCountries select c).ToList();
+        }
+
+        public IActionResult Index()
+        {
+           
+            return View();
+        }
+
+       
+
+        [HttpPost]
+        public JsonStringResult GetName()
+        {
+            
+             
+
+
+
+            var result = (from c in countries                          
+                          select c).ToList();
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+           
+        }
+
+        [HttpPost]
+        public JsonStringResult GetInsertedCountries()
+        {
+
+
+
+
+
+            var result = (from c in _context.lkpCountry
+                          select c).ToList();
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+
+        }
+
+
+        [HttpPost]
+        public ActionResult SaveCountry([FromBody]lkpCountry Country)
+        {
+
+            try
+            {
+                var selectedcountry = (from c in countries where c.CountryName==Country.CountryName
+                                       select c).FirstOrDefault();
+
+                if (selectedcountry==null)
+                {
+                    string messageCountry = "Country information not found";
+                    return new JsonStringResult(messageCountry);
+                }
+
+
+                var found = (from c in _context.lkpCountry where c.CountryName == Country.CountryName select c).FirstOrDefault();
+
+                //Country name dows not exist, so add a new country
+                if (found == null)
+                {
+
+                    Country.CountryName = selectedcountry.CountryName;
+                    Country.CountryCode = selectedcountry.CountryCode;
+                    Country.Latitude = selectedcountry.latitude;
+                    Country.Longitude = selectedcountry.longitude;
+                    Country.CreatedAt = DateTime.Now;
+                    Country.ModifiedAt = DateTime.Now;
+                    Country.Active = true;
+
+                    _context.lkpCountry.Add(Country);
+                    _context.SaveChanges();
+                }
+                //Country found, Update it
+                else
+                {
+                    found.CountryName = Country.CountryName ;
+                    found.CountryCode = selectedcountry.CountryCode;
+                    found.Latitude = selectedcountry.latitude;
+                    found.Longitude = selectedcountry.longitude;
+                    found.ModifiedAt = DateTime.Now;
+                    _context.SaveChanges();
+
+                }
+
+                string message = "SUCCESS";
+                return new JsonStringResult(message);
+            }
+            catch (Exception ex)
+            {
+
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+
+          
+
+           
+
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteCountry([FromBody]lkpCountry Country)
+        {
+            string message = "SUCCESS";
+
+            try
+            {
+                var selectedcountry = (from c in _context.lkpCountry
+                                       where c.CountryName == Country.CountryName
+                                       select c).FirstOrDefault();
+
+                if (selectedcountry == null)
+                {
+
+                    message = "Fail";
+                }
+
+                _context.lkpCountry.Remove(selectedcountry);
+                _context.SaveChanges();
+              
+                return new JsonStringResult(message);
+            }
+            catch (System.Exception)
+            {
+                
+                return new JsonStringResult("Fail");
+            }
+
+        }
+
+
+
+
+    }
+
+    public class JsonStringResult : ContentResult
+    {
+        public JsonStringResult(string json)
+        {
+            Content = json;
+            ContentType = "application/json";
+        }
+    }
+}

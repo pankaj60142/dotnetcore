@@ -1,0 +1,18 @@
+{
+    "ConnectionString": "data source=.;initial catalog=dMUDH;user id=sa;password=123;MultipleActiveResultSets=True;",
+    "SendGridUser": "apikey",
+    "SendGridKey": "SG.6cOnTe7JTbmzcvZbJ-GZOQ.77KomM_G-M_SOWfM9Gxu2-7JcwWFAb-JlHPRcwB8-Jw",
+    "Database": "LocalDb",
+    "Logging": {
+        "IncludeScopes": false,
+        "LogLevel": {
+            "Default": "Information",
+            "System": "Information",
+            "Microsoft": "Information"
+        }
+    },
+    "SmartAdmin": {
+        "Environment": "Development",
+        "UseShortcuts": true
+    }
+}

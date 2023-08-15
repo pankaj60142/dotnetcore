@@ -1,0 +1,176 @@
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using JetBrains.Annotations;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SmartAdmin.Seed.Extensions;
+using SmartAdmin.Seed.Models;
+using SmartAdmin.Seed.Models.AccountViewModels;
+using SmartAdmin.Seed.Services;
+using SmartAdmin.Seed.Models.Entities;
+using SmartAdmin.Seed.Data;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace SmartAdmin.Seed.Controllers
+{
+    public class ConfirmationController : Controller
+    {
+
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        private List<lkpDataCenter> datacenter;
+        #endregion
+
+        //private readonly ILogger _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+
+        public ConfirmationController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+            _userManager = userManager;
+            //_signInManager = signInManager;
+            //_emailSender = emailSender;
+            //_logger = logger;
+
+            _context = context;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities = (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+            datacenter = (from c in _context.lkpDataCenter select c).ToList();
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
+
+        public JsonStringResult GetCountryName()
+        {
+            var resultCountries = (from c in countries
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(int CountryId)
+        {
+            var result = (from s in _context.lkpState
+                          where s.CountryId == CountryId
+                          select s
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        //public IActionResult CompanyUser()
+        //{
+        //    return View();
+        //}
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult CompanyUser(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompanyUser(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                        .Where(y => y.Count > 0)
+                        .ToList();
+
+                return View(model);
+            }
+
+
+
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                CompanyName = model.CompanyName
+                //CountryName="Pakistan",
+                // CountryId="Pak123"
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                
+                //_logger.LogInformation("User created a new account with password.");
+
+                //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+              
+                //_logger.LogInformation("User created a new account with password.");
+                //return RedirectToLocal(returnUrl);
+            }
+
+            AddErrors(result);
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction(nameof(ConfirmationController.CompanyUser), "Company User");
+        }
+
+
+
+        public class JsonStringResult : ContentResult
+        {
+            public JsonStringResult(string json)
+            {
+                Content = json;
+                ContentType = "application/json";
+            }
+        }
+    }
+}

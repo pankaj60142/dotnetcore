@@ -1,0 +1,159 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class CityController : Controller
+    {
+        #region Declaration
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        #endregion
+        public CityController(ApplicationDbContext context)
+        {
+           _context =context;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities= (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(int CountryId)
+        {
+            var result = (from s in _context.lkpState                         
+                           where s.CountryId == CountryId
+                          select s
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+
+        public JsonStringResult GetCountryName()
+        {
+           var resultCountries = (from c in countries
+                                  select c).ToList();
+
+
+           var json   = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+        [HttpPost]
+        public JsonStringResult GetCityName(string StateName)
+        {
+            var result = (from s in states
+                          join ac in allcities on s.StateName equals ac.StateName
+                          where s.StateName == StateName
+                          select ac
+                          ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+        public JsonStringResult GetStateName()
+        {
+            var resultCities = (from c in states
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCities);
+            return new JsonStringResult(json);
+        }
+        //[HttpPost]
+        //public ActionResult SaveCity([FromBody]lkpCityForController objState)
+        //{
+
+        //    try
+        //    {
+
+
+
+
+
+                
+               
+        //            var selectedCountry = (from c in countries
+        //                                   join s in states on c.CountryId equals s.CountryId
+        //                                   where c.CountryName == objState.CountryName 
+                                           
+        //                                   select c).FirstOrDefault();
+               
+
+        //        if (selectedCountry == null || objState.CountryId == 0 || objState.CountryId == -999)
+        //        {
+        //            string messageCountry = "State information not found";
+        //            return new JsonStringResult(messageCountry);
+        //        }
+
+                
+        //        var found = (from c in _context.lkpState where c.StateName == objState.StateName select c).FirstOrDefault();
+
+        //        //Country name dows not exist, so add a new country
+        //        if (found == null)
+        //        {
+
+
+        //            lkpCity city = new lkpCity();
+        //            city.StateId = selectedCountry.CountryName;
+
+        //            city.Latitude = selectedstate.Latitude;
+        //            city.Longitude = selectedstate.Longitude;
+        //            city.CreatedAt = DateTime.Now;
+        //            city.ModifiedAt = DateTime.Now;
+        //            city.Active = true;
+
+        //            _context.lkpCity.Add(city);
+        //            _context.SaveChanges();
+        //        }
+        //        //Country found, Update it
+        //        else
+        //        {
+        //            found.StateName = objState.StateName;
+
+        //            found.Latitude = selectedstate.Latitude;
+        //            found.Longitude = selectedstate.Longitude;
+        //            found.ModifiedAt = DateTime.Now;
+        //            _context.SaveChanges();
+
+        //        }
+
+        //        string message = "SUCCESS";
+        //        return new JsonStringResult(message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        string message = "Fail.." + ex.Message;
+        //        return new JsonStringResult(message);
+        //    }
+
+
+
+
+
+
+        //}
+
+
+    }
+}

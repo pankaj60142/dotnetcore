@@ -1,0 +1,535 @@
+@{
+    ViewData["Title"] = "Data Center";
+}
+
+
+<style type="text/css">
+    .modal-header {
+        background-color: #404040 !important;
+        color: white;
+    }
+
+        .modal-header button.close {
+            color: #ffffff !important;
+        }
+
+    .chosen-container {
+        width: 100% !important;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+            Forms
+            <span>
+                >
+                Data center
+            </span>
+        </h1>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-primary" type="button" style="margin:12px 12px 0 0; float:right;" data-toggle="modal" data-target="#openmodal">Add Data Center</button>
+    </div>
+    <div class="modal" id="openmodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Data Center
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmdatacenter" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">Country Name</label>
+
+                                        <label class="input">
+                                            <select name="countryname" id="countryname" onchange="fillState(this)"></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">State Name</label>
+
+                                        <select id="StateName" name="StateName" onchange="fillcity()"></select>
+                                        <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">City Name</label>
+
+                                        <label class="input">
+                                            <select name="CityName" id="CityName"></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City Name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+
+                                        <label class="label">Data Center Name</label>
+
+                                        <label class="input">
+                                            <input name="datacentername" id="datacentername"/>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Center Name</b>
+                                        </label>
+                                    </section>
+
+                                </div>
+
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveDataCenter();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="clearDataCenter();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Data Center </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+
+
+                    <div class="widget-body no-padding">
+
+                        <br />
+                        <table id="tblDataCenter" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>City Name</th>
+                                    <th>Data Center Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+@section Scripts{
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+          
+            $('#countryname').chosen();
+            $('#countryname').chosen({ allow_single_deselect: false });
+            $('#StateName').chosen();
+            $('#StateName').chosen({ allow_single_deselect: false });
+            $('#CityName').chosen();
+            $('#CityName').chosen({ allow_single_deselect: false });
+            fillcountry();
+            FillAllDataCenter();
+
+        });
+
+        function fillcountry() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/Datacenter/GetCountry',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+                    Destroycountryname();
+                    for (var x = 0; x < resultCountry.length; x++) {
+
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryId).text(resultCountry[x].CountryName));
+
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            });
+        }
+        function DeleteSelecteddatacenter(datacenter) {
+
+
+
+
+            swal({
+                title: "Are you sure?",
+                text: "All associated data centers will be deleted too,You will not be able to rollback this action!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+
+                        Deletedatacenter(datacenter);
+
+                    } else {
+                        swal("Cancelled", "You Cancelled delete operation!", "error");
+                    }
+                });
+
+
+
+
+        }
+
+        function Deletedatacenter(datacenter) {
+
+            var selecteddatacenter = datacenter;
+            
+
+
+            selecteddatacenter = parseInt(selecteddatacenter);
+            alert(selecteddatacenter);
+
+
+
+            var options = {};
+            options.url = "/DataCenter/DeleteDataCenter";
+            options.type = "POST";
+
+            var obj = {
+
+                DataCenterId: selecteddatacenter
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+
+                if (msg.responseText == "SUCCESS") {
+                    swal("Deleted!", "Data Center has been deleted!", "success");
+                    FillAllDataCenter();
+                }
+                else
+                    swal("Error", "Error while deleting Data Center!", "error");
+            };
+
+            $.ajax(options);
+        }
+        function Destroycountryname() {
+            $('#countryname')
+                .empty()
+                .append('<option selected="selected" value="">Select Country</option>');
+        }
+        function fillState(countrycode) {
+
+            countrycode = $("#countryname").val();
+            countrycode = parseInt(countrycode);
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Datacenter/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { countrycode: countrycode, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+                    DestroyStatename();
+
+                    for (var x = 0; x < resultState.length; x++) {
+
+
+                        $('#StateName').append($('<option></option>').attr('value', resultState[x].StateId).text(resultState[x].StateName));
+
+
+                    }
+                    $('#StateName').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            });
+        }
+        function DestroyStatename() {
+            $('#StateName')
+                .empty()
+                .append('<option selected="selected" value="">Select State</option>');
+        }
+        function fillcity() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            
+            var StateId = $("#StateName").val();
+            StateId = parseInt(StateId);
+           
+
+            $.ajax({
+                url:rootUrl + '/Datacenter/GetCities',
+                type: 'POST',
+                data: { StateId: StateId, compid: compid},
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCities) {
+                    DestroyCityName();
+
+
+                    for (var x = 0; x < resultCities.length; x++) {
+
+                        $('#CityName').append($('<option></option>').attr('value', resultCities[x].CityId).text(resultCities[x].CityName));
+
+
+
+                    }
+                    $('#CityName').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            });
+        }
+        function DestroyCityName() {
+            $('#CityName')
+                .empty()
+                .append('<option selected="selected" value="">Select City</option>');
+        }
+        function SaveDataCenter() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            var CityId = $('#CityName').val();
+            CityId = parseInt(CityId);
+            var DataCenterName = $('#datacentername').val();
+
+            if ($("#frmdatacenter").valid()) {
+                if (CityId == null || CityId == "") {
+                    swal("Error", "City must be seleted!", "error");
+                    return;
+                }
+                if (DataCenterName == null || DataCenterName == "") {
+                    swal("Error", "DataCenterName must be Entered!", "error");
+                    return;
+                }
+
+
+                
+
+
+                
+
+                var options = {};
+                options.url = "/Datacenter/SaveDatacenter";
+                options.type = "POST";
+
+                var obj = {
+                    DataCenterName: DataCenterName,
+                    CityId: CityId,
+                    CompanyId: compid
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+                        $('#datacentername').val('');
+                        FillAllDataCenter();
+                        $('#openmodal').modal('hide');
+                        DestroyCityName();
+                        DestroyStatename();
+                        swal("Saved!", "DataCenter saved successfully!", "success");
+                        
+                        
+                    }
+                    else
+                        swal("Error", "Error while saving DataCenter!", "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+           
+        }
+        function FillAllDataCenter() {
+            var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url:rootUrl + '/Datacenter/GetInsertedDataCenter',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill city', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblDataCenter').DataTable().destroy();
+                     $('#tblDataCenter').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'CityName', 'width': '20%' },
+                            { data: 'Datacenter', 'width': '60%' },
+
+                            {
+
+                                "data": "DataCenterId",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteSelecteddatacenter(\'' + data + '\');">Delete</button>';
+                                }
+                            }
+                          
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+    </script>
+}

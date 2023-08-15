@@ -1,0 +1,1010 @@
+
+@{
+    ViewData["Title"] = "User Roles";
+}
+
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+            Forms
+            <span>
+                >
+                User Roles
+            </span>
+        </h1>
+    </div>
+
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="company-user" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+
+                                <div class="row" style="padding-left:10px; padding-right:10px;">
+
+                                    <section>
+                                        <label class="label">Select User</label>
+                                        <label class="select">
+                                            <select id="Users" data-placeholder="Choose a country..." multiple class="chosen-select"></select>
+                                        </label>
+                                    </section>
+
+
+
+
+
+
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+                            </fieldset>
+
+
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+
+
+            <!-- end widget -->
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                        <header>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
+                            <h2>Countries </h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+
+
+                            <div class="widget-body no-padding">
+
+                                <fieldset>
+
+                                    <div class="row smart-form" style="padding-left:10px; padding-right:10px; padding-top:20px;">
+
+                                        <section>
+                                            <label class="label">Select Country</label>
+                                            <label class="select">
+                                                <select id="Country" data-placeholder="Choose a country..." multiple class="chosen-select"></select>
+                                            </label>
+
+                                            <label class="label">Selected Countires</label>
+                                        </section>
+
+
+
+
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                </fieldset>
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                        <header>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
+                            <h2>Datacenters </h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+
+
+                            <div class="widget-body no-padding">
+
+                                <fieldset>
+
+                                    <div class="row smart-form" style="padding-left:10px; padding-right:10px; padding-top:20px;">
+
+                                        <section>
+                                            <label class="label">Select Datacenter</label>
+                                            <label class="select">
+                                                <select id="Datacenter" data-placeholder="Choose a Datacenter..." multiple class="chosen-select"></select>
+                                            </label>
+
+                                            <label class="label">Selected Datacenters</label>
+                                        </section>
+
+
+
+
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                </fieldset>
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                        <header>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
+                            <h2>Departments </h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+
+
+                            <div class="widget-body no-padding">
+
+                                <fieldset>
+
+                                    <div class="row smart-form" style="padding-left:10px; padding-right:10px; padding-top:20px;">
+
+                                        <section>
+                                            <label class="label">Select Department</label>
+                                            <label class="select">
+                                                <select id="Department" data-placeholder="Choose a Department..." multiple class="chosen-select"></select>
+                                            </label>
+
+                                            <label class="label">Selected Departments</label>
+                                        </section>
+
+
+
+
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                </fieldset>
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Widget ID (each widget will need unique ID)-->
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                        <header>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
+                            <h2>Applications </h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+
+
+                            <div class="widget-body no-padding">
+
+                                <fieldset>
+
+                                    <div class="row smart-form" style="padding-left:10px; padding-right:10px; padding-top:20px;">
+
+                                        <section>
+                                            <label class="label">Select Application</label>
+                                            <label class="select">
+                                                <select id="Application" data-placeholder="Choose an Application..." multiple class="chosen-select"></select>
+                                            </label>
+
+                                            <label class="label">Selected Applications</label>
+                                        </section>
+
+
+
+
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                </fieldset>
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                    <!-- end widget -->
+                </div>
+            </div>
+
+
+
+            <div class="row text-right" style="padding-right:10px;">
+                <footer>
+                    <button type="button" class="btn btn-primary" onclick="Save();">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="Clear();">
+                        Cancel
+                    </button>
+                </footer>
+            </div>
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+
+
+
+
+@section Scripts {
+    <!-- SCRIPTS ON PAGE EVENT -->
+    <script type="text/javascript">
+
+        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+        pageSetUp();
+
+
+        runAllForms();
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+
+
+
+        };
+
+        $(document).ready(function () {
+            $("#Users").chosen({ no_results_text: "Oops, nothing found!" });
+            $("#Country").chosen({ no_results_text: "Oops, nothing found!" });
+            $("#Datacenter").chosen({ no_results_text: "Oops, nothing found!" });
+            $("#Department").chosen({ no_results_text: "Oops, nothing found!" }); 
+            $("#Application").chosen({ no_results_text: "Oops, nothing found!" }); 
+        });
+
+
+
+
+
+        // Validation
+        $(function () {
+            // Validation
+            $("#company-user").validate({
+
+                // Rules for form validation
+                rules: {
+
+                    firstname: {
+                        required: true
+                    },
+                    lastname: {
+                        required: true
+                    },
+
+                    username: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    },
+                    confirmpassword: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20,
+                        equalTo: '#password'
+                    },
+
+                    tblRoles: {
+                        required: false
+                    }
+
+                },
+
+                // Messages for form validation
+                messages: {
+
+                    username: {
+                        required: 'Please enter your username',
+                    },
+
+                    email: {
+                        required: 'Please enter your email address',
+                        email: 'Please enter a VALID email address'
+                    },
+                    password: {
+                        required: 'Please enter your password'
+                    },
+                    confirmpassword: {
+                        required: 'Please enter your password one more time',
+                        equalTo: 'Please enter the same password as above'
+                    },
+                    firstname: {
+                        required: 'Please select your first name'
+                    },
+                    lastname: {
+                        required: 'Please select your last name'
+                    },
+                    tblRoles: {
+                        required: 'Please select your gender'
+                    },
+                    terms: {
+                        required: 'You must agree with Terms and Conditions'
+                    }
+                },
+
+                // Ajax form submition
+                submitHandler: function (form) {
+                    $(form).ajaxSubmit({
+                        success: function () {
+                            $("#company-user").addClass('submited');
+                        }
+                    });
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+        });
+
+        // end pagefunction
+
+
+
+        $('#countryname').flexdatalist({
+            minLength: 1
+        });
+
+        $('#statename').flexdatalist({
+            minLength: 1
+        });
+
+
+        $('#departmentname').flexdatalist({
+            minLength: 1
+        });
+
+        $('#datacentername').flexdatalist({
+            minLength: 1
+        });
+
+        $('#applicationname').flexdatalist({
+            minLength: 1
+        });
+
+        var selectedcountryid = 0;
+
+        function HideShow(selectObject) {
+            var value = selectObject.value;
+
+            if (value == "1") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "none";
+                document.getElementById("cities").style.display = "none";
+                document.getElementById("datacenter").style.display = "none";
+                document.getElementById("department").style.display = "none";
+                document.getElementById("application").style.display = "none";
+
+            }
+
+            if (value == "2") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("cities").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "none";
+                document.getElementById("application").style.display = "none";
+            }
+
+            if (value == "3") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("cities").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "block";
+                document.getElementById("application").style.display = "none";
+
+            }
+
+            if (value == "4") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "block";
+                document.getElementById("application").style.display = "none";
+                document.getElementById("cities").style.display = "block";
+
+            }
+
+            if (value == "5") {
+                document.getElementById("country").style.display = "none";
+                document.getElementById("state").style.display = "none";
+                document.getElementById("datacenter").style.display = "none";
+                document.getElementById("department").style.display = "none";
+                document.getElementById("application").style.display = "none";
+                document.getElementById("cities").style.display = "none";
+
+            }
+        }
+
+
+        function FillStates(countryid) {
+
+            $.ajax({
+                url: '/Confirmation/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CountryId: countryid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+
+
+                    var flexdatalistState = $("#statename").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'StateId',
+                        visibleProperties: ["StateName", "Latitude", "Longitude", "StateId"],
+                        searchIn: 'StateName',
+                        data: resultState
+                    });
+
+
+
+                    flexdatalistState.on('change:flexdatalist', function (event, set, options) {
+                        FillCities($("#statename").val());
+                    });
+
+
+                    flexdatalistState.on('select:flexdatalist', function (event, data) {
+
+
+
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillCities(stateid) {
+
+            $.ajax({
+                url: '/Confirmation/GetCityName',
+                type: 'POST',
+                datatype: 'json',
+                data: { StateId: stateid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCity) {
+
+
+                    var flexdatalistCity = $("#cityname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CityId',
+                        visibleProperties: ["CityName", "Latitude", "Longitude", "CityId"],
+                        searchIn: 'CityName',
+                        data: resultCity
+                    });
+
+                    flexdatalistCity.on('change:flexdatalist', function (event, set, options) {
+                        FillDataCenter($("#cityname").val());
+                    });
+
+                    flexdatalistCity.on('select:flexdatalist', function (event, data) {
+
+                       // FillDataCenter($("#cityname").val());
+
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillDataCenter(cityid) {
+
+            $.ajax({
+                url: '/Confirmation/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CityId: cityid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDataCenter) {
+
+
+                    var flexdatalistDatacenter = $("#datacentername").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DataCenterId',
+                        visibleProperties: ["DataCenterName", "DataCenterId"],
+
+                        searchIn: 'DataCenterName',
+                        data: resultDataCenter
+                    });
+
+                    flexdatalistDatacenter.on('change:flexdatalist', function (event, set, options) {
+                        FillDepartment($("#datacentername").val());
+                    });
+
+                }
+
+            });
+        }
+
+        function FillDepartment(datacenterid) {
+
+            $.ajax({
+                url: '/Confirmation/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { DataCenterId: datacenterid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDepartment) {
+
+
+                    var flexdatalistDatacenter = $("#departmentname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DepartmentId',
+                        visibleProperties: ["DepartmentName", "DepartmentId"],
+
+                        searchIn: 'DepartmentName',
+                        data: resultDepartment
+                    });
+
+
+
+                }
+
+            });
+        }
+
+
+
+        var rootDir = "@Url.Content("~/")";
+
+
+        function FillCountries() {
+            $.ajax({
+                url: '/Department/GetCountryName',
+                type: 'POST',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+
+                    var flexDataListCountry = $("#countryname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CountryId',
+                        visibleProperties: ["CountryName", "Latitude", "Longitude", "CountryId"],
+                        searchIn: 'CountryName',
+                        data: resultCountry
+                    });
+
+
+                    flexDataListCountry.on('change:flexdatalist', function (event, set, options) {
+                        FillStates($("#countryname").val());
+                    });
+
+                    flexDataListCountry.on('select:flexdatalist', function (event, data) {
+                       // console.log($("#countryname").val());
+                      //  selectedcountryid = $("#countryname").val();
+                      //  FillStates(selectedcountryid);
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+
+                }
+
+
+            });
+        }
+
+
+
+        FillCountries();
+
+
+        function SaveUser() {
+
+
+
+            if ($("#company-user").valid()) {
+
+
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                var email = document.getElementById("email").value;
+                var role = $("#role option:selected").text();
+                var countries = $("#countryname").val();
+                var states = $("#statename").val();
+                var cities = $("#cityname").val();
+                var datacenters = $("#datacentername").val();
+                var departments = $("#departmentname").val();
+
+
+                var options = {};
+                options.url = "/Confirmation/SaveUser";
+                options.type = "POST";
+                //
+                var obj = {
+                    UserName: username,
+                    Pass: password,
+                    Email: email,
+                    Role: role,
+                    SelectedCountries: countries,
+                    SelectedStates: states,
+                    SelectedCities: cities,
+                    SelectedDatacenters: datacenters,
+                    SelectedDepartments: departments
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "User saved successfully!", "success");
+                        $('#username').val('');
+                        $('#password').val('');
+                        $('#confirmpassword').val('');
+                        $('#email').val('');
+                        $('#role').val('0');
+
+
+
+                        FillAllUsers();
+                    }
+                    else
+                        //document.getElementById("countryid").addClass("state-error");
+
+                        swal("Error", msg.responseText, "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+        }
+
+
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
