@@ -1,0 +1,1837 @@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="widget-grid" class="">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Company Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="company-user" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+
+
+
+
+
+                                <div class="row">
+
+
+
+                                    <section class="col col-6" id="country">
+                                        <label class="label">Country Name</label>
+
+                                        <div class="input" id="countryid">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="countryname" placeholder='Select countries' class='flexdatalist' data-min-length='1' multiple='multiple' list='countries' name='countryname'>
+
+
+
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6" id="state">
+                                        <label class="label">State Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="statename" placeholder='Select States' class='flexdatalist' data-min-length='1' multiple='multiple' list='states' name='states1'>
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="cities">
+                                        <label class="label">City Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="datacenter">
+                                        <label class="label">Datacenters</label>
+                                        <div class="input">
+
+                                            <input type='text' id="datacentername" placeholder='Select Datacenters' class='flexdatalist' data-min-length='1' multiple='multiple' list='datacenters' name='datacenters1'>
+
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="department">
+                                        <label class="label">Departments</label>
+                                        <div class="input">
+
+                                            <input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+
+
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="application" style="display:none">
+                                        <label class="label">Applications </label>
+                                        <div class="input">
+
+                                            <input type='text' id="applicationname" placeholder='Select Applications' class='flexdatalist' data-min-length='1' multiple='multiple' list='applications' name='datacenters1'>
+
+
+
+
+                                        </div>
+                                    </section>
+
+
+                                </div>
+
+
+
+                            </fieldset>
+
+                            @*<footer>
+                                    <button type="button" class="btn btn-primary" onclick="SaveUser();">
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-danger" onclick="ClearCity();">
+                                        Cancel
+                                    </button>
+                                </footer>*@
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+
+
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-server"></i>
+                    </span>
+                    <h2>Server  </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body custom-scroll" id="Tree">
+
+                        <ul id="myTab3" class="nav nav-tabs tabs-left bordered">
+                            <li class="active">
+                                <a href="#l1" data-toggle="tab">Server </a>
+                            </li>
+
+                            <li class="pull-left">
+                                <a href="#l4" data-toggle="tab">Server Database</a>
+                            </li>
+                            <li class="pull-left">
+                                <a href="#l5" data-toggle="tab">Server Document</a>
+                            </li>
+
+                        </ul>
+
+                        <div id="myTabContent3" class="tab-content padding-10">
+                            <div class="tab-pane fade in active" id="l1">
+                                <form id="Frmserver">
+
+                                    <fieldset>
+                                        <input name="authenticity_token" type="hidden">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input class="form-control" id="Name" name="Name" placeholder="Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Location </label>
+                                                <select class="form-control" name="LocationID" id="LocationID" onchange="HideShow(this)"></select>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IP Address</label>
+                                                <input class="form-control" id="IPAddress" name="IPAddress" placeholder="IP Address" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Admin Engineer </label>
+                                                <input class="form-control" id="AdminEngineerID" name="AdminEngineerID" placeholder="Admin Engineer " type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>OS</label>
+                                                <input class="form-control" id="OS" name="OS" placeholder="OS" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Processor Number</label>
+                                                <input class="form-control" name="ProcessorNumber" id="ProcessorNumber" placeholder="Processor Number" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>CPU Speed</label>
+                                                <input class="form-control" name="CPUSpeed" id="CPUSpeed" placeholder="CPU Speed" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Server Memory</label>
+                                                <input class="form-control" name="ServerMemory" id="ServerMemory" placeholder="Server Memory" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Comment</label>
+                                                <input class="form-control" name="Comment" id="Comment" placeholder="Comment" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>V Host Name</label>
+                                                <input class="form-control" name="VHostName" id="VHostName" placeholder="VHost Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Virtual Host Type</label>
+                                                <input class="form-control" name="VirtualHostType" id="VirtualHostType" placeholder="Virtual Host Type" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Backup Description</label>
+                                                <input class="form-control" name="BackupDescription" id="BackupDescription" placeholder="Backup Description" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>WebServer Type </label>
+                                                <input class="form-control" id="WebServerTypeID" name="WebServerTypeID" placeholder="WebServer Type " type-="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Server Type </label>
+                                                <select class="form-control" name="ServerTypeID" id="ServerTypeID" onchange="HideShow(this)"></select>
+                                              
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>AntiVirus Type </label>
+                                                <input class="form-control" name="AntiVirusTypeID" id="AntiVirusTypeID" placeholder="AntiVirus Type ID" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Reboot Schedule</label>
+                                                <input class="form-control" name="RebootSchedule" id="RebootSchedule" placeholder="Reboot Schedule" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Controller Number</label>
+                                                <input class="form-control" name="ControllerNumber" id="ControllerNumber" placeholder="Controller Number" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Disk Capacity</label>
+                                                <input class="form-control" name="DiskCapacity" id="DiskCapacity" placeholder="Disk Capacity" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Network Type </label>
+                                                <select class="form-control" name="NetworkTypeID" id="NetworkTypeID" onchange="HideShow(this)"></select>
+                                             
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IT Group</label>
+                                                <select class="form-control" name="ITGroupID" id="ITGroupID" onchange="HideShow(this)"></select>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Group Description</label>
+                                                <input class="form-control" name="GroupDescription" id="GroupDescription" placeholder="Group Description" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cabinet No</label>
+                                                <input class="form-control" name="CabinetNo" id="CabinetNo" placeholder="CabinetNo" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Chasis No</label>
+                                                <input class="form-control" name="CertificateExpiration" id="ChasisNo" placeholder="Chasis No" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Model No</label>
+                                                <input class="form-control" name="ModelNo" id="ModelNo" placeholder="Model No" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Blade No</label>
+                                                <input class="form-control" name="BladeNo" id="BladeNo" placeholder="Blade No" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Generation</label>
+                                                <input class="form-control" name="Generation" id="Generation" placeholder="Generation" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Serial No</label>
+                                                <input class="form-control" name="SerialNo" id="SerialNo" placeholder="Serial No" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILODNS Name</label>
+                                                <input class="form-control" name="ILODNSName" id="ILODNSName" placeholder="ILODNS Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILOIP Address</label>
+                                                <input class="form-control" name="ILOIPAddress" id="ILOIPAddress" placeholder="ILOIP Address" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IP Address2</label>
+                                                <input class="form-control" name="IPAddress2" id="IPAddress2" placeholder="IP Address2" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IP Address3</label>
+                                                <input class="form-control" name="IPAddress3" id="IPAddress3" placeholder="IP Address3" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>BackUp Path</label>
+                                                <input class="form-control" name="BackUpPath" id="BackUpPath" placeholder="BackUp Path" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILO License</label>
+                                                <input class="form-control" name="ILOLicense" id="ILOLicense" placeholder="ILO License" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Cable No</label>
+                                                <input class="form-control" name="NIC1CableNo" id="NIC1CableNo" placeholder="NIC1 Cable No" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Bunble No</label>
+                                                <input class="form-control" name="NIC1BunbleNo" id="NIC1BunbleNo" placeholder="NIC1 Bunble No" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>IP Address4</label>
+                                                <input class="form-control" name="IPAddress4" id="IPAddress4" placeholder="IP Address4" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+
+
+
+                                            <div class="select">
+                                                <label>SAN</label>
+                                                <select class="form-control" name="SAN" id="SAN" onchange="HideShow(this)"></select>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="select">
+                                                <label>SANSwitchName</label>
+                                                <select class="form-control" name="SANSwitchName" id="SANSwitchName" onchange="HideShow(this)"></select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>SAN Switch Port</label>
+                                                <select class="form-control" name="SANSwitchPort" id="SANSwitchPort" onchange="HideShow(this)"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Fibre Backup</label>
+                                                <select class="form-control" name="FibreBackup" id="FibreBackup" onchange="HideShow(this)"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            
+                                            <div class="form-group">
+                                                <label>Fibre Switch Name</label>
+                                                <select class="form-control" name="FibreSwitchName" id="FibreSwitchName" onchange="HideShow(this)"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                
+                                                <label>Fibre Switch Port</label>
+                                                <select class="form-control" name="FibreSwitchPort" id="FibreSwitchPort" onchange="HideShow(this)"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cluster Type</label>
+                                                <select class="form-control" name="ClusterType" id="ClusterType" onchange="HideShow(this)"></select>                          
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cluster Name</label>
+                                                <input class="form-control" name="ClusterName" id="ClusterName" placeholder="Cluster Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cluster IP1</label>
+                                                <input class="form-control" name="ClusterIP1" id="ClusterIP1" placeholder="Cluster IP1" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cluster IP2</label>
+                                                <input class="form-control" name="ClusterIP2" id="ClusterIP2" placeholder="Cluster IP2" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Manufacturer Number</label>
+                                                <input class="form-control" name="ManufacturerNumber" id="ManufacturerNumber" placeholder="Manufacturer Number" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Warranty Expiration</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="mydate" id="WarrantyExpiration" placeholder="Select a date" class="form-control datepicker" data-dateformat="dd/mm/yy">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Bundle</label>
+                                                <input class="form-control" name="NIC1Bundle" id="NIC1Bundle" placeholder="NIC1 Bundle" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC2 Bundle</label>
+                                                <input class="form-control" name="NIC2Bundle" id="NIC2Bundle" placeholder="NIC2 Bundle" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC3 Bundle</label>
+                                                <input class="form-control" name="NIC3Bundle" id="NIC3Bundle" placeholder="NIC3 Bundle" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC4 Bundle</label>
+                                                <input class="form-control" name="NIC4Bundle" id="NIC4Bundle" placeholder="NIC4 Bundle" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Cable</label>
+                                                <input class="form-control" name="NIC1Cable" id="NIC1Cable" placeholder="NIC1 Cable" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC2 Cable</label>
+                                                <input class="form-control" name="NIC2Cable" id="NIC2Cable" placeholder="NIC2 Cable" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC3 Cable</label>
+                                                <input class="form-control" name="NIC3Cable" id="NIC3Cable" placeholder="NIC3 Cable" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC4 Cable</label>
+                                                <input class="form-control" name="NIC4Cable" id="NIC4Cable" placeholder="NIC4 Cable" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cluster SAN</label>
+                                                <input class="form-control" name="ClusterSAN" id="ClusterSAN" placeholder="Cluster SAN" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>LUN Number</label>
+                                                <input class="form-control" name="LUNNumber" id="LUNNumber" placeholder="LUN Number" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <input class="form-control" name="Description" id="Description" placeholder="Description" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Location</label>
+                                                <input class="form-control" name="Location" id="Location" placeholder="Location" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Network</label>
+                                                <input class="form-control" name="Network" id="Network" placeholder="Network" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>iLO Connection</label>
+                                                <input class="form-control" name="iLOConnection" id="iLO_Connection" placeholder="iLO Connection" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILO Password</label>
+                                                <input class="form-control" name="ILOPassword" id="ILO_Password" placeholder="ILO Password" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Backup</label>
+                                                <input class="form-control" name="Backup" id="Backup" placeholder="Backup" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Virtualize?</label>
+                                                <div class="onoffswitch-container">
+                                                    @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                    <span class="onoffswitch">
+                                                        <input type="checkbox" class="onoffswitch-checkbox" id="Virtualize">
+                                                        <label class="onoffswitch-label" for="Virtualize">
+                                                            <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                            <span class="onoffswitch-switch"></span>
+                                                        </label>
+                                                    </span>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Extend Warranty?</label>
+                                                <div class="onoffswitch-container">
+                                                    @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                    <span class="onoffswitch">
+                                                        <input type="checkbox" class="onoffswitch-checkbox" id="Extend_Warranty">
+                                                        <label class="onoffswitch-label" for="ExtendWarranty">
+                                                            <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                            <span class="onoffswitch-switch"></span>
+                                                        </label>
+                                                    </span>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>SMTP</label>
+                                                <div class="onoffswitch-container">
+                                                    @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                    <span class="onoffswitch">
+                                                        <input type="checkbox" class="onoffswitch-checkbox" id="SMTP">
+                                                        <label class="onoffswitch-label" for="SMTP">
+                                                            <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                            <span class="onoffswitch-switch"></span>
+                                                        </label>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div><br />
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Interface</label>
+                                                <input class="form-control" name="NIC1Interface" id="NIC1Interface" placeholder="NIC1 Interface" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC2 Interface</label>
+                                                <input class="form-control" name="NIC2Interface" id="NIC2Interface" placeholder="NIC2 Interface" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC3 Interface</label>
+                                                <input class="form-control" name="NIC3Interface" id="NIC3Interface" placeholder="NIC3 Interface" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC4 Interface</label>
+                                                <input class="form-control" name="NIC4Interface" id="NIC4Interface" placeholder="NIC4 Interface" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Subnet</label>
+                                                <input class="form-control" name="NIC1Subnet" id="NIC1Subnet" placeholder="NIC1 Subnet" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC2 Subnet</label>
+                                                <input class="form-control" name="NIC2Subnet" id="NIC2Subnet" placeholder="NIC2 Subnet" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC3 Subnet</label>
+                                                <input class="form-control" name="NIC3Subnet" id="NIC3Subnet" placeholder="NIC3 Subnet" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC4Subnet</label>
+                                                <input class="form-control" name="NIC4Subnet" id="NIC4Subnet" placeholder="NIC4 Subnet" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Switch Port Num</label>
+                                                <input class="form-control" name="NIC1SwitchPortNum" id="NIC1SwitchPortNum" placeholder="NIC1 Switch Port Num" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC2 Switch Port Num</label>
+                                                <input class="form-control" name="NIC2SwitchPortNum" id="NIC2SwitchPortNum" placeholder="NIC2 Switch Port Num" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC3 Switch Port Num</label>
+                                                <input class="form-control" name="NIC3SwitchPortNum" id="NIC3SwitchPortNum" placeholder="NIC3 Switch Port Num" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC4 Switch Port Num</label>
+                                                <input class="form-control" name="NIC4SwitchPortNum" id="NIC4SwitchPortNum" placeholder="NIC4 Switch Port Num" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 VLAN</label>
+                                                <input class="form-control" name="NIC1VLAN" id="NIC1VLAN" placeholder="NIC1 VLAN" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC2 VLAN</label>
+                                                <input class="form-control" name="NIC2VLAN" id="NIC2VLAN" placeholder="NIC2 VLAN" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC3 VLAN</label>
+                                                <input class="form-control" name="NIC3VLAN" id="NIC3VLAN" placeholder="NIC3 VLAN" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC4 VLAN</label>
+                                                <input class="form-control" name="NIC4VLAN" id="NIC4VLAN" placeholder="NIC4 VLAN" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC1 Switch Name</label>
+                                                <input class="form-control" name="NIC1SwitchName" id="NIC1SwitchName" placeholder="NIC1 Switch Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC2 Switch Name</label>
+                                                <input class="form-control" name="NIC2SwitchName" id="NIC2SwitchName" placeholder="NIC2 Switch Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC3 Switch Name</label>
+                                                <input class="form-control" name="NIC3SwitchName" id="NIC3SwitchName" placeholder="NIC3 Switch Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>NIC4 Switch Name</label>
+                                                <input class="form-control" name="NIC4SwitchName" id="NIC4SwitchName" placeholder="NIC4 Switch Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>CPU Type</label>
+                                                <input class="form-control" name="CPUType" id="CPUType" placeholder="CPU Type" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>DNS Server1</label>
+                                                <input class="form-control" name="DNSServer1" id="DNSServer1" placeholder="DNS Server1" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>DNS Server2</label>
+                                                <input class="form-control" name="DNSServer2" id="DNSServer2" placeholder="DNS Server2" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Physical Disk Size</label>
+                                                <input class="form-control" name="PhysicalDiskSize" id="PhysicalDiskSize" placeholder="Physical Disk Size" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Raid Type</label>
+                                                <input class="form-control" name="RaidType" id="RaidType" placeholder="Raid Type" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Physical Disks</label>
+                                                <input class="form-control" name="PhysicalDisks" id="PhysicalDisks" placeholder="Physical Disks" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Ownership</label>
+                                                <input class="form-control" name="Ownership" id="Ownership" placeholder="Ownership" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>ILO Password</label>
+                                                <input class="form-control" name="ILOPassword" id="ILOPassword" placeholder="ILO Password" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Server Use</label>
+                                                <input class="form-control" name="ServerUseID" id="ServerUseID" placeholder="Server UseID" type="text">
+                                            </div>
+                                        </div>
+
+
+                                    </fieldset>
+
+                                </form>
+
+                            </div>
+
+
+                            <div class="tab-pane fade" id="l4">
+                                <form action="" id="company-user" class="smart-form">
+                                    <fieldset>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+
+                                                <section class="col col-lg-12 col-md-12">
+                                                    <label class="label">Database</label>
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="DatabaseID" id="DatabaseID" onchange="HideShow(this)"></select>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane fade" id="l5">
+                                <form action="" id="company-user" class="smart-form">
+                                    <fieldset>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+
+                                                <section class="col col-lg-12 col-md-12">
+                                                    <label class="label">Document</label>
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="DocumentID" id="DocumentID" onchange="HideShow(this)">
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+
+                            <div class="form-actions">
+
+                                <button type="button" onclick="SaveFramework_Server();" class="btn btn-primary btn-lg">
+
+                                    Submit
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- end widget content -->
+
+    </div>
+    <!-- end widget div -->
+
+
+</section>
+
+
+
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+
+
+
+        pageSetUp();
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+        };
+
+        // end pagefunction
+
+        $(document).ready(function () {
+            $("#InstalledDate").datepicker('setDate', 'today');
+            Application_Database();
+            Application_SAN();
+            Application_SANSwitchName();
+            Application_SANSwitchPort();
+            Application_lkpFibreBackup();
+            Application_FiberSwitchName();
+            Application_lkpFibreBackup();
+            Application_FiberSwitchPort();
+            Application_ClusterType();
+            Application_Location();
+            Application_lkpITGroup();
+            Application_NetworkType();
+            Application_ServerType();
+            Application_Document();
+
+        });
+
+        function Application_Document() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_Document";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name);
+
+                    $('#DocumentID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+
+        function Application_SAN() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_SAN";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+
+                    $('#SAN').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        
+        function Application_lkpFibreBackup() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpFibreBackup";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+
+                    $('#FibreBackup').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+        function Application_FiberSwitchName() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpFibreSwitchName";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    $('#FibreSwitchName').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_FiberSwitchPort() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpFibreSwitchPort";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    $('#FibreSwitchPort').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_ClusterType() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpClusterType";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    $('#ClusterType').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_Location() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpLocation";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    $('#LocationID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_lkpITGroup() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpITGroup";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    $('#ITGroupID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_NetworkType() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpNetworkType";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    $('#NetworkTypeID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_ServerType() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_lkpServerType";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    $('#ServerTypeID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        
+        function Application_SANSwitchName() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_SANSwitchName";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+
+                    $('#SANSwitchName').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+        function Application_SANSwitchPort() {
+            var options = {};
+            options.url = "/Framework_Server/frmserver_SANSwitchPort";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+
+                    $('#SANSwitchPort').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Application_Database() {
+
+
+            var options = {};
+            options.url = "/Framework_Server/frmserver_DatabaseID";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name);
+                    $('#DatabaseID').append(option);
+
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+
+
+
+        function FillStates(countryid) {
+
+            $.ajax({
+                url: '/Framework_Server/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CountryId: countryid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+
+
+                    var flexdatalistState = $("#statename").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'StateName',
+                        visibleProperties: ["StateName", "Latitude", "Longitude", "StateId"],
+                        searchIn: 'StateName',
+                        data: resultState
+                    });
+
+                    flexdatalistState.on('select:flexdatalist', function (event, data) {
+                        selectedstateid = data.StateId;
+
+                        FillCities(data.StateId);
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillCities(stateid) {
+
+            $.ajax({
+                url: '/Framework_Server/GetCityName',
+                type: 'POST',
+                datatype: 'json',
+                data: { StateId: stateid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCity) {
+
+                    var flexdatalistCity = $("#cityname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CityName',
+                        visibleProperties: ["CityName", "Latitude", "Longitude", "CityId"],
+                        searchIn: 'CityName',
+                        data: resultCity
+                    });
+
+                    flexdatalistCity.on('select:flexdatalist', function (event, data) {
+                        selectedcityid = data.CityId;
+                        FillDataCenter(selectedcityid);
+
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillDataCenter(cityid) {
+
+            $.ajax({
+                url: '/Framework_Server/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CityId: cityid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDataCenter) {
+
+
+                    var flexdatalistDatacenter = $("#datacentername").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DataCenterName',
+                        visibleProperties: ["DataCenterName", "DataCenterId"],
+
+                        searchIn: 'DataCenterName',
+                        data: resultDataCenter
+                    });
+
+                    flexdatalistDatacenter.on('select:flexdatalist', function (event, data) {
+
+                        selecteddatacenterid = data.DataCenterId;
+                        FillDeparment(selecteddatacenterid);
+                    });
+
+                }
+
+            });
+        }
+
+        function FillDeparment(dataCenterId) {
+
+            $.ajax({
+                url: '/Framework_Server/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { DataCenterId: dataCenterId },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+
+                },
+
+                success: function (resultDepartment) {
+
+
+                    var flexdatalistDatacenter = $("#departmentname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DepartmentName',
+                        visibleProperties: ["DepartmentName", "DepartmentId"],
+
+                        searchIn: 'DepartmentName',
+                        data: resultDepartment
+                    });
+
+                    flexdatalistDatacenter.on('select:flexdatalist', function (event, data) {
+
+                        selecteddepartmentid = data.DepartmentId;
+
+                    });
+
+                }
+
+            });
+        }
+
+
+
+
+        function SaveFramework_Server() {
+            if ($("#Frmserver").valid()) {
+                     
+                          var selectedName = $('#Name').val();
+                         
+                var selectedLocationID = $('#LocationID').val();
+                var selectedIPAddress = $('#IPAddress').val();
+                var selectedAdminEngineerID = $('#AdminEngineerID').val();
+                var selectedOS= $('#OS').val();
+                var selectedProcessorNumber = $('#ProcessorNumber').val();
+                var selectedCPUSpeed = $('#CPUSpeed').val();
+                
+                var selectedServerMemory = $('#ServerMemory').val();
+                var selectedComment = $('#Comment').val();
+                var selectedVHostName = $('#VHostName').val();
+                var selectedVirtualHostType = $('#VirtualHostType').val();
+                var selectedBackupDescription = $('#BackupDescription').val();
+                var selectedWebServerTypeID = $('#WebServerTypeID').val();
+                var selectedServerTypeID = $('#ServerTypeID').val();
+                var selectedAntiVirusTypeID = $('#AntiVirusTypeID').val();
+                var selectedRebootSchedule = $('#RebootSchedule').val();
+                var selectedControllerNumber = $('#ControllerNumber').val();
+                var selectedDiskCapacity = $('#DiskCapacity').val();
+                var selectedNetworkTypeID = $('#NetworkTypeID').val();
+                var selecteITGroupID = $('#ITGroupID').val();
+                var selectedGroupDescription = $('#GroupDescription').val();
+                var selectedCabinetNo = $('#CabinetNo').val();
+                var selectedChasisNo = $('#ChasisNo').val();
+                var selectedModelNo= $('#ModelNo').val();
+                var selectedBladeNo = $('#BladeNo').val();
+                var selectedGeneration = $('#Generation').val();
+                var selectedSerialNo = $('#SerialNo').val();
+                var selectedILODNSName = $('#ILODNSName').val();
+                var selectedILOIPAddress = $('#ILOIPAddress').val();
+                var selectedIPAddress2 = $('#IPAddress2').val();
+                var selectedIPAddress3= $('#IPAddress3').val();
+                var selectedBackUpPath = $('#BackUpPath').val();
+                var selectedILOLicense = $('#ILOLicense').val();
+                var selectedLastUpdatedBy = $('#LastUpdatedBy').val();
+                var selectedNIC1CableNo = $('#NIC1CableNo').val();
+                var selectedNIC1BunbleNo = $('#NIC1BunbleNo').val();
+                var selectedIPAddress4 = $('#IPAddress4').val();
+                var selectedSAN = $('#SAN').val();
+                var selectedSANSwitchName = $('#SANSwitchName').val();
+                var selectedSANSwitchPort = $('#SANSwitchPort').val();
+                var selectedFibreBackup = $('#FibreBackup').val();
+                var selectedFibreSwitchName = $('#FibreSwitchName').val();
+                var selectedFibreSwitchPort = $('#FibreSwitchPort').val();
+                var selectedClusterType = $('#ClusterType').val();
+                var selectedClusterName = $('#ClusterName').val();
+                var selectedClusterIP1 = $('#ClusterIP1').val();
+                var selectedClusterIP2 = $('#ClusterIP2').val();
+                var selectedManufacturerNumber = $('#ManufacturerNumber').val();
+                var selectedManufacturer = $('#Manufacturer').val();
+                var selectedNIC1Bundle = $('#NIC1Bundle').val();
+                var selectedNIC2Bundle = $('#NIC2Bundle').val();
+                var selectedNIC3Bundle = $('#NIC3Bundle').val();
+                var selectedNIC4Bundle = $('#NIC4Bundle').val();
+                var selectedNIC1Cable = $('#NIC1Cable').val();
+                var selectedNIC2Cable = $('#NIC2Cable').val();
+                var selectedNIC3Cable = $('#NIC3Cable').val();
+                var selectedNIC4Cable = $('#NIC4Cable').val();
+                var selectedClusterSAN = $('#ClusterSAN').val();
+                var selectedLUNNumber = $('#LUNNumber').val();
+                var selectedSMTP = $('#SMTP').val();
+                var selectedDescription = $('#Description').val();
+                var selectedLocation = $('#Location').val();
+                var selectedNetwork = $('#Network').val();
+                var selectediLOConnection= $('#iLO_Connection').val();
+                var selectedILOPassword = $('#ILO_Password').val();
+                var selectedBackup = $('#Backup').val();
+                var selectedVirtualize = $('#Virtualize').val();
+                 var selectedExtend_Warranty = $('#Extend_Warranty').val();
+                 var selectedNIC1Interface = $('#NIC1Interface').val();
+                 var selectedNIC2Interface = $('#NIC2Interface').val();
+                 var selectedNIC3Interface= $('#NIC3Interface').val();
+                 var selectedNIC4Interface = $('#NIC4Interface').val();
+                 var selectedNIC1Subnet = $('#NIC1Subnet').val();
+                 var selectedNIC2Subnet = $('#NIC2Subnet').val();
+                 var selectedNIC3Subnet= $('#NIC3Subnet').val();
+                 var selectedNIC4Subnet = $('#NIC4Subnet').val();
+                 var selectedNIC1SwitchPortNum = $('#NIC1SwitchPortNum').val();
+                 var selectedNIC2SwitchPortNum = $('#NIC2SwitchPortNum').val();
+                 var selectedNIC3SwitchPortNum = $('#NIC3SwitchPortNum').val();
+                 var selectedNIC4SwitchPortNum = $('#NIC4SwitchPortNum').val();
+                 var selectedNIC1VLAN = $('#NIC1VLAN').val();
+                 var selectedNIC2VLAN= $('#NIC2VLAN').val();
+                 var selectedNIC3VLAN = $('#NIC3VLAN').val();
+                 var selectedNIC4VLAN = $('#NIC4VLAN').val();
+                 var selectedNIC1SwitchName = $('#NIC1SwitchName').val();
+                 var selectedNIC2SwitchName = $('#NIC2SwitchName').val();
+                 var selectedNIC3SwitchName = $('#NIC3SwitchName').val();
+                 var selectedNIC4SwitchName = $('#NIC4SwitchName').val();
+                 var selectedCPUType = $('#CPUType').val();
+                 var selectedDNSServer1 = $('#DNSServer1').val();
+                var selectedDNSServer2 = $('#DNSServer2').val();
+                var selectedPhysicalDiskSize = $('#PhysicalDiskSize').val();
+                var selectedPhysicalDisks = $('#PhysicalDisks').val();
+                 var selectedRaidType = $('#RaidType').val();
+                var selectedOwnership = $('#Ownership').val();
+               
+                var selectedILOPassword = $('#ILOPassword').val();
+                var selectedServerUseID = $('#ServerUseID').val();
+               
+              
+                          var options = {};
+                options.url = "/Framework_Server/SaveFramework_Server";
+                          options.type = "POST";
+                var obj = {
+
+                    Name: selectedName,
+                    LocationID:selectedLocationID,
+                    IPAddress:selectedIPAddress,
+                    AdminEngineerID:selectedAdminEngineerID,
+                    OS:selectedOS,
+                    ProcessorNumber: selectedProcessorNumber,
+                    CPUSpeed: selectedCPUSpeed,
+                    ServerMemory:selectedServerMemory,
+                    Comment: selectedComment,
+                        VHostName: selectedVHostName,
+                    VirtualHostType: selectedVirtualHostType,
+                        BackupDescription: selectedBackupDescription,
+                    WebServerTypeID: selectedWebServerTypeID,
+                        ServerTypeID: selectedServerTypeID,
+                    AntiVirusTypeID: selectedAntiVirusTypeID,
+                        RebootSchedule: selectedRebootSchedule,
+                    ControllerNumber: selectedControllerNumber,
+                        DiskCapacity: selectedDiskCapacity,
+                    NetworkTypeID: selectedNetworkTypeID,
+                        ITGroupID: selecteITGroupID,
+                    GroupDescription: selectedGroupDescription,
+                        CabinetNo: selectedCabinetNo,
+                    ChasisNo: selectedChasisNo,
+                        ModelNo: selectedModelNo,
+                    BladeNo: selectedBladeNo,
+                    Generation: selectedGeneration,
+                    SerialNo: selectedSerialNo,
+                    ILODNSName: selectedILODNSName,
+                    ILOIPAddress: selectedILOIPAddress,
+                    IPAddress2: selectedIPAddress2,
+                    IPAddress3: selectedIPAddress3,
+                    BackUpPath: selectedBackUpPath,
+                    ILOLicense: selectedILOLicense,
+                    LastUpdatedBy: selectedLastUpdatedBy,
+                    NIC1CableNo: selectedNIC1CableNo,
+                    NIC1BunbleNo: selectedNIC1BunbleNo,
+                    IPAddress4: selectedIPAddress4,
+                    SAN: selectedSAN,
+                    SANSwitchName: selectedSANSwitchName,
+                    SANSwitchPort: selectedSANSwitchPort,
+                    ClusterSAN: selectedClusterSAN,
+                    FibreBackup: selectedFibreBackup,
+                    FibreSwitchName: selectedFibreSwitchName,
+                    FibreSwitchPort: selectedFibreSwitchPort,
+                    ClusterType: selectedClusterType,
+                    ClusterName: selectedClusterName,
+                    ClusterIP1: selectedClusterIP1,
+                    ClusterIP2: selectedClusterIP2,
+                    ManufacturerNumber: selectedManufacturerNumber,
+                    Manufacturer: selectedManufacturer,
+                    NIC1Bundle: selectedNIC1Bundle,
+                    NIC2Bundle: selectedNIC2Bundle,
+                    NIC3Bundle: selectedNIC3Bundle,
+                    NIC4Bundle: selectedNIC4Bundle,
+                    NIC1Cable: selectedNIC1Cable,
+                    NIC2Cable: selectedNIC2Cable,
+                    NIC3Cable: selectedNIC3Cable,
+                    NIC4Cable: selectedNIC4Cable,
+                    LUNNumber: selectedLUNNumber,
+                    //SMTP: selectedSMTP,
+                    Description: selectedDescription,
+                    Location: selectedLocation,
+                    Network: selectedNetwork,
+                    iLO_Connection: selectediLOConnection,
+                    ILO_Password: selectedILOPassword,
+                    Backup: selectedBackup,
+                    //Virtualize: selectedVirtualize,
+                    //Extend_Warranty: selectedExtend_Warranty,
+                    NIC1Interface: selectedNIC1Interface,
+                    NIC2Interface: selectedNIC2Interface,
+                    NIC3Interface:selectedNIC3Interface,
+                    NIC4Interface: selectedNIC4Interface,
+                    NIC1Subnet: selectedNIC1Subnet,
+                    NIC2Subnet: selectedNIC2Subnet,
+                    NIC3Subnet: selectedNIC3Subnet,
+                   NIC4Subnet: selectedNIC4Subnet,
+                    NIC1SwitchPortNum: selectedNIC1SwitchPortNum,
+                    NIC2SwitchPortNum: selectedNIC2SwitchPortNum,
+                    NIC3SwitchPortNum: selectedNIC3SwitchPortNum,
+                    NIC4SwitchPortNum: selectedNIC4SwitchPortNum,
+                    NIC1VLAN: selectedNIC1VLAN,
+                    NIC2VLAN: selectedNIC2VLAN,
+                    NIC3VLAN: selectedNIC3VLAN,
+                    NIC4VLAN: selectedNIC4VLAN,
+                    NIC1SwitchName: selectedNIC1SwitchName,
+                    NIC2SwitchName: selectedNIC2SwitchName,
+                    NIC3SwitchName: selectedNIC3SwitchName,
+                    NIC4SwitchName: selectedNIC4SwitchName,
+                    CPUType: selectedCPUType,
+                    DNSServer1: selectedDNSServer1,
+                    DNSServer2: selectedDNSServer2,
+                    PhysicalDiskSize: selectedPhysicalDiskSize,
+                    RaidType: selectedRaidType,
+                    Ownership: selectedOwnership,
+                    PhysicalDisks: selectedPhysicalDisks,          
+                    ILOPassword: selectedILOPassword,
+                    ServerUseID: selectedServerUseID,
+
+                };
+                         
+                          options.data = JSON.stringify(obj);
+                          options.contentType = "application/json";
+                          options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Framework Database saved successfully!", "success");
+                        $('#Name').val('');
+                        validate();
+       
+
+                    }
+                    else
+                        swal("Error", "Please fill in the required fields!", "error");
+                };
+                $.ajax(options);
+
+            }
+            else {
+                swal("Error", "Error while saving Framework Database!", "error");
+            }
+
+
+        }
+
+    
+
+
+        var rootDir = "@Url.Content("~/")";
+
+        var selectedcountryid = -999;
+        var selectedstateid = -999;
+        var selectedcityid = -999;
+        var selecteddatacenterid = -999;
+        var selecteddepartmentid = -999;
+
+        $.ajax({
+            url: '/Framework_Server/GetCountryName',
+            type: 'POST',
+            datatype: 'json',
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+
+            },
+
+            success: function (resultCountry) {
+
+
+                var flexDataListCountry = $("#countryname").flexdatalist({
+                    minLength: 1,
+                    valueProperty: 'CountryId',
+                    visibleProperties: ["CountryName", "Latitude", "Longitude", "CountryId"],
+                    searchIn: 'CountryName',
+                    data: resultCountry
+                });
+
+                flexDataListCountry.on('select:flexdatalist', function (event, data) {
+                    selectedcountryid = data.CountryId;
+                    FillStates(selectedcountryid);
+                    //$('#city').val(data.city);
+                    //$('#state').val(data.state);
+                });
+
+
+            }
+
+
+        });
+
+        //function validate() {
+        //    var txt = "";
+        //    if (document.getElementById("selectedSAN").validity) {
+        //        txt = "Please Enter a number";
+        //    }
+        //    document.getElementById("selectedSAN").innerHTML = txt;
+        //}
+
+
+
+        function ClearDepartment(DepartmentId) {
+
+        }
+
+
+    </script>
+
+}
+

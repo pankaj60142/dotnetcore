@@ -1,0 +1,270 @@
+@model SmartAdmin.Seed.Controllers.FileInformation
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- NEW WIDGET START -->
+        <article class="col-sm-12">
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div>
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-cloud"></i>
+                    </span>
+                    <h2>  Share Diagram Via Email! </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
+
+                        <form action="" id="frmCity" class="smart-form" onSubmit="return false;">
+                            @Html.AntiForgeryToken()
+
+
+                            <fieldset>
+                                <span class="widget-icon">
+                                    <i id="sharingFolderTitle" class="fa fa-edit" style="font-weight:bold;"></i>
+
+                                </span>
+
+
+
+                                <section>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-envelope"></i>
+                                        <input type="email" id="txtEmailShareFolder" name="txtEmailShareFolder" placeholder="Email address">
+                                        <b class="tooltip tooltip-bottom-right">Needed to share  with your account</b>
+                                    </label>
+
+                                    <p id="txtEmailShareFolderError" style="color:red"></p>
+                                </section>
+                            </fieldset>
+
+                            
+                            
+
+                            <footer>
+                                Share
+                                <button type="button" class="btn btn-primary" onclick="ShareFolderViaEmail();">
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelShareFolder();">
+                                    Cancel
+                                </button>
+                                <p id="sharingFolderInfoMessage" style="color:green"></p>
+
+                            </footer>
+                        </form>
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+        </article>
+        <!-- WIDGET END -->
+
+    </div>
+
+    <!-- end row -->
+    <!-- row -->
+
+    <div class="row">
+
+        <style>
+            .s2 {
+                color: #D14;
+            }
+
+            .c1 {
+                color: #998;
+                font-style: italic;
+            }
+
+            .mi {
+                color: #099;
+            }
+        </style>
+
+
+
+    </div>
+
+    <!-- end row -->
+
+</section>
+<!-- end widget grid -->
+@section Scripts{
+<script type="text/javascript">
+            $(document).ready(function () {
+                document.getElementById("header").style.display = "none";
+                document.getElementById("header").style.display = "none";
+                  document.getElementById("sharingFolderTitle").innerHTML = '@Model.FileName';            
+            });
+
+
+               const validateEmail = (email) => {
+                  return email.match(
+                    /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                  );
+                };
+
+                     function ShareFolderViaEmail()
+                                    {
+                                        var fileName = '@Model.FileName';
+
+                  const email = $('#txtEmailShareFolder').val();
+
+
+                  if (validateEmail(email)) {
+                      document.getElementById("txtEmailShareFolderError").innerHTML="";
+                      var emailToShare=document.getElementById("txtEmailShareFolder").value;
+
+                       var compid = localStorage.getItem("companyid");
+                       $.ajax({
+                                            url:rootUrl + '/Graph/ShareFolderViaEmail',
+                                            type: 'POST',
+                                            datatype: 'json',
+                                            data: { compid: compid,folderid:-99,email:emailToShare,foldername:fileName,isfilesharing:true },
+                                            error: function (jqXHR, textStatus, errorThrown) {
+                                                alert(errorThrown);
+                                                swal('Alert!', 'Unable to share folder', 'error');
+                                            },
+                                            success: function (result) {
+
+                                                if(result.Message.indexOf("success")==-1)
+                                                {
+                                                    document.getElementById("sharingFolderInfoMessage").style.color = "red";
+                                                }
+                                                else
+                                                {
+                                                    document.getElementById("sharingFolderInfoMessage").style.color = "green";
+                                                }
+
+
+                                              document.getElementById("sharingFolderInfoMessage").innerHTML=result.Message;
+
+
+                                                    //$('#foldersharemodal').modal('hide');
+
+                                            }
+
+                                        });
+
+
+
+                  }
+
+                  else {
+                   document.getElementById("txtEmailShareFolderError").innerHTML="Please enter valid email address";
+                  }
+
+
+                                    }
+
+
+                                       $(document).keypress(function(e) {
+
+      if (e.keycode == 13 || e.which == 13) {
+        ShareFolderViaEmail();
+      }
+    });
+
+            function SendEmail() {
+
+                debugger;
+                var fileName = '@Model.FileName';
+
+                var selected_email = document.getElementById("txtEmail").value;
+
+
+                    //      var options = {};
+
+                    //options.url = "/Country/SaveCountry";
+                    //options.type = "POST";
+
+
+
+                    //options.data = JSON.stringify(obj);
+                    //options.contentType = "application/json";
+                    //options.dataType = "json";
+
+                    //options.beforeSend = function (xhr) {
+                    //    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    //        $('input:hidden[name="__RequestVerificationToken"]').val());
+                    //};
+                    //options.complete = function (msg) {
+                    //    if (msg.responseText == "SUCCESS") {
+
+                    //        swal("Saved!", "Country saved successfully!", "success");
+                    //        $('#countryname').val('');
+                    //        $('#openmodal').modal('hide');
+                    //        FillcountriesGrid();
+                    //        clearcountry();
+                    //    }
+                    //    else
+                    //        swal("Error", "Error while saving country!", "error");
+                    //};
+
+                    //$.ajax(options);
+
+                    $.ajax({
+                        type: 'POST',
+                        url:rootUrl + '/Graph/SharedViaEmail',
+                        data: { name: fileName, email: selected_email },
+                          datatype: 'json',
+                        success: function (result) {
+
+                            if (result != "success") {
+                                swal("Error", "Unable to send email!", "error");
+                                return;
+                            }
+                            else {
+                                swal("Success", "Email sent successfully!", "success");
+                                return;
+                            }
+                        }
+                    });
+            }
+
+
+
+</script>
+
+
+}

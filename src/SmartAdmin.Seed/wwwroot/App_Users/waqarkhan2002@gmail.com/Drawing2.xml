@@ -1,0 +1,31 @@
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="13" parent="1"/>
+    <mxCell id="14" parent="1"/>
+    <mxCell id="7" parent="1"/>
+    <mxCell id="8" parent="1"/>
+    <mxCell id="2" value="" style="image;html=1;labelBackgroundColor=#ffffff;image=stencils/usman/doc.png" parent="1" vertex="1">
+      <mxGeometry x="241" y="148" width="80" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="3" value="" style="image;html=1;labelBackgroundColor=#ffffff;image=stencils/usman/xlsx.png" parent="1" vertex="1">
+      <mxGeometry x="247" y="270" width="80" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="4" value="" style="image;html=1;labelBackgroundColor=#ffffff;image=stencils/usman/jpg.png" parent="1" vertex="1">
+      <mxGeometry x="70" y="140" width="80" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="5" value="" style="image;html=1;labelBackgroundColor=#ffffff;image=stencils/usman/pdf.png" parent="1" vertex="1">
+      <mxGeometry x="70" y="280" width="80" height="80" as="geometry"/>
+    </mxCell>
+    <mxCell id="6" value="" style="shape=mxgraph.arrows.striped_arrow;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2" parent="1" vertex="1">
+      <mxGeometry x="150" y="160" width="97" height="70" as="geometry"/>
+    </mxCell>
+    <mxCell id="9" value="&lt;h1&gt;Second Diagram&lt;/h1&gt;&lt;div&gt;You can write any text here&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+      <mxGeometry x="430" y="100" width="220" height="120" as="geometry"/>
+    </mxCell>
+    <mxCell id="10" value="Text" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=99;" parent="1" vertex="1">
+      <mxGeometry x="280" y="430" width="40" height="20" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>

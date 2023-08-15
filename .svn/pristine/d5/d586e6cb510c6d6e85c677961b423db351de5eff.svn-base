@@ -1,0 +1,1090 @@
+<style type="text/css">
+    .page-header p {
+        overflow: hidden;
+    }
+
+        .page-header p a {
+            width: 200px;
+            text-align: center;
+        }
+
+    .code {
+        height: 500px;
+        overflow: scroll;
+        zoom: .84;
+    }
+
+    * {
+        font-family: "source-sans-pro";
+    }
+
+    .heading {
+        font-size: 180px;
+        line-height: 200px;
+    }
+
+    .head, .examples, .docs {
+        text-align: center;
+    }
+
+    code, pre, pre span {
+        text-align: left;
+        font-family: monospace;
+        font-weight: normal;
+        font-size: medium;
+    }
+
+    .head ul {
+        list-style-type: none;
+    }
+
+    .map {
+        position: relative;
+        margin: 0 auto;
+        width: 1000px;
+        height: 500px;
+    }
+
+    .tall {
+        height: 750px;
+        width: 550px;
+    }
+
+    .examples h3 {
+        margin-bottom: 0;
+    }
+
+    .options {
+        position: relative;
+        overflow: hidden;
+        max-height: 21px;
+        -webkit-transition: max-height 250ms ease-in;
+        transition: max-height 250ms ease-in;
+        -moz-transition: max-height 250ms ease-in;
+    }
+
+        .options pre {
+            margin-top: 10px;
+        }
+
+        .options:hover {
+            background-color: #DDD;
+            cursor: pointer;
+        }
+
+        .options pre:hover {
+            cursor: default;
+        }
+
+    .open {
+        max-height: 5000px !important;
+    }
+
+    .options:after {
+        content: "(Click to toggle code) ↓";
+        color: #666;
+        float: right;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    #footer {
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    sup.new {
+        color: red;
+    }
+
+    path {
+        stroke: white;
+        stroke-width: 0.25px;
+        fill: lightblue;
+        cursor: pointer;
+    }
+
+
+    /*div.tooltip {
+        color: #222;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0px 0px 2px 0px #a6a6a6;
+        padding: .2em;
+        text-shadow: #f5f5f5 0 1px 0;
+        opacity: 0.9;
+        position: absolute;
+        font-size: 12px;
+        font-family: "Arial", sans-serif;
+    }*/
+
+    div.tooltip {
+        color: black;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0px 0px 2px 0px #a6a6a6;
+        padding: .2em;
+        text-shadow: #f5f5f5 0 1px 0;
+        opacity: 0.9;
+        position: absolute;
+        font-size: 14px;
+        font-family: "Arial", sans-serif;
+        font-weight: normal;
+    }
+
+
+    .names {
+        fill: none;
+        stroke: #fff;
+        stroke-linejoin: round;
+    }
+
+
+    /*    text{
+      pointer-events:none;
+    }*/
+
+    .details {
+        color: white;
+    }
+
+
+    .node circle {
+        fill: #fff;
+        stroke: orange;
+        stroke-width: 2px;
+        width: 10px;
+        height: 10px;
+    }
+
+    .node text {
+        font: 12px sans-serif;
+        font-weight: normal;
+    }
+
+    .link {
+        fill: none;
+        stroke: black;
+        stroke-width: 1px;
+        stroke-dasharray: 20,10,5,5,5,10;
+    }
+</style>
+<div id="map"></div>
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
+                    <h2>World Map</h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding" id="UsmanTesting">
+
+
+                        <div id="vector-map" class="vector-map">    </div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Country Wise Data Visualization</h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+
+
+
+                    <div class="widget-body no-padding">
+
+                        <div id="mapdetails"></div>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                        -->
+                        <header>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
+                            <h2>Data Centers </h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+
+
+                            <div class="widget-body no-padding">
+
+                                <br />
+                                <table id="tblCountry" class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Country Code</th>
+                                            <th>Country Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                        -->
+                        <header>
+                            <span class="widget-icon">
+                                <i class="fa fa-table"></i>
+                            </span>
+                            <h2>Applications </h2>
+
+                        </header>
+
+                        <!-- widget div-->
+                        <div>
+
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+
+                            </div>
+
+
+                            <div class="widget-body no-padding">
+
+                                <br />
+                                <table id="tblCountry1" class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Country Code</th>
+                                            <th>Country Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+
+
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+
+        var countryjsonobject;
+
+
+        $.ajax({
+            url: '/Home/GetDefinedCountries',
+            type: 'POST',
+            datatype: 'json',
+            async: false,
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+
+            },
+            success: function (result) {
+                countryjsonobject = result;
+
+             
+
+
+
+
+            }
+        });
+
+
+
+        var width = document.getElementById("vector-map").clientWidth,
+            height = document.getElementById("vector-map").clientHeight;
+
+        //var width = 1200,
+        //    height = 510;
+        var countryCode = 826;
+
+
+        // Some code for the country label tooltip
+        var offsetL = document.getElementById('map').offsetLeft + 1;
+        var offsetT = document.getElementById('map').offsetTop + 1;
+
+        var tooltip = d3.select("#map")
+            .append("div")
+            .attr("class", "tooltip hidden");
+
+
+
+        // var countryjsonobject = '{ "countries": [{ "name":"Pakistan", "id":586 },    { "name":"India","id":356},{ "name":"United States", "id":840 }, { "name":"Canada","id":124} ]  }';
+
+
+
+
+        var projection = d3.geoMercator()
+            .center([0, 20])
+            .scale(width / 9)
+            //.scale(150)
+            .translate([width / 2, height / 2])
+
+
+
+
+
+
+
+        var svg = d3.select("#vector-map").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        var path = d3.geoPath()
+            .projection(projection);
+        var g = svg.append("g");
+
+        var countryobject = countryjsonobject;
+        //console.log(JSON.stringify(countryobject.countries[0]));
+        // load and display the World
+        d3.json("world-110m2.json", function (error, topology) {
+
+
+            var countries = topojson.feature(topology, topology.objects.countries);
+
+            var selectedcolor;
+
+
+
+
+
+            g.selectAll(".country")
+                .data(topojson.feature(topology, topology.objects.countries)
+                    .features)
+                .enter().insert("path", ".graticule")
+                .attr("class", "country")
+                .attr("d", path)
+                .on("mousemove", function (d, i) {
+                    var mouse = d3.mouse(svg.node())
+                        .map(function (d) { return parseInt(d); });
+                    tooltip.classed("hidden", false)
+                        .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT) + "px")
+                        .html(ShowCountryName(countryobject, d.id));
+                })
+                .on("mouseover", function (d, i) {
+                    selectedcolor = d3.select(this).attr("r", 10).style("fill");
+                    d3.select(this).attr("r", 10).style("fill", "#2874A6");
+                })
+                .on("mouseout", function () {
+                    d3.select(this).attr("r", 10).style("fill", selectedcolor);
+
+                })
+
+                .on('click', function (d, i) {
+
+                    var mouse = d3.mouse(svg.node())
+                        .map(function (d) { return parseInt(d); });
+                   
+                    //var x = document.getElementById("wid-id-1");
+                    //x.classList.add("jarviswidget-collapsed");
+
+                    document.querySelector('.jarviswidget-toggle-btn').click();
+                    fillData(d.id);
+
+                    // document.getElementsByClassName('jarviswidget-toggle-btn').click();
+                    //document.getElementById("wid-id-1").setAttribute('data-widget-collapsed', 'true');
+                    // document.getElementsByTagName("i").class = "fa fa-plus";
+
+
+                })
+                .style("fill", function (d) {
+
+                    if (FoundInCountries(countryobject, d.id)) {
+
+
+                        return '#2196F3';
+                    }
+                    else {
+                        return 'lightgray';
+                    }
+
+                });
+
+
+
+
+            // load and display the cities
+            //d3.csv("cities.csv", function (error, data) {
+            //    g.selectAll("circle")
+            //        .data(data)
+            //        .enter()
+            //        .append("a")
+            //        .attr("xlink:href", function (d) {
+            //            return "https://www.google.com/search?q=" + d.city;
+            //        }
+            //        )
+            //        .append("circle")
+            //        .attr("cx", function (d) {
+            //            return projection([d.lon, d.lat])[0];
+            //        })
+            //        .attr("cy", function (d) {
+            //            return projection([d.lon, d.lat])[1];
+            //        })
+            //        .attr("r", 3)
+            //        .style("fill", "maroon");
+            //});
+
+
+            g.selectAll("path")
+                .data(topojson.feature(topology, topology.objects.countries)
+                    .features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+
+        });
+        // zoom and pan
+
+
+        var zoom = d3.zoom()
+            .on("zoom", function () {
+
+                g.attr("transform", d3.event.transform)
+
+                g.selectAll("circle")
+                    .attr("d", path.projection(projection));
+                g.selectAll("path")
+                    .attr("d", path.projection(projection));
+            });
+
+
+
+        svg.call(zoom)
+
+
+        function FoundInCountries(countryobject, id) {
+
+
+            for (var i = 0; i < countryobject.length; i++) {
+                console.log(countryobject[i].id.toString());
+                if (countryobject[i].id.toString() == id.toString()) {
+
+                    return true;
+
+                }
+            }
+
+            return false;
+
+        }
+
+
+        function ShowCountryName(countryobject, id) {
+            for (var i = 0; i < countryobject.length; i++) {
+
+                if (countryobject[i].id.toString() == id.toString()) {
+
+                    return countryobject[i].name.toString();
+
+                }
+            }
+
+            return "";
+        }
+
+
+        /*function FillData Strats here */
+
+        function fillData(countryid) {
+
+            document.getElementById("mapdetails").innerHTML = "";
+
+            var fields = [
+                "id",
+                "name",
+                "tag.analytics.aggname",
+                "tag.analytics.jobname",
+                "tag.analytics.metric",
+                "tag.kubernetes.namespace.creationTimestamp",
+                "tag.kubernetes.namespace.name",
+                "tag.kubernetes.namespace.phase",
+                "tag.kubernetes.namespace.uid",
+                "tag.kubernetes.node.ExternalIP",
+                "tag.kubernetes.node.Hostname",
+                "tag.kubernetes.node.InternalIP",
+                "tag.kubernetes.node.creationTimestamp",
+                "tag.kubernetes.node.name",
+                "tag.kubernetes.node.uid",
+                "tag.kubernetes.pod.creationTimestamp",
+                "tag.kubernetes.pod.hostIP",
+                "tag.kubernetes.pod.label.app",
+                "tag.kubernetes.pod.label.chart",
+                "tag.kubernetes.pod.label.component",
+                "tag.kubernetes.pod.label.controller-revision-hash",
+                "tag.kubernetes.pod.label.heritage",
+                "tag.kubernetes.pod.label.k8s-app",
+                "tag.kubernetes.pod.label.kubernetes.io/cluster-service",
+                "tag.kubernetes.pod.label.name",
+                "tag.kubernetes.pod.label.pod-template-generation",
+                "tag.kubernetes.pod.label.pod-template-hash",
+                "tag.kubernetes.pod.label.release",
+                "tag.kubernetes.pod.label.tier",
+                "tag.kubernetes.pod.name",
+                "tag.kubernetes.pod.phase",
+                "tag.kubernetes.pod.podIP",
+                "tag.kubernetes.pod.uid",
+                "tag.kubernetes.service",
+                "tag.kubernetes.type",
+                "tag.collector",
+                "units"
+            ]
+
+            var key = "tag.kubernetes.pod.label.release";
+
+            const buildTree = (fields) => {
+                let tree = {
+                    "name": "tags",
+                    "children": []
+                }
+
+                const addNodes = (tag) => {
+                    for (let i = 0; i < root.children.length; i++) {
+                        if (tag === root.children[i].name) {
+                            root = root.children[i];
+                            return;
+                        }
+                    }
+                    root.children.push({
+                        'name': tag,
+                        children: []
+                    })
+                    root = root.children[root.children.length - 1]
+                }
+
+                fields.forEach((field) => {
+                    tags = field.split('.');
+                    root = tree;
+                    tags.forEach(addNodes)
+                })
+                return tree;
+            }
+
+           var realData;
+            
+
+
+
+            $.ajax({
+                url: '/Home/GetDataCenterTreeForCountry',
+                type: 'POST',
+                datatype: 'json',
+                data: { countryid: countryid },
+                async: false,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+                success: function (result) {
+                    //realData = { "name": "pak" };
+
+                //    realData = {
+                //         "name": "Max" ,
+                //     "name": "Hagbard" ,
+                //     "name": "Karl" 
+                //};
+
+                    realData = result;
+                   
+                 
+
+                }
+            });
+
+
+
+           
+
+
+            // Set the dimensions and margins of the diagram
+            var margin = { top: 0, right: 0, bottom: 30, left: 70 },
+                width = window.innerWidth - margin.left - margin.right,
+                height = 700 - margin.top - margin.bottom;
+
+            // append the svg object to the body of the page
+            // appends a 'group' element to 'svg'
+            // moves the 'group' element to the top left margin
+            var svg = d3.select("#mapdetails").append("svg")
+                .attr("id", "svg")
+                .attr("width", width + margin.right + margin.left)
+                .attr("height", height + margin.top + margin.bottom)
+                // .attr("preserveAspectRatio", "xMinYMin meet")
+                //   .attr("viewBox", `0 0 ${width} ${height}`)
+                .append("g")
+                .attr("transform", "translate("
+                    + margin.left + "," + margin.top + ")");
+
+
+
+            // declares a tree layout and assigns the size
+            var treemap = d3.tree().size([height, width]);
+            var i = 0,
+                duration = 750,
+                root;
+            // Assigns parent, children, height, depth
+            root = d3.hierarchy(realData, function (d) { return d.children; });
+            root.x0 = height / 2;
+            root.y0 = 0;
+
+            // Collapse after the second level
+            // root.children.forEach(collapse);
+
+            // collapse all
+            expand(root)
+            expandOnKey(key, root);
+            update(root);
+
+            //Expand the tree based on key
+            function expandOnKey(key, root) {
+                var node = root;
+                var tags = key.split(".");
+                while (tags.length > 0) {
+                    var found = false;
+                    var next = tags[0]
+                    if (node._children) {
+                        node._children.forEach((child) => {
+                            if (child.data.name === next) {
+                                // expand this node
+                                node.children = node._children;
+                                node._children = null;
+                                // change fill color
+                                node.class = 'match'
+                                child.class = 'match';
+                                node = child;
+                                found = true;
+                            }
+                        })
+                    }
+                    if (found) {
+                        tags.shift()
+                    } else {
+                        return;
+                    }
+                }
+            }
+
+
+            // Collapse the node and all it's children
+            function collapse(d) {
+                if (d.children) {
+                    d._children = d.children
+                    d._children.forEach(collapse)
+                    d.children = null
+                }
+            }
+
+            function expand(d) {
+                var children = (d.children) ? d.children : d._children;
+                if (d._children) {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                if (children)
+                    children.forEach(expand);
+            }
+            function getHeight(root) {
+                if (!root) {
+                    return 0
+                }
+                let expandChildren = [0]
+                // if root has expanded children
+                if (root.children) {
+                    expandChildren = root.children.map(ea => getHeight(ea))
+                }
+                const max = expandChildren.reduce((a, b) => Math.max(a, b))
+                return 1 + max
+            }
+
+            function update(source) {
+                var currentHeight = getHeight(root);
+                var newWidth = window.innerWidth;
+                document.getElementById("svg").style.width = newWidth;
+                // Assigns the x and y position for the nodes
+                var realData = treemap(root);
+
+                // Compute the new tree layout.
+                var nodes = realData.descendants(),
+                    links = realData.descendants().slice(1);
+
+                // Normalize for current-depth.
+                nodes.forEach(function (d) { d.y = d.depth * window.innerWidth / (currentHeight + Math.log(currentHeight - 1)) });
+                // ****************** Nodes section ***************************
+                // create tip for nodes
+                // var tip = d3.tip()
+                //   .attr('class', 'd3-tip')
+                //   .offset([-10, 0])
+                //   .html(function(d) {
+                //     return getPath(d)
+                //   })
+
+                // Update the nodes...
+                var node = svg.selectAll('g.node')
+                    .data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+
+
+                // Enter any new modes at the parent's previous position.
+                var nodeEnter = node.enter().append('g')
+                    .attr('class', 'node')
+                    .attr("transform", function (d) {
+                        return "translate(" + source.y0 + "," + source.x0 + ")";
+                    })
+                    .on('click', click);
+                // nodeEnter.call(tip);
+                // Add Circle for the nodes
+                nodeEnter.append('circle')
+                    .attr('class', 'node')
+                    .attr('r', 1e-6)
+                    .style("fill", function (d) {
+                        return d._children ? "#2196F3" : "#fff";
+                    })
+                // .on('mouseover', tip.show) // add tip
+                // .on('mouseout', tip.hide);
+
+                //////////// adds images as nodes
+                //////////nodeEnter.append("image")
+                //////////    .attr("xlink:href", function (d) { return d.data.name; })
+                //////////    .attr("x", "-12px")
+                //////////    .attr("y", "-12px")
+                //////////    .attr("width", "24px")
+                //////////    .attr("height", "24px");
+
+                // Add labels for the nodes
+                nodeEnter.append('text')
+                    .attr("dy", ".35em")
+                    .attr("x", function (d) {
+                        return d.children || d._children ? -13 : 13;
+                    })
+                    .attr("text-anchor", function (d) {
+                        return d.children || d._children ? "end" : "start";
+                    })
+                    .text(function (d) { return d.data.name; });
+
+                // UPDATE
+                var nodeUpdate = nodeEnter.merge(node);
+                // Transition to the proper position for the node
+                nodeUpdate.transition()
+                    .duration(duration)
+                    .attr("transform", function (d) {
+                        return "translate(" + d.y + "," + d.x + ")";
+                    });
+
+                // Update the node attributes and style
+                nodeUpdate.select('circle.node')
+                    .attr('r', 5)
+                    .style("fill", function (d) {
+                        if (getPath(d) === key) {
+                            // clicked leaf node
+                            return 'blue';
+                        } else if (d.class === 'match') {
+                            return 'green';
+                        }
+                        return d._children ? "#2196F3" : "#fff";
+                    })
+                    .style("stroke", function (d) {
+                        if (getPath(d) === key) {
+                            // clicked leaf node
+                            return 'lightblue';
+                        } else {
+                            return '#2196F3';
+                        }
+
+                    })
+                    .attr('cursor', 'pointer');
+
+
+                // Remove any exiting nodes
+                var nodeExit = node.exit().transition()
+                    .duration(duration)
+                    .attr("transform", function (d) {
+                        return "translate(" + source.y + "," + source.x + ")";
+                    })
+                    .remove();
+
+                // On exit reduce the node circles size to 0
+                nodeExit.select('circle')
+                    .attr('r', 1e-6);
+
+                // On exit reduce the opacity of text labels
+                nodeExit.select('text')
+                    .style('fill-opacity', 1e-6);
+
+                // ****************** links section ***************************
+
+                // Update the links...
+                var link = svg.selectAll('path.link')
+                    .data(links, function (d) { return d.id; });
+
+                // Enter any new links at the parent's previous position.
+                var linkEnter = link.enter().insert('path', "g")
+                    .attr("class", "link")
+                    .attr('d', function (d) {
+                        var o = { x: source.x0, y: source.y0 }
+                        return diagonal(o, o)
+                    });
+
+                // UPDATE
+                var linkUpdate = linkEnter.merge(link);
+
+                // Transition back to the parent element position
+                linkUpdate.transition()
+                    .duration(duration)
+                    .attr('d', function (d) { return diagonal(d, d.parent) })
+                    .style("stroke", function (d) {
+                        if (d.class === 'match') {
+                            return '#3fb986'
+                        }
+                    });
+
+                // Remove any exiting links
+                var linkExit = link.exit().transition()
+                    .duration(duration)
+                    .attr('d', function (d) {
+                        var o = { x: source.x, y: source.y }
+                        return diagonal(o, o)
+                    })
+                    .remove();
+
+                // Store the old positions for transition.
+                nodes.forEach(function (d) {
+                    d.x0 = d.x;
+                    d.y0 = d.y;
+                });
+
+                // Creates a curved (diagonal) path from parent to the child nodes
+                function diagonal(s, d) {
+
+                    var path = `M ${s.y} ${s.x}
+                    C ${(s.y + d.y) / 2} ${s.x},
+                      ${(s.y + d.y) / 2} ${d.x},
+                      ${d.y} ${d.x}`
+
+                    return path;
+                }
+
+                // Toggle children on click.
+                function click(d) {
+                    if (!d.children && !d._children) {
+                        //leaf node
+                        key = getPath(d);
+                        d.path = key;
+                    }
+                    //d.children is expanded children
+                    //d._children is collapes children
+                    if (d.children) {
+                        d._children = d.children;
+                        d.children = null;
+                    } else {
+                        d.children = d._children;
+                        d._children = null;
+                    }
+                    update(d);
+                }
+                // return the path from root to this node
+                function getPath(d) {
+                    var path = [];
+                    while (d.parent !== null) {
+                        path.unshift(d.data.name)
+                        d = d.parent
+                    }
+                    return path.join('.')
+                }
+            }
+            // resize the chart width based on window size
+            window.addEventListener('resize', _.debounce(function () {
+
+                update(root)
+            }, 200));
+
+
+        }
+
+            /*Fill Data Functions Ends here */
+
+
+
+            /***  Map details multilevel code starts here. ***/
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+}

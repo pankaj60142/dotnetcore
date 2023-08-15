@@ -1,0 +1,248 @@
+@using SmartAdmin.Seed.Configuration
+@using SmartAdmin.Seed.Models
+@using SmartAdmin.Seed.Models.AccountViewModels
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+        <h1 class="txt-color-orangeDark login-header-big" style="color:#d6882a !important">Enterprise Atlas (EA): <br /> Atlas of your Enterprise.</h1>
+        <div class="hero">
+
+            <div class="pull-left login-desc-box-l">
+                <h4 class="paragraph-header" style="width:100%">It’s Okay to be Smart, Experience the simplicity of EnterpriseAtlas everywhere you go!</h4>
+                @* <div class="login-app-icons">
+                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>
+                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>
+                    </div>*@
+            </div>
+
+            <img src="~/img/homepage_image.png" class="pull-right display-image" alt="" style="width: 284px;height: 97%;margin-top: -42px;">
+
+        </div>
+
+        @* <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5 class="about-heading">About Web APP - Are you up to date?</h5>
+            <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
+            </p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5 class="about-heading">Not just your average template!</h5>
+            <p>
+            Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
+            </p>
+            </div>
+            </div>*@
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+        <div class="well no-padding">
+            <form asp-controller="Account" asp-action="Login" id="login-form" class="smart-form client-form">
+                <header>
+                    <b>Sign In</b>
+                </header>
+
+                <fieldset>
+                    <section>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    </section>
+                    <section style="display:none">
+                        <label class="label">Company</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-institution"></i>
+                            <input type="text" id="CompanyId" name="companyname" value="">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal" ></i> Please enter company name</b>
+                        </label>
+                    </section>
+
+                    <section>
+                        <label class="label">E-mail</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            @{
+                                if  (Model  !=  null)
+                                {
+                                    <input type="email" id="email" autofocus name="email" value="@Model.Email">
+                                }
+                                else
+
+                                {
+
+                                    <input type="email" autofocus id="email" name="email">
+                                }
+                            }
+
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b>
+                        </label>
+                    </section>
+
+                    <section>
+                        <label class="label">Password</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            <input type="password" id="password" name="password">
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+                        </label>
+                        <div class="note">
+                            <a asp-controller="Account" asp-action="ForgotPassword">Forgot password?</a>
+                        </div>
+                    </section>
+
+                    <section>
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember" checked="">
+                            <i></i>Stay signed in
+                        </label>
+                    </section>
+                </fieldset>
+                <footer>
+                    <button id="BtnSave" type="button" class="btn btn-primary" onclick="LoginUser()">
+                        Sign in
+                    </button>
+                </footer>
+            </form>
+
+        </div>
+
+        @* <h5 class="text-center"> - Or sign in using -</h5>
+
+            <ul class="list-inline text-center">
+            <li>
+            <a href="javascript:void(0);" class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+            <a href="javascript:void(0);" class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+            <a href="javascript:void(0);" class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
+            </li>
+            </ul>*@
+
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+<script type="text/javascript">
+    runAllForms();
+
+    $(function() {
+        debugger;
+          const queryString = window.location.search;
+
+    const urlParams = new URLSearchParams(queryString);
+
+    const action = urlParams.get('id');
+
+    if(action !=null)
+    {
+    if(action==-999999)
+    {
+         swal('Account verified successfully');
+    }
+    }
+
+        // Validation
+        $("#login-form").validate({
+            // Rules for form validation
+            rules: {
+                //companyname: {
+                //    required: true,
+                //    maxlength: 500
+                //},
+                email : {
+                    required : true,
+                    email : true
+                },
+                password : {
+                    required : true,
+                    minlength : 3,
+                    maxlength : 20
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                //companyname: {
+                //    required: 'Please enter country name'
+
+                //},
+                email : {
+                    required : 'Please enter your email address',
+                    email : 'Please enter a VALID email address'
+                },
+                password : {
+                    required : 'Please enter your password'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement : function(error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+    });
+
+
+    function LoginUser() {
+
+
+        GetCompanyId();
+
+
+
+
+    }
+
+        $(document).keypress(function (event) {
+            if (event.key === "Enter") {
+                // Cancel the default action, if needed
+                event.preventDefault();
+
+                // Trigger the button element with a click
+                document.getElementById("BtnSave").click();
+                document.getElementById("BtnSave").disabled = true;
+            }
+        });
+
+    function GetCompanyId() {
+
+        var company = document.getElementById("CompanyId").value;
+        $.ajax({
+            url:'../Account/GetCompanyId',
+            type: 'POST',
+            datatype: 'json',
+            data: { CompanyName: company },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                    document.getElementById("BtnSave").disabled = false;
+            },
+
+            success: function (result) {
+                if (result.length == 0) {
+                    swal('Please enter valid company name');
+                }
+
+                else {
+                    localStorage.setItem("companyid", result[0].CompanyId);
+
+
+                    document.getElementById("login-form").submit();
+
+                }
+
+                
+                    document.getElementById("BtnSave").disabled = false;
+
+
+
+
+            }
+
+
+        });
+    }
+
+
+</script>
+}

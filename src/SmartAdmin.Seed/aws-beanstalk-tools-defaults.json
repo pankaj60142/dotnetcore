@@ -1,0 +1,24 @@
+
+{
+    "region" : "us-east-2",
+    "configuration" : "Debug",
+    "framework"     : "netcoreapp3.1",
+    "self-contained" : false,
+    "application"    : "SmartAdminSeed",
+    "environment"    : "SmartAdminSeed-dev",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-342e287d\";\"aws:ec2:vpc,Subnets\"=\"subnet-8a70fce1\"",
+    "solution-stack"       : "64bit Windows Server Core 2019 v2.6.8 running IIS 10.0",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "smartadminseed-dev",
+    "instance-type"        : "t2.micro",
+    "key-pair"             : "",
+    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
+    "service-role"         : "aws-elasticbeanstalk-service-role",
+    "proxy-server"         : "nginx",
+    "profile"              : "default",
+    "health-check-url"     : "/",
+    "iis-website"          : "Default Web Site",
+    "app-path"             : "/"
+}

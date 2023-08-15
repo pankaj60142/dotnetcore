@@ -1,0 +1,189 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class StateController : Controller
+    {
+
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> states;
+        private List<lkpAllCountries> countries;
+        #endregion
+
+        public StateController(ApplicationDbContext context)
+        {
+
+            _context = context;
+            states = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpAllCountries select c).ToList();
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonStringResult GetName()
+        {
+
+            var result = (from c in states
+                          select c).ToList();
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+        }
+
+        public JsonStringResult GetCountry()
+        {
+
+            var resultCountry = (from c in countries
+                                 select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountry);
+            return new JsonStringResult(json);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult SaveState([FromBody]lkpState state)
+        {
+
+            try
+            {
+                var selectedcountry = (from c in states
+                                       where c.StateName == state.StateName
+                                       select c).FirstOrDefault();
+
+                if (selectedcountry == null)
+                {
+                    string messageCountry = "Country information not found";
+                    return new JsonStringResult(messageCountry);
+                }
+
+
+                var found = (from c in _context.lkpState where c.StateName == state.StateName select c).FirstOrDefault();
+
+                //Country name dows not exist, so add a new country
+                if (found == null)
+                {
+
+                    state.StateName = selectedcountry.StateName;
+                   
+                    state.StateId = selectedcountry.StateId;
+                    state.Latitude = selectedcountry.latitude;
+                    state.Longitude = selectedcountry.longitude;
+                    state.CreatedAt = DateTime.Now;
+                    state.ModifiedAt = DateTime.Now;
+                    state.Active = true;
+
+                    _context.lkpState.Add(state);
+                    _context.SaveChanges();
+                }
+                //Country found, Update it
+                else
+                {
+                    found.StateName = state.StateName;
+                   
+                    found.StateId = selectedcountry.StateId;
+                    found.Latitude = selectedcountry.latitude;
+                    found.Longitude = selectedcountry.longitude;
+                    found.ModifiedAt = DateTime.Now;
+                    _context.SaveChanges();
+
+                }
+
+                string message = "SUCCESS";
+                return new JsonStringResult(message);
+            }
+            catch (Exception ex)
+            {
+
+                string message = "Fail.." + ex.Message;
+                return new JsonStringResult(message);
+            }
+
+
+
+
+
+
+        }
+
+
+
+        //[HttpPost]
+        //public ActionResult FillState()
+        //{
+        //    //var q = from c in _context.lkpAllStates
+        //    //        join o in _context.lkpAllCountries
+        //    //        on c.CountryCode equals o.CountryCode
+        //    //        select new
+        //    //        {
+        //    //            custid = c.CountryCode,
+                        
+
+        //    //        };
+
+
+        //    return View();
+        //}
+        [HttpPost]
+        public JsonStringResult GetInsertedStates()
+        {
+
+            var result = (from c in _context.lkpState
+                          select c).ToList();
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteState([FromBody]lkpState state)
+        {
+            string message = "SUCCESS";
+
+            try
+            {
+                var selectedstate = (from c in _context.lkpState
+                                       where c.StateName == state.StateName
+                                       select c).FirstOrDefault();
+
+                if (selectedstate == null)
+                {
+
+                    message = "Fail";
+                }
+
+                _context.lkpState.Remove(selectedstate);
+                _context.SaveChanges();
+
+                return new JsonStringResult(message);
+            }
+            catch (System.Exception)
+            {
+
+                return new JsonStringResult("Fail");
+            }
+
+        }
+
+
+    }
+
+    
+}

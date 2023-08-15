@@ -1,0 +1,23 @@
+<!-- HEADER -->
+<header id="header">
+    <div id="logo-group">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo">
+            <a href="/">
+                <img src="~/img/logo.png" style="height: 55px;width: 83px;margin-top: -16px;" alt="SmartAdmin">
+
+            </a>
+        </span>
+        <!-- END LOGO PLACEHOLDER -->
+    </div>
+
+    <span id="extr-page-header-space">
+        <span hide-if-active asp-controller="Account" asp-action="Login">
+            <span class="hidden-mobile hidden-xs"></span> <a asp-controller="Account" asp-action="Login" class="btn btn-warning">Sign in</a>
+        </span>
+        <span show-if-active asp-controller="Account" asp-action="Login">
+            <span class="hidden-mobile hidden-xs"></span> <a asp-controller="Account" asp-action="Register" class="btn btn-warning">Create account</a>
+        </span>
+    </span>
+</header>
+<!-- END HEADER -->

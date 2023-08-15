@@ -1,0 +1,594 @@
+
+@{
+    ViewData["Title"] = "Data Center";
+}
+
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+            Forms
+            <span>
+                >
+                Department
+            </span>
+        </h1>
+    </div>
+
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Department Form </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmDepartment" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="label">Country Name</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="countryname" name="countryname" placeholder="Country name" class="flexdatalist" data-min-length="1" data-value-property='CountryName' >
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">State Name</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="statename" name="statename" placeholder="State name" class="flexdatalist" data-min-length="1" data-value-property='StateName' >
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the State name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">City Name</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" data-value-property='CityName' >
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">Data Center Name</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="datacentername" name="datacentername" placeholder="Data Center name" class="flexdatalist" data-min-length="1" data-value-property='DataCenter name' >
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Center name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">Department Name</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="departmentname" name="departmentname" placeholder="Department name" data-min-length="1" data-value-property='Department Name' >
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Department name</b>
+                                        </label>
+                                    </section>
+
+
+
+
+                                </div>
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveDepartment();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="ClearCity();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Department </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+
+
+                    <div class="widget-body no-padding">
+
+                        <br />
+                        <table id="tblDepartmentName" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Data Center Name</th>
+                                    <th>Department Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+
+
+
+
+@section Scripts {
+    <!-- SCRIPTS ON PAGE EVENT -->
+    <script type="text/javascript">
+
+       
+
+        pageSetUp();
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+        };
+
+        // end pagefunction
+
+        function FillStates(countryid) {
+
+            $.ajax({
+                url: '/Department/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CountryId: countryid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+
+
+                    var flexdatalistState = $("#statename").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'StateName',
+                        visibleProperties: ["StateName", "Latitude", "Longitude", "StateId"],
+                        searchIn: 'StateName',
+                        data: resultState
+                    });
+
+                    flexdatalistState.on('select:flexdatalist', function (event, data) {
+                        selectedstateid = data.StateId;
+
+                        FillCities(data.StateId);
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillCities(stateid) {
+
+            $.ajax({
+                url: '/Department/GetCityName',
+                type: 'POST',
+                datatype: 'json',
+                data: { StateId: stateid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCity) {
+                    
+                    var flexdatalistCity = $("#cityname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CityName',
+                        visibleProperties: ["CityName", "Latitude", "Longitude", "CityId"],
+                        searchIn: 'CityName',
+                        data: resultCity
+                    });
+
+                    flexdatalistCity.on('select:flexdatalist', function (event, data) {
+                        selectedcityid = data.CityId;
+                        FillDataCenter(selectedcityid);
+                       
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillDataCenter(cityid) {
+
+            $.ajax({
+                url: '/Department/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CityId: cityid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDataCenter) {
+
+
+                    var flexdatalistDatacenter = $("#datacentername").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DataCenterName',
+                        visibleProperties: ["DataCenterName", "DataCenterId"],
+                        
+                        searchIn: 'DataCenterName',
+                        data: resultDataCenter
+                    });
+
+                    flexdatalistDatacenter.on('select:flexdatalist', function (event, data) {
+                        
+                        selecteddatacenterid = data.DataCenterId;
+                       
+                    });
+
+                }
+                
+            });
+        }
+        
+        var rootDir = "@Url.Content("~/")";
+        
+        var selectedcountryid = -999;
+        var selectedstateid = -999;
+        var selectedcityid = -999;
+        var selecteddatacenterid = -999;
+
+        $.ajax({
+            url: '/Department/GetCountryName',
+            type: 'POST',
+            datatype: 'json',
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+
+            },
+
+            success: function (resultCountry) {
+
+
+                var flexDataListCountry = $("#countryname").flexdatalist({
+                    minLength: 1,
+                    valueProperty: 'CountryId',
+                    visibleProperties: ["CountryName", "Latitude", "Longitude", "CountryId"],
+                    searchIn: 'CountryName',
+                    data: resultCountry
+                });
+
+                flexDataListCountry.on('select:flexdatalist', function (event, data) {
+                    selectedcountryid = data.CountryId;
+                    FillStates(selectedcountryid);
+                    //$('#city').val(data.city);
+                    //$('#state').val(data.state);
+                });
+
+
+            }
+
+
+        });
+
+
+
+
+        function SaveDepartment() {
+
+
+
+            if ($("#frmDepartment").valid()) {
+
+                var selectedstate = selectedstateid;
+                var selectedcountry = selectedcountryid;
+                var selectedcity = selectedcityid;
+                var selecteddatacenter = selecteddatacenterid;
+                var selectedDepartment = $('#departmentname').val();
+
+
+                var options = {};
+                options.url = "/Department/SaveDepartment";
+                options.type = "POST";
+
+                var obj = {
+                    CountryId: selectedcountry,
+                    StateId: selectedstate,
+                    CityId: selectedcity,
+                    DataCenterId: selecteddatacenter,
+                    DepartmentName: selectedDepartment
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Data Center saved successfully!", "success");
+                        $('#departmentname').val('');
+                         FillAllDepartment();
+                    }
+                    else
+
+
+                        swal("Error", "Error while saving datacenter!", "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+        }
+
+        function FillAllDepartment() {
+            $.ajax({
+                url: '/Department/GetInsertedDepartment',
+                type: 'POST',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill Department', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblDepartmentName').DataTable().destroy();
+                    var t = $('#tblDepartmentName').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'DataCenterName', 'width': '20%' },
+                            { data: 'DepartmentName', 'width': '60%' },
+
+                            {
+
+                                "data": "DepartmentId",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteSelecteddepartment(\'' + data + '\');">Delete</button>';
+                                }
+                            },
+                            { data: 'DepartmentId', "visible": false }
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+
+        FillAllDepartment();
+
+      
+        function DeleteSelecteddepartment(department) {
+
+
+
+
+            swal({
+                title: "Are you sure?",
+                text: "All associated data centers will be deleted too,You will not be able to rollback this action!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+
+                        Deletedepartment(department);
+
+                    } else {
+                        swal("Cancelled", "You Cancelled delete operation!", "error");
+                    }
+                });
+
+
+
+
+        }
+
+        function Deletedepartment(department) {
+
+            var selecteddepartment = department;
+            
+            var options = {};
+            options.url = "/Department/Deletedepartment";
+            options.type = "POST";
+
+            var obj = {
+
+                DepartmentId: selecteddepartment
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+
+                if (msg.responseText == "SUCCESS") {
+                    swal("Deleted!", "Department has been deleted!", "success");
+                    FillAllDepartment();
+                }
+                else
+                    swal("Error", "Error while deleting Department !", "error");
+            };
+
+            $.ajax(options);
+        }
+        function ClearDepartment(DepartmentId) {
+
+        }
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

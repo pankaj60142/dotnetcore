@@ -1,0 +1,760 @@
+@{
+    Layout = null;
+}
+
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Grapheditor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="~/graph/styles/grapheditor.css">
+    <link rel="stylesheet" type="text/css" href="~/css/SweetAlert.css">
+     @*<link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />*@
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+    
+ 
+
+    <style type="text/css">
+        div#jarviswidget-fullscreen-mode#mxGraph {
+            height: 100vh !important;
+        }
+
+        .geFooterContainer {
+            height: 0px !important;
+        }
+
+  .btn {
+  background-color: #d6892d;
+          border: #d6892d;
+  color: white;
+  padding: 6px 21px;
+  font-size: 16px;
+  cursor: pointer;
+  /*box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,.1), 0 0.9375rem 1.40625rem rgba(90,97,105,.1), 0 0.25rem 0.53125rem rgba(90,97,105,.12), 0 0.125rem 0.1875rem rgba(90,97,105,.1);*/
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+          background-color: #fbba6c;
+  color:white;
+
+}
+
+
+
+.stackMain {
+       max-height: 98vh !important;
+        overflow: unset !important;
+    }
+
+ .stack {
+        display: inline-block;
+        vertical-align: top;
+        width: 20%;
+        border: 1px solid #ccc;
+        margin: 20px;
+      max-height: 98vh !important;
+        box-shadow: 0 6px 4px -4px lightgrey;
+    }
+
+        .stack:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    .stackHdr {
+        background-color: white;
+        border: 1px solid #fff;
+        padding: 5px;
+    }
+
+
+    .stackRight {
+          display: flex;
+  flex-wrap: wrap;
+    vertical-align: top;
+    width: 79%;
+   
+   margin-left:20%;
+    max-height: 98vh !important;
+    /*box-shadow: 0 6px 4px -4px lightgrey;*/
+    }
+
+        
+
+        .stackRight > div {
+  flex: 1 1 auto;
+  border: 1px red white;
+  text-align: center;
+
+  margin: 5px;  /* and that, will result in a 10px gap */
+   width: 50px;
+  height: 50px;
+
+}
+
+     .stackRight > div:hover {
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+     }
+
+
+   /* (B) LIST */
+    .ulShapes {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .ulShapes li {
+            padding: 20px;
+            font-weight:bold;
+            border-bottom: 2px solid #DCDCDC;
+        }
+
+            .ulShapes li:hover {
+                cursor:pointer;
+                background: #eaeaea38;
+            }
+
+            li.selected {
+   background-color: #0063c3 !important;
+    color: white;
+}
+
+            .ulShapes li.hide {
+                display: none;
+            }
+    </style>
+    <script type="text/javascript">
+
+         rootUrl = '@Url.Content("~")';
+        // Parses URL parameters. Supported parameters are:
+        // - lang=xy: Specifies the language of the user interface.
+        // - touch=1: Enables a touch-style user interface.
+        // - storage=local: Enables HTML5 local storage.
+        // - chrome=0: Chromeless mode.
+        var urlParams = (function (url) {
+            var result = new Object();
+            var idx = url.lastIndexOf('?');
+
+            if (idx > 0) {
+                var params = url.substring(idx + 1).split('&');
+
+                for (var i = 0; i < params.length; i++) {
+                    idx = params[i].indexOf('=');
+
+                    if (idx > 0) {
+                        result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                    }
+                }
+            }
+
+            return result;
+        })(window.location.href);
+
+        // Default resources are included in grapheditor resources
+        mxLoadResources = false;
+    </script>
+     @*<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.js" asp-fallback-src="~/js/bootstrap/bootstrap.js" asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal" crossorigin="anonymous"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/graph/js/Init.js"></script>
+    <script type="text/javascript" src="~/graph/deflate/pako.min.js"></script>
+    <script type="text/javascript" src="~/graph/deflate/base64.js"></script>
+    <script type="text/javascript" src="~/graph/jscolor/jscolor.js"></script>
+    <script src="~/graph/js/DemoPurify.js"></script>
+    <script type="text/javascript" src="~/graph/sanitizer/sanitizer.min.js"></script>
+    <script type="text/javascript" src="~/src/js/mxClient.js"></script>
+    <script type="text/javascript" src="~/graph/js/spin.min.js"></script>
+    <script type="text/javascript" src="~/graph/js/EditorUi.js"></script>
+    <script type="text/javascript" src="~/graph/js/Editor.js"></script>
+   
+   
+   
+@*   All sidebar files*@
+    <script type="text/javascript" src="~/graph/js/Sidebar.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-ActiveDirectory.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Advanced.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-AlliedTelesis.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Android.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-ArchiMate.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-ArchiMate3.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Arrows2.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Atlassian.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-AWS.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-AWS3.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-AWS3D.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-AWS4.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-AWS4b.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Azure.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Azure2.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Basic.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Bootstrap.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-BPMN.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-C4.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Cabinet.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Cisco.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Cisco19.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-CiscoSafe.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Citrix.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Cumulus.js"></script>
+    <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Flowchart.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-DFD.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-EIP.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Electrical.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-ER.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Floorplan.js"></script> 
+ 
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-FluidPower.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-GCP.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-GCP2.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-GCPIcons.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Gmdl.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-IBM.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Infographic.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Ios.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Ios7.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Kubernetes.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-LeanMapping.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Mockup.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-MSCAE.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Network.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Office.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-PID.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Rack.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Signs.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Sitemap.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Sysml.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-ThreatModeling.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-UML25.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Veeam.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-Veeam2.js"></script>
+ <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-VVD.js"></script>
+    <script type="text/javascript" src="~/graph/js/AdditionalSidebars/Sidebar-WebIcons.js"></script>
+
+
+    @*All sidebar files*@
+    <script type="text/javascript" src="~/graph/js/Graph.js"></script>
+    <script type="text/javascript" src="~/graph/js/Format.js"></script>
+    <script type="text/javascript" src="~/graph/js/Shapes.js"></script>
+
+    @*<script type="text/javascript" src="https://unpkg.com/canvg@3.0.4/lib/umd.js"></script>*@
+      <script type="text/javascript" src="~/js/umd.js"></script>
+   
+     
+    <script type="text/javascript" src="~/graph/js/FileSaver.js"></script>
+
+    <script type="text/javascript" src="~/graph/js/Actions.js"></script>
+    <script type="text/javascript" src="~/graph/js/Menus.js"></script>
+    <script type="text/javascript" src="~/graph/js/Toolbar.js"></script>
+    <script type="text/javascript" src="~/graph/js/Dialogs.js"></script>
+    <script type="text/javascript" src="~/javascript/src/js/util/mxAutoSaveManager.js"></script>
+    <script type="text/javascript" src="~/js/SweetAlert.js"></script>
+
+   @* <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" 
+        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+        crossorigin="anonymous">
+</script>*@
+
+
+    <script src="~/graph/js/jspdf.min.js" >
+        
+</script>
+
+<script src="~/graph/js/jquery.resizeandcrop.js"></script>
+
+   <script>
+        function loadScript(src, onLoadSuccessCallback, onLoadErrorCallback) {
+            if (!src) {
+                console.error("Error: missing src");
+                return;
+            }
+
+            // Check if the script is already loaded
+            if (document.querySelector('script[src="' + src + '"]')) {
+                // Script already loaded...
+                console.warn("Script Already Loaded. Skipping: ", src);
+                onLoadSuccessCallback();
+            } else {
+                // Script not already leaded; load script...
+                // Create script tag
+                const js = document.createElement('script');
+                js.src = src;
+                js.setAttribute("async", "");
+
+                // Setup success callback
+                if (onLoadSuccessCallback) {
+                    js.onload = onLoadSuccessCallback;
+                }
+
+                // Setup error callback
+                if (onLoadErrorCallback) {
+                    js.onerror = onLoadErrorCallback;
+                }
+
+                // Add the script tag to <head>
+                document.head.appendChild(js);
+            }
+        };
+   </script>
+</head>
+<body class="geEditor">
+
+   
+    <div id="myModal" class="savemodal">
+
+        <!-- Modal content -->
+        <div class="savemodal-content">
+            <span class="close" onclick="CloseModal();">&times;</span>
+            <p>Some text in the Modal..</p>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        var modal = document.getElementById("myModal");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        // When the user clicks on <span> (x), close the modal
+        function CloseModal() {
+            modal.style.display = "none";
+        }
+
+        window.theCallData = null;
+        var main_spinner=null;
+        window.addEventListener('message', function (theEvent) {
+
+            if (theEvent.data[0] === 'pcall') {
+                //window.theCallData = theEvent.data[1];
+                FillDiagram(theEvent.data[1], theEvent.data[2])
+            }
+
+            else if (theEvent.data[0] === 'cleardiagram') {
+                //window.theCallData = theEvent.data[1];
+                ClearDiagram();
+            }
+
+        }, false);
+
+
+        function ClearDiagram()
+        {
+
+            window.theCallData.editor.graph.selectAll(null, true); deleteAllCellsOfGraph(true, window.theCallData.editor.graph); window.theCallData.editor.setModified(false);
+         window.theCallData.editor.undoManager.clear();
+
+         window.theCallData.editor.resetGraph();;
+         window.theCallData.editor.filename = null;
+      
+       
+
+        window.parent.document.getElementById("graphEditor").innerHTML = "(New) ";
+        }
+
+        function CreateSpinner(x, y, size) {
+           
+            var autoPosition = (x == null || y == null);
+            size = (size != null) ? size : 24;
+
+            var spinner = new Spinner({
+                lines: 12, // The number of lines to draw
+                length: size, // The length of each line
+                width: Math.round(size / 3), // The line thickness
+                radius: Math.round(size / 2), // The radius of the inner circle
+                rotate: 0, // The rotation offset
+                color: (Editor.isDarkMode()) ? '#c0c0c0' : '#000', // #rgb or #rrggbb
+                speed: 1.5, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: true, // Whether to render a shadow
+                hwaccel: false, // Whether to use hardware acceleration
+                zIndex: 2e9 // The z-index (defaults to 2000000000)
+            });
+            this.main_spinner=spinner;
+            // Extends spin method to include an optional label
+            var oldSpin = spinner.spin;
+
+            spinner.spin = function (container, label) {
+                var result = false;
+
+                if (!this.active) {
+                    oldSpin.call(this, container);
+                    this.active = true;
+
+                    if (label != null) {
+                        if (autoPosition) {
+                            y = Math.max(document.body.clientHeight || 0, document.documentElement.clientHeight || 0) / 2;
+                            x = document.body.clientWidth / 2 - 2;
+                        }
+
+                        var status = document.createElement('div');
+                        status.style.position = 'absolute';
+                        status.style.whiteSpace = 'nowrap';
+                        status.style.background = '#4B4243';
+                        status.style.color = 'white';
+                        status.style.fontFamily = Editor.defaultHtmlFont;
+                        status.style.fontSize = '9pt';
+                        status.style.padding = '6px';
+                        status.style.paddingLeft = '10px';
+                        status.style.paddingRight = '10px';
+                        status.style.zIndex = 2e9;
+                        status.style.left = Math.max(0, x) + 'px';
+                        status.style.top = Math.max(0, y + 70) + 'px';
+
+                        mxUtils.setPrefixedStyle(status.style, 'borderRadius', '6px');
+                        mxUtils.setPrefixedStyle(status.style, 'transform', 'translate(-50%,-50%)');
+
+                        if (!Editor.isDarkMode()) {
+                            mxUtils.setPrefixedStyle(status.style, 'boxShadow', '2px 2px 3px 0px #ddd');
+                        }
+
+                        if (label.substring(label.length - 3, label.length) != '...' &&
+                            label.charAt(label.length - 1) != '!') {
+                            label = label + '...';
+                        }
+
+                        status.innerHTML = label;
+                        container.appendChild(status);
+                        spinner.status = status;
+                    }
+
+                    // Pause returns a function to resume the spinner
+                    this.pause = mxUtils.bind(this, function () {
+                        var fn = function () { };
+
+                        if (this.active) {
+                            fn = mxUtils.bind(this, function () {
+                                this.spin(container, label);
+                            });
+                        }
+
+                        this.stop();
+
+                        return fn;
+                    });
+
+                    result = true;
+                }
+
+                return result;
+            };
+
+            // Extends stop method to remove the optional label
+            var oldStop = spinner.stop;
+
+            spinner.stop = function () {
+                oldStop.call(this);
+                this.active = false;
+
+                if (spinner.status != null && spinner.status.parentNode != null) {
+                    spinner.status.parentNode.removeChild(spinner.status);
+                }
+
+                spinner.status = null;
+            };
+
+            spinner.pause = function () {
+                return function () { };
+            };
+
+            return spinner;
+        };
+
+        function FillGraphByXml(xmlElem,filename)
+        {
+            var cells = [];
+            var dx = 0;
+            var dy = 0;
+            var crop = false;
+            try {
+                var graph = window.theCallData.editor.graph;
+                window.theCallData.editor.setFilename(filename + ".xml");
+
+                window.parent.document.getElementById("graphEditor").innerHTML = "(" + filename + ")";
+            
+                var xml = xmlElem;
+
+                if (xml != null && xml.length > 0) {
+                    // Adds pages
+                    graph.model.beginUpdate();
+                    try {
+                        var doc = mxUtils.parseXml(xml);
+                        var mapping = {};
+
+                        // Checks for mxfile with multiple pages
+                        var node = Editor.extractGraphModel(doc.documentElement, this.pages != null);
+
+                        if (node != null && node.nodeName == 'mxfile' && this.pages != null) {
+                            var diagrams = node.getElementsByTagName('diagram');
+
+                            if (diagrams.length == 1 && !addNewPage) {
+                                node = Editor.parseDiagramNode(diagrams[0]);
+
+                                if (this.currentPage != null) {
+                                    mapping[diagrams[0].getAttribute('id')] = this.currentPage.getId();
+
+                                    // Renames page if diagram has one blank page with default name
+                                    if (this.isBlankFile()) {
+                                        var name = diagrams[0].getAttribute('name');
+
+                                        if (name != null && name != '') {
+                                            this.editor.graph.model.execute(new RenamePage(
+                                                this, this.currentPage, name));
+                                        }
+                                    }
+                                }
+                            }
+                            else if (diagrams.length > 0) {
+                                var pages = [];
+                                var i0 = 0;
+
+                                // Adds first page to current page if current page is only page and empty
+                                if (this.pages != null && this.pages.length == 1 && this.isDiagramEmpty()) {
+                                    mapping[diagrams[0].getAttribute('id')] = this.pages[0].getId();
+                                    node = Editor.parseDiagramNode(diagrams[0]);
+                                    crop = false;
+                                    i0 = 1;
+                                }
+
+                                for (var i = i0; i < diagrams.length; i++) {
+                                    // Imported pages must obtain a new ID and
+                                    // all links to pages must be updated below
+                                    var oldId = diagrams[i].getAttribute('id')
+                                    diagrams[i].removeAttribute('id');
+
+                                    var page = this.updatePageRoot(new DiagramPage(diagrams[i]));
+                                    mapping[oldId] = diagrams[i].getAttribute('id');
+                                    var index = this.pages.length;
+
+                                    // Checks for invalid page names
+                                    if (page.getName() == null) {
+                                        page.setName(mxResources.get('pageWithNumber', [index + 1]));
+                                    }
+
+                                    graph.model.execute(new ChangePage(this, page, page, index, true));
+                                    pages.push(page);
+                                }
+
+                                this.updatePageLinks(mapping, pages);
+                            }
+                        }
+
+                        if (node != null && node.nodeName === 'mxGraphModel') {
+                            cells = graph.importGraphModel(node, dx, dy, crop);
+
+                            if (cells != null) {
+                                for (var i = 0; i < cells.length; i++) {
+                                    this.updatePageLinksForCell(mapping, cells[i]);
+                                }
+                            }
+
+                            var bgImg = graph.parseBackgroundImage(node.getAttribute('backgroundImage'));
+
+                            if (bgImg != null && bgImg.originalSrc != null) {
+                                this.updateBackgroundPageLink(mapping, bgImg);
+                                var change = new ChangePageSetup(this, null, bgImg);
+                                change.ignoreColor = true;
+                                graph.model.execute(change);
+                            }
+                        }
+
+                        if (applyDefaultStyles) {
+                            this.insertHandler(cells, null, null,
+                                graph.defaultVertexStyle,
+                                graph.defaultEdgeStyle,
+                                false, true);
+                        }
+                    }
+                    finally {
+                        graph.model.endUpdate();
+                    }
+                }
+            }
+            catch (e) {
+                //if (!noErrorHandling) {
+                //    //this.handleError(e);
+                //}
+                //else {
+                //    throw e;
+                //}
+            }
+
+            this.main_spinner.stop();
+        }
+
+
+        function FillDiagram(xmlElem, fileid) {
+
+
+
+            if (this.main_spinner.spin(window.parent.document.body, mxResources.get('loading'))) {
+             }
+
+          
+
+            $.ajax({
+                url: rootUrl + '/Graph/GetDesignerDiagramXML',
+                type: 'POST',
+                data: { "FileId": fileid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+                    updateInProgress = 1;
+                    var xmlContents = result.XMLData;
+                    var filename = result.FileName;
+                   
+                    FillGraphByXml(xmlContents,filename);
+
+
+                }
+
+
+            });
+             
+
+
+          
+              
+                return;
+
+    
+            var ui = window.theCallData.editor.graph;
+            window.theCallData.editor.graph.selectAll(null, true);
+            deleteAllCellsOfGraph(true, window.theCallData.editor.graph);
+
+            var doc = mxUtils.parseXml(xmlElem);
+            window.theCallData.editor.graph.setSelectionCells(window.theCallData.editor.graph.importGraphModel(doc.documentElement));
+
+             window.theCallData.editor.setFilename(filename + ".xml");
+
+            window.parent.document.getElementById("graphEditor").innerHTML = "(" + filename + ")";
+
+            return;
+
+            //window.theCallData.editor.resetGraph();
+
+            // var xmlElem = '<mxGraphModel><root><mxCell id="0" />   <mxCell id="1" parent="0" /> <mxCell id="2" value="Text" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1"> <mxGeometry x="230" y="140" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="3" value="&lt;h1&gt;Heading&lt;/h1&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1"><mxGeometry x="50" y="250" width="190" height="120" as="geometry"/></mxCell>  </root></mxGraphModel>';
+            xmlElem = xmlElem.replace("</mxGraphModel>", "");
+            xmlElem = xmlElem.replace("<mxGraphModel>", "");
+            var doc = mxUtils.parseXml(xmlElem);
+            var codec = new mxCodec(doc);
+
+            var cells = [];
+            var elt = doc.documentElement.childNodes;
+            for (i = 0; i < elt.length; i++) {
+
+                cells.push(codec.decodeCell(elt[i]));
+                window.theCallData.editor.graph.refresh();
+                // txt += elt[i].nodeName + ": " + elt[i].childNodes[0].nodeValue + "<br>";
+            }
+
+
+
+
+            window.theCallData.editor.graph.addCells(cells);
+
+            window.theCallData.editor.setModified(false);
+            window.theCallData.editor.undoManager.clear();
+
+
+            window.theCallData.editor.setFilename(filename + ".xml");
+
+            window.parent.document.getElementById("graphEditor").innerHTML = "(" + filename + ")";
+
+
+
+
+
+
+        }
+
+        function deleteAllCellsOfGraph(includeEdges, graph) {
+            // Cancels interactive operations
+            graph.escape();
+            var cells = graph.getDeletableCells(graph.getSelectionCells());
+
+
+            if (cells != null && cells.length > 0) {
+                var parents = graph.model.getParents(cells);
+                graph.removeCells(cells, includeEdges);
+
+                // Selects parents for easier editing of groups
+                if (parents != null) {
+                    var select = [];
+
+                    for (var i = 0; i < parents.length; i++) {
+                        if (graph.model.contains(parents[i]) &&
+                            (graph.model.isVertex(parents[i]) ||
+                                graph.model.isEdge(parents[i]))) {
+                            select.push(parents[i]);
+                        }
+                    }
+
+                    graph.setSelectionCells(select);
+                }
+            }
+        };
+
+        // Extends EditorUi to update I/O action states based on availability of backend
+        (function () {
+
+           
+
+
+            var editorUiInit = EditorUi.prototype.init;
+
+            EditorUi.prototype.init = function () {
+                editorUiInit.apply(this, arguments);
+                this.actions.get('export').setEnabled(true);
+                   this.actions.get('import').setEnabled(true);
+                // Updates action states which require a backend
+                if (!Editor.useLocalStorage) {
+                    mxUtils.post(OPEN_URL, '', mxUtils.bind(this, function (req) {
+                        var enabled = req.getStatus() != 404;
+                        this.actions.get('open').setEnabled(true);
+                     
+                        this.actions.get('save').setEnabled(true);
+                        this.actions.get('saveAs').setEnabled(enabled);
+                        this.actions.get('export').setEnabled(true);
+                    }));
+                }
+
+                CreateSpinner(null, null, 24);
+
+             
+            };
+
+
+            // Adds required resources (disables loading of fallback properties, this can only
+            // be used if we know that all keys are defined in the language specific file)
+            mxResources.loadDefaultBundle = false;
+            var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
+                mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
+
+            // Fixes possible asynchronous requests
+            mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function (xhr) {
+                // Adds bundle text to resources
+                mxResources.parse(xhr[0].getText());
+
+                // Configures the default graph theme
+                var themes = new Object();
+                themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
+
+                // Main
+                window.theCallData = new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+
+
+            }, function () {
+                document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+            });
+        })();
+
+   
+    </script>
+</body>
+</html>
+
+

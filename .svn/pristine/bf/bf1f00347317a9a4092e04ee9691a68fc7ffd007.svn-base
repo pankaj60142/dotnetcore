@@ -1,0 +1,459 @@
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using JetBrains.Annotations;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SmartAdmin.Seed.Extensions;
+using SmartAdmin.Seed.Models;
+using SmartAdmin.Seed.Models.AccountViewModels;
+using SmartAdmin.Seed.Services;
+using SmartAdmin.Seed.Models.Entities;
+using SmartAdmin.Seed.Data;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+
+namespace SmartAdmin.Seed.Controllers
+{
+    public class ConfirmationController : Controller
+    {
+
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        private List<lkpDataCenter> datacenter;
+        #endregion
+
+        //private readonly ILogger _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+
+        public ConfirmationController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+            _userManager = userManager;
+            //_signInManager = signInManager;
+            //_emailSender = emailSender;
+            //_logger = logger;
+
+            _context = context;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities = (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+            datacenter = (from c in _context.lkpDataCenter select c).ToList();
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
+
+        public JsonStringResult GetCountryName()
+        {
+
+            var resultCountries = (from c in countries
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+
+        [HttpPost]
+        public JsonStringResult GetStateName(string CountryId)
+        {
+            try
+            {
+                string countryids = Regex.Replace(CountryId, @"[^,\d]", "0");
+
+                int[] ids = countryids.Split(',').Select(int.Parse).ToArray();
+
+
+
+                var result = (from s in _context.lkpState
+                              where ids.Contains(s.CountryId)
+                              select s
+                              ).ToList();
+
+
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception)
+            {
+
+                return new JsonStringResult("[]");
+            }
+
+        }
+
+        public JsonStringResult GetCityName(string StateId)
+
+        {
+
+            try
+            {
+                string stateids = Regex.Replace(StateId, @"[^,\d]", "0");
+
+                int[] ids = stateids.Split(',').Select(int.Parse).ToArray();
+
+                var result = (from c in _context.lkpCity
+                              where ids.Contains(c.StateId)
+                              select c
+                              ).ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception)
+            {
+
+                return new JsonStringResult("[]");
+            }
+        }
+
+        public JsonStringResult GetDataCenterName(string CityId)
+
+        {
+            try
+            {
+                string cityids = Regex.Replace(CityId, @"[^,\d]", "");
+                int[] ids = cityids.Split(',').Select(int.Parse).ToArray();
+
+                var result = (from c in _context.lkpDataCenter
+                              where ids.Contains(c.CityId)
+                              select c
+                              ).ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception)
+            {
+
+                return new JsonStringResult("[]");
+            }
+        }
+
+        public JsonStringResult GetDepartmentName(string DataCenterId)
+
+        {
+            try
+            {
+                string datacenterids = Regex.Replace(DataCenterId, @"[^,\d]", "");
+                int[] ids = datacenterids.Split(',').Select(int.Parse).ToArray();
+
+                var result = (from c in _context.lkpDepartment
+                              where ids.Contains(c.DataCenterId)
+                              select c
+                              ).ToList();
+                var json = JsonConvert.SerializeObject(result);
+                return new JsonStringResult(json);
+            }
+            catch (Exception)
+            {
+
+                return new JsonStringResult("[]");
+            }
+        }
+
+        //public IActionResult CompanyUser()
+        //{
+        //    return View();
+        //}
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult CompanyUser(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveUser([FromBody]lkpuserForController users)
+        {
+
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                        .Where(y => y.Count > 0)
+                        .ToList();
+
+
+                return new JsonStringResult("Errors occured while saving user");
+            }
+
+
+            try
+            {
+
+
+
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var companyid = user.CompanyId;
+                var companyname = user.CompanyName;
+
+
+                var user_1 = new ApplicationUser
+                {
+                    UserName = users.UserName,
+                    Email = users.Email,
+                    EmailConfirmed = true,
+                    CompanyName = companyname,
+                    CompanyId = companyid
+
+
+                    //CountryName="Pakistan",
+                    // CountryId="Pak123"
+                };
+
+                var result = await _userManager.CreateAsync(user_1, users.Pass);
+
+                if (result.Succeeded)
+                {
+
+
+                    var resultRole = await _userManager.AddToRoleAsync(user_1, users.Role);
+
+                    if (resultRole.Succeeded)
+                    {
+                        //_context.Authorization_AllowedCountries.RemoveRange(_context.Authorization_AllowedCountries.Where(x=>x.UserId== user_1.Id));
+                        //_context.SaveChanges();
+
+
+                        //Add selected countries for the newly created user in Authorization_AllowedCountries table so that it could be accessed later
+                        //split multiple countries id and save each countryid through a loop in Authorization_AllowedCountries table
+
+                        if (users.SelectedCountries != "")
+                        {
+                            string countryids = Regex.Replace(users.SelectedCountries, @"[^,\d]", "0");
+                            List<int> cntry = countryids.Split(',').Select(int.Parse).ToList();
+
+                            foreach (int c in cntry)
+                            {
+                                if (c != 0)
+                                {
+                                    Authorization_AllowedCountries allowedcountries = new Authorization_AllowedCountries();
+                                    allowedcountries.CountryId = c;
+                                    allowedcountries.UserId = user_1.Id;
+                                    _context.Add(allowedcountries);
+                                }
+                            }
+                        }
+
+
+                        //Add selected states for the newly created user in Authorization_AllowedStates table so that it could be accessed later
+                        //split multiple state id and save each stateid through a loop in Authorization_AllowedStates table
+
+                        if (users.SelectedStates != "")
+                        {
+                            string stateids = Regex.Replace(users.SelectedStates, @"[^,\d]", "0");
+                            List<int> st = stateids.Split(',').Select(int.Parse).ToList();
+
+                            foreach (int c in st)
+                            {
+                                if (c != 0)
+                                {
+                                    Authorization_AllowedStates allowedstates = new Authorization_AllowedStates();
+                                    allowedstates.StateId = c;
+                                    allowedstates.UserId = user_1.Id;
+                                    _context.Add(allowedstates);
+                                }
+                            }
+                        }
+
+                        //Add selected cities for the newly created user in Authorization_AllowedCities table so that it could be accessed later
+                        //split multiple city id and save each stateid through a loop in Authorization_AllowedCities table
+
+                        if (users.SelectedCities != "")
+                        {
+                            string stateids = Regex.Replace(users.SelectedCities, @"[^,\d]", "0");
+                            List<int> st = stateids.Split(',').Select(int.Parse).ToList();
+
+                            foreach (int c in st)
+                            {
+                                if (c != 0)
+                                {
+                                    Authorization_AllowedCities allowedcities = new Authorization_AllowedCities();
+                                    allowedcities.CityId = c;
+                                    allowedcities.UserId = user_1.Id;
+                                    _context.Add(allowedcities);
+                                }
+                            }
+                        }
+
+                        //Add selected datacenters for the newly created user in Authorization_AllowedDatacenters table so that it could be accessed later
+                        //split multiple datacenter id and save each stateid through a loop in Authorization_AllowedDatacenters table
+
+                        if (users.SelectedDatacenters != "")
+                        {
+                            string datacenterids = Regex.Replace(users.SelectedDatacenters, @"[^,\d]", "0");
+                            List<int> dc = datacenterids.Split(',').Select(int.Parse).ToList();
+
+                            foreach (int c in dc)
+                            {
+                                if (c != 0)
+                                {
+                                    Authorization_AllowedDatacenters alloweddatacenters = new Authorization_AllowedDatacenters();
+                                    alloweddatacenters.DatacenterId = c;
+                                    alloweddatacenters.UserId = user_1.Id;
+                                    _context.Add(alloweddatacenters);
+                                }
+                            }
+                        }
+
+                        //Add selected departments for the newly created user in Authorization_AllowedDepartments table so that it could be accessed later
+                        //split multiple department id and save each stateid through a loop in Authorization_AllowedDepartments table
+
+                        if (users.SelectedDepartments != "")
+                        {
+                            string departmentids = Regex.Replace(users.SelectedDepartments, @"[^,\d]", "0");
+                            List<int> dp = departmentids.Split(',').Select(int.Parse).ToList();
+
+                            foreach (int c in dp)
+                            {
+                                if (c != 0)
+                                {
+                                    Authorization_AllowedDepartments alloweddepartments = new Authorization_AllowedDepartments();
+                                    alloweddepartments.DepartmentId = c;
+                                    alloweddepartments.UserId = user_1.Id;
+                                    _context.Add(alloweddepartments);
+                                }
+                            }
+                        }
+
+
+
+
+
+                        _context.SaveChanges();
+
+
+                        return new JsonStringResult("SUCCESS");
+                    }
+                    else
+                    {
+                        return new JsonStringResult("User created successfully,but unable to assign role");
+                    }
+
+
+
+                    // await _signInManager.SignInAsync(user, isPersistent: false);
+                    // _logger.LogInformation("User created a new account with password.");
+                    // return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    return new JsonStringResult(result.ToString());
+                }
+
+                // AddErrors(result);
+            }
+            catch (Exception)
+            {
+
+                return new JsonStringResult("Could not create account , Unkown Error occured");
+
+
+            }
+
+
+
+
+            // If we got this far, something failed, redisplay form
+            //return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompanyUser(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                        .Where(y => y.Count > 0)
+                        .ToList();
+
+                return View(model);
+            }
+
+
+
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                CompanyName = model.CompanyName
+                //CountryName="Pakistan",
+                // CountryId="Pak123"
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+
+                //_logger.LogInformation("User created a new account with password.");
+
+                //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+
+                //_logger.LogInformation("User created a new account with password.");
+                //return RedirectToLocal(returnUrl);
+            }
+
+            AddErrors(result);
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction(nameof(ConfirmationController.CompanyUser), "Company User");
+        }
+
+
+
+        public class JsonStringResult : ContentResult
+        {
+            public JsonStringResult(string json)
+            {
+                Content = json;
+                ContentType = "application/json";
+            }
+        }
+    }
+}

@@ -1,0 +1,730 @@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="widget-grid" class="">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+            \
+        -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Company Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="company-user" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+
+
+
+
+
+                                <div class="row">
+
+
+
+                                    <section class="col col-6" id="country">
+                                        <label class="label">Country Name</label>
+
+                                        <div class="input" id="countryid">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="countryname" placeholder='Select countries' class='flexdatalist' data-min-length='1' multiple='multiple' list='countries' name='countryname'>
+
+
+
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6" id="state">
+                                        <label class="label">State Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type='text' id="statename" placeholder='Select States' class='flexdatalist' data-min-length='1' multiple='multiple' list='states' name='states1'>
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="cities">
+                                        <label class="label">City Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="datacenter">
+                                        <label class="label">Datacenters</label>
+                                        <div class="input">
+
+                                            <input type='text' id="datacentername" placeholder='Select Datacenters' class='flexdatalist' data-min-length='1' multiple='multiple' list='datacenters' name='datacenters1'>
+
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="department">
+                                        <label class="label">Departments</label>
+                                        <div class="input">
+
+                                            <input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+
+
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="application" style="display:none">
+                                        <label class="label">Applications </label>
+                                        <div class="input">
+
+                                            <input type='text' id="applicationname" placeholder='Select Applications' class='flexdatalist' data-min-length='1' multiple='multiple' list='applications' name='datacenters1'>
+
+
+
+
+                                        </div>
+                                    </section>
+
+                                </div>
+
+
+
+                            </fieldset>
+
+                            @*<footer>
+                            <button type="button" class="btn btn-primary" onclick="SaveDatabase();">
+                                Save
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="ClearCity();">
+                                Cancel
+                            </button>
+                        </footer>*@
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+
+
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+                <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-database" s></i>
+                    </span>
+                    <h2>Databases  </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body custom-scroll" id="Tree">
+
+                        <ul id="myTab3" class="nav nav-tabs tabs-left bordered">
+                            <li class="active">
+                                <a href="#l1" data-toggle="tab">Databases </a>
+                            </li>
+
+                            <li class="pull-left">
+                                <a href="#l2" data-toggle="tab">Database Document</a>
+                            </li>
+
+                        </ul>
+
+
+                        <div id="myTabContent3" class="tab-content padding-10">
+                            <div class="tab-pane fade in active" id="l1">
+                                <form id="frmdatabases">
+
+                                    <fieldset>
+                                        <input name="authenticity_token" type="hidden">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input class="form-control" id="Name" name="Name" placeholder="Name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>DB Type </label>
+                                                <input class="form-control" id="DBTypeID" name="DBTypeID" placeholder="DB Type " type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>DB Version</label>
+                                                <input class="form-control" id="DBVersion" name="DBVersion" placeholder="DB Version" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Installer Name </label>
+                                                <input class="form-control" id="InstallerNameID" name="InstallerNameID" placeholder="Installer Name " type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Installed Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" name="InstalledDate" id="InstalledDate" placeholder="Installed Date" class="form-control datepicker" data-dateformat="dd/mm/yy">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Service Pack</label>
+                                                <input class="form-control" name="ServicePack" id="ServicePack" placeholder="Service Pack" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                           
+                                                   
+                                                                
+                                                                <div class="select">
+                                                                    <label>Dba</label>
+                                                                    <select class="form-control" name="DbaID" id="DbaID" onchange="HideShow(this)"></select>
+                                                                </div>
+                                                          
+                                                       
+                                           
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <label>Application Server</label>
+
+                                            <select class="form-control" id="select-1">
+                                                <option>No Server</option>
+                                                <option>Atlanta</option>
+                                                <option>Baltimore</option>
+                                                <option>Boston</option>
+                                                <option>Buenos Aires</option>
+                                                <option>Calgary</option>
+
+
+                                            </select>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Comment</label>
+                                                <textarea class="form-control" id="Comment" name="Comment" placeholder="Comment" cols="3"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+
+                                </form>
+                            </div>
+
+                            <div class="tab-pane fade" id="l2">
+                                <form action="" id="Frmdocuser" class="smart-form">
+                                    <fieldset>
+                                        <div class="col-lg-12">
+                                            <div class="row">
+
+                                                @*<section class="col col-lg-12 col-md-12">
+                                                    <label class="label">Document</label>
+                                                    <div class="select">
+                                                        <select name="databaseId" id="databaseId" onchange="HideShow(this)">
+                                                           
+
+                                                        </select> <i></i>
+                                                    </div>
+
+
+                                                </section>*@
+
+                                                <section class="col col-lg-12 ">
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Document Name </label>
+                                                            <input class="form-control" id="DocumentName" name="DocumentName" placeholder="DocumentName" type="text">
+                                                        </div>
+                                                    </div>
+
+                                                </section>
+
+                                                <section class="col col-lg-12 ">
+
+
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Path </label>
+                                                            <input class="form-control" id="DocumentPath" name="DocumentPath" placeholder="Path" type="text">
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                           
+                            <button type="button" onclick="SaveDatabase();" class="btn btn-primary btn-lg">
+
+                                Submit
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+           
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <!-- end widget content -->
+
+    </div>
+    <!-- end widget div -->
+
+
+</section>
+
+@section Scripts {
+    <script type="text/javascript">
+       
+
+
+
+        pageSetUp();
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+          
+
+
+        };
+
+        // end pagefunction
+
+        $(document).ready(function () {
+            $("#InstalledDate").datepicker('setDate', 'today');
+            Application_Database();
+          
+        });
+
+         function Application_Database() {
+            var options = {};
+            options.url = "/Framework_Databases/frmserver_DBAID";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                console.log(msg);
+                
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue);
+                    
+                    $('#DbaID').append(option);
+                   
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        
+        function FillStates(countryid) {
+
+            $.ajax({
+                url: '/Framework_Databases/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CountryId: countryid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+
+
+                    var flexdatalistState = $("#statename").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'StateName',
+                        visibleProperties: ["StateName", "Latitude", "Longitude", "StateId"],
+                        searchIn: 'StateName',
+                        data: resultState
+                    });
+
+                    flexdatalistState.on('select:flexdatalist', function (event, data) {
+                        selectedstateid = data.StateId;
+
+                        FillCities(data.StateId);
+                        //$('#city').val(data.city);
+                        //$('#state').val(data.state);
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillCities(stateid) {
+
+            $.ajax({
+                url: '/Framework_Databases/GetCityName',
+                type: 'POST',
+                datatype: 'json',
+                data: { StateId: stateid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCity) {
+                    
+                    var flexdatalistCity = $("#cityname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'CityName',
+                        visibleProperties: ["CityName", "Latitude", "Longitude", "CityId"],
+                        searchIn: 'CityName',
+                        data: resultCity
+                    });
+
+                    flexdatalistCity.on('select:flexdatalist', function (event, data) {
+                        selectedcityid = data.CityId;
+                        FillDataCenter(selectedcityid);
+                       
+                    });
+
+                }
+
+
+            });
+        }
+
+
+        function FillDataCenter(cityid) {
+
+            $.ajax({
+                url: '/Framework_Databases/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { CityId: cityid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultDataCenter) {
+
+
+                    var flexdatalistDatacenter = $("#datacentername").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DataCenterName',
+                        visibleProperties: ["DataCenterName", "DataCenterId"],
+                        
+                        searchIn: 'DataCenterName',
+                        data: resultDataCenter
+                    });
+
+                    flexdatalistDatacenter.on('select:flexdatalist', function (event, data) {
+                        
+                        selecteddatacenterid = data.DataCenterId;
+                        FillDeparment(selecteddatacenterid);
+                    });
+
+                }
+                
+            });
+        }
+
+        function FillDeparment(dataCenterId) {
+
+            $.ajax({
+                url: '/Framework_Databases/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { DataCenterId: dataCenterId },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                 
+
+                },
+
+                success: function (resultDepartment) {
+
+
+                    var flexdatalistDatacenter = $("#departmentname").flexdatalist({
+                        minLength: 1,
+                        valueProperty: 'DepartmentName',
+                        visibleProperties: ["DepartmentName", "DepartmentId"],
+
+                        searchIn: 'DepartmentName',
+                        data: resultDepartment
+                    });
+
+                    flexdatalistDatacenter.on('select:flexdatalist', function (event, data) {
+
+                        selecteddepartmentid = data.DepartmentId;
+
+                    });
+
+                }
+
+            });
+        }
+        
+        function SaveDatabase() {
+                      if ($("#frmdatabases").valid()) {
+                var selectedName = $('#Name').val();
+                var selectedDbVersion = $('#DBVersion').val();
+                var selectedServicePack = $('#ServicePack').val();
+                var selectedComments = $('#Comment').val();
+                var selectedDBTypeID = $('#DBTypeID').val();
+                var selectedDbaID =    $('#DbaID').val();
+                var selectedInstallerNameID = $('#InstallerNameID').val();
+                var selectedDocumentName = $('#DocumentName').val();
+                var selectedDocumentPath = $('#DocumentPath').val();
+
+                var options = {};
+                options.url = "/Framework_Databases/SaveDatabase";
+                options.type = "POST";
+                var obj = {
+
+                    Name: selectedName,
+                    DBVersion:selectedDbVersion,
+                    ServicePack:selectedServicePack,
+                    Comment:selectedComments,
+                    DBTypeID:selectedDBTypeID,
+                    InstallerNameID: selectedInstallerNameID,
+                    DbaID: selectedDbaID,
+
+
+
+                };
+
+                var docobj = {
+                    Name: selectedDocumentName,
+                    Path: selectedDocumentPath,
+                    //Name: document.getElementById("#DocumentName").value,
+                    //Path: document.getElementById("#DocumentPath").value,
+                };
+
+                var framework_databases = {
+
+                    "databases": obj,
+
+                    "document": docobj
+                }  
+
+                options.data = JSON.stringify(framework_databases);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Framework Database saved successfully!", "success");
+                        $('#Name').val('');
+                        $('#DBVersion').val('');
+                        $('#ServicePack').val('');
+                        $('#Comment').val('');
+                        $('#DBTypeID').val('');
+                        $('#InstallerNameID').val('');
+                        $('#DbaID').val('');
+                        $('#DocumentName').val('');
+                        $('#DocumentPath').val('');
+                
+                       // FillCountry();
+                       
+                    }
+                    else
+                        swal("Error", "Please fill in the required fields!", "error");
+                };
+                $.ajax(options);
+                
+            }
+            else {
+                swal("Error", "Error while saving Framework Database!", "error");
+            }
+           
+
+        }
+        
+        var rootDir = "@Url.Content("~/")";
+        
+        var selectedcountryid = -999;
+        var selectedstateid = -999;
+        var selectedcityid = -999;
+        var selecteddatacenterid = -999;
+        var selecteddepartmentid = -999;
+
+        $.ajax({
+            url: '/Framework_Databases/GetCountryName',
+            type: 'POST',
+            datatype: 'json',
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+
+            },
+
+            success: function (resultCountry) {
+
+
+                var flexDataListCountry = $("#countryname").flexdatalist({
+                    minLength: 1,
+                    valueProperty: 'CountryId',
+                    visibleProperties: ["CountryName", "Latitude", "Longitude", "CountryId"],
+                    searchIn: 'CountryName',
+                    data: resultCountry
+                });
+
+                flexDataListCountry.on('select:flexdatalist', function (event, data) {
+                    selectedcountryid = data.CountryId;
+                    FillStates(selectedcountryid);
+                    //$('#city').val(data.city);
+                    //$('#state').val(data.state);
+                });
+
+
+            }
+
+
+        });
+        
+        function ClearDepartment(DepartmentId) {
+
+        }
+
+
+    </script>
+
+}
+
+

@@ -1,0 +1,2045 @@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section id="widget-grid" class="">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Company Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+
+
+
+
+
+                    <form action="" id="frm-application" >
+
+                        @Html.AntiForgeryToken()
+                        <fieldset>
+                            <div class="smart-form" style="padding:10px">
+                                <div class="row">
+
+
+
+                                    <section class="col col-6" id="country" >
+                                        <label class="label">Country Name</label>
+
+                                        <div class="input" id="countryid">
+
+
+                                            <select name="countryname" id="countryname" style="width:100%" multiple></select>
+
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6" id="state" >
+                                        <label class="label">State Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+
+                                            <select id="statename" name="statename" multiple></select>
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="cities">
+                                        <label class="label">City Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <select name="cityname" id="cityname" multiple></select>
+                                            <!-- <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                -->
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="datacenter" >
+                                        <label class="label">Datacenters</label>
+                                        <div class="input">
+                                            <select name="datacentername" id="datacentername" multiple></select>
+
+
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="department" >
+                                        <label class="label">Departments</label>
+                                        <div class="input">
+                                            <select name="departmentname" id="departmentname" multiple></select>
+
+                                            <!--<input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+                -->
+
+                                        </div>
+                                    </section>
+
+
+
+                                    <!--       <section class="col col-6" id="application" style="display:none">
+               <label class="label">Applications </label>
+               <div class="input">
+
+                   <input type='text' id="applicationname" placeholder='Select Applications' class='flexdatalist' data-min-length='1' multiple='multiple' list='applications' name='datacenters1'>
+
+
+
+
+               </div>
+           </section>
+
+        -->
+                                </div>
+
+                            </div>
+                        </fieldset>
+
+
+
+
+                        <!-- end widget content -->
+                        <!-- end widget div -->
+                        <!-- end widget -->
+
+
+                       
+
+                            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false">
+                                <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+                                <header>
+                                    <span class="widget-icon">
+                                        <i class="fa fa-pencil-square"></i>
+                                    </span>
+                                    <h2>Application  </h2>
+
+                                </header>
+
+                                <!-- widget div-->
+                                <div>
+
+                                    <!-- widget edit box -->
+                                    <div class="jarviswidget-editbox">
+                                        <!-- This area used as dropdown edit box -->
+
+                                    </div>
+                                    <!-- end widget edit box -->
+                                    <!-- widget content -->
+                                    <div class="widget-body custom-scroll" id="Tree">
+
+                                        <ul id="myTab3" class="nav nav-tabs tabs-left bordered">
+                                            <li class="active">
+                                                <a href="#l1" data-toggle="tab">Applications </a>
+                                            </li>
+                                            <li class="pull-left">
+                                                <a href="#l2" data-toggle="tab">Application ADGroup</a>
+                                            </li>
+                                            <li class="pull-left">
+                                                <a href="#l3" data-toggle="tab">Application Contact</a>
+                                            </li>
+                                            <li class="pull-left">
+                                                <a href="#l4" data-toggle="tab">Application Database</a>
+                                            </li>
+                                            <li class="pull-left">
+                                                <a href="#l5" data-toggle="tab">Application Document</a>
+                                            </li>
+
+                                        </ul>
+
+                                        <div id="myTabContent3" class="tab-content padding-10">
+                                            <div class="tab-pane fade in active" id="l1">
+
+
+                                                <fieldset>
+                                                    <input name="authenticity_token" type="hidden">
+                                                    <div class="col-lg-6">
+                                                        <label>Application Server</label>
+
+                                                        <select class="form-control" id="Application_Server"></select>
+                                                    </div>
+
+                                                    @*<div class="col-lg-6">
+                        <label>c</label>
+                        <select class="form-control" id="Application_Database"></select>
+                    </div>*@
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label><strong>Application Database</strong></label>
+                                                            <select id="Application_Database" class="form-control"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Name</label>
+                                                            <input class="form-control" id="Name" name="Name" placeholder="Name" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Version</label>
+                                                            <input class="form-control" id="Version" name="Version" placeholder="Version" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Short Description</label>
+                                                            <textarea class="form-control" id="ShortDescription" name="ShortDescription" placeholder="Short Description" rows="3"></textarea>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Long Description</label>
+                                                            <textarea class="form-control" id="LongDescription" name="LongDescription" placeholder="Long Description" rows="3"></textarea>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Installation Path</label>
+                                                            <input class="form-control" id="InstallationPath" name="InstallationPath" placeholder="InstallationPath" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Installed Date</label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="InstalledDate" id="InstalledDate" placeholder="Select a date" class="form-control datepicker" data-dateformat="mm/dd/yy">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Support Phone</label>
+                                                            <input class="form-control" name="SupportPhone" id="SupportPhone" placeholder="Support Phone" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Support Email</label>
+                                                            <input class="form-control" name="SupportEmail" id="SupportEmail" placeholder="Support Email" type="email">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Support Account No</label>
+                                                            <input class="form-control" name="SupportAccountNo" id="SupportAccountNo" placeholder="Support Account No" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Support Expiration Date</label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="SupportExpirationDate" id="SupportExpirationDate" placeholder="Support Expiration Date" class="form-control datepicker" data-dateformat="mm/dd/yy">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Support URL</label>
+                                                            <input class="form-control" name="SupportURL" id="SupportURL" placeholder="Support URL" type="text">
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Number Of Licenses</label>
+                                                            <input class="form-control" name="NumberOfLicenses" id="NumberOfLicenses" placeholder="Number Of Licenses" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Comment</label>
+                                                            <input class="form-control" id="Comment" name="Comment" placeholder="Comment" type-="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Installer Name ID</label>
+
+                                                            <select id="InstallerNameID" class="form-control"></select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Username</label>
+                                                            <input class="form-control" name="Username" id="Username" placeholder="Username" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Password</label>
+                                                            <input class="form-control" name="Password" id="Password" placeholder="Password" type="password">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Developer Type ID</label>
+                                                            <input class="form-control" name="DeveloperTypeID" id="DeveloperTypeID" placeholder="Developer Type ID" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                  
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Citrix Application Name</label>
+                                                            <input class="form-control" name="CitrixApplicationName" id="CitrixApplicationName" placeholder="Citrix Application Name" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Application URL</label>
+                                                            <input class="form-control" name="ApplicationURL" id="ApplicationURL" placeholder="Application URL" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Application Type ID</label>
+                                                            <input class="form-control" name="ApplicationTypeID" id="ApplicationTypeID" placeholder="Application Type ID" type="text">
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Is Exposed to Internet</label>
+                                                            @*<input class="form-control" name="IsVisibleInsideGGP" id="IsVisibleInsideGGP" placeholder="Citrix Application Name" type="text">*@
+                                                            <div class="onoffswitch-container">
+                                                                @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                                <span class="onoffswitch">
+                                                                    <input type="checkbox" class="onoffswitch-checkbox" id="IsVisibleInsideGGP">
+                                                                    <label class="onoffswitch-label" for="IsVisibleInsideGGP">
+                                                                        <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                                        <span class="onoffswitch-switch"></span>
+                                                                    </label>
+                                                                </span>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Certificate Expiration</label>
+
+                                                            <div class="input-group">
+                                                                <input type="text" name="CertificateExpiration" id="CertificateExpiration" placeholder="Certificate Expiration Date" class="form-control datepicker" data-dateformat="mm/dd/yy">
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>SMTP</label>
+                                                            <input class="form-control" name="SMTP" id="SMTP" placeholder="SMTP" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Is Visible Non Employee</label>
+                                                            <div class="onoffswitch-container">
+                                                                @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                                <span class="onoffswitch">
+                                                                    <input type="checkbox" class="onoffswitch-checkbox" id="IsVisibleNonEmployee">
+                                                                    <label class="onoffswitch-label" for="IsVisibleNonEmployee">
+                                                                        <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                                        <span class="onoffswitch-switch"></span>
+                                                                    </label>
+                                                                </span>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Firewall Exception</label>
+                                                            <input class="form-control" name="FirewallException" id="FirewallException" placeholder="Firewall Exception" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>LDAP</label>
+                                                            <input class="form-control" name="LDAP" id="LDAP" placeholder="LDAP" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                  
+
+                                                </fieldset>
+
+                                            </div>
+                                            <div class="tab-pane fade" id="l2">
+
+                                                <fieldset>
+
+                                                    <div class="row">
+
+                                                        @*<div class="col-lg-6">
+            <div class="form-group">
+                <label>Group Name</label>
+                <input class="form-control" name="GroupName" id="GroupName" placeholder="Group Name" type="text">
+
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Group Path</label>
+                <input class="form-control" name="GroupPath" id="GroupPath" placeholder="Group Path" type="text">
+
+            </div>
+        </div>*@
+
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>ApplicationADGroupID</label>
+                                                                @*<input class="form-control" name="DeveloperID" id="DeveloperID" placeholder="Developer ID" type="text">*@
+                                                                <select class="form-control" id="ApplicationADGroupID"></select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </fieldset>
+
+                                            </div>
+
+                                            <div class="tab-pane fade" id="l3">
+
+                                                <fieldset>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>First Name</label>
+                                                            <input class="form-control" id="FirstName" name="FirstName" placeholder="First Name" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Last Name</label>
+                                                            <input class="form-control" id="LastName" name="LastName" placeholder="Last Name" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Middle Initial</label>
+                                                            <input class="form-control" id="MiddleInitial" name="MiddleInitial" placeholder="Middle Initial" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input class="form-control" id="Email" name="Email" placeholder="Email" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Phone</label>
+                                                            <input class="form-control" id="Phone" name="Phone" placeholder="Phone" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Title</label>
+                                                            <input class="form-control" id="Title" name="Title" placeholder="Title" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Login Name</label>
+                                                            <input class="form-control" id="LoginName" name="LoginName" placeholder="Login Name" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>SID</label>
+                                                            <input class="form-control" id="SID" name="SID" placeholder="SID" type="text">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Employee No</label>
+                                                            <input class="form-control" id="EmployeeNo" name="EmployeeNo" placeholder="EmployeeNo" type="text">
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Contact Type ID</label>
+                                                            <input class="form-control" id="ContactTypeID" name="ContactTypeID" placeholder="Contact Type ID" type="text">
+
+                                                        </div>
+                                                    </div>
+
+                                                    @*<div class="col-lg-6">
+                                                        <div class="form-group" style="display:none">
+                                                            <label>Application ID</label>
+                                                            <input class="form-control" id="ApplicationID" name="ContactTypeID" placeholder="Contact Type ID" type="text">
+
+                                                        </div>
+                                                    </div>*@
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>IsValid</label>
+                                                            <div class="onoffswitch-container">
+                                                                @*<span class="onoffswitch-title">Auto Open Next</span>*@
+                                                                <span class="onoffswitch">
+                                                                    <input type="checkbox" class="onoffswitch-checkbox" id="IsValid">
+                                                                    <label class="onoffswitch-label" for="IsValid">
+                                                                        <span class="onoffswitch-inner" data-swchon-text="Yes" data-swchoff-text="No"></span>
+                                                                        <span class="onoffswitch-switch"></span>
+                                                                    </label>
+                                                                </span>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            @*<button type="button" class="btn btn-primary btn-lg" onclick="addContactData()">Add</button>*@
+                                                            <button type="button" class="btn btn-primary btn-lg" onclick="FillData()">Add</button>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+
+                                                        <table id="tblapplicationcontact" class="table table-striped table-bordered table-hover" width="100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>First Name</th>
+                                                                    <th>Last Name</th>
+                                                                    <th>Middle Initial</th>
+                                                                    <th>Email</th>
+                                                                    <th>Phone</th>
+                                                                    <th>Title</th>
+                                                                    <th>Login Name</th>
+                                                                    <th>SID</th>
+                                                                    <th>Employee No</th>
+                                                                    <th>IsValid</th>
+                                                                    <th>Contact Type ID</th>
+                                                                    @*<th>Actions</th>*@
+
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </fieldset>
+
+                                            </div>
+
+                                            <div class="tab-pane fade" id="l4">
+
+                                                <fieldset>
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+
+                                                            <section class=" col-lg-12 col-md-12">
+                                                                <label class="label">Database Name</label>
+                                                                <div class="select form-group">
+
+
+                                                                    <select id="databaseID" class="form-control"></select>
+                                                                </div>
+                                                            </section>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="l5">
+
+                                                <fieldset>
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+
+                                                            <section class="col col-lg-12 col-md-12">
+                                                                <label class="label">Document</label>
+
+                                                                <div class="select form-group">
+
+
+                                                                    <select id="DocumentID" class="form-control"></select>
+                                                                </div>
+
+                                                            </section>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-primary btn-lg" onclick="SaveDataapplication();">Save</button>
+                                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalFrameworkApplication" onclick="FillDatabaseTable();">Search</button>
+                                        </div>
+
+                                       
+
+
+                                        <div id="modalFrameworkApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                                            <div role="document" class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+
+                                                        <h4 id="_exampleModalLabel" class="modal-title">Database Detail Screen</h4>
+                                                        <h4 id="PersonnelName" class="modal-title" style="color: red"></h4>
+                                                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+
+                                                        <div class="widget-body no-padding">
+
+                                                            <table id="tblDataApplication" class="table table-striped table-bordered table-hover" width="100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Application ID</th>
+                                                                        <th>Name</th>
+                                                                        <th>UserName</th>
+                                                                        @*<th>Short Description</th>
+                                                                        <th>ADGroup Name</th>
+                                                                        <th>Application Database</th>
+                                                                        <th>Application Document</th>*@
+
+                                                                        <th>Edit</th>
+                                                                        <th>Delete</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                            </div>
+                       
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- end widget content -->
+
+    
+    <!-- end widget div -->
+
+
+</section>
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/js/plugin/bootstrapvalidator/bootstrapValidator.js"></script>
+    <script type="text/javascript">
+
+
+
+
+        pageSetUp();
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+        };
+
+
+        $(document).ready(function () {
+            $('#countryname').chosen();
+            $('#countryname').chosen({ allow_single_deselect: false });
+            $('#statename').chosen();
+            $('#statename').chosen({ allow_single_deselect: false });
+            $('#cityname').chosen();
+            $('#cityname').chosen({ allow_single_deselect: false });
+            $('#datacentername').chosen();
+            $('#datacentername').chosen({ allow_single_deselect: false });
+            $('#departmentname').chosen();
+            $('#departmentname').chosen({ allow_single_deselect: false });
+            $("#InstalledDate").datepicker('setDate', 'today');
+            $("#SupportExpirationDate").datepicker('setDate', 'today');
+            $("#CertificateExpiration").datepicker('setDate', 'today');
+            fillcountry();
+            frmApplication_Database();
+            frmApplication_Server();
+            frmApplication_Developer();
+            frmApplication_Installer();
+            Get_Database();
+            Get_Document();
+            
+            frmApplication_ADGroup();
+
+
+            document.getElementById('countrylbl').style.display = 'none';
+            document.getElementById('citylbl').style.display = 'none';
+            document.getElementById('departmentlbl').style.display = 'none';
+            document.getElementById('datacenterlbl').style.display = 'none';
+            document.getElementById('statelbl').style.display = 'none';
+
+            $('#frm-application').bootstrapValidator({
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    Name: {
+
+                        validators: {
+                            notEmpty: {
+                                message: 'Name is required'
+                            },
+                            stringLength: {
+                                max: 100,
+                                message: 'name be less than 20 characters long'
+                            }
+                        }
+                    },
+
+                    ShortDescription: {
+                        // The group will be set as default (.form-group)
+                        validators: {
+                            notEmpty: {
+                                message: 'ShortDescription is required'
+                            },
+                            stringLength: {
+                                max: 20,
+                                message: 'name be less than 200 characters long'
+                            }
+                        }
+                    },
+
+                    NumberOfLicenses: {
+
+                        validators: {
+                            notEmpty: {
+                                message: 'NumberOfLicenses must be integer'
+                            },
+                            stringLength: {
+                                max: 200,
+                                message: 'Number of License must be entered'
+                            }
+                        }
+                    },
+
+                    DeveloperTypeID: {
+
+                        validators: {
+                            notEmpty: {
+                                message: 'DeveloperTypeID must be integer'
+                            },
+                            stringLength: {
+                                max: 200,
+                                message: 'DeveloperTypeID must be entered'
+                            }
+                        }
+                    },
+
+                    ApplicationTypeID: {
+
+                        validators: {
+                            notEmpty: {
+                                message: 'ApplicationTypeID must be integer'
+                            },
+                            stringLength: {
+                                max: 200,
+                                message: 'ApplicationTypeID must be entered'
+                            }
+                        }
+                    },
+                    ContactTypeID: {
+
+                        validators: {
+                            notEmpty: {
+                                message: 'ContactTypeID must be integer'
+                            },
+                            stringLength: {
+                                max: 200,
+                                message: 'ContactTypeID must be entered'
+                            }
+                        }
+                    },
+                    Email: {
+
+                        validators: {
+                            notEmpty: {
+                                message: 'Enter a valid Email'
+                            },
+                            stringLength: {
+                                max: 200,
+                                message: 'Enter must be entered'
+                            }
+                        }
+                    }
+                    
+                    //cityname: {
+                    //    // The group will be set as default (.form-group)
+                    //    validators: {
+                    //        notEmpty: {
+                    //            message: 'City must be selected'
+                    //        }
+
+                    //    }
+                    //},
+                    //countryname: {
+                    //    // The group will be set as default (.form-group)
+                    //    validators: {
+                    //        notEmpty: {
+                    //            message: 'Country must be selected'
+                    //        }
+
+                    //    }
+                    //},
+                   // statename: {
+                    //    // The group will be set as default (.form-group)
+                    //    validators: {
+                    //        notEmpty: {
+                    //            message: 'State must be selected'
+                    //        }
+
+                    //    }
+                    //},
+                    //datacentername: {
+                    //    // The group will be set as default (.form-group)
+                    //    validators: {
+                    //        notEmpty: {
+                    //            message: 'Data Center must be selected'
+                    //        }
+
+                    //    }
+                    //},
+                    //departmentname: {
+                    //    // The group will be set as default (.form-group)
+                    //    validators: {
+                    //        notEmpty: {
+                    //            message: 'Department must be selected'
+                    //        }
+
+                    //    }
+                    //},
+                    //InstallerNameID: {
+                    //    // The group will be set as default (.form-group)
+                    //    validators: {
+                    //        notEmpty: {
+                    //            message: 'Installer Name must be entered'
+                    //        }
+
+                    //    }
+                    //}
+
+                }
+            });
+
+
+        });
+
+
+
+
+        var arr = {
+            FirstName: document.getElementById("FirstName").value,
+            LastName: document.getElementById("LastName").value,
+            MiddleInitial: document.getElementById("MiddleInitial").value,
+            Email: document.getElementById("Email").value,
+            Phone: document.getElementById("Phone").value,
+            Title: document.getElementById("Title").value,
+            LoginName: document.getElementById("LoginName").value,
+            SID: document.getElementById("SID").value,
+            EmployeeNo: document.getElementById("EmployeeNo").value,
+            ContactTypeID: document.getElementById("ContactTypeID").value
+
+        };
+
+
+        //var arr = new Array();
+
+        function FillDatabaseTable() {
+            $.ajax({
+                url: "/Framework_Application/GetDatabase",
+                type: 'Get',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    swal('Alert!', 'Unable to fill Data', 'error');
+                },
+                success: function (result) {
+                    console.log(result)
+
+
+
+                    $('#tblDataApplication').DataTable().destroy();
+                    $('#tblDataApplication').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'ApplicationID' },
+                            { data: 'Name' },
+                            { data: 'Usrname' },
+                            //{ data: 'ShortDescription' },
+                            //{ data: 'GroupName' },
+                            //{ data: 'ApplicationDatabaseID' },
+                            //{ data: 'ApplicationDocumentID' },
+
+                            {
+
+                                "data": "ApplicationID",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-primary" onclick="Editdata(\'' + data + '\');">Edit</button>';
+                                }
+                            },
+                            {
+
+                                "data": "ApplicationID",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteData(\'' + data + '\');">Delete</button>';
+                                }
+                            }
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+        function fillcountry() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/Department/GetCountry',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+
+
+                    for (var x = 0; x < resultCountry.length; x++) {
+
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryId).text(resultCountry[x].CountryName));
+
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+                    $("#countryname").chosen().change(function (event) {
+
+                        fillState($(event.target).val(), [], [], [], []);
+
+                    });
+
+
+
+
+
+
+                }
+
+
+            });
+        }
+        function FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCites = selectedcities.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedCites: SelectedCites, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdatacenter) {
+                    Destroydatacenter();
+
+                    for (var x = 0; x < resultdatacenter.length; x++) {
+
+
+                        $('#datacentername').append($('<option></option>').attr('value', resultdatacenter[x].DataCenterId).text(resultdatacenter[x].DataCenterName));
+
+
+                    }
+                    $('#datacentername').trigger("chosen:updated");
+                    $("#datacentername").chosen().change(function (event) {
+
+                        FillDepartment($(event.target).val(), []);
+
+                    });
+                    if (SelectedDepartments.length == 0) {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+                        FillDepartment(selecteddatacenters, SelectedDepartments);
+                    }
+
+
+
+                }
+
+
+            });
+
+        }
+        function FillDepartment(SelectedDataCenter, SelectedDepartments) {
+            SelectedDataCenter = SelectedDataCenter.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedDataCenter: SelectedDataCenter, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdepartment) {
+                    Destroydepartmentname();
+
+                    for (var x = 0; x < resultdepartment.length; x++) {
+
+
+                        $('#departmentname').append($('<option></option>').attr('value', resultdepartment[x].DepartmentId).text(resultdepartment[x].DepartmentName));
+
+
+                    }
+                    $('#departmentname').trigger("chosen:updated");
+
+                    if (SelectedDepartments.length > 0) {
+                        $("#departmentname").val(SelectedDepartments).trigger("chosen:updated");
+                    }
+
+
+                }
+
+
+            });
+
+        }
+        function fillCity(SelectedStates, selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedStates = SelectedStates.join(",");
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetCityName',
+                type: 'POST',
+                data: { SelectedStates: SelectedStates, compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCities) {
+                    DestroyCityName();
+
+
+                    for (var x = 0; x < resultCities.length; x++) {
+
+                        $('#cityname').append($('<option></option>').attr('value', resultCities[x].CityId).text(resultCities[x].CityName));
+
+
+
+                    }
+                    $('#cityname').trigger("chosen:updated");
+
+                    $("#cityname").chosen().change(function (event) {
+
+                        FillDataCenter($(event.target).val(), [], []);
+
+                    });
+                    if (selecteddatacenters.length == 0) {
+                        $("#cityname").val(SelectedCities).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#cityname").val(selectedcities).trigger("chosen:updated");
+                        FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments);
+                    }
+
+
+                }
+
+
+
+            });
+        }
+        function fillState(SelectedCountryIds, selectedstates, selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCountryIds = SelectedCountryIds.join(",");
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+
+                data: { SelectedCountryIds1: SelectedCountryIds, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+                    DestroyStatename();
+
+                    for (var x = 0; x < resultState.length; x++) {
+
+
+                        $('#statename').append($('<option></option>').attr('value', resultState[x].StateId).text(resultState[x].StateName));
+
+
+                    }
+
+                    $('#statename').trigger("chosen:updated");
+                    $("#statename").chosen().change(function (event) {
+
+                        fillCity($(event.target).val(), [], [], []);
+                    });
+
+                    if (selectedcities.length == 0) {
+                        $("#statename").val(selectedstates).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#statename").val(selectedstates).trigger("chosen:updated");
+                        fillCity(selectedstates, selectedcities, selecteddatacenters, SelectedDepartments);
+                    }
+                }
+
+
+            });
+
+        }
+
+
+        function FillData() {
+
+            var obj = {
+                FirstName: "",
+                LastName: "",
+                MiddleInitial: "",
+                Email: "",
+                Phone: "",
+                Title: "",
+                LoginName: "",
+                SID: "",
+                IsValid:"",
+                EmployeeNo: "",
+                printInfo: function () {
+                    console.log(this.FirstName);
+                    console.log(this.LastName);
+                }
+            }
+
+            // Initializing the parameters.
+            obj.FirstName = document.getElementById("FirstName").value;
+            obj.LastName = document.getElementById("LastName").value;
+            obj.MiddleInitial = document.getElementById("MiddleInitial").value;
+            obj.Email = document.getElementById("Email").value;
+            obj.Phone = document.getElementById("Phone").value;
+            obj.Title = document.getElementById("Title").value;
+            obj.LoginName = document.getElementById("LoginName").value;
+            //obj.IsValid = document.getElementById(":checked").value;
+            obj.IsValid = $('#IsValid').is(':checked');
+            alert(obj.IsValid);
+            obj.SID = document.getElementById("SID").value;
+            obj.EmployeeNo = document.getElementById("EmployeeNo").value;
+            obj.ContactTypeID = document.getElementById("ContactTypeID").value;
+
+           
+            // Using method of the object.
+            //obj.printInfo();
+            $('#tblapplicationcontact').DataTable().destroy();
+            // Create table with data set
+            var table = $('#tblapplicationcontact').DataTable();
+            table.row.add([obj.FirstName, obj.LastName, obj.MiddleInitial, obj.Email, obj.Phone, obj.Title, obj.LoginName, obj.SID, obj.EmployeeNo, obj.IsValid, obj.ContactTypeID])
+
+                .draw()
+
+
+
+        }
+        
+
+        function addContactData() {
+            if ($("#application_contact").valid()) {
+                var FirstName = $('#FirstName').val();
+
+                var LastName = $('#LastName').val();
+
+                var MiddleInitial = $('#MiddleInitial').val();
+
+                var Email = $('#Email').val();
+
+                var Phone = $('#Phone').val();
+
+                var Title = $('#Title').val();
+
+               var SID = $('#SID').val();
+                var EmployeeNo = $('#EmployeeNo').val();
+                var IsValid = $('#IsValid').is(':checked');
+                
+                var ContactTypeID = $('#ContactTypeID').val();
+                var LoginName = $('#LoginName').val();
+               
+                var options = {};
+                options.url = "/Framework_Application/Addcontact";
+                options.type = "POST";
+                var obj = {
+
+                    FirstName: FirstName,
+                    LastName: LastName,
+                    MiddleInitial: MiddleInitial,
+                    Email: Email,
+                    Phone: Phone,
+                    Title: Title,
+                   SID: SID,
+                    EmployeeNo: EmployeeNo,
+                    LoginName: LoginName,
+                    IsValid: IsValid,
+                    ContactTypeID: ContactTypeID,
+                   
+                };
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Framework application saved successfully!", "success");
+
+                    }
+                    else
+                        swal("Error", "Please fill in the required fields!", "error");
+                };
+                $.ajax(options);
+            }
+
+            }
+            
+        
+        function frmApplication_Database() {
+
+
+                    var options = {};
+            options.url = "/Framework_Application/GetDatabases";
+                    options.type = "GET";
+                    var obj = {
+
+                    };
+
+                    options.data = JSON.stringify(obj);
+                    options.contentType = "application/json";
+                    options.dataType = "json";
+
+                    options.beforeSend = function (xhr) {
+                        xhr.setRequestHeader("MY-XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    };
+            options.complete = function (msg) {
+                
+
+                //alert(msg.responseJSON[i].Name);
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name).val(msg.responseJSON[i].DatabaseID);
+                    $('#Application_Database').append(option);
+}
+
+                    };
+                    $.ajax(options);
+
+
+        }
+
+        function Get_Database() {
+
+
+            var options = {};
+            options.url = "/Framework_Application/GetDatabases";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+             
+
+                //alert(msg.responseJSON[i].Name);
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name).val(msg.responseJSON[i].DatabaseID);
+                    $('#databaseID').append(option);
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+        function Get_Document() {
+            var options = {};
+            options.url = "/Framework_Application/GetDocument";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+               
+
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    //var option = $('<option></option>').text(msg.responseJSON[i].Name);
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name).val(msg.responseJSON[i].DocumentID);
+
+                    $('#DocumentID').append(option);
+
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+        function frmApplication_Server() {
+
+
+            var options = {};
+            options.url = "/Framework_Application/GetServer";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].Name).val(msg.responseJSON[i].ServerID);
+                    $('#Application_Server').append(option);
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+        function frmApplication_Developer() {
+
+
+            var options = {};
+            options.url = "/Framework_Application/GetDeveloper";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                
+
+                //alert(msg.responseJSON[i].Name);
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].GGPDeveloperID);
+                    $('#DeveloperID').append(option);
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+        function frmApplication_Installer() {
+
+
+            var options = {};
+            options.url = "/Framework_Application/GetInstaller";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                
+
+                //alert(msg.responseJSON[i].Name);
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].CodeValue).val(msg.responseJSON[i].LookupId);
+                    $('#InstallerNameID').append(option);
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+        function Destroycountryname() {
+            $('#countryname')
+                .empty();
+        }
+
+        function Destroydepartmentname() {
+            $('#departmentname')
+                .empty();
+        }
+
+        function DestroyCityName() {
+            $('#cityname')
+                .empty();
+        }
+        function DestroyStatename() {
+            $('#statename')
+                .empty();
+        }
+
+        function Destroydatacenter() {
+            $('#datacentername')
+                .empty();
+        }
+        function frmApplication_ADGroup() {
+
+
+            var options = {};
+            options.url = "/Framework_Application/GetAdGroup";
+            options.type = "GET";
+            var obj = {
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+                
+
+                //alert(msg.responseJSON[i].Name);
+                for (var i = 0; i < msg.responseJSON.length; i++) {
+                    var option = $('<option></option>').text(msg.responseJSON[i].GroupName).val(msg.responseJSON[i].ADGroupID);
+                    $('#ApplicationADGroupID').append(option);
+                    
+                }
+
+            };
+            $.ajax(options);
+
+
+        }
+
+
+        function Editdata(ApplicationID) {
+            // $("#countryname").val("Pakistan");
+
+            $.ajax({
+                url:rootUrl + '/Framework_Application/EditData',
+                type: 'POST',
+                datatype: 'json',
+                data: { ApplicationID: ApplicationID },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+
+                },
+
+                success: function (result) {
+                    $("#ApplicationID").val(result[0].ApplicationID);
+                  
+                    $("#countryname").val(result[0].CountryId);
+                    $("#statename").val(result[0].StateId);
+                    $("#cities").val(result[0].CityId);
+                    $("#datacentername").val(result[0].DataCenterId);
+                    $("#departmentname").val(result[0].DepartmentId);
+                    $("#Application_Database").val(result[0].DatabaseID);
+                    $("#Name").val(result[0].Name);
+                    $("#Version").val(result[0].Ver);
+                    $("#ShortDescription").val(result[0].ShortDescription);
+                    $("#LongDescription").val(result[0].LongDescription);
+                    $("#InstallationPath").val(result[0].InstallationPath);
+                    $("#InstalledDate").val(result[0].InstalledDate);
+                    $("#SupportPhone").val(result[0].SupportPhone);
+                  //  $("#SupportEmail").val(result[0].SupportEmail );
+                    $("#SupportAccountNo").val(result[0].SupportAccountNo);
+                    $("#SupportExpirationDate").val(result[0].SupportExpirationDate);
+                    $("#SupportURL").val(result[0].SupportURL);
+                    $("#NumberOfLicenses").val(result[0].NumberOfLicenses);
+                    $("#Comment").val(result[0].Comment);
+                    $("#Username").val(result[0].Usrname);
+                    $("#Password").val(result[0].Pass);
+                    $("#DeveloperTypeID").val(result[0].DeveloperTypeID);
+                    $("#DeveloperID").val(result[0].DeveloperID);
+                    $("#CitrixApplicationName").val(result[0].CitrixApplicationName);
+                    $("#ApplicationURL").val(result[0].ApplicationURL);
+                    $("#ApplicationTypeID").val(result[0].ApplicationTypeID);
+                    $("#IsVisibleInsideGGP").val(result[0].IsVisibleInsideGGP);
+                    $("#IsVisibleNonEmployee").val(result[0].IsVisibleNonEmployee);
+                    $("#CertificateExpiration").val(result[0].CertificateExpiration);
+                    $("#SMTP").val(result[0].SMTP);
+                    $("#FirewallException").val(result[0].FirewallException);
+                   
+                    $("#LDAP").val(result[0].LDAP);
+                    $("#ApplicationADGroupID").val(result[0].ADGroupID);
+                    $("#FirstName").val(result[0].FirstName);
+                    $("#LastName").val(result[0].LastName);
+                    $("#MiddleInitial").val(result[0].MiddleInitial);
+                    $("#Email").val(result[0].Email );
+                    $("#Phone").val(result[0].Phone);
+                    $("#Title").val(result[0].Title);
+                    $("#LoginName").val(result[0].LoginName);
+                    $("#SID").val(result[0].SID);
+                    $("#EmployeeNo").val(result[0].EmployeeNo);
+                    $("#ContactTypeID").val(result[0].ContactTypeID);
+                    $("#IsValid").val(result[0].IsValid);
+                    $("#DocumentID").val(result[0].DocumentID);
+                    $("#databaseID").val(result[0].DatabaseID);
+
+
+
+
+
+
+
+                    $('#modalFrameworkApplication').modal('hide');
+                }
+
+            });
+        }
+
+
+
+
+
+        function SaveDataapplication() {
+
+            if ($("#frm-application").valid()) {
+                var ApplicationID = $('#ApplicationID').val();
+               
+                var Application_Database = $('#Application_Database').val();
+                var Application_Server = $('#Application_Server').val();
+                var Name = $('#Name').val();
+
+                var Ver = $('#Version').val();
+
+                var ShortDescription = $('#ShortDescription').val();
+                var LongDescription = $('#LongDescription').val();
+                var InstallationPath = $('#InstallationPath').val();
+                 var InstalledDate = $('#InstalledDate').val();
+                var SupportPhone = $('#SupportPhone').val();
+
+                //var mail = $('#SupportEmail').val();
+
+                var SupportAccountNo = $('#SupportAccountNo').val();
+                  var SupportExpirationDate = $('#SupportExpirationDate').val();
+                var SupportURL = $('#SupportURL').val();
+
+                var NumberOfLicenses = $('#NumberOfLicenses').val();
+
+
+                if (isNaN(NumberOfLicenses)) {
+                    swal("Error", "Number of Licenses must be a number!", "error");
+                    return false;
+                }
+                var Comment = $('#Comment').val();
+                var InstallerNameID = $('#InstallerNameID').val();
+                if (isNaN(InstallerNameID)) {
+                    swal("Error", "Number of Licenses must be a number!", "error");
+                    return false;
+                }
+                var Usrname = $('#Username').val();
+                var Pass = $('#Password').val();
+               var DeveloperTypeID = $('#DeveloperTypeID').val();
+
+                var DeveloperID = 0;
+                alert(DeveloperID);
+                if (isNaN(DeveloperID)) {
+                    swal("Error", "Developer ID must be a number!", "error");
+                    return false;
+                }
+                var CitrixApplicationName = $('#CitrixApplicationName').val();
+                var ApplicationURL = $('#ApplicationURL').val();
+                var ApplicationTypeID = $('#ApplicationTypeID').val();
+
+                if (isNaN(ApplicationTypeID)) {
+                    swal("Error", "Application Type ID must be a number!", "error");
+                    return false;
+                }
+                var IsVisibleInsideGGP = $('#IsVisibleInsideGGP').is(':checked');
+                var IsVisibleNonEmployee = $('#IsVisibleNonEmployee').is(':checked');
+                 var CertificateExpiration = $('#CertificateExpiration').val();
+                var SMTP = $('#SMTP').val();
+                var FirewallException = $('#FirewallException').val();
+               
+                var LDAP = $('#LDAP').val();
+
+                //  -------------------------------StartADGRoup----------------->
+                var selectedGroupID = $('#ApplicationADGroupID').val();
+
+
+                // --------------------------------EndADGroup-------------->
+
+                //------------------------------ApplicationContact------------->
+                var contacts = [];
+                var table = $('#tblapplicationcontact').DataTable();
+                table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var data = this.data();
+                    contacts.push({ FirstName: data[0], LastName: data[1], MiddleInitial: data[2], Email: data[3], Phone: data[4], Title: data[5], LoginName: data[6], SID: data[7], EmployeeNo: data[8], IsValid: data[9], ContactTypeID: data[10] });
+                });
+
+
+
+                ////  ---------------------------EndApp-------------------------->
+                //-----------------------AppicationDAtabase-------------------->
+                var selectedDatabase = $('#databaseID').val();
+                //---------------------------end------------------------------>
+
+
+                //----------------------------ApplicationDocument------------>
+
+                var selectedDocument = $('#DocumentID').val();
+
+
+                //-----------------------------End------------------------->
+
+
+                //-------------------------saveCountryetc--------------->
+                var selectedCountry = $('#countryname').val();
+             
+                if (selectedCountry == "" || selectedCountry == 0) {
+
+
+                    document.getElementById('countrylbl').style.display = 'inherit';
+
+                }
+
+                var selectedState = $('#statename').val();
+                if (selectedState == "" || selectedState == 0) {
+
+
+                    document.getElementById('statelbl').style.display = 'inherit';
+
+                }
+
+                var selecteddatacenter = $('#datacentername').val();
+                if (selecteddatacenter == "" || selecteddatacenter == 0) {
+
+
+                    document.getElementById('datacenterlbl').style.display = 'inherit';
+
+                }
+
+                var selecteddepartment = $('#departmentname').val();
+                if (selecteddepartment == "" || selecteddepartment == 0) {
+
+
+                    document.getElementById('departmentlbl').style.display = 'inherit';
+
+                }
+
+                var selectedCity = $('#cityname').val();
+                if (selectedCity == "" || selectedCity == 0) {
+
+
+                    document.getElementById('citylbl').style.display = 'inherit';
+                    return false;
+
+                }
+
+                //----------------------------end--------------------->
+
+
+               
+
+
+
+
+                var options = {};
+                options.url = "/Framework_Application/SaveDataapplication";
+                options.type = "POST";
+               
+
+                var appid = $('#ApplicationID').val();
+                if (appid == null || appid == '') {
+                    appid = 0;
+                }
+
+                var obj1 = {
+                    "application": {
+                        ApplicationID: appid,
+
+                        Application_Database: Application_Database,
+                        Application_Server: Application_Server,
+                        Name: Name,
+                        Ver: Ver,
+                        ShortDescription: ShortDescription,
+                        LongDescription: LongDescription,
+                        InstallationPath: InstallationPath,
+                        InstalledDate: InstalledDate,
+                        SupportPhone: SupportPhone,
+                        // SupportEmail: 'SupportEmail',
+                        SupportAccountNo: SupportAccountNo,
+                     SupportExpirationDate: SupportExpirationDate,
+                        SupportURL: SupportURL,
+                        NumberOfLicenses: NumberOfLicenses,
+                        Comment: Comment,
+                        InstallerNameID: InstallerNameID,
+                        Usrname: Usrname,
+                        Pass: Pass,
+                        DeveloperTypeID: DeveloperTypeID,
+
+                        DeveloperID: DeveloperID,
+                        CitrixApplicationName: CitrixApplicationName,
+                        ApplicationURL: ApplicationURL,
+                        ApplicationTypeID: ApplicationTypeID,
+                       // IsVisibleInsideGGP: IsVisibleInsideGGP,
+                         CertificateExpiration: CertificateExpiration,
+                        SMTP: SMTP,
+                        IsVisibleNonEmployee: IsVisibleInsideGGP,
+                        FirewallException: FirewallException,
+                      //  VProcessDependent: VProcessDependent,
+                        LDAP: LDAP
+                    },
+                    "ApplicationADGroup": {
+                        //GroupPath: GroupPath,
+                        //GroupName: GroupName
+                        ADGroupID: selectedGroupID
+                    },
+                    "contact": contacts,
+                    "document": {
+                        "DocumentID": selectedDocument
+                    },
+                    "databases": {
+                        "DataBaseID": selectedDatabase
+
+                    },
+                    "document": {
+                        "DocumentID": selectedDocument
+                    },
+                    "lkpCity": {
+                        "CityId": selectedCity
+                    },
+
+                    "lkpCountry": {
+                        "CountryId": selectedCountry
+                    },
+
+                    "lkpState": {
+                        "StateId": selectedState
+                    },
+
+                    "lkpDepartment": {
+                        "DepartmentId": selecteddepartment
+                    },
+                    "lkpDataCenter": {
+                        "DataCenterId": selecteddatacenter
+                    },
+                }
+                options.data = JSON.stringify(obj1);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Framework application saved successfully!", "success");
+                        $('#Application_Database').val('');
+                        $('#Application_Server').val('');
+                        $('#Name').val('');
+                        $('#Ver').val('');
+                        $('#ShortDescription').val('');
+                        $('#LongDescription').val('');
+                        $('#InstallationPath').val('');
+                        $('#SupportPhone').val('');
+                        $('#SupportAccountNo').val('');
+                        $('#SupportURL').val('');
+                        $('#NumberOfLicenses').val('');
+                        $('#Comment').val('');
+                        $('#InstallerNameID').val('');
+                        $('#Usrname').val('');
+                        $('#Pass').val('');
+                        $('#DeveloperTypeID').val('');
+                        $('#CitrixApplicationName').val('');
+                        $('#ApplicationURL').val('');
+                        $('#ApplicationTypeID').val('');
+                        $('#SMTP').val('');
+                        $('#FirewallException').val('');
+                        $('#LDAP').val('');
+                        $('#FirstName').val('');
+                        $('#LastName').val('');
+                        $('#MiddleInitial').val('');    
+                        $('#Email').val('');
+                        $('#Phone').val('');
+                        $('#Title').val('');
+                        $('#LoginName').val('');
+                        $('#SID').val('');
+                        $('#EmployeeNo').val('');
+                        $('#ContactTypeID').val('');
+                        $('#countryname').val('');
+                        $('#statename').val('');
+                        $('#cityname').val('');
+                        $('#datacentername').val('');
+                        $('#departmentname').val('');
+
+                    }
+                   
+                    else
+                        
+
+                        swal("Error", "Please fill in the required fields!", "error");
+                };
+                $.ajax(options);
+
+            }
+
+        }
+       
+
+
+        function Clearframeworkapplication() {
+            selectedName = "";
+
+        }
+
+        function ClearDatatble() {
+            FirstName = "";
+            LastName = "";
+            MiddleInitial = "";
+            Email = "";
+            Phone = "";
+            Title = "";
+            SID = "";
+            EmployeeNo = "";
+            ContactTypeID = "";
+        }
+
+        function ClearDepartment(DepartmentId) {
+
+        }
+
+    </script>
+
+}
+
+

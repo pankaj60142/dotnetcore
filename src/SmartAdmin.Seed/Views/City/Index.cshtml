@@ -1,0 +1,530 @@
+
+@{
+    ViewData["Title"] = "City";
+}
+
+
+<style type="text/css">
+    .modal-header {
+        background-color: #404040 !important;
+        color: white;
+    }
+
+        .modal-header button.close {
+            color: #ffffff !important;
+        }
+
+    .chosen-container {
+        width: 100% !important;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+            Forms
+            <span>
+                >
+                City
+            </span>
+        </h1>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-primary" type="button" style="margin:12px 12px 0 0; float:right;" data-toggle="modal" data-target="#openmodal">Add New City</button>
+    </div>
+    <div class="modal" id="openmodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Country
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCity" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">Country Name</label>
+
+                                        <label class="input">
+                                            <select name="countryname" id="countryname" onchange="fillState(this)"></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">State Name</label>
+
+                                        <select id="StateName" name="StateName" onchange="fillcity(this)"></select>
+                                        <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">City Name</label>
+
+                                        <label class="input">
+                                            <select name="CityName" id="CityName"></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City Name</b>
+                                        </label>
+                                    </section>
+
+                                </div>
+
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveCity();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="clearcountry();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Cities </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+
+
+                    <div class="widget-body no-padding">
+
+                        <br />
+                        <table id="tblCity" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>State Name</th>
+                                    <th>City Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#countryname').chosen();
+            $('#countryname').chosen({ allow_single_deselect: false });
+            $('#StateName').chosen();
+            $('#StateName').chosen({ allow_single_deselect: false });
+            $('#CityName').chosen();
+            $('#CityName').chosen({ allow_single_deselect: false });
+            fillcountry();
+            FillAllCities();
+        });
+        function SaveCity() {
+            var StateId = $("#StateName").val();
+            var chunks = $('#CityName').val();
+           
+            if (StateId == null || StateId == "") {
+                swal("Error", "State must be seleted!", "error");
+                return;
+            }
+            if (chunks == null || chunks == "") {
+                swal("Error", "City must be seleted!", "error");
+                return;
+            }
+
+
+                       var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            if ($("#frmCity").valid()) {
+
+                
+                StateId = parseInt(StateId);
+               
+             
+                
+                var chunks = $('#CityName').val();
+                
+               
+                chunks = chunks.split("_");
+                var Latitude = chunks[1];
+                var Longitude = chunks[2];
+                var CityName = chunks[3];
+
+
+                var options = {};
+                options.url = "/City/SaveCity";
+                options.type = "POST";
+
+                var obj = {
+                    StateId: StateId,
+                    Latitude: Latitude,
+                    Longitude: Longitude,
+                    CityName: CityName,
+                   CompanyId: compid
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "City saved successfully!", "success");
+                        $('#CityName').val('');
+                        $('#openmodal').modal('hide');
+                        FillAllCities();
+                    }
+                    else
+                        swal("Error", "Error while saving City!", "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+
+
+
+        }
+        function DestroyCityName() {
+            $('#CityName')
+                .empty()
+                .append('<option selected="selected" value="">Select City</option>');
+        }
+        function fillcity(StateName) {
+            StateName = StateName.options[StateName.selectedIndex].text;
+            var CountryName = $("#countryname option:selected").text();
+            
+            
+            $.ajax({
+                url:rootUrl + '/City/GetCities',
+                type: 'POST',
+                data: { CountryName: CountryName, StateName: StateName },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCities) {
+                    DestroyCityName();
+
+                   
+                    for (var x = 0; x < resultCities.length; x++) {
+
+                        $('#CityName').append($('<option></option>').attr('value', resultCities[x].CityId + "_" + resultCities[x].Latitude + "_" + resultCities[x].Longitude + "_" + resultCities[x].CityName ).text(resultCities[x].CityName));
+
+
+
+                    }
+                    $('#CityName').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            }); 
+        }
+        function FillAllCities() {
+            var compid = localStorage.getItem("companyid");
+            $.ajax({
+                url:rootUrl + '/City/GetInsertedCities',
+                type: 'POST',
+                datatype: 'json',
+                data: { compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill city', 'error');
+                },
+                success: function (result) {
+
+
+                    $('#tblCity').DataTable().destroy();
+                    var t = $('#tblCity').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'StateName', 'width': '20%' },
+                            { data: 'CityName', 'width': '60%' },
+
+                            {
+
+                                "data": "CityId",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteSelectedCity(\'' + data + '\');">Delete</button>';
+                                }
+                            },
+                            { data: 'CityId', "visible": false }
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+        function DeleteSelectedCity(city) {
+
+
+
+
+            swal({
+                title: "Are you sure?",
+                text: "All associated cities will be deleted too,You will not be able to rollback this action!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+
+                        Deletecity(city);
+
+                    } else {
+                        swal("Cancelled", "You Cancelled delete operation!", "error");
+                    }
+                });
+
+
+
+
+        }
+
+        function Deletecity(city) {
+
+            var selectecity = city;
+            selectecity = parseInt(selectecity);
+
+            
+
+
+
+
+            var options = {};
+            options.url = "/City/DeleteCity";
+            options.type = "POST";
+
+            var obj = {
+
+                CityId: selectecity
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+
+                if (msg.responseText == "SUCCESS") {
+                    swal("Deleted!", "State has been deleted!", "success");
+                    FillAllCities();
+                }
+                else
+                    swal("Error", "Error while deleting state!", "error");
+            };
+
+            $.ajax(options);
+        }
+        function DestroyStatename() {
+            $('#StateName')
+                .empty()
+                .append('<option selected="selected" value="">Select State</option>');
+        }
+        function fillcountry() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/City/GetCountry',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+                    Destroycountryname();
+                    for (var x = 0; x < resultCountry.length; x++) {
+
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryId).text(resultCountry[x].CountryName));
+
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+
+
+                    
+
+                }
+
+
+            });
+        }
+        function fillState() {
+           
+            var countrycode = $("#countryname").val();
+            countrycode = parseInt(countrycode);
+          
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+         
+
+            $.ajax({
+                url:rootUrl + '/City/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+                data: { countrycode: countrycode, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+                    DestroyStatename();
+                    
+                    for (var x = 0; x < resultState.length; x++) {
+
+
+                        $('#StateName').append($('<option></option>').attr('value', resultState[x].StateId ).text(resultState[x].StateName));
+
+
+                    }
+                    $('#StateName').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            });
+        }
+        function Destroycountryname() {
+            $('#countryname')
+                .empty()
+                .append('<option selected="selected" value="">Select Country</option>');
+        }
+    </script>
+}

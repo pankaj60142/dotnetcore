@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SmartAdmin.Seed.Models.Entities
+{
+    public class FrmApplication
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ApplicationID { get; set; }
+        public string Name { get; set; }
+        public string Ver { get; set; }
+        public string ShortDescription { get; set; }
+        public string LongDescription { get; set; }
+        public string InstallationPath { get; set; }
+        public string InstalledDate { get; set; }
+        public string SupportPhone { get; set; }
+        public string SupportEmail { get; set; }
+        public string SupportAccountNo { get; set; }
+        public string SupportExpirationDate { get; set; }
+        public string SupportURL { get; set; }
+        public string NumberOfLicenses { get; set; }
+        public string Comment { get; set; }
+        public string InstallerNameID { get; set; }
+        public string Usrname { get; set; }
+        public string Pass { get; set; }
+        public string DeveloperTypeID { get; set; }
+        public string DeveloperID { get; set; }
+        public string CitrixApplicationName { get; set; }
+        public string ApplicationURL { get; set; }
+        public string ApplicationTypeID { get; set; }
+        public string IsVisibleInsideGGP { get; set; }
+        public string CertificateExpiration { get; set; }
+        public string SMTP { get; set; }
+        public string IsVisibleNonEmployee { get; set; }
+        public string FirewallException { get; set; }
+        public string VProcessDependent { get; set; }
+        public string LDAP { get; set; }
+    }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+@{
+    Layout = null;
+}
+
+
+<head>
+<meta charset="utf-8">
+<title>Creating Fixed Header and Footer with CSS</title>
+<style>
+   .container {
+    width: 98%;
+    height: 95vh;
+    margin: 10px;
+    border: 1px solid #fff;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 7px #292929;
+    -moz-box-shadow: 0px 2px 7px #292929;
+    -webkit-box-shadow: 0px 2px 7px #292929;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.mainbody,
+.header
+{
+    padding: 5px;
+}
+.mainbody {
+    margin-top: 0;
+    min-height: 150px;
+    max-height: 388px;
+    overflow: auto;
+}
+.header {
+    height: 40px;
+     background-color: whiteSmoke;
+    border-bottom: 1px solid #EEE;    
+    height: 40px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.footer {
+      height: 40px;
+    background-color: whiteSmoke;
+    border-top: 1px solid #DDD;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: fixed;
+    bottom: 3%;
+    width: 96%;
+   
+}
+
+ .btn {
+    background-color: #0063c3;
+    border: none;
+    border-radius: 11px;
+    color: white;
+    padding: 9px 30px;
+    /* margin-right: 4px; */
+    margin-top: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0.46875rem 2.1875rem rgb(90 97 105 / 10%), 0 0.9375rem 1.40625rem rgb(90 97 105 / 10%), 0 0.25rem 0.53125rem rgb(90 97 105 / 12%), 0 0.125rem 0.1875rem rgb(90 97 105 / 10%);
+}
+
+</style>
+</head>
+<body>
+   <div class="container">
+    <div class="header">Header</div>
+    <div class="mainbody">
+        <p>Body</p>
+    </div>
+    <div class="footer"><div style="display: inline-block; padding-right: 0px; position: absolute; right: 0px; margin-top: 0px;"><button class="btn"><i class="fa fa-share-alt"></i> Share</button></div></div>
+</div>
+@*<div class="container">
+    <div class="header">Header</div>
+    <div class="mainbody">
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+        <p>Body</p>
+    </div>
+    <div class="footer">Footer</div>
+</div>*@
+
+
+
+</body>
+</html>

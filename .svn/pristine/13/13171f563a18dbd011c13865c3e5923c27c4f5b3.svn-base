@@ -1,0 +1,573 @@
+
+@{
+    ViewData["Title"] = "Country";
+}
+
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+            Forms
+            <span>
+                >
+                Country
+            </span>
+        </h1>
+    </div>
+
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Country Form </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCountry" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="label">Country Name</label>
+                                        <label class="input">
+
+                                            <input type="text" id="countryname" name="countryname" placeholder="Country name" class="flexdatalist" data-min-length="1" data-value-property='CountryName' required data-selection-required="true">
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="label">Country Code</label>
+                                        <label class="input">
+                                            <input type="text" id="countrycode" name="countrycode" style="background-color:lightyellow" readonly placeholder="Country code">
+                                        </label>
+                                    </section>
+
+                                </div>
+
+                                @*<<div class="row">
+                                    <input type="file" id="inp" />
+                                    <button type="button" onclick="FileBrowse()"  >sss</button>
+                                </div>*@
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveCountry();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="ClearCountry();">
+                                    Cancel
+                                </button>
+                            </footer>
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Countries </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+
+
+                    <div class="widget-body no-padding">
+
+                        <br />
+                        <table id="tblCountry" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Country Code</th>
+                                    <th>Country Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+
+
+
+
+@section Scripts {
+    <!-- SCRIPTS ON PAGE EVENT -->
+    <script type="text/javascript">
+
+        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+        pageSetUp();
+
+
+
+
+
+
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+
+            var $checkoutForm = $('#frmCountry').validate({
+                errorClass: errorClass,
+                errorElement: errorElement,
+                highlight: function (element) {
+                    $(element).parent().removeClass('state-success').addClass("state-error");
+                    $(element).removeClass('valid');
+                },
+                unhighlight: function (element) {
+                    $(element).parent().removeClass("state-error").addClass('state-success');
+                    $(element).addClass('valid');
+                },
+
+                // Rules for form validation
+                rules: {
+                    countryname: {
+                        required: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    countryname: {
+                        required: 'Please select country name'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+
+
+
+
+
+        };
+
+        // end pagefunction
+
+        // Load form valisation dependency
+
+        // load related plugins
+
+
+            //function () {
+            //    loadScript("/js/plugin/datatables/dataTables.colVis.min.js",
+            //        function () {
+            //            loadScript("/js/plugin/datatables/dataTables.tableTools.min.js",
+            //                function () {
+            //                    loadScript("/js/plugin/datatables/dataTables.bootstrap.min.js",
+            //                        function () {
+            //                            loadScript("/js/plugin/datatable-responsive/datatables.responsive.min.js",
+
+            //                                function () {
+            //                                    loadScript("/js/plugin/jquery-form/jquery-form.min.js",
+            //                                        pagefunction);
+            //                                });
+            //                        });
+            //                });
+            //        });
+
+            //});
+
+
+
+
+         var rootDir = "@Url.Content("~/")";
+
+        $.ajax({
+            url:'/Country/GetName',
+            type: 'POST',
+            datatype: 'json',
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+
+            },
+            success: function (result) {
+
+
+                $('.flexdatalist').flexdatalist({
+                    minLength: 1,
+                    valueProperty: 'CountryName',
+                    visibleProperties: ["CountryName", "CountryCode", "latitude","longitude"],
+                    searchIn: 'CountryName',
+                    data: result
+                });
+
+
+
+
+            }
+        });
+
+
+        function FillCountry() {
+            $.ajax({
+                url: '/Country/GetInsertedCountries',
+                type: 'POST',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill countries', 'error');
+                },
+                success: function (result) {
+
+
+
+                    $('#tblCountry').DataTable().destroy();
+                    var t = $('#tblCountry').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'CountryCode', 'width': '20%' },
+                            { data: 'CountryName', 'width': '60%' },
+                            //{ data: 'DownloadLink', 'width': '10%' },
+
+
+                            //{
+
+                            //    "data": "CountryName",
+                            //    "render": function (data, type, full, meta, oData) {
+                            //        return '<button type="button"  class="btn btn-info" onclick="EditCountry(\'' + data + '\');">Edit</button>';
+                            //    }
+                            //},
+                            {
+
+                                "data": "CountryName",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteCountry(\'' + data + '\');">Delete</button>';
+                                }
+                            }
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+
+        FillCountry();
+        function SaveCountry() {
+
+
+
+            if ($("#frmCountry").valid()) {
+
+                var selectedcountry = $('#countryname').val();
+
+
+                var options = {};
+                options.url = "/Country/SaveCountry";
+                options.type = "POST";
+
+                var obj = {
+
+                    CountryName: selectedcountry
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+
+                        swal("Saved!", "Country saved successfully!", "success");
+                        $('#countryname').val('');
+                        FillCountry();
+                    }
+                    else
+                        swal("Error", "Error while saving country!", "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+        }
+
+        function ClearCountry(countryid) {
+
+        }
+
+        function DeleteCountry(country) {
+
+
+
+
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to rollback this action!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+
+
+
+
+                        DeleteCountryAjax(country);
+
+
+
+                    } else {
+                        swal("Cancelled", "You Cancelled delete operation!", "error");
+                    }
+                });
+
+
+
+
+        }
+
+
+        function DeleteCountryAjax(country) {
+
+            var selectedcountry = country;
+
+
+
+
+
+
+            var options = {};
+            options.url = "/Country/DeleteCountry";
+            options.type = "POST";
+
+            var obj = {
+
+                CountryName: selectedcountry
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+
+
+                if (msg.responseText == "SUCCESS") {
+                    swal("Deleted!", "Country has been deleted!", "success");
+                    FillCountry();
+                }
+                else
+                    swal("Error", "Error while deleting country!", "error");
+            };
+
+            $.ajax(options);
+        }
+
+
+
+        function FileBrowse() {
+            var formData = new FormData();
+formData.append('file', $('#csvimport')[0].files[0]); // myFile is the input type="file" control
+
+            var _url = '/Country/UploadFile';
+
+$.ajax({
+    url: _url,
+    type: 'POST',
+    data: formData,
+    processData: false,  // tell jQuery not to process the data
+    contentType: false,  // tell jQuery not to set contentType
+    success: function (result) {
+    },
+    error: function (jqXHR) {
+    },
+    complete: function (jqXHR, status) {
+    }
+});
+        }
+
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,158 @@
+@{
+    ViewData["Title"] = "Confirm email";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+
+            <span id="spanResult">
+
+            </span>
+        </h1>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+@section Scripts {
+<!-- SCRIPTS ON PAGE EVENT -->
+<script type="text/javascript">
+            var rootDir = "@Url.Content("~/")";
+
+            $( document ).ready(function() {
+         $.ajax({
+                    url: rootUrl + '/Account/ConfirmEmail',
+                    type: 'POST',
+                    datatype: 'json',
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+
+                    },
+
+                    success: function (result) {
+
+                        if (result.hasOwnProperty('Message')) {
+
+                            if(result.Message=='success')
+                            {
+                                document.getElementById("spanResult").innerHTML="";
+                                document.getElementById("spanResult").innerHTML="Account confirmed successfully..Please Click '<a href='/Login'>Login Here</a>' to Login";
+                            }
+                            else
+
+                            {
+                                document.getElementById("spanResult").innerHTML="";
+                                document.getElementById("spanResult").innerHTML=result.Message;
+
+                            }
+
+                        }
+
+                        else {
+
+
+
+
+
+                        }
+
+
+
+
+                    }
+
+
+                });
+    });
+            /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+         *
+         * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+         *
+         * // activate tooltips
+         * $("[rel=tooltip]").tooltip();
+         *
+         * // activate popovers
+         * $("[rel=popover]").popover();
+         *
+         * // activate popovers with hover states
+         * $("[rel=popover-hover]").popover({ trigger: "hover" });
+         *
+         * // activate inline charts
+         * runAllCharts();
+         *
+         * // setup widgets
+         * setup_widgets_desktop();
+         *
+         * // run form elements
+         * runAllForms();
+         *
+         ********************************
+         *
+         * pageSetUp() is needed whenever you load a page.
+         * It initializes and checks for all basic elements of the page
+         * and makes rendering easier.
+         *
+         */
+
+            pageSetUp();
+
+            // pagefunction
+
+            var pagefunction = function () {
+
+                var responsiveHelper_dt_basic = undefined;
+
+
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
+                // PAGE RELATED SCRIPTS
+
+                var errorClass = 'invalid';
+                var errorElement = 'em';
+
+
+                function ConfirmEmail() {
+
+                }
+
+            };
+
+            // end pagefunction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+}

@@ -1,0 +1,653 @@
+
+@{
+    ViewData["Title"] = "Map columns for reports";
+}
+<style type="text/css">
+    .modal-header {
+        background-color: #404040 !important;
+        color: white;
+    }
+
+        .modal-header button.close {
+            color: #ffffff !important;
+        }
+
+    .chosen-container{
+        width:100% !important;
+    }
+    #tblMappings {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+    }
+        #tblMappings th {
+            background-color: #f9f9f9;
+        }
+        #tblMappings th, #tblMappings td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid lightgrey;
+        }
+
+        #tblMappings tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+            #mytblMappings tr.header, #tblMappings tr:hover {
+                background-color: #f1f1f1;
+            }
+
+   
+</style>
+
+<div class="row">
+    <div class="col-9">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <h2 class="page-title txt-color-bluedark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Admin
+                <span>
+                    >
+                    Column Mappings
+                </span>
+            </h2>
+
+
+        </div>
+    </div>
+
+    <div class="col-3">
+
+            @*<button type="button" class="btn btn-primary" style="margin:12px 12px 0 0; float:right;" data-toggle="modal" data-target="#openmodal">Map Settings</button>*@
+    </div>
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+
+
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Column Mappings </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form id="map-report" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+
+
+                                <div class="row">
+                                    <section class="col col-lg-6">
+                                        <label class="label">Tables</label>
+                                        <label class="input ">
+                                            <select name="tablename" id="tablename" onchange="Fillcolumns(this)"></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to select the Table name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-lg-6">
+                                        <label class="label">Mapped Table Name</label>
+                                        <label class="input ">
+                                            <input type="text" id="txtMappedTableName">
+                                            <b class="tooltip tooltip-bottom-right">Enter Mapped Table Name</b>
+                                        </label>
+                                    </section>
+
+
+                                </div>
+
+                                <hr/>
+                                <br/>
+
+                                <div class="row">
+                                    <section class="col col-lg-6">
+                                    </section>
+
+                                    <section class="col col-lg-6">
+                                        <input type="text"  id="txtMappings" class="form-control" onkeyup="SearchTable()" placeholder="Search for names..">
+                                    </section>
+
+                                    
+
+
+                                </div>
+                                <div class="row">
+
+                                    <section class="col col-lg-12">
+                                      
+
+                                        <table id="tblMappings" class="display" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>SQL Column Name</th>
+                                                    <th>Data Type</th>
+                                                    <th>Mapped Column Name</th>
+
+
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+
+                                    </section>
+                                </div>
+
+                                    <!--<div class="row">
+            <section class="col col-6">
+                <label class="label">Password</label>
+                <label class="input">
+                    <i class="icon-append fa fa-exclamation-circle"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <b class="tooltip tooltip-bottom-right">Needed to enter the Password</b>
+                </label>
+            </section>
+
+            <section class="col col-6">
+                <label class="label">Confrim Password</label>
+                <label class="input">
+                    <i class="icon-append fa fa-exclamation-circle"></i>
+                    <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
+                    <b class="tooltip tooltip-bottom-right">Needed to Confirm Password</b>
+                </label>
+            </section>
+
+        </div>
+        <div class="row">
+            <section class="col col-lg-12 col-md-12">
+                <label class="label">Role</label>
+                <div class="select">
+                    <select name="roles" id="role" onchange="HideShow(this.value)">
+                        <option value="0" selected="">Select Role</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Country</option>
+                        <option value="3">DataCenter</option>
+                        <option value="4">Department</option>
+                        <option value="5">Application</option>
+
+                    </select>
+                </div>
+            </section>
+        </div>
+
+        <div class="row">
+
+
+
+            <section class="col col-6" id="country" style="display:none">
+                <label class="label">Country Name</label>
+
+                <div class="input" id="countryid">
+
+
+                    <select name="countryname" id="countryname" style="width:100%" multiple></select>
+
+                </div>
+            </section>
+
+            <section class="col col-6" id="state" style="display:none">
+                <label class="label">State Name</label>
+                <div class="input">
+                    <i class="icon-append fa fa-exclamation-circle"></i>
+
+                    <select id="statename" name="statename" multiple></select>
+
+                </div>
+            </section>
+        </div>
+
+        <div class="row">
+            <section class="col col-6" id="cities" style="display:none">
+                <label class="label">City Name</label>
+                <div class="input">
+                    <i class="icon-append fa fa-exclamation-circle"></i>
+                    <select name="cityname" id="cityname" multiple></select>-->
+                                    <!-- <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+        -->
+                                    <!--<b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                </div>
+            </section>
+
+
+
+            <section class="col col-6" id="datacenter" style="display:none">
+                <label class="label">Datacenters</label>
+                <div class="input">
+                    <select name="datacentername" id="datacentername" multiple></select>
+
+
+
+
+                </div>
+            </section>
+        </div>
+
+        <div class="row">
+            <section class="col col-6" id="department" style="display:none">
+                <label class="label">Departments</label>
+                <div class="input">
+                    <select name="departmentname" id="departmentname" multiple></select>-->
+                                    <!--<input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+        -->
+                                    <!--</div>
+            </section>
+
+
+
+            <section class="col col-6" id="application" style="display:block">
+                <label class="label">Applications </label>
+                <div class="input">
+                    <select name="applicationname" id="applicationname" multiple></select>
+
+
+
+
+
+                </div>
+            </section>
+
+
+        </div>-->
+
+
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveMapping();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelUser();">
+                                    Cancel
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- END COL -->
+
+
+
+</div>
+    <!-- Modal -->
+    <div class="modal" id="openmodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Country
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmCountry" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">Country Name</label>
+                                      
+                                        <label class="input ">
+                                            <select  name="countryname" id="countryname" onchange="Countryattr(this)"></select>
+                                               <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                        </label>
+                                           
+                                       
+
+
+
+                                    </section>
+
+
+                                    <section class="col col-6">
+                                        <label class="label">Country Code</label>
+                                        <label class="input">
+                                            <input type="text" id="countrycode" name="countrycode" style="background-color:lightyellow" readonly placeholder="Country code">
+                                        </label>
+                                    </section>
+
+
+                                </div>
+                                <footer>
+                                    <button type="button" class="btn btn-primary" onclick="SaveCountry();">
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-danger" onclick="clearcountry();">
+                                        Cancel
+                                    </button>
+                                </footer>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            filltables();
+            $('#tablename').chosen();
+            $('#tablename').chosen({ allow_single_deselect: false });
+        });
+       
+
+        function filltables()
+        {
+            $.ajax({
+                url: rootUrl + '/Reports/GetAllTablesFromEntityFramework',
+                type: 'POST',
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+
+                    Destroytablename();
+                    for (var x = 0; x < result.length; x++) {
+                        
+
+                        $('#tablename').append($('<option></option>').attr('value', result[x]).text(result[x]));
+                       
+
+                    }
+                    $('#tablename').trigger("chosen:updated");
+
+
+
+
+                }
+
+
+            });
+        }
+
+        function SaveMapping() {
+
+            var sqltablename =  $("#tablename").chosen().val();
+            var table = document.getElementById("tblMappings");
+
+            var mappingFieldValue = document.getElementById("txtMappedTableName").value;
+            
+
+            if (mappingFieldValue == null || mappingFieldValue == '') {
+                Swal("Alert!", "Please enter mapped table name!", "return");
+                document.getElementById("txtMappedTableName").focus();
+                return;
+            }
+
+            var columnValues = new Array();
+
+
+            
+
+            if (table.rows.length == 0) {
+                Swal("Alert!", "No data is available for mapping!", "return");
+
+                
+                return;
+            }
+            for (var i = 0, row; row = table.rows[i]; i++) {
+
+                try {
+                    if (i > 0) {
+                        columnValues.push({ "SqlTableName": mappingFieldValue, "SqlColumnName":  row.cells[0].innerText , "ColumnType":  row.cells[1].innerText , "MappedColumnName":  row.cells[2].childNodes[0].value  });
+                    }
+                }
+                catch (err) {
+                    
+                }
+                
+            }
+
+          
+
+            
+            $.ajax({
+                url: rootUrl + '/Reports/SaveMapping',
+                type: 'POST',
+                datatype: 'json',              
+                data: { tablename: sqltablename,columnvalues: JSON.stringify(columnValues) },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+
+
+                    if (result.Message == "success") {
+                        swal("Success", "Mapping saved successfully!", "success");
+                    }
+                    else {
+                        swal("Error", "Unable to save mapping information!", "error");
+                    }
+
+
+                }
+
+
+            });
+
+            //document.getElementById("countrycode").value = values;
+
+
+        }
+
+        function Fillcolumns(all) {
+            var value = all.options[all.selectedIndex].value;
+         
+            document.getElementById("countrycode").value = value;
+
+            $.ajax({
+                url: rootUrl + '/Reports/GetColumnNamesOfTable',
+                type: 'POST',
+                datatype: 'json',
+                data: { tablename: value },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+
+
+                    var table = document.getElementById("tblMappings");
+                    //or use :  var table = document.all.tableid;
+
+                    for (var i = table.rows.length - 1; i > 0; i--) {
+                        table.deleteRow(i);
+                    }
+                   
+                 
+                    for (var x = 0; x < result.length; x++) {
+                        addRow(result[x].SqlColumnName, result[x].ColumnType, result[x].MappedColumnName);
+                    }
+
+
+                }
+
+
+              
+
+
+                
+
+
+            });
+
+
+            $.ajax({
+                url: rootUrl + '/Reports/GetMappedTableName',
+                type: 'POST',
+                datatype: 'json',
+                data: { tablename: value },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+
+                    document.getElementById("txtMappedTableName").value = result.Message;
+
+
+                }
+
+            });
+
+            //document.getElementById("countrycode").value = values;
+
+
+        }
+
+        // function to add new row.
+        function addRow(sqlcolumnname,sqldatatype,mappedcolumnname) {
+            var Tab = document.getElementById('tblMappings');
+
+            var rowCnt = Tab.rows.length;    // get the number of rows.
+            var tr = Tab.insertRow(rowCnt); // table row.
+            tr = Tab.insertRow(rowCnt);
+
+          
+                var td = document.createElement('td');          // TABLE DEFINITION.
+                td = tr.insertCell(0);
+
+               
+                    // add a button control.
+                    //var button = document.createElement('input');
+           // button.setAttribute('type', 'button');
+            // add button's "onclick" event.
+                    //button.setAttribute('onclick', 'removeRow(this)');
+
+
+                    // set the attributes.
+            const node = document.createTextNode(sqlcolumnname);
+          
+
+                    
+
+            td.appendChild(node);
+
+
+            var td1 = document.createElement('td');          // TABLE DEFINITION.
+            td1 = tr.insertCell(1);
+            const node1 = document.createTextNode(sqldatatype);
+
+
+
+
+            td1.appendChild(node1);
+
+
+
+            var td2 = document.createElement('td');          // TABLE DEFINITION.
+            td2 = tr.insertCell(2);
+               
+                    // the 2nd, 3rd and 4th column, will have textbox.
+                    var ele = document.createElement('input');
+            ele.setAttribute('type', 'text');
+            ele.className += " form-control";
+            
+            ele.setAttribute('value', mappedcolumnname);
+
+                    td2.appendChild(ele);
+                
+            }
+        
+       
+        function Destroytablename() {
+            $('#tablename')
+                .empty()
+                .append('<option selected="selected" value="">Select Table</option>');
+        }
+
+        function SearchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("txtMappings");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("tblMappings");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+      
+    </script>
+}

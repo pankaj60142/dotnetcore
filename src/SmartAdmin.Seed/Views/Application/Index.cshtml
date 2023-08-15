@@ -1,0 +1,823 @@
+@{
+    ViewData["Title"] = "Appliction";
+}
+<style type="text/css">
+    .modal-header {
+        background-color: #404040 !important;
+        color: white;
+    }
+
+        .modal-header button.close {
+            color: #ffffff !important;
+        }
+
+    .chosen-container {
+        width: 100% !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-9">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <h2 class="page-title txt-color-bluedark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Forms
+                <span>
+                    >
+                    Application
+                </span>
+            </h2>
+
+
+        </div>
+    </div>
+
+    <div class="col-3">
+
+        <button type="button" class="btn btn-primary" style="margin:12px 12px 0 0; float:right;" data-toggle="modal" data-target="#openmodal">Add New Application</button>
+    </div>
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+
+
+
+
+
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid" data-widget-editbuttone">
+
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Application </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+
+
+                    <div class="widget-body no-padding">
+                        <div class="row" style="margin:10px;">
+
+                        </div>
+                        <div class="row" style="margin:10px;">
+
+
+
+                            <table id="tblApplication" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Application Name</th>
+                                        <th>Department Name</th>
+                                        <th>Action</th>
+                                        <th>Action</th>
+
+
+                                    </tr>
+                                </thead>
+                            </table>
+
+
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+                <!-- end widget -->
+
+            </div>
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="openmodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Application
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmapplication" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">Country Name</label>
+
+                                        <label class="input">
+                                            <select name="countryname" id="countryname" multiple></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Country name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">State Name</label>
+
+                                        
+                                        <select id="statename" name="statename" multiple></select>
+                                        <b class="tooltip tooltip-bottom-right">Needed to enter the State name</b>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">City Name</label>
+
+                                        <label class="input">
+                                            <select name="cityname" id="cityname" multiple></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City Name</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+
+                                        <label class="label">Data Center Name</label>
+
+                                        <label class="input">
+                                            <select name="datacentername" id="datacentername" multiple></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Center Name</b>
+                                        </label>
+                                    </section>
+                                    
+
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="label">Department Name</label>
+
+                                        <label class="input">
+                                            
+                                            <select name="departmentname" id="departmentname" multiple></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Department Name</b>
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+
+                                        <label class="label">Application</label>
+                                        
+                                        <label class="input">
+                                            <input name="applicationname" id="applicationname" />
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Department Name</b>
+                                        </label>
+                                    </section>
+
+                                </div>
+
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveApplication();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="FilterApplication();">
+                                    Filter
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal for Edit-->
+    <div class="modal" id="Editmodal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </span>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                        Edit Application
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <div class="widget-body no-padding">
+
+                        <form action="" id="frmapplication" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        
+                                        <label class="label">Department Name</label>
+
+                                        <label class="input">
+
+                                            <select name="department" id="department"></select>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Department Name</b>
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+
+                                        <label class="label">Application</label>
+
+                                        <label class="input">
+                                            <input name="application" id="application" />
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Application Name</b>
+                                        </label>
+                                    </section>
+
+                                </div>
+
+
+                            </fieldset>
+                            <fieldset>
+
+                                <div class="row" style="display:block" id="applicationsection">
+                                    <section class="col col-6" >
+                                        <label class="label">Application id</label>
+                                        <label class="input">
+                                            <input name="applicationid" id="applicationid" />
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Data Application Name</b>
+                                        </label>
+                                    </section>
+
+                                </div>
+
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveApplication();">
+                                    Save
+                                </button>
+
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ROW -->
+
+</section>
+@section Scripts{
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+
+            var selectedcountries = [];
+            var selectedstates = [];
+            var SelectedCities = [];
+            var selecteddatacenters = [];
+            var SelectedDepartments = [];
+
+
+            $('#countryname').chosen();
+            $('#countryname').chosen({ allow_single_deselect: false });
+            $('#statename').chosen();
+            $('#statename').chosen({ allow_single_deselect: false });
+            $('#cityname').chosen();
+            $('#cityname').chosen({ allow_single_deselect: false });
+            $('#datacentername').chosen();
+            $('#datacentername').chosen({ allow_single_deselect: false });
+            $('#departmentname').chosen();
+            $('#departmentname').chosen({ allow_single_deselect: false });
+            $('#department').chosen();
+            $('#department').chosen({ allow_single_deselect: false });
+            document.getElementById("applicationsection").style.display = "none";
+           
+            fillcountry();
+
+        });
+      
+        function FilterApplication() {
+            var compid = localStorage.getItem("companyid");
+            var departments = $('#departmentname').val();
+            var temfilterdep = 0;
+
+            departments = departments.join(",");
+            $.ajax({
+                url:rootUrl + '/Application/GetFilterApplications',
+                type: 'POST',
+                datatype: 'json',
+                data: { compid: compid, departments: departments },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill city', 'error');
+                },
+                success: function (result) {
+                   
+                    $('#openmodal').modal('hide');
+
+                    $('#tblApplication').DataTable().destroy();
+                    var t = $('#tblApplication').DataTable({
+                        data: result,
+                        paging: true,
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+
+                            { data: 'ApplicationName', 'width': '60%' },
+                            { data: 'DepartmentName', 'width': '60%' },
+                            {
+
+                                "data": "ApplicationId",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#Editmodal" onclick="EditApplication(\'' + data + '\');">Edit</button>';
+                                }
+                            },
+                            {
+
+                                "data": "ApplicationId",
+                                "render": function (data, type, full, meta, oData) {
+                                    return '<button type="button"  class="btn btn-danger" onclick="DeleteApplication(\'' + data + '\');">Delete</button>';
+                                }
+                            }
+
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+        function fillCity(SelectedStates, selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedStates = SelectedStates.join(",");
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetCityName',
+                type: 'POST',
+                data: { SelectedStates: SelectedStates, compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCities) {
+                    DestroyCityName();
+
+
+                    for (var x = 0; x < resultCities.length; x++) {
+
+                        $('#cityname').append($('<option></option>').attr('value', resultCities[x].CityId).text(resultCities[x].CityName));
+
+
+
+                    }
+                    $('#cityname').trigger("chosen:updated");
+
+                    $("#cityname").chosen().change(function (event) {
+
+                        FillDataCenter($(event.target).val(), [], []);
+
+                    });
+                    if (selecteddatacenters.length == 0) {
+                        $("#cityname").val(selectedcities).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#cityname").val(selectedcities).trigger("chosen:updated");
+                        FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments);
+                    }
+
+
+                }
+
+
+
+            });
+        }
+        function EditApplication(ApplicationId) {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/Application/EditApplication',
+                type: 'POST',
+                data: { ApplicationId: ApplicationId,ComapnyId: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+                     if (result!=null) {
+                         document.getElementById("department").value = result[0].DepartmentId;
+                         document.getElementById("application").value = result[0].ApplicationName;
+                         document.getElementById("applicationid").value = result[0].ApplicationId;
+
+                     }
+
+
+                }
+
+
+            });
+        }
+
+
+        function Destroycountryname() {
+            $('#countryname')
+                .empty();
+        }
+        function fillcountry() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/Department/GetCountry',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+
+
+                    for (var x = 0; x < resultCountry.length; x++) {
+
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryId).text(resultCountry[x].CountryName));
+
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+                    $("#countryname").chosen().change(function (event) {
+
+                        fillState($(event.target).val(), [], [], [], []);
+
+                    });
+
+
+
+
+
+
+                }
+
+
+            });
+        }
+        function fillState(SelectedCountryIds, selectedstates, selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCountryIds = SelectedCountryIds.join(",");
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+
+                data: { SelectedCountryIds1: SelectedCountryIds, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+                    DestroyStatename();
+
+                    for (var x = 0; x < resultState.length; x++) {
+
+
+                        $('#statename').append($('<option></option>').attr('value', resultState[x].StateId).text(resultState[x].StateName));
+
+
+                    }
+
+                    $('#statename').trigger("chosen:updated");
+                    $("#statename").chosen().change(function (event) {
+
+                        fillCity($(event.target).val(), [], [], []);
+                    });
+
+                    //  if (selectedcities.length == 0) {
+                    //    $("#statename").val(selectedstates).trigger("chosen:updated");
+
+                    //}
+                    //else {
+                    //  $("#statename").val(selectedstates).trigger("chosen:updated");
+                    //fillCity(selectedstates, selectedcities, selecteddatacenters, SelectedDepartments);
+                    //}
+                }
+
+
+            });
+
+        }
+
+        function FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCites = selectedcities.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedCites: SelectedCites, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdatacenter) {
+                    Destroydatacenter();
+
+                    for (var x = 0; x < resultdatacenter.length; x++) {
+
+
+                        $('#datacentername').append($('<option></option>').attr('value', resultdatacenter[x].DataCenterId).text(resultdatacenter[x].DataCenterName));
+
+
+                    }
+                    $('#datacentername').trigger("chosen:updated");
+                    $("#datacentername").chosen().change(function (event) {
+
+                        FillDepartment($(event.target).val(), []);
+
+                    });
+                    if (SelectedDepartments.length == 0) {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+                        FillDepartment(selecteddatacenters, SelectedDepartments);
+                    }
+
+
+
+                }
+
+
+            });
+
+        }
+        function FillDepartment(SelectedDataCenter, SelectedDepartments) {
+            SelectedDataCenter = SelectedDataCenter.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedDataCenter: SelectedDataCenter, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdepartment) {
+                    Destroydepartmentname();
+                    Destroydepartment();
+                    for (var x = 0; x < resultdepartment.length; x++) {
+
+
+                        $('#departmentname').append($('<option></option>').attr('value', resultdepartment[x].DepartmentId).text(resultdepartment[x].DepartmentName));
+
+                        $('#department').append($('<option></option>').attr('value', resultdepartment[x].DepartmentId).text(resultdepartment[x].DepartmentName));
+
+                    }
+                    $('#departmentname').trigger("chosen:updated");
+                    $('#department').trigger("chosen:updated");
+
+                    if (SelectedDepartments.length > 0) {
+                        $("#departmentname").val(SelectedDepartments).trigger("chosen:updated");
+                    }
+
+
+                }
+
+
+            });
+
+        }
+        function Destroydepartment() {
+            $('#department')
+                .empty();
+        }
+        function DeleteApplication(ApplicationId) {
+
+
+
+
+            swal({
+                title: "Are you sure?",
+                text: "All associated data centers will be deleted too,You will not be able to rollback this action!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+
+                    if (isConfirm) {
+
+                        DeletedApplication(ApplicationId);
+
+                    } else {
+                        swal("Cancelled", "You Cancelled delete operation!", "error");
+                    }
+                });
+
+
+
+
+        }
+
+        function DeletedApplication(ApplicationId) {
+
+            var ApplicationId = ApplicationId;
+            ApplicationId = parseInt(ApplicationId);
+            var options = {};
+            options.url = "/Application/DeleteApplication";
+            options.type = "POST";
+
+            var obj = {
+
+                ApplicationId: ApplicationId
+
+            };
+
+            options.data = JSON.stringify(obj);
+            options.contentType = "application/json";
+            options.dataType = "json";
+
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader("MY-XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            };
+            options.complete = function (msg) {
+
+                $('#tblApplication').DataTable().destroy();
+
+                if (msg.responseText == "SUCCESS") {
+                    FilterApplication();
+                    swal("Deleted!", "Application has been deleted!", "success");
+
+                   
+                }
+                else
+                    swal("Error", "Error while deleting Application !", "error");
+            };
+
+            $.ajax(options);
+        }
+        function Destroydepartmentname() {
+            $('#departmentname')
+                .empty();
+        }
+
+        function DestroyCityName() {
+            $('#cityname')
+                .empty();
+        }
+        function DestroyStatename() {
+            $('#statename')
+                .empty();
+        }
+
+        function Destroydatacenter() {
+            $('#datacentername')
+                .empty();
+        }
+        function ClearDropbox() {
+           
+           
+            
+            
+            
+            
+            
+            
+            $('#applicationname').val(''); 
+           
+            document.getElementById("applicationid").value = 0;
+            $('#application').val('');
+            $('#department').val('');
+            $('#department').trigger("chosen:updated");
+
+            $('#statename').text('');
+            $('#statename').trigger("chosen:updated");
+            $('#countryname').val('');
+            $('#countryname').trigger("chosen:updated");
+            $('#cityname').val('');
+            $('#cityname').trigger("chosen:updated");
+            $('#datacentername').val('');
+            $('#datacentername').trigger("chosen:updated");
+            $('#departmentname').val('');
+            $('#departmentname').trigger("chosen:updated");
+            
+        }
+        function SaveApplication() {
+            if ($("#frmapplication").valid()) {
+                var ApplicationId = 0;
+                ApplicationId = $('#applicationid').val();
+                var application = $('#application').val();
+                var compid = localStorage.getItem("companyid");
+                compid = parseInt(compid);
+                var applicationname = $('#applicationname').val();
+                var departments = $('#departmentname').val();
+                departments = departments.join(",");
+               
+                $.ajax({
+                    url:rootUrl + '/Application/SaveApplication',
+                    type: 'POST',
+                    data: { compid:compid, applicationname: applicationname, departments: departments, ApplicationId: ApplicationId, application: application },
+                    datatype: 'json',
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("MY-XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    complete: function (msg) {
+                        
+                        if (msg.responseText == "SUCCESS")
+                            swal("Saved!", "Application saved successfully!", "success");
+                        FilterApplication();
+                        ClearDropbox();
+                        $('#openmodal').modal('hide');
+                        $('#Editmodal').modal('hide');
+                }
+                });
+
+
+
+            }
+        }
+    </script>
+}
+<!-- end widget grid -->

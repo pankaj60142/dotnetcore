@@ -1,0 +1,227 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models;
+using static SmartAdmin.Seed.Controllers.ConfirmationController;
+
+namespace SmartAdmin.Seed.Controllers
+{
+    public class GraphController : Controller
+    {
+
+        #region Declaration
+
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        private IList<string> roles;
+        int companyid = 0;
+
+        #endregion
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public GraphController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+
+
+            _userManager = userManager;
+            _context = context;
+          
+
+
+
+        }
+
+        private async Task<int> GetCompanyId()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            roles = await _userManager.GetRolesAsync(user);
+            companyid = user.CompanyId;
+
+            return 0;
+        }
+
+        [HttpPost]
+        public async Task<JsonStringResult> GetFrameworkData()
+        {
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var result = (from c in _context.Authorization_AllowedCountries
+                          join allcountries in _context.lkpCountry on c.CountryId equals allcountries.CountryId
+                          where c.UserId == user.Id
+                          select new FrameworkTree
+                          {
+                              id = c.CountryId,
+                              text = allcountries.CountryName,
+                              type = "root"
+                             
+
+                          }).ToList();
+
+            foreach(var c in result)
+            {
+                c.children= GetStates(c.id, user.Id);
+            }
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+
+
+        }
+
+        private List<FrameworkTree> GetStates(int countryid,string userid)
+        {
+
+            var result=(from s in _context.Authorization_AllowedStates 
+                       join allstates in _context.lkpState on s.StateId equals allstates.StateId
+                       where allstates.CountryId==countryid && s.UserId==userid
+                       select new FrameworkTree
+                       {
+                           id = s.StateId,
+                           text = allstates.StateName,
+                           type = "root"
+                           
+
+                       }).ToList();
+            foreach (var c in result)
+            {
+                c.children = GetCities(c.id, userid);
+            }
+
+            return result;
+        }
+
+        private List<FrameworkTree> GetCities(int stateid, string userid)
+        {
+
+            var result = (from s in _context.Authorization_AllowedCities
+                          join allcities in _context.lkpCity on s.CityId equals allcities.CityId
+                          where allcities.StateId == stateid && s.UserId == userid
+                          select new FrameworkTree
+                          {
+                              id = s.CityId,
+                              text = allcities.CityName,
+                              type = "root"
+
+
+                          }).ToList();
+
+            foreach (var d in result)
+            {
+                d.children = GetDataCenter(d.id, userid);
+            }
+
+
+            return result;
+        }
+
+        private List<FrameworkTree> GetDataCenter(int cityid, string userid)
+        {
+
+            var result = (from s in _context.Authorization_AllowedDatacenters
+                          join alldatacenters in _context.lkpDataCenter on s.DatacenterId equals alldatacenters.DataCenterId
+                          where alldatacenters.CityId == cityid && s.UserId == userid
+                          select new FrameworkTree
+                          {
+                              id = s.DatacenterId,
+                              text = alldatacenters.DataCenterName,
+                              type = "root"
+
+
+                          }).ToList();
+
+            foreach (var de in result)
+            {
+                de.children = GetDepartment(de.id, userid);
+            }
+
+            return result;
+        }
+
+        public IActionResult mxgraph()
+        {
+            return View();
+        }
+
+        private List<FrameworkTree> GetDepartment(int datacenterid, string userid)
+        {
+
+            var result = (from s in _context.Authorization_AllowedDepartments
+                          join alldepts in _context.lkpDepartment on s.DepartmentId equals alldepts.DepartmentId
+                          where alldepts.DataCenterId == datacenterid && s.UserId == userid
+                          select new FrameworkTree
+                          {
+                              id = s.DepartmentId,
+                              text = alldepts.DepartmentName,
+                              type = "root"
+
+
+                          }).ToList();
+
+            return result;
+        }
+
+        //var jsonData = [
+        //                                    {
+        //                                        id: 1,
+        //                                      text: "Folder 1",
+        //                                      type: "root",
+        //                                      state: {
+
+        //                                          selected: false
+        //                                        },
+        //                                        children: [
+        //                                            {
+        //                                                id: 2,
+        //                                                text: "Sub Folder 1",
+        //                                                type: "child",
+        //                                                state: {
+        //                                                    selected: false
+        //                                                },
+        //                                            },
+        //                                            {
+        //                                                id: 3,
+        //                                                text: "Sub Folder 2",
+        //                                                type: "child",
+        //                                                state: {
+        //                                                    selected: false
+        //                                                },
+        //                                            }
+        //                                        ]
+        //                                    },
+        //                                    {
+        //                                        id: 4,
+        //                                        text: "Folder 2",
+        //                                        type: "root",
+        //                                        state: {
+        //                                            selected: true
+        //                                        },
+        //                                        children: []
+        //                                    }
+        //                                ];
+    }
+
+    public class FrameworkTree
+    {
+
+        public int id { get; set; }
+        public string text { get; set; }
+        public string type { get; set; }
+        public string state { get; set; }
+        public List<FrameworkTree> children { get; set; }
+
+        public FrameworkTree()
+        {
+            this.children = new List<FrameworkTree>();
+        }
+    }
+}

@@ -1,0 +1,929 @@
+<style type="text/css">
+    .page-header p {
+        overflow: hidden;
+    }
+
+        .page-header p a {
+            width: 200px;
+            text-align: center;
+        }
+
+    .code {
+        height: 500px;
+        overflow: scroll;
+        zoom: .84;
+    }
+
+    * {
+        font-family: "source-sans-pro";
+    }
+
+    .heading {
+        font-size: 180px;
+        line-height: 200px;
+    }
+
+    .head, .examples, .docs {
+        text-align: center;
+    }
+
+    code, pre, pre span {
+        text-align: left;
+        font-family: monospace;
+        font-weight: normal;
+        font-size: medium;
+    }
+
+    .head ul {
+        list-style-type: none;
+    }
+
+    .map {
+        position: relative;
+        margin: 0 auto;
+        width: 1000px;
+        height: 500px;
+    }
+
+    .tall {
+        height: 750px;
+        width: 550px;
+    }
+
+    .examples h3 {
+        margin-bottom: 0;
+    }
+
+    .options {
+        position: relative;
+        overflow: hidden;
+        max-height: 21px;
+        -webkit-transition: max-height 250ms ease-in;
+        transition: max-height 250ms ease-in;
+        -moz-transition: max-height 250ms ease-in;
+    }
+
+        .options pre {
+            margin-top: 10px;
+        }
+
+        .options:hover {
+            background-color: #DDD;
+            cursor: pointer;
+        }
+
+        .options pre:hover {
+            cursor: default;
+        }
+
+    .open {
+        max-height: 5000px !important;
+    }
+
+    .options:after {
+        content: "(Click to toggle code) ↓";
+        color: #666;
+        float: right;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    #footer {
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    sup.new {
+        color: red;
+    }
+
+    path {
+        stroke: white;
+        stroke-width: 0.25px;
+        fill: lightblue;
+    }
+
+    /*div.tooltip {
+        color: #222;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0px 0px 2px 0px #a6a6a6;
+        padding: .2em;
+        text-shadow: #f5f5f5 0 1px 0;
+        opacity: 0.9;
+        position: absolute;
+        font-size: 12px;
+        font-family: "Arial", sans-serif;
+    }*/
+
+    div.tooltip {
+        color: #fb0707;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0px 0px 2px 0px #a6a6a6;
+        padding: .2em;
+        text-shadow: #f5f5f5 0 1px 0;
+        opacity: 0.9;
+        position: absolute;
+        font-size: 18px;
+        font-family: "Arial", sans-serif;
+        font-weight: bold;
+    }
+
+
+    .names {
+        fill: none;
+        stroke: #fff;
+        stroke-linejoin: round;
+    }
+
+  
+    /*    text{
+      pointer-events:none;
+    }*/
+
+    .details {
+        color: white;
+    }
+
+
+    .node circle {
+        fill: #fff;
+        stroke: orange;
+        stroke-width: 3px;
+        width: 10px;
+        height: 10px;
+    }
+
+    .node text {
+        font: 15px sans-serif;
+        font-weight:bold;
+    }
+
+    .link {
+        fill: none;
+        stroke: black;
+        stroke-width: 1px;
+        stroke-dasharray: 20,10,5,5,5,10;
+    }
+</style>
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
+                    <h2>World Map</h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+
+                        <div id="vector-map" class="vector-map">    </div>
+                        <div id="map"></div>
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Country Wise Data Visualization</h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+               
+
+
+                    <div class="widget-body no-padding">
+
+                        <div id="mapdetails"></div>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+
+
+
+
+
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var width = document.getElementById("vector-map").clientWidth;
+            var height = document.getElementById("vector-map").clientHeight;
+
+            //alert("The width of this div = " + width + " and height of this div = " + height + " .");
+        });
+
+
+
+        var width = document.getElementById("vector-map").clientWidth,
+            height = document.getElementById("vector-map").clientHeight;
+
+        //var width = 1200,
+        //    height = 510;
+        var countryCode = 826;
+
+
+        // Some code for the country label tooltip
+        var offsetL = document.getElementById('map').offsetLeft + 1;
+        var offsetT = document.getElementById('map').offsetTop + 1;
+
+        var tooltip = d3.select("#map")
+            .append("div")
+            .attr("class", "tooltip hidden");
+
+
+
+        var countryjsonobject = '{ "countries": [{ "name":"Pakistan", "id":586 },    { "name":"India","id":356},{ "name":"United States", "id":840 }, { "name":"Canada","id":124},{ "name":"Northern Cyprus","id":1},{ "name":"Kosovo","id":2},{ "name":"Somaliland","id":3},{ "name":"Afghanistan","id":4},{ "name":"Albania","id":8},{ "name":"Antarctica","id":10},{ "name":"Algeria","id":12},{ "name":"American Samoa","id":16},{ "name":"Andorra","id":20},{ "name":"Angola","id":24},{ "name":"Antigua and Barbuda","id":28},{ "name":"Azerbaijan","id":31},{ "name":"Argentina","id":32},{ "name":"Australia","id":36},{ "name":"Bahamas","id":44},{ "name":"Bahrain","id":48},{ "name":"Bangladesh","id":50},{ "name":"Armenia","id":51},{ "name":"Barbados","id":52},{ "name":"Belgium","id":56},{ "name":"Bermuda","id":60},{ "name":"Bhutan","id":64},{ "name":"Bolivia","id":68},{ "name":"Bosnia and Herzegovina","id":70},{ "name":"Botswana","id":72},{ "name":"Bouvet Island","id":74},{ "name":"Brazil","id":76},{ "name":"Belize","id":84},{ "name":"British Indian Ocean Territory","id":86},{ "name":"Solomon Islands","id":90},{ "name":"Virgin Islands, British","id":92},{ "name":"Brunei Darussalam","id":96},{ "name":"Bulgaria","id":100},{ "name":"Myanmar","id":104},{ "name":"Burundi","id":108},{ "name":"Belarus","id":112},{ "name":"Cambodia","id":116},{ "name":"Cameroon","id":120},{ "name":"Cape Verde","id":132},{ "name":"Cayman Islands","id":136},{ "name":"Central African Republic","id":140},{ "name":"Sri Lanka","id":144},{ "name":"Chad","id":148},{ "name":"Chile","id":152},{ "name":"China","id":156},{ "name":"Taiwan, Province of China","id":158},{ "name":"Christmas Island","id":162},{ "name":"Cocos (Keeling) Islands","id":166},{ "name":"Colombia","id":170},{ "name":"Comoros","id":174},{ "name":"Mayotte","id":175},{ "name":"Congo","id":178},{ "name":"Congo, the Democratic Republic of the","id":180},{ "name":"Cook Islands","id":184},{ "name":"Costa Rica","id":188},{ "name":"Croatia","id":191},{ "name":"Cuba","id":192},{ "name":"Cyprus","id":196},{ "name":"Czech Republic","id":203},{ "name":"Benin","id":204},{ "name":"Denmark","id":208},{ "name":"Dominica","id":212},{ "name":"Dominican Republic","id":214},{ "name":"Ecuador","id":218},{ "name":"El Salvador","id":222},{ "name":"Equatorial Guinea","id":226},{ "name":"Ethiopia","id":231},{ "name":"Eritrea","id":232},{ "name":"Estonia","id":233},{ "name":"Faroe Islands","id":234},{ "name":"Falkland Islands (Malvinas)","id":238},{ "name":"South Georgia and the South Sandwich Islands","id":239},{ "name":"Fiji","id":242},{ "name":"Finland","id":246},{ "name":"Åland Islands","id":248},{ "name":"France","id":250},{ "name":"French Guiana","id":254},{ "name":"French Polynesia","id":258},{ "name":"French Southern Territories","id":260},{ "name":"Djibouti","id":262},{ "name":"Gabon","id":266},{ "name":"Georgia","id":268},{ "name":"Gambia","id":270},{ "name":"Germany","id":276},{ "name":"Ghana","id":288},{ "name":"Gibraltar","id":292},{ "name":"Kiribati","id":296},{ "name":"Greece","id":300},{ "name":"Greenland","id":304},{ "name":"Grenada","id":308},{ "name":"Guadeloupe","id":312},{ "name":"Guam","id":316},{ "name":"Guatemala","id":320},{ "name":"Guinea","id":324},{ "name":"Guyana","id":328},{ "name":"Haiti","id":332},{ "name":"Heard Island and McDonald Islands","id":334},{ "name":"Holy See (Vatican City State)","id":336},{ "name":"Honduras","id":340},{ "name":"Hong Kong","id":344},{ "name":"Hungary","id":348},{ "name":"Iceland","id":352},{ "name":"Indonesia","id":360},{ "name":"Iran, Islamic Republic of","id":364},{ "name":"Iraq","id":368},{ "name":"Ireland","id":372},{ "name":"Israel","id":376},{ "name":"Italy","id":380},{ "name":"Côte dIvoire","id":384},{ "name":"Jamaica","id":388},{ "name":"Japan","id":392},{ "name":"Kazakhstan","id":398},{ "name":"Jordan","id":400},{ "name":"Kenya","id":404},{ "name":"Korea, Democratic People Republic of","id":408},{ "name":"Korea, Republic of","id":410},{ "name":"Kuwait","id":414},{ "name":"Kyrgyzstan","id":417},{ "name":"Lao Peoples Democratic Republic","id":418},{ "name":"Lebanon","id":422},{ "name":"Lesotho","id":426},{ "name":"Latvia","id":428},{ "name":"Liberia","id":430},{ "name":"Libya","id":434},{ "name":"Liechtenstein","id":438},{ "name":"Lithuania","id":440},{ "name":"Luxembourg","id":442},{ "name":"Macao","id":446},{ "name":"Madagascar","id":450},{ "name":"Malawi","id":454},{ "name":"Malaysia","id":458},{ "name":"Maldives","id":462},{ "name":"Mali","id":466},{ "name":"Malta","id":470},{ "name":"Martinique","id":474},{ "name":"Mauritania","id":478},{ "name":"Mauritius","id":480},{ "name":"Mexico","id":484},{ "name":"Monaco","id":492},{ "name":"Mongolia","id":496},{ "name":"Moldova, Republic of","id":498},{ "name":"Montenegro","id":499},{ "name":"Montserrat","id":500},{ "name":"Morocco","id":504},{ "name":"Mozambique","id":508},{ "name":"Oman","id":512},{ "name":"Namibia","id":516},{ "name":"Nauru","id":520},{ "name":"Nepal","id":524},{ "name":"Netherlands","id":528},{ "name":"Curaçao","id":531},{ "name":"Aruba","id":533},{ "name":"Sint Maarten (Dutch part)","id":534},{ "name":"Bonaire, Sint Eustatius and Saba","id":535},{ "name":"New Caledonia","id":540},{ "name":"Vanuatu","id":548},{ "name":"New Zealand","id":554},{ "name":"Nicaragua","id":558},{ "name":"Niger","id":562},{ "name":"Nigeria","id":566},{ "name":"Niue","id":570},{ "name":"Norfolk Island","id":574},{ "name":"Norway","id":578},{ "name":"Northern Mariana Islands","id":580},{ "name":"United States Minor Outlying Islands","id":581},{ "name":"","id":583},{ "name":"Marshall Islands","id":584},{ "name":"Palau","id":585},{ "name":"Panama","id":591},{ "name":"Papua New Guinea","id":598},{ "name":"Paraguay","id":600},{ "name":"Peru","id":604},{ "name":"Philippines","id":608},{ "name":"Pitcairn","id":612},{ "name":"Poland","id":616},{ "name":"Portugal","id":620},{ "name":"Guinea-Bissau","id":624},{ "name":"Timor-Leste","id":626},{ "name":"Puerto Rico","id":630},{ "name":"Qatar","id":634},{ "name":"Réunion","id":638},{ "name":"Romania","id":642},{ "name":"Russian Federation","id":643},{ "name":"Rwanda","id":646},{ "name":"Saint Barthélemy","id":652},{ "name":"Saint Helena, Ascension and Tristan da Cunha","id":654},{ "name":"Saint Kitts and Nevis","id":659},{ "name":"Anguilla","id":660},{ "name":"Saint Lucia","id":662},{ "name":"Saint Martin (French part)","id":663},{ "name":"Saint Pierre and Miquelon","id":666},{ "name":"Saint Vincent and the Grenadines","id":670},{ "name":"San Marino","id":674},{ "name":"Sao Tome and Principe","id":678},{ "name":"Saudi Arabia","id":682},{ "name":"Senegal","id":686},{ "name":"Serbia","id":688},{ "name":"Seychelles","id":690},{ "Sierra Leonename":"","id":694},{ "name":"Singapore","id":702}, { "name": "Slovakia", "id": 703 }, { "name": "Viet Nam", "id": 704 }, { "name": "Slovenia", "id": 705 }, { "name": "Somalia", "id": 706 }, { "name": "South Africa", "id": 710 }, { "name": "Zimbabwe", "id": 716 }, { "name": "Spain", "id": 724 }, { "name": "South Sudan", "id": 728 }, { "name": "Sudan", "id": 729 }, { "name": "Western Sahara", "id": 732 }, { "name": "Suriname", "id": 740 }, { "name": "Svalbard and Jan Mayen", "id": 744 }, { "name": "Swaziland", "id": 748 }, { "name": "Sweden", "id": 752 }, { "name": "Switzerland", "id": 756 }, { "name": "Syrian Arab Republic", "id": 760 }, { "name": "Tajikistan", "id": 762 }, { "name": "Thailand", "id": 764 }, { "name": "Togo", "id": 768 }, { "name": "Tokelau", "id": 772 }, { "name": "Tonga", "id": 776 }, { "name": "Trinidad and Tobago", "id": 780 }, { "name": "United Arab Emirates", "id": 784 }, { "name": "Tunisia", "id": 788 }, { "name": "Turkey", "id": 792 }, { "name": "Turkmenistan", "id": 795 }, { "name": "Turks and Caicos Islands", "id": 796 }, { "name": "Tuvalu", "id": 798 }, { "name": "Uganda", "id": 800 }, { "name": "Ukraine", "id": 804 }, { "name": "Macedonia, the former Yugoslav Republic of", "id": 807 }, { "name": "Egypt", "id": 818 }, { "name": "United Kingdom", "id": 826 }, { "name": "Guernsey", "id":831  }, { "name": "Jersey", "id": 832 }, { "name": "Isle of Man", "id":  833}, { "name": "Tanzania, United Republic of", "id": 834 }, { "name": "Virgin Islands, U.S.", "id":850  }, { "name": "Burkina Faso", "id": 854 }, { "name": "Uruguay", "id": 858 }, { "name": "Uzbekistan", "id": 860 }, { "name": "Venezuela, Bolivarian Republic of", "id": 862 }, { "name": "Wallis and Futuna", "id": 876 }, { "name": "Samoa", "id":882  }, { "name": "Yemen", "id": 887 }, { "name": "Zambia", "id": 894 }]  }';
+
+
+
+       // var countryjsonobject = '{ "countries": [{ "name":"Pakistan", "id":586 },    { "name":"India","id":356}]  }';
+
+
+
+
+        var projection = d3.geoMercator()
+            .center([0, 5])
+            .scale(width / 11)
+            .translate([width / 2, height / 2])
+
+
+
+
+
+
+
+        var svg = d3.select("#vector-map").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        var path = d3.geoPath()
+            .projection(projection);
+        var g = svg.append("g");
+
+        var countryobject = JSON.parse(countryjsonobject);
+        console.log(JSON.stringify(countryobject.countries[0]));
+        // load and display the World
+        d3.json("world-110m2.json", function (error, topology) {
+
+
+            var countries = topojson.feature(topology, topology.objects.countries);
+
+            var selectedcolor;
+
+
+            g.selectAll(".country")
+                .data(topojson.feature(topology, topology.objects.countries)
+                    .features)
+                .enter().insert("path", ".graticule")
+                .attr("class", "country")
+                .attr("d", path)
+                .on("mousemove", function (d, i) {
+                    var mouse = d3.mouse(svg.node())
+                        .map(function (d) { return parseInt(d); });
+                    tooltip.classed("hidden", false)
+                        .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT) + "px")
+                        .html(ShowCountryName(countryobject, d.id));
+                })
+                .on("mouseover", function (d, i) {
+                    selectedcolor = d3.select(this).attr("r", 10).style("fill");
+                    d3.select(this).attr("r", 10).style("fill", "darkorange");
+                })
+                .on("mouseout", function () {
+                    d3.select(this).attr("r", 10).style("fill", selectedcolor);
+
+                })
+                .style("fill", function (d) {
+
+                    if (FoundInCountries(countryobject, d.id)) {
+
+                        
+                        return 'rgb(83, 123, 139)';
+                    }
+                    else {
+                        return '#D3D3D3';
+                    }
+
+                });
+
+
+
+
+            // load and display the cities
+            //d3.csv("cities.csv", function (error, data) {
+            //    g.selectAll("circle")
+            //        .data(data)
+            //        .enter()
+            //        .append("a")
+            //        .attr("xlink:href", function (d) {
+            //            return "https://www.google.com/search?q=" + d.city;
+            //        }
+            //        )
+            //        .append("circle")
+            //        .attr("cx", function (d) {
+            //            return projection([d.lon, d.lat])[0];
+            //        })
+            //        .attr("cy", function (d) {
+            //            return projection([d.lon, d.lat])[1];
+            //        })
+            //        .attr("r", 3)
+            //        .style("fill", "maroon");
+            //});
+
+
+            g.selectAll("path")
+                .data(topojson.feature(topology, topology.objects.countries)
+                    .features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+
+        });
+        // zoom and pan
+
+
+        var zoom = d3.zoom()
+            .on("zoom", function () {
+
+                g.attr("transform", d3.event.transform)
+
+                g.selectAll("circle")
+                    .attr("d", path.projection(projection));
+                g.selectAll("path")
+                    .attr("d", path.projection(projection));
+            });
+
+
+
+        svg.call(zoom)
+
+
+        function FoundInCountries(countryobject, id) {
+
+
+            for (var i = 0; i < countryobject.countries.length; i++) {
+                console.log(countryobject.countries[i].id.toString());
+                if (countryobject.countries[i].id.toString() == id.toString()) {
+
+                    return true;
+
+                }
+            }
+
+            return false;
+
+        }
+
+
+        function ShowCountryName(countryobject, id) {
+            for (var i = 0; i < countryobject.countries.length; i++) {
+
+                if (countryobject.countries[i].id.toString() == id.toString()) {
+
+                    return countryobject.countries[i].name.toString();
+
+                }
+            }
+
+            return "";
+        }
+
+
+
+        /***  Map details multilevel code starts here. ***/
+
+        var fields = [
+            "id",
+            "name",
+            "tag.analytics.aggname",
+            "tag.analytics.jobname",
+            "tag.analytics.metric",
+            "tag.kubernetes.namespace.creationTimestamp",
+            "tag.kubernetes.namespace.name",
+            "tag.kubernetes.namespace.phase",
+            "tag.kubernetes.namespace.uid",
+            "tag.kubernetes.node.ExternalIP",
+            "tag.kubernetes.node.Hostname",
+            "tag.kubernetes.node.InternalIP",
+            "tag.kubernetes.node.creationTimestamp",
+            "tag.kubernetes.node.name",
+            "tag.kubernetes.node.uid",
+            "tag.kubernetes.pod.creationTimestamp",
+            "tag.kubernetes.pod.hostIP",
+            "tag.kubernetes.pod.label.app",
+            "tag.kubernetes.pod.label.chart",
+            "tag.kubernetes.pod.label.component",
+            "tag.kubernetes.pod.label.controller-revision-hash",
+            "tag.kubernetes.pod.label.heritage",
+            "tag.kubernetes.pod.label.k8s-app",
+            "tag.kubernetes.pod.label.kubernetes.io/cluster-service",
+            "tag.kubernetes.pod.label.name",
+            "tag.kubernetes.pod.label.pod-template-generation",
+            "tag.kubernetes.pod.label.pod-template-hash",
+            "tag.kubernetes.pod.label.release",
+            "tag.kubernetes.pod.label.tier",
+            "tag.kubernetes.pod.name",
+            "tag.kubernetes.pod.phase",
+            "tag.kubernetes.pod.podIP",
+            "tag.kubernetes.pod.uid",
+            "tag.kubernetes.service",
+            "tag.kubernetes.type",
+            "tag.collector",
+            "units"
+        ]
+
+        var key = "tag.kubernetes.pod.label.release";
+
+        const buildTree = (fields) => {
+            let tree = {
+                "name": "tags",
+                "children": []
+            }
+
+            const addNodes = (tag) => {
+                for (let i = 0; i < root.children.length; i++) {
+                    if (tag === root.children[i].name) {
+                        root = root.children[i];
+                        return;
+                    }
+                }
+                root.children.push({
+                    'name': tag,
+                    children: []
+                })
+                root = root.children[root.children.length - 1]
+            }
+
+            fields.forEach((field) => {
+                tags = field.split('.');
+                root = tree;
+                tags.forEach(addNodes)
+            })
+            return tree;
+        }
+
+
+        //var treeData = buildTree(fields);
+
+        var treeData =
+        {
+            "name": "State",
+            "children": [
+                {
+                    "name": "Punjab",
+                    "children": [
+                        {
+                            "name": "Lahore",
+
+                            "children": [
+                                {
+                                    "name": "Data Center Lahore"
+                                }
+                            ]
+                        },
+                        { "name": "Multan" },
+                        { "name": "Faisalabad" },
+                        { "name": "Sialkot" },
+                        { "name": "Mianwali" },
+                        { "name": "Sargodha" },
+
+
+                    ]
+                },
+                {
+                    "name": "KPK",
+                    "children": [
+                        {
+                            "name": "Peshawar",
+                            "children": [
+                                { "name": "Data Center1" },
+                                { "name": "Data Center2" }
+                            ]
+                        },
+                        { "name": "Mardan" }
+                    ]
+                },
+
+                {
+                    "name": "Sindh",
+                    "children": [
+                        {
+                            "name": "Karachi",
+                            "children": [
+                                { "name": "Data Center Karachi East" },
+                                { "name": "Data Center Karachi West" }
+                            ]
+                        },
+                        { "name": "Larkana" }
+                    ]
+                },
+
+                {
+                    "name": "Balochistan",
+                    "children": [
+                        {
+                            "name": "Quetta",
+                            "children": [
+                                { "name": "Data Center Quetta" }
+                            ]
+                        },
+                        { "name": "Gwadar" }
+                    ]
+                }
+
+            ]
+        };
+
+        // Set the dimensions and margins of the diagram
+        var margin = { top: 0, right: 0, bottom: 30, left: 70 },
+            width = window.innerWidth - margin.left - margin.right,
+            height = 700 - margin.top - margin.bottom;
+
+        // append the svg object to the body of the page
+        // appends a 'group' element to 'svg'
+        // moves the 'group' element to the top left margin
+        var svg = d3.select("#mapdetails").append("svg")
+            .attr("id", "svg")
+            .attr("width", width + margin.right + margin.left)
+            .attr("height", height + margin.top + margin.bottom)
+            // .attr("preserveAspectRatio", "xMinYMin meet")
+            //   .attr("viewBox", `0 0 ${width} ${height}`)
+            .append("g")
+            .attr("transform", "translate("
+                + margin.left + "," + margin.top + ")");
+
+
+
+        // declares a tree layout and assigns the size
+        var treemap = d3.tree().size([height, width]);
+        var i = 0,
+            duration = 750,
+            root;
+        // Assigns parent, children, height, depth
+        root = d3.hierarchy(treeData, function (d) { return d.children; });
+        root.x0 = height / 2;
+        root.y0 = 0;
+
+        // Collapse after the second level
+        // root.children.forEach(collapse);
+
+        // collapse all
+        collapse(root)
+        expandOnKey(key, root);
+        update(root);
+
+        //Expand the tree based on key
+        function expandOnKey(key, root) {
+            var node = root;
+            var tags = key.split(".");
+            while (tags.length > 0) {
+                var found = false;
+                var next = tags[0]
+                if (node._children) {
+                    node._children.forEach((child) => {
+                        if (child.data.name === next) {
+                            // expand this node
+                            node.children = node._children;
+                            node._children = null;
+                            // change fill color
+                            node.class = 'match'
+                            child.class = 'match';
+                            node = child;
+                            found = true;
+                        }
+                    })
+                }
+                if (found) {
+                    tags.shift()
+                } else {
+                    return;
+                }
+            }
+        }
+
+
+        // Collapse the node and all it's children
+        function collapse(d) {
+            if (d.children) {
+                d._children = d.children
+                d._children.forEach(collapse)
+                d.children = null
+            }
+        }
+        function getHeight(root) {
+            if (!root) {
+                return 0
+            }
+            let expandChildren = [0]
+            // if root has expanded children
+            if (root.children) {
+                expandChildren = root.children.map(ea => getHeight(ea))
+            }
+            const max = expandChildren.reduce((a, b) => Math.max(a, b))
+            return 1 + max
+        }
+
+        function update(source) {
+            var currentHeight = getHeight(root);
+            var newWidth = window.innerWidth;
+            document.getElementById("svg").style.width = newWidth;
+            // Assigns the x and y position for the nodes
+            var treeData = treemap(root);
+
+            // Compute the new tree layout.
+            var nodes = treeData.descendants(),
+                links = treeData.descendants().slice(1);
+
+            // Normalize for current-depth.
+            nodes.forEach(function (d) { d.y = d.depth * window.innerWidth / (currentHeight + Math.log(currentHeight - 1)) });
+            // ****************** Nodes section ***************************
+            // create tip for nodes
+            // var tip = d3.tip()
+            //   .attr('class', 'd3-tip')
+            //   .offset([-10, 0])
+            //   .html(function(d) {
+            //     return getPath(d)
+            //   })
+
+            // Update the nodes...
+            var node = svg.selectAll('g.node')
+                .data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+
+
+            // Enter any new modes at the parent's previous position.
+            var nodeEnter = node.enter().append('g')
+                .attr('class', 'node')
+                .attr("transform", function (d) {
+                    return "translate(" + source.y0 + "," + source.x0 + ")";
+                })
+                .on('click', click);
+            // nodeEnter.call(tip);
+            // Add Circle for the nodes
+            nodeEnter.append('circle')
+                .attr('class', 'node')
+                .attr('r', 1e-6)
+                .style("fill", function (d) {
+                    return d._children ? "orange" : "#fff";
+                })
+            // .on('mouseover', tip.show) // add tip
+            // .on('mouseout', tip.hide);
+
+            // Add labels for the nodes
+            nodeEnter.append('text')
+                .attr("dy", ".35em")
+                .attr("x", function (d) {
+                    return d.children || d._children ? -13 : 13;
+                })
+                .attr("text-anchor", function (d) {
+                    return d.children || d._children ? "end" : "start";
+                })
+                .text(function (d) { return d.data.name; });
+
+            // UPDATE
+            var nodeUpdate = nodeEnter.merge(node);
+            // Transition to the proper position for the node
+            nodeUpdate.transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + d.y + "," + d.x + ")";
+                });
+
+            // Update the node attributes and style
+            nodeUpdate.select('circle.node')
+                .attr('r', 5)
+                .style("fill", function (d) {
+                    if (getPath(d) === key) {
+                        // clicked leaf node
+                        return 'red';
+                    } else if (d.class === 'match') {
+                        return 'green';
+                    }
+                    return d._children ? "orange" : "#fff";
+                })
+                .style("stroke", function (d) {
+                    if (getPath(d) === key) {
+                        // clicked leaf node
+                        return 'red';
+                    } else {
+                        return 'orange';
+                    }
+
+                })
+                .attr('cursor', 'pointer');
+
+
+            // Remove any exiting nodes
+            var nodeExit = node.exit().transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + source.y + "," + source.x + ")";
+                })
+                .remove();
+
+            // On exit reduce the node circles size to 0
+            nodeExit.select('circle')
+                .attr('r', 1e-6);
+
+            // On exit reduce the opacity of text labels
+            nodeExit.select('text')
+                .style('fill-opacity', 1e-6);
+
+            // ****************** links section ***************************
+
+            // Update the links...
+            var link = svg.selectAll('path.link')
+                .data(links, function (d) { return d.id; });
+
+            // Enter any new links at the parent's previous position.
+            var linkEnter = link.enter().insert('path', "g")
+                .attr("class", "link")
+                .attr('d', function (d) {
+                    var o = { x: source.x0, y: source.y0 }
+                    return diagonal(o, o)
+                });
+
+            // UPDATE
+            var linkUpdate = linkEnter.merge(link);
+
+            // Transition back to the parent element position
+            linkUpdate.transition()
+                .duration(duration)
+                .attr('d', function (d) { return diagonal(d, d.parent) })
+                .style("stroke", function (d) {
+                    if (d.class === 'match') {
+                        return '#3fb986'
+                    }
+                });
+
+            // Remove any exiting links
+            var linkExit = link.exit().transition()
+                .duration(duration)
+                .attr('d', function (d) {
+                    var o = { x: source.x, y: source.y }
+                    return diagonal(o, o)
+                })
+                .remove();
+
+            // Store the old positions for transition.
+            nodes.forEach(function (d) {
+                d.x0 = d.x;
+                d.y0 = d.y;
+            });
+
+            // Creates a curved (diagonal) path from parent to the child nodes
+            function diagonal(s, d) {
+
+                var path = `M ${s.y} ${s.x}
+                C ${(s.y + d.y) / 2} ${s.x},
+                  ${(s.y + d.y) / 2} ${d.x},
+                  ${d.y} ${d.x}`
+
+                return path;
+            }
+
+            // Toggle children on click.
+            function click(d) {
+                if (!d.children && !d._children) {
+                    //leaf node
+                    key = getPath(d);
+                    d.path = key;
+                }
+                //d.children is expanded children
+                //d._children is collapes children
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                update(d);
+            }
+            // return the path from root to this node
+            function getPath(d) {
+                var path = [];
+                while (d.parent !== null) {
+                    path.unshift(d.data.name)
+                    d = d.parent
+                }
+                return path.join('.')
+            }
+        }
+        // resize the chart width based on window size
+        window.addEventListener('resize', _.debounce(function () {
+
+            update(root)
+        }, 200));
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+}

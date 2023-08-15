@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using SmartAdmin.Seed.Data;
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class DatacenterController : Controller
+    {
+
+        public DatacenterController(ApplicationDbContext context)
+        {
+
+           
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}

@@ -1,0 +1,151 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SmartAdmin.Seed.Data;
+using SmartAdmin.Seed.Models.Entities;
+
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace SmartAdmin.Seed.Controllers.Settings
+{
+    public class Framework_Application : Controller
+    {
+        
+        #region Declaration
+        private readonly ApplicationDbContext _context;
+        private List<lkpAllStates> allStates;
+        private List<lkpCountry> countries;
+        private List<lkpAllCountries> allcountries;
+        private List<lkpAllCities> allcities;
+        private List<lkpState> states;
+        private List<lkpCity> city;
+        private List<lkpDataCenter> datacenter;
+        private List<lkpDepartment> department;
+        
+        #endregion
+        public Framework_Application(ApplicationDbContext db)
+        {
+            _context = db;
+            allStates = (from c in _context.lkpAllStates select c).ToList();
+            countries = (from c in _context.lkpCountry select c).ToList();
+            allcities = (from c in _context.lkpAllCities select c).ToList();
+            city = (from c in _context.lkpCity select c).ToList();
+            states = (from c in _context.lkpState select c).ToList();
+            allcountries = (from c in _context.lkpAllCountries select c).ToList();
+            datacenter = (from c in _context.lkpDataCenter select c).ToList();
+            department = (from c in _context.lkpDepartment select c).ToList();
+        }
+        // GET: /<controller>/
+        public IActionResult Index()
+        {
+            return View();  
+        }
+        public JsonStringResult GetCountryName()
+        {
+            var resultCountries = (from c in countries
+                                   select c).ToList();
+
+
+            var json = JsonConvert.SerializeObject(resultCountries);
+            return new JsonStringResult(json);
+        }
+        [HttpPost]
+        public JsonStringResult GetDepartmentName(int DataCenterId)
+
+        {
+
+            var result = (from s in _context.lkpDepartment
+                          where s.DataCenterId == DataCenterId
+                          select s
+            ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+        [HttpPost]
+        public JsonStringResult GetDataCenterName(int CityId)
+
+        {
+
+            var result = (from s in _context.lkpDataCenter
+                          where s.CityId == CityId
+                          select s
+            ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+        [HttpPost]
+        public JsonStringResult GetCityName(int StateId)
+
+        {
+            var result = (from s in _context.lkpCity
+                          where s.StateId == StateId
+                          select s
+            ).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+        [HttpPost]
+        public JsonStringResult GetStateName(int CountryId)
+        {
+            var result = (from s in _context.lkpState
+                          where s.CountryId == CountryId
+                          select s
+            ).ToList();
+
+
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+        [HttpPost]
+     
+        public JsonStringResult SaveData([FromBody] FrmApplication frmApplication)
+        {
+            FrmApplication pro = new FrmApplication();
+            pro.Name = frmApplication.Name;
+            pro.Ver = frmApplication.Ver;
+            pro.ShortDescription = frmApplication.ShortDescription;
+            pro.LongDescription = frmApplication.LongDescription;
+            pro.InstallationPath = frmApplication.InstallationPath;
+            pro.InstalledDate = frmApplication.InstalledDate;       
+            pro.SupportPhone = frmApplication.SupportPhone;
+            pro.SupportEmail = frmApplication.SupportEmail;
+            pro.SupportAccountNo = frmApplication.SupportAccountNo;
+            pro.SupportExpirationDate = frmApplication.SupportExpirationDate;
+            pro.SupportURL = frmApplication.SupportURL;
+            pro.NumberOfLicenses = frmApplication.NumberOfLicenses;
+            pro.Comment = frmApplication.Comment;
+            pro.InstallerNameID = frmApplication.InstallerNameID;
+            pro.Usrname = frmApplication.Usrname;
+            pro.Pass = frmApplication.Pass;
+            pro.DeveloperTypeID = frmApplication.DeveloperTypeID;
+            pro.DeveloperID = frmApplication.DeveloperID;
+            pro.CitrixApplicationName = frmApplication.CitrixApplicationName;
+            pro.ApplicationURL = frmApplication.ApplicationURL;
+            pro.ApplicationTypeID = frmApplication.ApplicationTypeID;
+            pro.IsVisibleInsideGGP = frmApplication.IsVisibleInsideGGP;
+            pro.CertificateExpiration = frmApplication.CertificateExpiration;
+            pro.SMTP = frmApplication.SMTP;
+           // pro.IsVisibleNonEmployee = frmApplication.IsVisibleNonEmployee;
+            pro.FirewallException = frmApplication.FirewallException;
+            pro.LDAP = frmApplication.LDAP;
+            pro.VProcessDependent = frmApplication.VProcessDependent;
+
+
+            _context.Add(pro);
+           _context.SaveChanges();
+            return new JsonStringResult("SUCCESS");
+        }
+        [HttpGet]
+        public JsonStringResult Application_Database()
+        {
+
+            var result = _context.Databases.ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return new JsonStringResult(json);
+        }
+    }
+    }
+

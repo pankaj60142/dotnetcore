@@ -1,0 +1,16 @@
+{
+    "ConnectionString": "data source=MASOOMFARISHTA\\SA;initial catalog=dMUDH;user id=sa;password=123;MultipleActiveResultSets=True;",
+    "Database": "LocalDb",
+    "Logging": {
+        "IncludeScopes": false,
+        "LogLevel": {
+            "Default": "Information",
+            "System": "Information",
+            "Microsoft": "Information"
+        }
+    },
+    "SmartAdmin": {
+        "Environment": "Development",
+        "UseShortcuts": true
+    }
+}

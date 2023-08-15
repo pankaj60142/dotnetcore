@@ -1,0 +1,1212 @@
+
+@{
+    ViewData["Title"] = "Company Users";
+}
+
+<style type="text/css">
+    .chosen-container {
+        width: 100% !important;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h1 class="page-title txt-color-blueDark">
+
+            <!-- PAGE HEADER -->
+            <i class="fa-fw fa fa-pencil-square-o"></i>
+            Forms
+            <span>
+                >
+                Company Users
+            </span>
+        </h1>
+    </div>
+
+
+</div>
+
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+
+    <!-- START ROW -->
+
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <h2>Company Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form id="company-user" class="smart-form">
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                @*<div class="row">
+                                        <section class="col col-6">
+                                            <label class="label">First Name</label>
+
+                                            <label class="input" id="firstname">
+                                                <i class="icon-append fa fa-exclamation-circle"></i>
+                                                <input type="text" id="firstname" name="firstname" placeholder="First Name">
+                                                <b class="tooltip tooltip-bottom-right">Needed to enter the First Name</b>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-6">
+                                            <label class="label">Last Name</label>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-exclamation-circle"></i>
+                                                <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+                                                <b class="tooltip tooltip-bottom-right">Needed to enter the Last Name</b>
+                                            </label>
+                                        </section>
+                                    </div>*@
+                                <div class="row">
+                                    @*<section class="col col-6">
+                                            <label class="label">Designation</label>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-exclamation-circle"></i>
+                                                <input type="text" id="designation" name="designation" placeholder="Designation">
+                                                <b class="tooltip tooltip-bottom-right">Needed to enter the Designation</b>
+                                            </label>
+                                        </section>*@
+
+
+
+                                    @*<section class="col col-6">
+                                            <label class="label">Username</label>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-exclamation-circle"></i>
+                                                <input type="text" id="username" name="username" placeholder="Username">
+                                                <b class="tooltip tooltip-bottom-right">Needed to enter the Username </b>
+                                            </label>
+                                        </section>*@
+
+
+                                    <section class="col col-12">
+                                        <label class="label">Email/Username</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="email" id="email" name="email" placeholder="Email" required>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Email</b>
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="label">Password</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="password" id="password" name="password" placeholder="Password" required>
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the Password</b>
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="label">Confrim Password</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" required>
+                                            <b class="tooltip tooltip-bottom-right">Needed to Confirm Password</b>
+                                        </label>
+                                    </section>
+
+                                </div>
+                                <div class="row">
+                                    <section class="col col-lg-12 col-md-12">
+                                        <label class="label">Role</label>
+                                        <div class="select">
+                                            <select name="roles" id="role" onchange="HideShow(this.value)">
+                                                <option value="0" selected="">Select Role</option>
+                                                <option value="1">Admin</option>
+                                                <option value="2">Country</option>
+                                                <option value="3">DataCenter</option>
+                                                <option value="4">Department</option>
+                                                <option value="5">Application</option>
+
+                                            </select>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+
+
+
+                                    <section class="col col-6" id="country" style="display:none">
+                                        <label class="label">Country Name</label>
+
+                                        <div class="input" id="countryid">
+
+
+                                            <select name="countryname" id="countryname" style="width:100%" multiple></select>
+
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6" id="state" style="display:none">
+                                        <label class="label">State Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+
+                                            <select id="statename" name="statename" multiple></select>
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="cities" style="display:none">
+                                        <label class="label">City Name</label>
+                                        <div class="input">
+                                            <i class="icon-append fa fa-exclamation-circle"></i>
+                                            <select name="cityname" id="cityname" multiple></select>
+                                            <!-- <input type="text" id="cityname" name="cityname" placeholder="City name" class="flexdatalist" data-min-length="1" multiple='multiple' data-value-property='CityId'>
+                                            -->
+                                            <b class="tooltip tooltip-bottom-right">Needed to enter the City name</b>
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="datacenter" style="display:none">
+                                        <label class="label">Datacenters</label>
+                                        <div class="input">
+                                            <select name="datacentername" id="datacentername" multiple></select>
+
+
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6" id="department" style="display:none">
+                                        <label class="label">Departments</label>
+                                        <div class="input">
+                                            <select name="departmentname" id="departmentname" multiple></select>
+
+                                            <!--<input type='text' id="departmentname" placeholder='Select Departments' class='flexdatalist' data-min-length='1' multiple='multiple' list='departments' name='deparments1'>
+                                            -->
+
+                                        </div>
+                                    </section>
+
+
+
+                                    <section class="col col-6" id="application" style="display:block">
+                                        <label class="label">Applications </label>
+                                        <div class="input">
+                                            <select name="applicationname" id="applicationname" multiple></select>
+
+
+
+
+
+                                        </div>
+                                    </section>
+
+
+                                </div>
+
+
+
+                            </fieldset>
+
+                            <footer>
+                                <button type="button" class="btn btn-primary" onclick="SaveUser();">
+                                    Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="CancelUser();">
+                                    Cancel
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                    <h2>Users </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+
+
+                    <div class="widget-body no-padding">
+
+                        <br />
+                        <table id="tblRoles" class="table table-striped table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Company Name</th>
+                                    <th>Roles</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+
+
+
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+        </article>
+        <!-- END COL -->
+
+
+
+    </div>
+
+    <!-- END ROW -->
+
+</section>
+<!-- end widget grid -->
+
+
+
+
+@section Scripts {
+    <!-- SCRIPTS ON PAGE EVENT -->
+    <script type="text/javascript">
+        var GlobalUserId = "0";
+        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+     *
+     * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+     *
+     * // activate tooltips
+     * $("[rel=tooltip]").tooltip();
+     *
+     * // activate popovers
+     * $("[rel=popover]").popover();
+     *
+     * // activate popovers with hover states
+     * $("[rel=popover-hover]").popover({ trigger: "hover" });
+     *
+     * // activate inline charts
+     * runAllCharts();
+     *
+     * // setup widgets
+     * setup_widgets_desktop();
+     *
+     * // run form elements
+     * runAllForms();
+     *
+     ********************************
+     *
+     * pageSetUp() is needed whenever you load a page.
+     * It initializes and checks for all basic elements of the page
+     * and makes rendering easier.
+     *
+     */
+
+        pageSetUp();
+
+
+        runAllForms();
+        // pagefunction
+
+        var pagefunction = function () {
+
+            var responsiveHelper_dt_basic = undefined;
+
+
+            var breakpointDefinition = {
+                tablet: 1024,
+                phone: 480
+            };
+            // PAGE RELATED SCRIPTS
+
+            var errorClass = 'invalid';
+            var errorElement = 'em';
+
+
+
+
+
+
+
+        };
+
+        $(document).ready(function () {
+
+            $('#countryname').chosen();
+            $('#countryname').chosen({ allow_single_deselect: false });
+            $('#statename').chosen();
+            $('#statename').chosen({ allow_single_deselect: false });
+            $('#cityname').chosen();
+            $('#cityname').chosen({ allow_single_deselect: false });
+            $('#datacentername').chosen();
+            $('#datacentername').chosen({ allow_single_deselect: false });
+            $('#departmentname').chosen();
+            $('#departmentname').chosen({ allow_single_deselect: false });
+            $('#applicationname').chosen();
+            $('#applicationname').chosen({ allow_single_deselect: false });
+
+          document.getElementById("country").style.display = "none";
+            document.getElementById("cities").style.display = "none";
+            document.getElementById("state").style.display = "none";
+            document.getElementById("datacenter").style.display = "none";
+            document.getElementById("department").style.display = "none";
+            document.getElementById("application").style.display = "none";
+            fillcountry();
+            fillUsers();
+        });
+        function fillCity(SelectedStates, selectedcities, selecteddatacenters, SelectedDepartments) {
+        SelectedStates = SelectedStates.join(",");
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetCityName',
+                type: 'POST',
+                data: { SelectedStates: SelectedStates, compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCities) {
+                    DestroyCityName();
+
+
+                    for (var x = 0; x < resultCities.length; x++) {
+
+                        $('#cityname').append($('<option></option>').attr('value', resultCities[x].CityId).text(resultCities[x].CityName));
+
+
+
+                    }
+                    $('#cityname').trigger("chosen:updated");
+
+                    $("#cityname").chosen().change(function (event) {
+
+                        FillDataCenter($(event.target).val(),[],[]);
+
+                    });
+                    if (selecteddatacenters.length == 0) {
+                        $("#cityname").val(selectedcities).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#cityname").val(selectedcities).trigger("chosen:updated");
+                        FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments);
+                    }
+
+
+                }
+
+
+
+            });
+        }
+
+
+
+        function Destroycountryname() {
+            $('#countryname')
+                .empty();
+        }
+        function fillcountry() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/Department/GetCountry',
+                type: 'POST',
+                data: { compid: compid },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultCountry) {
+
+
+
+                    for (var x = 0; x < resultCountry.length; x++) {
+
+
+                        $('#countryname').append($('<option></option>').attr('value', resultCountry[x].CountryId).text(resultCountry[x].CountryName));
+
+
+                    }
+                    $('#countryname').trigger("chosen:updated");
+                    $("#countryname").chosen().change(function (event) {
+
+                        fillState($(event.target).val(),[],[],[],[]);
+
+                    });
+
+
+
+
+
+
+                }
+
+
+            });
+        }
+        function FillDataCenter(selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCites = selectedcities.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDataCenterName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedCites: SelectedCites, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdatacenter) {
+                    Destroydatacenter();
+
+                    for (var x = 0; x < resultdatacenter.length; x++) {
+
+
+                        $('#datacentername').append($('<option></option>').attr('value', resultdatacenter[x].DataCenterId).text(resultdatacenter[x].DataCenterName));
+
+
+                    }
+                    $('#datacentername').trigger("chosen:updated");
+                    $("#datacentername").chosen().change(function (event) {
+
+                        FillDepartment($(event.target).val(),[]);
+
+                    });
+                    if (SelectedDepartments.length == 0) {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#datacentername").val(selecteddatacenters).trigger("chosen:updated");
+                        FillDepartment(selecteddatacenters, SelectedDepartments);
+                    }
+
+
+
+                }
+
+
+            });
+
+        }
+        function FillDepartment(SelectedDataCenter, SelectedDepartments) {
+            SelectedDataCenter = SelectedDataCenter.join(",");
+
+
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetDepartmentName',
+                type: 'POST',
+                datatype: 'json',
+                data: { SelectedDataCenter: SelectedDataCenter, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultdepartment) {
+                    Destroydepartmentname();
+
+                    for (var x = 0; x < resultdepartment.length; x++) {
+
+
+                        $('#departmentname').append($('<option></option>').attr('value', resultdepartment[x].DepartmentId).text(resultdepartment[x].DepartmentName));
+
+
+                    }
+                    $('#departmentname').trigger("chosen:updated");
+                    $("#departmentname").chosen().change(function (event) {
+
+                        fillApplication($(event.target).val());
+
+                    });
+
+                    if (SelectedDepartments.length > 0) {
+                        $("#departmentname").val(SelectedDepartments).trigger("chosen:updated");
+                    }
+
+
+                }
+
+
+            });
+
+        }
+
+        function fillUsers() {
+            var compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+            $.ajax({
+                url:rootUrl + '/Confirmation/FillUsersGrid',
+                type: 'POST',
+                datatype: 'json',
+                data: { compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    Swal('Alert!', 'Unable to fill states', 'error');
+                },
+
+                success: function (result) {
+                    console.log(result);
+                    $('#tblRoles').DataTable().destroy();
+                    $('#tblRoles').DataTable({
+                        data: result,
+                        paging: true,
+
+
+                        scrollX: false,
+                        autoWidth: false,
+                        "iDisplayLength": 7,
+                        columns: [
+                            { data: 'Email', 'width': '20%' },
+                            { data: 'CompanyName', 'width': '20%' },
+                            { data:'Name'},
+                            {
+
+                                "data": "Id",
+                                "render": function (data, type, full, meta, oData) {
+
+                                    return '<button type="button"  class="btn btn-danger" onclick="EditRole(\'' + data + '\',\'' + full.Name + '\');">Edit</button>';
+                                }
+                            },
+
+
+                        ],
+
+
+
+                        responsive: true
+
+
+                    });
+                }
+
+            });
+        }
+        function Destroydepartmentname() {
+            $('#departmentname')
+                .empty();
+        }
+
+        function DestroyApplication() {
+            $('#applicationname')
+                .empty();
+        }
+        function DestroyCityName() {
+            $('#cityname')
+                .empty();
+        }
+        function DestroyStatename() {
+            $('#statename')
+                .empty();
+        }
+
+        function Destroydatacenter() {
+            $('#datacentername')
+                .empty();
+        }
+
+        function ClearDropdowns() {
+              $("#countryname").val('').trigger("chosen:updated");
+                        $("#statename").val('').trigger("chosen:updated");
+                        $("#cityname").val('').trigger("chosen:updated");
+                        $("#datacentername").val('').trigger("chosen:updated");
+                         $("#departmentname").val('').trigger("chosen:updated");
+        }
+        function EditRole(UserId, RoleId) {
+            var selectedindex = "0";
+
+            GlobalUserId = UserId;
+            if (RoleId == "Country") {
+                document.getElementById("role").selectedIndex = "2";
+                HideShow("2");
+            }
+            if (RoleId == "Admin") {
+                document.getElementById("role").selectedIndex = "1";
+                HideShow("1");
+            }
+
+            if (RoleId == "DataCenter") {
+                document.getElementById("role").selectedIndex = "3";
+                HideShow("3");
+            }
+            if (RoleId == "Department") {
+                document.getElementById("role").selectedIndex = "4";
+                HideShow("4");
+            }
+            if (RoleId == "Application") {
+                document.getElementById("role").selectedIndex = "5";
+                HideShow("5");
+            }
+            //$("#role option[text=" + RoleId + "]").prop("selected", true);
+
+            //document.getElementById("role").text = RoleId;
+
+           // compid = parseInt(compid);
+            var selectedcountries = [];
+            var selectedstates = [];
+            var selectedcities = [];
+            var selecteddatacenters = [];
+            var SelectedDepartments = [];
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetRoleId',
+                type: 'POST',
+                data: { UserId: UserId, RoleId: RoleId },
+                datatype: 'json',
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (result) {
+
+
+                    if (RoleId == "Admin")
+                    {
+                        CancelUser();
+                        document.getElementById("email").value = result[0].Email;
+                        document.getElementById("role").selectedIndex = "1";
+                        HideShow("1");
+                        ClearDropdowns();
+                    }
+                    else if (RoleId == "Country") {
+
+                        for (var x = 0; x < result.length; x++) {
+                            if (selectedcountries.indexOf(result[x].CountryId) !== -1) {
+                                alert("Value exists!")
+                            } else {
+                                selectedcountries.push(result[x].CountryId);
+}
+
+
+                        }
+                       // document.getElementById("username").value = result[0].UserName;
+                        document.getElementById("email").value = result[0].Email;
+                       // alert(selectedcountries);
+
+                        ClearDropdowns();
+                        $("#countryname").val(selectedcountries).trigger("chosen:updated");
+
+                    }
+
+
+                    else if (RoleId == "DataCenter") {
+                        ClearDropdowns();
+                        selectedcountries = result.map(item => item.CountryId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        $("#countryname").val(selectedcountries).trigger("chosen:updated");
+
+                        // const distinctCountries = distinct(result, (item) => item.CountryId);
+
+                        selectedstates = result.map(item => item.StateId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+
+
+                        selectedcities = result.map(item => item.CityId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        selecteddatacenters = result.map(item => item.DatacenterId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        SelectedDepartments = result.map(item => item.DepartmentId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+
+
+                        fillState(selectedcountries, selectedstates, selectedcities, selecteddatacenters, []);
+
+                        //document.getElementById("username").value = result[0].UserName;
+                        document.getElementById("email").value = result[0].Email;
+
+                    }
+                    else if (RoleId == "Department") {
+                        ClearDropdowns();
+                         selectedcountries= result.map(item => item.CountryId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        $("#countryname").val(selectedcountries).trigger("chosen:updated");
+
+                       // const distinctCountries = distinct(result, (item) => item.CountryId);
+
+                        selectedstates = result.map(item => item.StateId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+
+
+                        selectedcities = result.map(item => item.CityId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        selecteddatacenters = result.map(item => item.DatacenterId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        SelectedDepartments = result.map(item => item.DepartmentId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+
+
+                        fillState(selectedcountries, selectedstates, selectedcities, selecteddatacenters, SelectedDepartments);
+
+                       // document.getElementById("username").value = result[0].UserName;
+                        document.getElementById("email").value = result[0].Email;
+}
+                    else if (RoleId == "Application") {
+                        ClearDropdowns();
+                        selectedcountries = result.map(item => item.CountryId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        $("#countryname").val(selectedcountries).trigger("chosen:updated");
+
+
+                        selectedstates = result.map(item => item.StateId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+
+
+                        selectedcities = result.map(item => item.CityId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        selecteddatacenters = result.map(item => item.DatacenterId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        SelectedDepartments = result.map(item => item.DepartmentId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                        SelectedApplications = result.map(item => item.ApplicationId)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+
+
+                        fillState(selectedcountries, selectedstates, selectedcities, selecteddatacenters, SelectedDepartments);
+
+                        //document.getElementById("username").value = result[0].UserName;
+                        document.getElementById("email").value = result[0].Email;
+                    }
+
+
+                }
+
+
+            });
+
+        }
+
+
+        function fillState(SelectedCountryIds, selectedstates, selectedcities, selecteddatacenters, SelectedDepartments) {
+            SelectedCountryIds = SelectedCountryIds.join(",");
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetStateName',
+                type: 'POST',
+                datatype: 'json',
+
+                data: { SelectedCountryIds1: SelectedCountryIds, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultState) {
+                    DestroyStatename();
+
+                    for (var x = 0; x < resultState.length; x++) {
+
+
+                        $('#statename').append($('<option></option>').attr('value', resultState[x].StateId).text(resultState[x].StateName   ));
+
+
+                    }
+
+                    $('#statename').trigger("chosen:updated");
+                    $("#statename").chosen().change(function (event) {
+
+                        fillCity($(event.target).val(),[],[],[]);
+                    });
+
+                    if (selectedcities.length == 0) {
+                        $("#statename").val(selectedstates).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#statename").val(selectedstates).trigger("chosen:updated");
+                        fillCity(selectedstates, selectedcities, selecteddatacenters, SelectedDepartments);
+                    }
+                }
+
+
+            });
+
+        }
+        function fillApplication(SelectedDepartments) {
+            SelectedDepartments = SelectedDepartments.join(",");
+
+            compid = localStorage.getItem("companyid");
+            compid = parseInt(compid);
+
+
+            $.ajax({
+                url:rootUrl + '/Confirmation/GetApplicationName',
+                type: 'POST',
+                datatype: 'json',
+
+                data: { SelectedDepartments: SelectedDepartments, compid: compid },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+
+                },
+
+                success: function (resultapplication) {
+                    DestroyApplication();
+
+                    for (var x = 0; x < resultapplication.length; x++) {
+
+
+                        $('#applicationname').append($('<option></option>').attr('value', resultapplication[x].ApplicationId).text(resultapplication[x].ApplicationName));
+
+
+                    }
+
+                    $('#applicationname').trigger("chosen:updated");
+
+                    if (selectedcities.length == 0) {
+                        $("#applicationname").val(selectedstates).trigger("chosen:updated");
+
+                    }
+                    else {
+                        $("#applicationname").val(selectedstates).trigger("chosen:updated");
+                        }
+                }
+
+
+            });
+        }
+        function GetText(dropdownid) {
+
+            var options = $("#" + dropdownid +" option:selected");
+            var result = "";
+            var values = $.map(options, function (option) {
+                result = result + "," + option.text;
+            });
+
+            return result;
+        }
+
+        function SaveUser() {
+
+
+            var pass = document.getElementById("password").value;
+            var confirmpass = document.getElementById("confirmpassword").value;
+
+            if (pass != confirmpass) {
+
+                   swal("Saved!", "Password must match with confirm password!", "success");
+                return;
+            }
+
+            if ($("#company-user").valid()) {
+
+
+
+                var username = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                var email = document.getElementById("email").value;
+                var role = $("#role option:selected").text();
+
+                var CountryName = GetText("countryname");
+                CountryName = CountryName.replace(/^,/, '');
+
+
+                var countries = $("#countryname").val();
+                countries = countries.join(",");
+
+                var StateName = GetText("statename");
+                StateName = StateName.replace(/^,/, '');
+                var states = $("#statename").val();
+                states = states.join(",");
+                var CityNames = GetText("cityname");
+                CityNames = CityNames.replace(/^,/, '');
+
+                var cities = $("#cityname").val();
+
+                cities = cities.join(",");
+
+
+
+                var DatacenterNames = GetText("datacentername");
+                DatacenterNames = DatacenterNames.replace(/^,/, '');
+                var datacenters = $("#datacentername").val();
+
+                datacenters = datacenters.join(",");
+
+                var DepartmentNames = GetText("departmentname");
+                DepartmentNames = DepartmentNames.replace(/^,/, '');
+                var departments = $("#departmentname").val();
+                departments = departments.join(",");
+                var ApplicationName = GetText("applicationname");
+                ApplicationName = ApplicationName.replace(/^,/, '');
+                var Application = $("#applicationname").val();
+                Application = Application.join(",");
+
+
+                var options = {};
+                options.url = rootUrl + "/Confirmation/SaveUser";
+                options.type = "POST";
+                //
+                var obj = {
+                    UserName: username,
+                    Pass: password,
+                    Email: email,
+                    Role: role,
+                    SelectedCountries: countries,
+                    SelectedStates: states,
+                    SelectedCities: cities,
+                    SelectedDatacenters: datacenters,
+                    SelectedDepartments: departments,
+                    UserId: GlobalUserId,
+                    SelectedCountryNames: CountryName,
+                    SelectedApplicationNames: Application
+
+                };
+
+                options.data = JSON.stringify(obj);
+                options.contentType = "application/json";
+                options.dataType = "json";
+
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader("MY-XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                };
+                options.complete = function (msg) {
+                    if (msg.responseText == "SUCCESS") {
+                        GlobalUserId = "0";
+                        swal("Saved!", "User saved successfully!", "success");
+                        $('#username').val('');
+                        $('#password').val('');
+                        $('#confirmpassword').val('');
+                        $('#email').val('');
+                        $('#role').val('0');
+
+
+
+                        fillUsers();
+                    }
+                    else
+                        //document.getElementById("countryid").addClass("state-error");
+
+                        swal("Error", msg.responseText, "error");
+                };
+
+                $.ajax(options);
+            }
+            else {
+                swal("Error", "Please fill in the required fields!", "error");
+            }
+        }
+
+
+
+
+
+
+        function CancelUser() {
+           document.getElementById("company-user").reset();
+
+            GlobalUserId = '';
+        }
+
+
+
+
+
+
+
+
+
+        var selectedcountryid = 0;
+
+        function HideShow(value) {
+
+
+
+            if (value == "1") {
+                document.getElementById("country").style.display = "none";
+                document.getElementById("state").style.display = "none";
+                document.getElementById("cities").style.display = "none";
+                document.getElementById("datacenter").style.display = "none";
+                document.getElementById("department").style.display = "none";
+
+
+            }
+
+            else if (value == "2") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "none";
+                document.getElementById("cities").style.display = "none";
+                document.getElementById("datacenter").style.display = "none";
+                document.getElementById("department").style.display = "none";
+
+            }
+
+            else if (value == "3") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("cities").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "none";
+
+
+            }
+
+          //  if (value == "4") {
+            //    document.getElementById("country").style.display = "block";
+            //    document.getElementById("state").style.display = "block";
+           //     document.getElementById("datacenter").style.display = "block";
+          //      document.getElementById("department").style.display = "block";
+
+          //      document.getElementById("cities").style.display = "block";
+
+           // }
+
+            else if (value == "4") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "block";
+
+                document.getElementById("cities").style.display = "block";
+
+
+            }
+
+            if (value == "5") {
+                document.getElementById("country").style.display = "block";
+                document.getElementById("state").style.display = "block";
+                document.getElementById("cities").style.display = "block";
+                document.getElementById("datacenter").style.display = "block";
+                document.getElementById("department").style.display = "block";
+                document.getElementById("application").style.display ="block";
+
+
+            }}
+
+
+
+
+
+
+
+
+
+
+        var rootDir = "@Url.Content("~/")";
+
+
+
+
+
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

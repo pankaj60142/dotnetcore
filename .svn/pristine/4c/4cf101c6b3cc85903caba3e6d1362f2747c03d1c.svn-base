@@ -1,0 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SmartAdmin.Seed.Models.Entities
+{
+    public class ApplicationDatabase
+    {
+        public int ApplicationDatabaseID { get; set; }
+        public int ApplicationID { get; set; }
+        public int DatabaseID { get; set; }
+    }
+}
