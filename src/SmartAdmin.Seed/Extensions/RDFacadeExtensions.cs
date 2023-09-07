@@ -28,7 +28,7 @@ namespace Microsoft.EntityFrameworkCore
                     .GetService<IRawSqlCommandBuilder>()
                     .Build(sql, parameters);
 
-                var paramObject = new RelationalCommandParameterObject(databaseFacade.GetService<IRelationalConnection>(), rawSqlCommand.ParameterValues, null, null);
+                var paramObject = new RelationalCommandParameterObject(databaseFacade.GetService<IRelationalConnection>(), rawSqlCommand.ParameterValues, null, null, null);
 
                 return rawSqlCommand
                     .RelationalCommand
@@ -51,7 +51,7 @@ namespace Microsoft.EntityFrameworkCore
                     .GetService<IRawSqlCommandBuilder>()
                     .Build(sql, parameters);
 
-                var paramObject = new RelationalCommandParameterObject(databaseFacade.GetService<IRelationalConnection>(), rawSqlCommand.ParameterValues, null, null);
+                var paramObject = new RelationalCommandParameterObject(databaseFacade.GetService<IRelationalConnection>(), rawSqlCommand.ParameterValues, null, null, null);
 
                 return await rawSqlCommand
                     .RelationalCommand
