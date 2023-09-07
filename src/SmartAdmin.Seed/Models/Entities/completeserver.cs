@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SmartAdmin.Seed.Models.Entities
 {
-    public class completeserver
+    public class Completeserver
     {
        
 
         public Server server { get; set; }
-        public serverdatabase databases { get; set; }
-        public serverdocument document { get; set; }
+        public Serverdatabase databases { get; set; }
+        public Serverdocument document { get; set; }
         public lkpCity lkpCity { get; set; }
         public lkpCountry lkpCountry { get; set; }
         public lkpState lkpState { get; set; }

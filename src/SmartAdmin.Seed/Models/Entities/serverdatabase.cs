@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartAdmin.Seed.Models.Entities
 {
-    public class serverdatabase
+    public class Serverdatabase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

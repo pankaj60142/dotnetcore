@@ -56,8 +56,8 @@ namespace SmartAdmin.Seed.Data
         public DbSet<Application> Application { get; set; }
         public DbSet<ApplicationDatabase> ApplicationDatabase { get; set; }
 
-        public DbSet<serverdocument> serverdocument { get; set; }
-        public DbSet<serverdatabase> serverdatabase { get; set; }
+        public DbSet<Serverdocument> serverdocument { get; set; }
+        public DbSet<Serverdatabase> serverdatabase { get; set; }
         public DbSet<Framework_Server_Location> framework_Server_Location { get; set; }
         public DbSet<GGPDeveloper> ggpDeveloper { get; set; }
         public DbSet<lkpInstaller> lkpInstaller { get; set; }

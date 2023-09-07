@@ -1128,7 +1128,7 @@ FROM cte
                     else
                     {
 
-                        try
+                        //try
                         {
                             var result = (from tree in _context.tblApplicationDesignerDiagram
                                           join sharedapp in _context.tblSharedApplicationWithUser on tree.DiagramId equals sharedapp.SharedApplicationId
@@ -1151,10 +1151,10 @@ FROM cte
                             var json = JsonConvert.SerializeObject(result);
                             return new JsonStringResult(json);
                         }
-                        catch (Exception ex)
+                        //catch (Exception ex)
                         {
 
-                            throw ex;
+                            //throw ex;
                         }
 
 
@@ -1233,7 +1233,7 @@ FROM cte
 
 
 
-                try
+                //try
                 {
                     var resultShared = (from tree in _context.tblApplicationDesignerDiagram
                                         join sharedapp in _context.tblSharedApplicationWithUser on tree.DiagramId equals sharedapp.SharedApplicationId
@@ -1258,10 +1258,10 @@ FROM cte
 
                     return new JsonStringResult(json);
                 }
-                catch (Exception ex)
+                //catch (Exception ex)
                 {
 
-                    throw ex;
+                //    throw ex;
                 }
 
 
