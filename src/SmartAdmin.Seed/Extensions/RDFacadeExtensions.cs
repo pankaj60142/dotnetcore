@@ -62,7 +62,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public static List<T> DataReaderMapToList<T>(IDataReader dr)
         {
-            try
+            //try
             {
                 List<T> list = new List<T>();
                 T obj = default(T);
@@ -84,10 +84,10 @@ namespace Microsoft.EntityFrameworkCore
                 }
                 return list;
             }
-            catch (Exception ex)
+            //catch (Exception)
             {
 
-                throw ex;
+                //throw ex;
             }
 
            

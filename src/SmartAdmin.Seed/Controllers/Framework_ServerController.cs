@@ -630,7 +630,7 @@ namespace SmartAdmin.Seed.Controllers.Settings
         //}
 
         [HttpPost]
-        public JsonStringResult SaveFramework_Server([FromBody] completeserver serv)
+        public JsonStringResult SaveFramework_Server([FromBody] Completeserver serv)
               {
             try
             {
@@ -639,8 +639,8 @@ namespace SmartAdmin.Seed.Controllers.Settings
                 if (found==null)
                 {
                     Server selectedserver = new Server();
-                    serverdatabase selecteddatabases = new serverdatabase();
-                    serverdocument selecteddocument = new serverdocument();
+                    Serverdatabase selecteddatabases = new Serverdatabase();
+                    Serverdocument selecteddocument = new Serverdocument();
                     Framework_Server_Location framework_Server_Location = new Framework_Server_Location();
 
                     selectedserver.Name = serv.server.Name;

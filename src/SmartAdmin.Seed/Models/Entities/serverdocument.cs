@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartAdmin.Seed.Models.Entities
 {
-    public class serverdocument
+    public class Serverdocument
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
