@@ -576,6 +576,9 @@
                                 <button type="button" class="btn btn-danger" onclick="CancelShareFolder();">
                                     Cancel
                                 </button>
+                                <button type="button" class="btn btn-primary" onclick="DisplayUrl();">
+                                    Display
+                                </button>
                                 <p id="sharingFolderInfoMessage" style="color:green"></p>
 
                             </footer>
@@ -1331,7 +1334,9 @@
 
 
         }
-
+        function DisplayUrl(){
+            alert(rootUrl + '/Graph/ShareFolderViaEmail');
+        }
         function ShareFolderViaEmail() {
 
 
