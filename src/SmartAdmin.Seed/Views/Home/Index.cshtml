@@ -559,8 +559,6 @@
                                     </label>
 
                                     <p id="txtEmailShareFolderError" style="color:red"></p>
-                                    <p id="sharingUrlMessage" style="color:Blue"></p>
-
 
 
                                 </section>
@@ -577,11 +575,8 @@
                                 <button type="button" class="btn btn-danger" onclick="CancelShareFolder();">
                                     Cancel
                                 </button>
-                                <button type="button" class="btn btn-primary" onclick="DisplayUrl();">
-                                    Display
-                                </button>
                                 <p id="sharingFolderInfoMessage" style="color:green"></p>
-
+                                <p id="sharingUrlMessage" style="color:Blue"></p>
                             </footer>
                         </form>
 
@@ -1270,6 +1265,8 @@
 
         $('#foldersharemodal').on('shown.bs.modal', function () {
             $('#txtEmailShareFolder').focus();
+            document.getElementById("sharingUrlMessage").innerHTML = 'https://denterpriseatlas.com/Graph/GetFolderSharingDetail';
+
         });
 
         function OpenShareFolderDatabaseViaEmail(id, text) {
@@ -1335,9 +1332,6 @@
 
 
         }
-        function DisplayUrl(){
-            alert(rootUrl + '/Graph/ShareFolderViaEmail');
-        }
         function ShareFolderViaEmail() {
 
 
@@ -1371,8 +1365,6 @@
 
 
                         document.getElementById("sharingFolderInfoMessage").innerHTML = result.Message;
-
-
                         //$('#foldersharemodal').modal('hide');
 
                     }
